@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.allergy.viewmodel.AllergyViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingEnd="12dp">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/previewLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/discharge_summary_color"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/dateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="Add New Allergy"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText,MissingConstraints" />
+
+
+                </LinearLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/resultLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@android:color/white"
+                    tools:ignore="MissingDefaultResource">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Date"
+                                android:textColor="@color/navColor"
+                                android:textSize="18sp" />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Type"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="18sp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Allergy"
+                                android:textColor="@color/navColor"
+                                android:textSize="18sp" />
+
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="3">
+
+                            <EditText
+                                android:id="@+id/etAllergyDateTime"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:textAlignment="center"
+                                android:textSize="16sp" />
+
+
+                            <Spinner
+                                android:id="@+id/encounterTypeSpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp" />
+
+
+                            <Spinner
+                                android:id="@+id/allergyNameSpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Source"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="18sp"
+
+                                />
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_weight="1"
+                                android:layout_marginTop="@dimen/_10sdp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Severity"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="18sp"
+
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <Spinner
+                                android:id="@+id/allergySourceSpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+
+                                />
+
+
+                            <Spinner
+                                android:id="@+id/allergySeveritySpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_5sdp"
+
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_weight="1.70"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".3"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Duration"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="18sp"
+
+                                />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_weight=".7"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Period"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="18sp"
+
+                                />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginRight="@dimen/_10sdp"
+                            android:layout_weight="1.70"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".3"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:id="@+id/minusImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_minus" />
+
+                                <EditText
+                                    android:id="@+id/durationTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="@drawable/background_underline"
+                                    android:fontFamily="@font/poppins"
+                                    android:gravity="center"
+                                    android:inputType="number"
+                                    android:paddingStart="10dp"
+                                    android:paddingTop="@dimen/_5sdp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="@dimen/_5sdp"
+                                    android:text="1"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="17sp"
+                                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                                <ImageView
+                                    android:id="@+id/plusImageView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp"
+                                    android:visibility="gone"
+                                    app:srcCompat="@drawable/ic_add_black" />
+
+
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/durationRecyclerView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:layout_weight=".7" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight=".3"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/addNewAllergyIconView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/hmis_background"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:id="@+id/addtext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_add"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="Add"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_eraser"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="Clear"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:visibility="visible"
+                    app:cardBackgroundColor="@android:color/white"
+                    tools:ignore="MissingDefaultResource">
+
+
+                    <LinearLayout
+                        android:id="@+id/contentLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/view" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/hideLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:weightSum="8"
+                            app:divider="@drawable/divider_color_white"
+                            app:showDividers="middle">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/s_no"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.50"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="Date"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".80"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/type"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/allergy"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.20"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/source"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.50"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/duration"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/severity"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".50"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:padding="@dimen/_5sdp"
+                                android:text="@string/action"
+                                android:textColor="@color/black"
+                                android:textSize="18sp" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/view" />
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/allergyRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+
+                        <TextView
+                            android:id="@+id/noRecordsTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_50sdp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text="Currently no records!!"
+                            android:textSize="@dimen/_10sdp"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </FrameLayout>
+</layout>

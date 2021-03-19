@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/mainLinearLayout"
+        android:orientation="horizontal"
+        android:weightSum="6">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.25">
+        </CheckBox>
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.35"
+            android:gravity="center"
+            android:id="@+id/patient_info"
+            android:text="Patient Info"
+            android:textColor="@color/navColor"
+            android:textSize="14sp">
+
+        </TextView>
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/navColor"
+
+            android:id="@+id/sample_id"
+            android:textSize="14sp"
+            android:text="3456">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.20"
+            android:text="20-04-2020"
+            android:id="@+id/dateText"
+            android:textColor="@color/navColor"
+
+            android:gravity="center"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.20"
+            android:gravity="center"
+            android:id="@+id/testMethod"
+            android:textColor="@color/navColor"
+
+            android:textSize="14sp"
+            android:text="Status">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/navColor"
+            android:id="@+id/status"
+
+            android:textSize="14sp"
+            android:text="Status">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

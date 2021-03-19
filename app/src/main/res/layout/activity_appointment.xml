@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context="com.oasys.digihealth.doctor.ui.telemedicine.AppointmentActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:visibility="gone"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@drawable/ic_favourite_back_arrow"
+        app:title="@string/book_appointment"
+        app:titleTextAppearance="@style/AppTheme.Main.ToolBarTitle"
+        app:titleTextColor="@android:color/white"
+        tools:targetApi="lollipop">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivProfileUser"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="115dp"
+            android:src="@drawable/ic_launcher_background"
+            tools:ignore="VectorDrawableCompat" />
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <fragment
+        android:id="@+id/nav_appointment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_appointment" />
+</androidx.appcompat.widget.LinearLayoutCompat>

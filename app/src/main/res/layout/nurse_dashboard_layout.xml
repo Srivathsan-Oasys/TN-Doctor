@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.nursedesk.viewmodel.NurseDeskViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16sp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textColor="@color/hmis_background"
+                />
+
+            <ImageView
+                android:id="@+id/imgFilter"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:srcCompat="@drawable/ic_filter"
+                android:layout_marginRight="16dp"
+                android:layout_alignParentEnd="true"
+                android:tint="@color/colorPrimary"/>
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+            android:id="@+id/config"
+            app:cardBackgroundColor="@color/colorAccent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/confifav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:paddingRight="10dp"
+                    app:srcCompat="@drawable/ic_config" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:id="@+id/configtext"
+                    android:text="@string/config"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+</layout>

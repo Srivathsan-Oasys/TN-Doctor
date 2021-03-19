@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:toola="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tvSno"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="1" />
+
+    <TextView
+        android:id="@+id/tvWardName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="Ward Name" />
+
+    <TextView
+        android:id="@+id/tvRoomName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="Room Name" />
+
+    <TextView
+        android:id="@+id/tvIpStore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="IP Store" />
+
+    <TextView
+        android:id="@+id/tvOpStore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="OP Store" />
+
+    <TextView
+        android:id="@+id/tvInjectionStore"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/dr_small_text"
+        toola:text="Injection" />
+
+    <LinearLayout
+        android:id="@+id/llAction"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/ic_edit_blue" />
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="5dp"
+            app:srcCompat="@drawable/ic_delete_black" />
+
+    </LinearLayout>
+
+</LinearLayout>

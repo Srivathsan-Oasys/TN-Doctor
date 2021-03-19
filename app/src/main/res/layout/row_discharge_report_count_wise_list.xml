@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:orientation="vertical">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view" />
+
+    <LinearLayout
+        android:layout_width="2000dp"
+        android:layout_height="wrap_content"
+        android:weightSum="35.5"
+        android:id="@+id/hideLayout"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:id="@+id/serialNum"
+            android:text="1"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/wardNameText"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.35"
+            android:gravity="center"
+            android:text=""
+            android:padding="5dp"
+
+            android:id="@+id/dischargeAdult"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.32"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/dischargeChild"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.35"
+            android:gravity="center"
+            android:id="@+id/dischargeTotal"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.32"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/abscandAdultMale"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.33"
+            android:gravity="center"
+            android:id="@+id/abscandChild"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.33"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/abscandTotal"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.35"
+            android:gravity="center"
+            android:id="@+id/leftAdult"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.33"
+            android:gravity="center"
+            android:id="@+id/leftChild"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.35"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/leftTotal"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.32"
+            android:gravity="center"
+            android:id="@+id/discargeAgainstAdult"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.33"
+            android:gravity="center"
+            android:id="@+id/DischargeAgainstChild"
+            android:text="0"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.33"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/dischargeAgainstTotal"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="0"
+            android:padding="5dp"
+
+            android:id="@+id/grandTotal"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view" />
+
+
+
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.lab.view_model.LabViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/manage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@android:color/white"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:layout_width="330dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@color/hmis_background"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_weight=".9"
+                        android:text="Comments"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+
+                        android:id="@+id/closeImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_weight=".1"
+                        android:src="@drawable/ic_close_white"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/comment" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+
+                    android:layout_marginTop="5dp">
+
+                    <EditText
+                        android:id="@+id/commentstxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:editable="false"
+                        android:focusable="false"
+
+                        android:background="@drawable/edittext_border"
+                        android:paddingLeft="10dp" />
+
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/clearCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_close"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="Cancel"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
+
+

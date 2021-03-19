@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.speciality_sketch.viewmodel.SpecialitySketchViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/_25sdp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="22dp"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                           android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:cardCornerRadius="@dimen/_5sdp"
+                                app:cardElevation="@dimen/_5sdp"
+                                app:cardBackgroundColor="@color/white">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:textSize="15sp"
+                                        android:layout_marginTop="5dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:layout_marginLeft="3dp"
+                                        android:text="Speciality Sketch"
+                                        android:textColor="@color/navColor">
+
+                                    </TextView>
+
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/autoCompleteTextName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableRight="@drawable/ic_search_black"
+                                        android:singleLine="true"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="13sp"
+                                        android:imeOptions="actionDone" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <ImageView
+                                            android:id="@+id/selectedImageview"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_200sdp"
+                                            android:layout_marginTop="@dimen/_20sdp" />
+                                        <LinearLayout
+                                            android:id="@+id/zoomLayout"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="50dp"
+                                            android:visibility="gone">
+                                            <ZoomControls
+                                                android:id="@+id/zoomControls1"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="50dp"
+                                                android:gravity="right" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="70dp"
+                                        android:orientation="horizontal"
+                                        android:gravity="center_vertical"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:background="@color/primaryGrey"
+                                        android:weightSum="6">
+                                        <ImageView
+                                            android:id="@+id/cropImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_marginLeft="@dimen/_10sdp"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/ic_crop">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/zoomImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/ic_zoom">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/editImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/ic_edit">
+                                        </ImageView>
+
+                                        <ImageView
+                                            android:id="@+id/textImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/ic_text">
+                                        </ImageView>
+
+
+                                        <ImageView
+                                            android:id="@+id/angleImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_weight="1"
+                                            android:visibility="gone"
+                                            app:srcCompat="@drawable/ic_triangle">
+                                        </ImageView>
+
+
+                                        <ImageView
+                                            android:id="@+id/paintImage"
+                                            android:layout_width="35dp"
+                                            android:layout_height="35dp"
+                                            android:layout_weight="1"
+                                            app:srcCompat="@drawable/ic_circle">
+                                        </ImageView>
+
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                android:gravity="end"
+                                android:layout_marginTop="@dimen/_20sdp"
+                                android:orientation="horizontal">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/saveCardView"
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    app:cardBackgroundColor="@color/secondaryColor"
+                                    app:cardCornerRadius="5dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_next"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:paddingStart="15dp"
+                                        android:paddingTop="7dp"
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="7dp"
+                                        android:text="Save"
+                                        android:textColor="@color/white"
+                                        android:textSize="16sp"
+                                        tools:ignore="HardcodedText" />
+                                </androidx.cardview.widget.CardView>
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/clearCardView"
+                                    android:layout_width="120dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="10dp"
+                                    app:cardBackgroundColor="@color/primaryGrey"
+                                    app:cardCornerRadius="5dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_eraser"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:paddingStart="15dp"
+                                        android:paddingTop="7dp"
+                                        android:paddingEnd="10dp"
+                                        android:paddingBottom="7dp"
+                                        android:text="Clear"
+                                        android:textColor="@color/white"
+                                        android:textSize="16sp"
+                                        tools:ignore="HardcodedText" />
+                                </androidx.cardview.widget.CardView>
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/favouriteDrawerCardView"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                android:layout_gravity="end"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="22dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/ic_favourite_back_arrow"
+                    tools:ignore="ContentDescription" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:background="#FFFFFF">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="scrollable" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

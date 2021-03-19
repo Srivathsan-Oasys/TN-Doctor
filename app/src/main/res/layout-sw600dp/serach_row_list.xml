@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_border_white"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/serialNoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="S.No"
+
+            android:textSize="@dimen/dr_medium_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/pinTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="left"
+            android:padding="@dimen/margin_left"
+            android:text="PIN"
+            android:textSize="@dimen/dr_medium_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.30"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="left"
+            android:padding="@dimen/margin_left"
+            android:text="Name"
+            android:textSize="@dimen/dr_medium_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/fathernameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.5"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="left"
+            android:padding="@dimen/margin_left"
+            android:text="FatherName"
+            android:textSize="@dimen/dr_medium_text"
+            android:visibility="gone">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.7"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="left"
+            android:padding="@dimen/margin_left"
+            android:text="gender"
+            android:textSize="@dimen/dr_medium_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="left"
+            android:padding="@dimen/margin_left"
+            android:text="Last Visit Date"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="SmallSp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

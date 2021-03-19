@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/text_spiiner"
+    android:text=""
+    android:paddingLeft="2dp"
+    android:paddingTop="10dp"
+    android:maxLines="1"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:textSize="@dimen/dr_medium_text"
+    android:gravity="left"
+    android:textColor="@color/black" />

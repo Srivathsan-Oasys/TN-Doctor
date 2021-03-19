@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="?actionBarSize"
+    android:layout_height="?actionBarSize">
+
+    <TextView
+        android:id="@+id/tvCalendarDays"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:ellipsize="end"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/calendar_filter"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:maxLines="1"
+        android:text="@string/material_calendar_monday"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

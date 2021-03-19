@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="50dp"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/chkCasuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            tools:text="&#8203;" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvPin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="13"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="55510000104366" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvPatientInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="15"
+        android:fontFamily="@font/poppins"
+
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="Name/Age/Gen" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvMobileNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="13"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="9876543210" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvMlcNo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="13"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="67305096383" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvWard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="13"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="Covid Ward" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvCaseType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="13"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        tools:text="MLC" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="15"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingHorizontal="5dp">
+
+        <ImageView
+            android:id="@+id/imgRecordEdit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            app:srcCompat="@drawable/ic_edit_blue" />
+
+        <ImageView
+            android:id="@+id/imgRecordView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="4dp"
+            app:srcCompat="@drawable/ic_view_red" />
+    </LinearLayout>
+
+</LinearLayout>

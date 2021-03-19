@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llAppointntmentPatientMain"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="1500dp"
+        android:layout_height="35dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessSno"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessPatientName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Test test"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="5555555555"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessDepartment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Radiology"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessDoctorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Mr. Test test"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessLabName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Lab"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessRadName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Radiology"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="2020-07-02"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAppoinSessStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="2"
+            android:background="@drawable/booked_status_border"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="Booked"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDownloadPatientAppointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_download_to_storage_drive" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCancelPatientAppointment"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_close_red" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivUpdatePatientAppointment"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/calender_icon" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

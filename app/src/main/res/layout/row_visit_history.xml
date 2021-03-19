@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="800dp"
+        android:layout_height="35dp"
+        android:weightSum="17"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/sno"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/sno"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/VisitNumber"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/VisitNumber"
+            android:textAllCaps="true"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/DepartmentName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/Department_Name"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/VisitType"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/VisitType"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/SpecialityClinicName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="4"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/SpecialityClinicName"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/VisitDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="@string/VisitDate"
+            android:textSize="@dimen/dr_medium_text"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.view_model.EmrViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+<!--
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center_vertical"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ToolbarTheme"
+                app:navigationIcon="@drawable/back_to_home_button_white"
+                app:title="EMR">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="end"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="3dp">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_avatar"
+                        tools:ignore="VectorDrawableCompat" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Patient Name"
+                                android:textColor="@color/white"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:srcCompat="@drawable/ic_down_arrow_white" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="55 Yr/Male"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+-->
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            app:cardElevation="2dp"
+            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:id="@+id/ll_main_layout"
+                android:layout_width="match_parent"
+                android:weightSum="10"
+                android:background="@color/op_bg_color"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_back"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/iv_arrow"
+                        android:layout_width="wrap_content"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="@color/grey"
+                        android:layout_centerInParent="true"
+                        android:rotation="180"
+                        android:layout_height="wrap_content">
+                    </ImageView>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_sub_mainLayout"
+                    android:layout_width="0dp"
+                    android:layout_weight="9"
+                    android:weightSum="10"
+                    android:background="@drawable/op_border_color"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/patientImage_new"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_centerInParent="true"
+                            app:srcCompat="@drawable/ic_avatar"
+                            tools:ignore="VectorDrawableCompat" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_show_deatil"
+                        android:layout_width="0dp"
+                        android:layout_weight="8"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tv_patient_name_new"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/navColor"
+                            android:textSize="16sp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <TextView
+                            android:layout_below="@id/tv_patient_name_new"
+                            android:id="@+id/tv_age_gender_new"
+                            android:layout_width="match_parent"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textColor="@color/navColor"
+                            android:textSize="16sp"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/ll_consulting_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:visibility="gone"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last Consulting :"
+                android:textSize="@dimen/dr_large_text" />
+
+            <TextView
+                android:id="@+id/tv_consultent_View"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mr doctor/demplate/02/05/2008"
+                android:textSize="@dimen/dr_large_text" />
+
+
+        </LinearLayout>
+
+
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-7dp"
+            android:layout_marginBottom="-7dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="@{viewModel.progressBar}" />
+
+        <FrameLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/contentLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        app:tabGravity="fill"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:tabIndicatorColor="@color/colorPrimary"
+                        app:tabMaxWidth="@dimen/_80sdp"
+                        app:tabMinWidth="@dimen/_80sdp"
+                        app:tabMode="scrollable"
+                        app:tabSelectedTextColor="@color/colorPrimary"
+                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
+                        app:tabTextColor="@color/primaryGrey" />
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <com.oasys.digihealth.doctor.utils.custom_views.CustomViewpager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/noDataFoundTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No EMR Found!"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"
+                android:textSize="20sp"
+                tools:ignore="HardcodedText" />
+        </FrameLayout>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="6"
+        android:id="@+id/mainLinearLayout"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.35"
+            android:id="@+id/serialNumberTextView"
+            android:text="S.No"
+            android:padding="5dp"
+            android:textColor="@color/navColor"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:id="@+id/visitDate"
+            android:padding="5dp"
+
+            android:textColor="@color/navColor"
+            android:text="Visit Date"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/typeTextView"
+            android:padding="5dp"
+
+
+            android:textColor="@color/navColor"
+            android:text="Type"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:textColor="@color/navColor"
+            android:text="File Name"
+            android:padding="5dp"
+
+            android:id="@+id/fileName"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.25"
+            android:textColor="@color/navColor"
+            android:padding="5dp"
+            android:text="Comments"
+            android:gravity="center"
+            android:id="@+id/commentsText"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="0.90">
+            <ImageView
+                android:id="@+id/downloadImageview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:srcCompat="@drawable/ic_download_to_storage_drive" />
+            <ImageView
+                android:id="@+id/deleteImageView"
+                android:layout_width="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_height="15dp"
+                android:gravity="center"
+                app:srcCompat="@drawable/ic_bin" />
+
+
+
+        </LinearLayout>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</LinearLayout>

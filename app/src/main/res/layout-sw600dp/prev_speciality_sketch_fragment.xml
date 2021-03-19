@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.speciality_sketch.viewmodel.PrevSpecialitySketchViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/parentLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_marginTop="@dimen/_10sdp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:orientation="vertical">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="45dp"
+                                        android:background="@drawable/edittext_border_white"
+                                        android:orientation="horizontal"
+                                        android:weightSum="4">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1.2"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="S.No"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="14sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Date"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="11sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.7"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Name"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="14sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Action"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="14sp">
+
+                                        </TextView>
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/previewRecyclerView"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="10dp"
+                                            android:nestedScrollingEnabled="true"
+                                            android:scrollbars="horizontal"
+                                            tools:ignore="UnusedAttribute"
+                                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

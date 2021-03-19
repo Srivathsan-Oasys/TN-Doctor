@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/patientCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/previewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/fadeBlue"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="10_Sep-2020 10:00 AM - Dermotologist-OP"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/buttonPDF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="5dp"
+                app:srcCompat="@drawable/ic_dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resultLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:weightSum="2"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/byTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:text="Ordered BY"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="14sp"
+                        tools:ignore="HardcodedText" />
+
+
+                    <TextView
+                        android:id="@+id/drName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/_8sdp"
+                        tools:text="Venkatddddd" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1.5dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginEnd="10dp"
+                        android:layerType="software"
+                        android:src="@drawable/dotted" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llDiagnosis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDiagnosis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fadeBlue"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="@string/diagnosis"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dr_small_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDiagnosis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llPrescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPrescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fadeBlue"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="@string/prescription"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dr_small_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvPrescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llLab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fadeBlue"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="@string/Lab"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dr_small_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvLab"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llRadiology"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvRadiology"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fadeBlue"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="@string/radiology"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dr_small_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRadiology"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llInvestigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvInvestigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/fadeBlue"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:text="@string/investigation"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/dr_small_text" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvInvestigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:itemCount="2" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp">
+
+                <Button
+                    android:id="@+id/repeatLab"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/orange"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="Repeat"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp">
+
+                <Button
+                    android:id="@+id/modifyLab"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/outPtientGreen"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="Modify"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:focusable="true"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp">
+
+                <Button
+                    android:id="@+id/viewButton"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/orange"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:text="View"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp">
+
+
+                <Button
+                    android:id="@+id/addNew"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Add New"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="visible" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/patientCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardUseCompatPadding="true"
+        tools:ignore="MissingDefaultResource">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/previewLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/fadeBlue"
+                android:orientation="horizontal"
+                android:layout_marginLeft="8dp"
+                tools:ignore="MissingConstraints">
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:text="10_Sep-2020 10:00 AM - Dermotologist-OP"
+                    android:textColor="@color/black"
+                    tools:ignore="HardcodedText,MissingConstraints" />
+
+                <ImageView
+                    android:id="@+id/buttonPDF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_dropdown" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resultLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:paddingStart="10dp"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        tools:ignore="MissingConstraints">
+
+                        <TextView
+                            android:id="@+id/byTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Ordered BY"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/poppins"
+                            tools:ignore="HardcodedText" />
+
+
+                        <TextView
+                            android:id="@+id/drName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Venkatddddd"
+                            android:layout_marginTop="3dp"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_6sdp" />
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="3dp"
+                            android:layout_height="1.5dp"
+                            android:layout_marginEnd="10dp"
+                            android:src="@drawable/dotted"
+                            android:layerType="software" />
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+    &lt;!&ndash;
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:paddingEnd="0dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.20"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+
+                        android:text="S.No"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.30"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Code"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.70"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Test Name"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.30"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Type"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.80"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Order To Location"
+                        android:textSize="16sp"
+                        android:gravity="center"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+
+                </LinearLayout>
+    &ndash;&gt;
+
+
+
+
+    &lt;!&ndash;
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/child_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+    &ndash;&gt;
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/_5sdp"
+                tools:ignore="MissingConstraints">
+
+
+                <Button
+                    android:id="@+id/repeatLab"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:background="@color/orange"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Repeat"
+                    android:padding="5dp"
+                    android:drawableLeft="@drawable/ic_repeat"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@color/outPtientGreen"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:id="@+id/modifyLab"
+                    android:text="Modify"
+                    android:padding="5dp"
+                    android:drawableLeft="@drawable/ic_edit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+
+
+
+                <Button
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Add New"
+                    android:padding="5dp"
+                    android:drawableLeft="@drawable/ic_plus"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>-->

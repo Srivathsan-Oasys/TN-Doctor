@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:id="@+id/mainLinearLayout">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/edittext_border_white"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:id="@+id/serialNum"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.50"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="S.No"
+                    android:textColor="@color/navColor"
+                    android:textSize="16sp">
+
+                </TextView>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+
+
+
+                <TextView
+                    android:id="@+id/dateText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="OP"
+                    android:textColor="@color/navColor"
+                    android:textSize="16sp">
+                </TextView>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/typeText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="OP"
+                    android:textColor="@color/navColor"
+                    android:textSize="16sp">
+
+                </TextView>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/Diagnosis"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.50"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="ASthma"
+                    android:textColor="@color/navColor"
+                    android:textSize="16sp">
+
+                </TextView>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+                <TextView
+                    android:id="@+id/diagnosisType"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="ASthma"
+                    android:textColor="@color/navColor"
+                    android:textSize="16sp">
+
+                </TextView>
+
+
+
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="2dp"
+                android:layout_height="1dp"
+                android:background="@color/view" />
+
+
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>

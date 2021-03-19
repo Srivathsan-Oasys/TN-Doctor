@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+        <TextView
+            android:id="@+id/sNoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.20"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:text="S.No" />
+
+        <TextView
+            android:id="@+id/observationTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.35"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+<!--        <TextView-->
+<!--            android:id="@+id/resultTextView"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.35"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="10dp"-->
+<!--            android:text=""-->
+<!--            android:textColor="@color/navColor"-->
+<!--            android:textSize="12sp" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/uomTextView"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_weight="0.30"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="10dp"-->
+<!--            android:text=""-->
+<!--            android:textColor="@color/navColor"-->
+<!--            android:textSize="12sp" />-->
+
+
+        <TextView
+            android:id="@+id/referenceRange"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.70"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDate1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDate2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.40"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+<!--        <ImageView-->
+<!--            android:id="@+id/deleteImageView"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="0.40"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="10dp"-->
+<!--            app:srcCompat="@drawable/ic_comment_yellow_24dp" />-->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

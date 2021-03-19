@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="1200dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="1200dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="1200dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/view" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/mainLayout"
+                android:layout_width="1200dp"
+                android:layout_height="60dp"
+                android:weightSum="28">
+
+                <TextView
+                    android:id="@+id/sNoTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/institutionTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/admissionDateTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/wardNameTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/bedNumberTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/bedTypeTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Bed Type"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/pinTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="PIN"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    />
+
+                <TextView
+                    android:id="@+id/patientNameTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Patient Name"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/ageOrGenderTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Age/Gender"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:id="@+id/mobileNumberTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="2.5"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Mobile Number"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+                <TextView
+                    android:id="@+id/addressTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Address"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/view" />
+        </LinearLayout>
+
+    </HorizontalScrollView>
+</LinearLayout>

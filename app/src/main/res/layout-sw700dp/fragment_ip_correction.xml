@@ -1,0 +1,1548 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.ip_management.admission.viewmodel.AddNewAdmissionViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="@string/IPCorrection"
+            android:textColor="@color/hmis_background"
+            android:textSize="@dimen/dr_title_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/view" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="true"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/searchLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/edtSeachPin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/poppins"
+                            android:hint="@string/pin_mobile_number"
+                            android:inputType="number"
+                            android:maxLength="14"
+                            android:maxLines="1"
+                            android:padding="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/Search"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/edtSeachPin"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="5dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardBackgroundColor="@color/search_button"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_search_white"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="@string/search"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dr_medium_text" />
+                        </androidx.cardview.widget.CardView>
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:id="@+id/pinLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/lastpin"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/primaryGrey">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:padding="5dp"
+                                android:text="@string/pin"
+                                android:textAllCaps="true"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/pin"
+                            android:layout_width="175dp"
+                            android:layout_height="36dp"
+                            android:background="@drawable/edittext_border_white"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            tools:text="7664323276656" />
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:animateLayoutChanges="true"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardElevation="6dp"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/patient_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:background="@color/fadeBlue"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="4dp"
+                                    android:text="@string/patient_details"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                                <ImageView
+                                    android:id="@+id/imgDown_patient"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:clickable="false"
+                                    android:contentDescription="@null"
+                                    android:focusable="true"
+                                    android:scaleType="centerInside"
+                                    app:srcCompat="@drawable/ic_dropdown" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/patient_detail_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:animateLayoutChanges="true"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/tvTitle"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".2"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/Salutation"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_weight=".4"
+    android:layout_height="wrap_content"
+    >
+                                    <TextView
+                                        android:id="@+id/tvName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+</LinearLayout>
+
+
+                                    <TextView
+                                        android:id="@+id/tvLastName"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:layout_weight=".4"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/lastname"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+
+                                </LinearLayout>
+
+
+                             <LinearLayout
+                                 android:layout_width="match_parent"
+                                 android:layout_height="wrap_content"
+                                 android:orientation="horizontal"
+                                 >
+
+
+                                 <com.google.android.material.textfield.TextInputLayout
+                                     android:id="@+id/tilTitle"
+                                     android:layout_width="0dp"
+                                     android:layout_weight=".2"
+                                     android:layout_marginTop="5dp"
+                                     android:layout_height="wrap_content">
+
+                                     <androidx.appcompat.widget.AppCompatSpinner
+                                         android:id="@+id/titleSpinner"
+                                         style="@style/Widget.AppCompat.Spinner.Underlined"
+                                         android:layout_width="match_parent"
+                                         android:layout_height="wrap_content"
+                                         android:layout_gravity="center"
+                                         android:focusable="false"
+                                         android:fontFamily="@font/poppins"
+                                         android:hint="@string/select_salutation"
+                                         android:inputType="textNoSuggestions"
+                                         android:maxLines="1"
+                                         android:paddingHorizontal="0dp"
+                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                         android:textSize="@dimen/dr_medium_text" />
+                                 </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                                 <EditText
+                                     android:id="@+id/edtName"
+                                     android:layout_width="0dp"
+                                     android:layout_weight=".4"
+                                     android:layout_height="wrap_content"
+                                     android:fontFamily="@font/poppins"
+                                     android:inputType="textNoSuggestions"
+                                     android:maxLines="1"
+                                     android:paddingHorizontal="4dp"
+                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                     android:textSize="@dimen/dr_medium_text" />
+
+
+
+                                 <EditText
+                                     android:id="@+id/edtLastName"
+                                     android:layout_width="0dp"
+                                     android:layout_weight=".4"
+                                     android:layout_height="wrap_content"
+                                     android:fontFamily="@font/poppins"
+                                     android:inputType="textNoSuggestions"
+                                     android:maxLines="1"
+                                     android:paddingHorizontal="4dp"
+                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                     android:textSize="@dimen/dr_medium_text" />
+                             </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".4"
+                                        >
+
+                                    <TextView
+                                        android:id="@+id/tvGender"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/gender"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".2"
+                                        >
+
+
+                                    <TextView
+                                        android:id="@+id/tvAge"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/age"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".4"
+                                        >
+
+
+                                    <TextView
+                                        android:id="@+id/tvPeriod"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/period"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilGender"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".4"
+
+                                        android:layout_marginTop="5dp"
+                                        android:layout_height="wrap_content">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/genderSpinner"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="0dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <EditText
+                                        android:id="@+id/edtAge"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".2"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="number"
+                                        android:maxLength="3"
+                                        android:maxLines="1"
+                                        android:paddingHorizontal="4dp"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilPeriod"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".4"
+
+                                        android:layout_marginTop="5dp"
+                                        android:layout_height="wrap_content">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/periodSpinner"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="0dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                                </LinearLayout>
+
+
+
+
+
+
+                             <!--
+                                <EditText
+                                    android:id="@+id/etGender"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:cursorVisible="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingHorizontal="4dp"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:visibility="gone" />
+
+
+
+
+
+                                <EditText
+                                    android:id="@+id/etPeriod"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="false"
+                                    android:cursorVisible="false"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingHorizontal="4dp"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:visibility="gone" />
+
+                                    -->
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:orientation="horizontal"
+
+                                    >
+
+                                <LinearLayout
+                                    android:id="@+id/llDob"
+                                    android:layout_width="0dp"
+                                    android:layout_weight=".5"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:visibility="visible">
+
+                                    <TextView
+                                        android:id="@+id/tvDob"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/DOB"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+                                    <EditText
+                                        android:id="@+id/edtDOB"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:drawableEnd="@drawable/ic_calendar"
+                                        android:focusable="false"
+                                        android:fontFamily="@font/poppins"
+                                        android:maxLength="12"
+                                        android:maxLines="1"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_medium_text"
+                                        android:visibility="visible" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_weight=".5"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    >
+
+
+                                <TextView
+                                    android:id="@+id/tvMobileNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:paddingHorizontal="4dp"
+                                    android:text="@string/mobile_number"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="@dimen/dr_medium_text">
+
+                                </TextView>
+
+
+                                <EditText
+                                    android:id="@+id/edtMobileNumber"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="number"
+                                    android:maxLength="10"
+                                    android:maxLines="1"
+                                    android:paddingHorizontal="4dp"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                                </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/tvFatherName"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/father_mother_guardian_name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    <TextView
+                                        android:id="@+id/tvOccupation"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/occupation"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+                                    <EditText
+                                        android:id="@+id/edtFatherName"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+                                        android:layout_height="45dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:maxLines="1"
+                                        android:paddingHorizontal="4dp"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilOccupation"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+
+                                        android:layout_marginTop="5dp"
+                                        android:layout_height="wrap_content">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/occupationSpinner"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="0dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+
+
+
+
+
+
+
+
+                                <TextView
+                                    android:id="@+id/tvAahaarNumber"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:paddingHorizontal="4dp"
+                                    android:text="@string/aadhaar_number"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="@dimen/dr_medium_text">
+
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/edit_adhar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="number"
+                                    android:maxLength="12"
+                                    android:maxLines="1"
+                                    android:paddingHorizontal="4dp"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/address_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/fadeBlue"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="6dp"
+                                    android:text="@string/address_details"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                                <ImageView
+                                    android:id="@+id/imgDvown_address"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:clickable="false"
+                                    android:contentDescription="@null"
+                                    android:focusable="true"
+                                    android:scaleType="centerInside"
+                                    app:srcCompat="@drawable/ic_dropdown" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/address_detail_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:animateLayoutChanges="true"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvDoorNo"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/door_number"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/edtDoorNumber"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="6dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvStreetName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/street_name"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/edtStreetName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="6dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvCountry"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/Country"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilCountry"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/spinnerCountry"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etCountry"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvState"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/State"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilState"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/spinnerState"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etState"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvDistrict"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/district"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilDistrict"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/districtSpinner"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etDistrict"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvTaluk"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/taluk"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilTaluk"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/talukSpinner"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etTaluk"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvVillage"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/village"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilVillage"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/villageSpinner"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etVillage"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvPincode"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/PinCode"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/edtPincode"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="number"
+                                            android:maxLength="6"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="6dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/attender_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@color/fadeBlue"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="6dp"
+                                    android:text="@string/attender_details"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                                <ImageView
+                                    android:id="@+id/imgDown_attender"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:clickable="false"
+                                    android:contentDescription="@null"
+                                    android:focusable="true"
+                                    android:scaleType="centerInside"
+                                    app:srcCompat="@drawable/ic_dropdown" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/attender_detail_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:animateLayoutChanges="true"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvAttenderName"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/attender_name"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/edtAttenderName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:digits="abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ ."
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="text"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="6dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvAttenderRelation"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/attender_relation"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:id="@+id/tilAttenderRelation"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/attenderRelationSpinner"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="45dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:hint="@string/attender_relation"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:paddingHorizontal="0dp"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="@dimen/dr_medium_text" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                        <EditText
+                                            android:id="@+id/etAttenderRelation"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:clickable="false"
+                                            android:cursorVisible="false"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:paddingHorizontal="6dp"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvAttenderNo"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginStart="3dp"
+                                            android:drawableEnd="@drawable/ic_asterisk"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/attender_mobile_number"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text">
+
+                                        </TextView>
+
+                                        <EditText
+                                            android:id="@+id/edtAttenderMobile"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="number"
+                                            android:maxLength="10"
+                                            android:maxLines="1"
+                                            android:paddingHorizontal="6dp"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="@dimen/dr_medium_text" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvCreatedby"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/created_by"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/etCreatedby"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textCapCharacters"
+                                            android:maxLength="100"
+                                            android:paddingHorizontal="6dp"
+                                            android:singleLine="true"
+                                            android:textAllCaps="true"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvCreatedOn"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/created_on"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/etCreatedOn"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textCapCharacters"
+                                            android:maxLength="100"
+                                            android:paddingHorizontal="6dp"
+                                            android:singleLine="true"
+                                            android:textAllCaps="true"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvModifiedby"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/modified_by"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/etModifiedby"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textCapCharacters"
+                                            android:maxLength="100"
+                                            android:paddingHorizontal="6dp"
+                                            android:singleLine="true"
+                                            android:textAllCaps="true"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvModifiedon"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:paddingHorizontal="6dp"
+                                            android:text="@string/modified_on"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone">
+
+                                        </TextView>
+
+
+                                        <EditText
+                                            android:id="@+id/etModifiedon"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:focusable="false"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textCapCharacters"
+                                            android:maxLength="100"
+                                            android:paddingHorizontal="6dp"
+                                            android:singleLine="true"
+                                            android:textAllCaps="true"
+                                            android:textSize="@dimen/dr_medium_text"
+                                            android:visibility="gone" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvReason"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableEnd="@drawable/ic_asterisk"
+                                android:fontFamily="@font/poppins_bold"
+                                android:paddingHorizontal="4dp"
+                                android:text="@string/ReasonforCorrection"
+                                android:textColor="@color/navColor"
+                                android:textSize="@dimen/dr_medium_text">
+
+                            </TextView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/reasonresultlayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="8dp"
+                                android:animateLayoutChanges="true"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardElevation="4dp">
+
+
+
+                                <EditText
+                                    android:id="@+id/edtReason"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/edittext_border"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="text"
+                                    android:padding="15dp"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                            </androidx.cardview.widget.CardView>
+
+                        <!--    <EditText
+                                android:id="@+id/edtReason"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:digits="abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ ."
+                                android:fontFamily="@font/poppins"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:paddingHorizontal="4dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="@dimen/dr_medium_text" />-->
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-7dp"
+                        android:backgroundTint="@color/red"
+                        android:indeterminate="true"
+                        android:indeterminateTint="#1a09d6"
+                        android:max="100"
+                        android:visibility="gone" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:gravity="end"
+                        android:orientation="horizontal"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="@dimen/_3sdp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/save"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/secondaryColor"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:id="@+id/saveTextview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_save_white"
+                                android:drawablePadding="5dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:text="@string/save"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dr_medium_text" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_7sdp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:id="@+id/clearText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser_12"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:paddingHorizontal="10dp"
+                                android:text="@string/clear"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+</layout>
+

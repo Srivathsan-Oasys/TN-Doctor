@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.view_model.LmisNewOrderViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Radiology Technician"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dr_title_text" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/navColor"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:drawableLeft="@drawable/ic_search_black"
+            android:text="Search">
+
+        </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/quick_text__name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/InputTypeField"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:hint="PIN/Mobile Number*"
+                    android:textAllCaps="true"
+                    android:maxLength="16"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/saveCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/Skyblue"
+                app:cardCornerRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_save_black"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:paddingStart="15dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="7dp"
+                    android:text="Search"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/clearCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_eraser"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:paddingStart="15dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="7dp"
+                    android:text="Clear"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:weightSum="6"
+            android:id="@+id/listviewlayout"
+            android:layout_marginRight="10dp">
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".40"
+                android:gravity="center"
+                android:text="S.no"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_bold"
+
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.25"
+                android:text="PIN"
+                android:fontFamily="@font/poppins_bold"
+
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.35"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_bold"
+
+                android:text="Patient Name"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="14sp"
+                android:text="Age"
+                android:fontFamily="@font/poppins_bold"
+
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Gender"
+                android:fontFamily="@font/poppins_bold"
+
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Mobile"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_bold"
+
+                android:gravity="center"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/view" />
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/_1sdp"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/searchRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="afterDescendants"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ProgressBar
+            android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:max="100"
+            android:backgroundTint="@color/red"
+            android:indeterminateTint="#1a09d6"
+            android:layout_marginTop="-7dp"/>
+    </LinearLayout>
+
+
+</layout>

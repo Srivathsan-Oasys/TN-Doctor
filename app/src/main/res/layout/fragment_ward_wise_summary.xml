@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_wardwise_report.viewmodel.WardWiseSummaryViewModel" />
+    </data>
+
+
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:visibility="visible"
+            android:fillViewport="true">
+            <LinearLayout
+                android:id="@+id/listLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/dateLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Start Date: "
+                        android:fontFamily="@font/poppins_semibold"
+                        android:id="@+id/startDateLable"
+                        android:textSize="@dimen/dr_medium_text">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:id="@+id/startDate"
+                        android:text=""
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/dr_medium_text">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_marginLeft="20dp"
+                        android:text="End Date: "
+                        android:fontFamily="@font/poppins_semibold"
+                        android:id="@+id/endDateLable"
+                        android:textSize="@dimen/dr_medium_text">
+
+                    </TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:id="@+id/endDate"
+                        android:text=""
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="@dimen/dr_medium_text">
+
+                    </TextView>
+
+
+                </LinearLayout>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/wardWiseRecyclerView"/>
+
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/_3sdp">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pdfDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/_20sdp"
+                app:cardBackgroundColor="@color/outPtientGreen"
+                android:visibility="visible"
+                android:layout_gravity="center"
+                app:cardCornerRadius="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_save_pdf"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:text="Pdf"
+                    android:paddingTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</layout>

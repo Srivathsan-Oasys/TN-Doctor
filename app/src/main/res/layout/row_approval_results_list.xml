@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainLinearLayout"
+        android:weightSum="5"
+        android:background="@drawable/edittext_border_white"
+        android:orientation="horizontal"
+        >
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0.40"
+            android:id="@+id/serialNumberTextView"
+            android:fontFamily="@font/poppins_bold"
+            android:text="S.No"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.30"
+            android:id="@+id/textProcess"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Test/Profile name"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <Spinner
+            android:id="@+id/result_spinner"
+            android:layout_width="0dp"
+            android:layout_weight="1.70"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center" />
+
+        <EditText
+            android:id="@+id/resultData"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:singleLine="true"
+            android:layout_weight="1.70"
+            />
+
+        <EditText
+            android:id="@+id/resultDataAlphanumeric"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:digits="abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.70"
+            android:singleLine="true"
+            />
+
+        <EditText
+            android:id="@+id/resultDataSplcase"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.70"
+            />
+
+        <EditText
+            android:id="@+id/resultDataNoneditable"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:focusable="false"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.70"
+            />
+
+        <EditText
+            android:id="@+id/resultLongText"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1.70"
+            />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="0.60"
+            android:id="@+id/uom_text"
+            android:fontFamily="@font/poppins_bold"
+            android:text="0"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/normal_val_text"
+            android:textSize="11sp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="0">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

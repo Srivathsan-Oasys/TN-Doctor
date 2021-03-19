@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.out_patient.view_model.InPatientViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.budiyev.android.codescanner.CodeScannerView
+            android:id="@+id/scanner_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:autoFocusButtonColor="@android:color/white"
+            app:autoFocusButtonVisible="true"
+            app:flashButtonColor="@android:color/white"
+            app:flashButtonVisible="true"
+            app:frameAspectRatioHeight="1"
+            app:frameAspectRatioWidth="1"
+            app:frameColor="@android:color/white"
+            app:frameCornersRadius="0dp"
+            app:frameCornersSize="50dp"
+            app:frameSize="0.75"
+            app:frameThickness="2dp"
+            app:maskColor="#77000000"
+            tools:ignore="MissingClass" />
+
+        <!-- <com.google.android.material.appbar.AppBarLayout
+             android:id="@+id/appBar"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+             <androidx.appcompat.widget.Toolbar
+                 android:id="@+id/toolbar"
+                 android:layout_width="match_parent"
+                 android:layout_height="?attr/actionBarSize"
+                 android:background="@color/colorPrimary"
+                 android:theme="@style/ToolbarTheme"
+                 app:title="OutPatient">
+
+               &lt;!&ndash;  <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="end"
+                     android:gravity="center_vertical"
+                     android:orientation="horizontal">
+
+                     <androidx.appcompat.widget.SearchView
+                         android:id="@+id/searchView"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:inputType="number"
+                         android:focusable="false"
+                         android:maxWidth="@dimen/_150sdp"
+                         app:iconifiedByDefault="false"
+                         app:queryHint="Search By Mobile Number/PIN" />
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:id="@+id/qr_code_imageview"
+                         android:layout_marginStart="@dimen/_10sdp"
+                         app:srcCompat="@drawable/ic_scan" />
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginStart="@dimen/_10sdp"
+                         android:layout_marginEnd="@dimen/_10sdp"
+                         app:srcCompat="@drawable/ic_question" />
+                 </LinearLayout>&ndash;&gt;
+             </androidx.appcompat.widget.Toolbar>
+
+         </com.google.android.material.appbar.AppBarLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:orientation="horizontal">
+
+            <!--
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:text="IN Patient"
+                            android:fontFamily="@font/poppins_bold"
+                            android:layout_gravity="center"
+                            android:textSize="@dimen/_8sdp"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:textColor="@color/hmis_background"
+
+                            />
+            -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:focusable="false"
+                    android:inputType="number"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="Search By Mobile Number/PIN" />
+
+                <ImageView
+                    android:id="@+id/qr_code_imageview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_scan_blue" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="0.1"
+                    app:srcCompat="@drawable/ic_question_blue" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-7dp"
+            android:layout_marginBottom="-7dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="@{viewModel.progressBar}" />
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/main_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </LinearLayout>
+</layout>

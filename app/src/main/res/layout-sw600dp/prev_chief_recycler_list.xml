@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3"
+        android:id="@+id/mainLayout"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:id="@+id/sNoTextView"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.50"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="10dp"
+            android:gravity="center"
+            android:id="@+id/nameTextView"
+            android:text="ChiefComplaints/Others"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="Duration"
+            android:textSize="14sp"
+            android:id="@+id/durationTextview"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

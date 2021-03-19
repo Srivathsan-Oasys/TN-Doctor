@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolbarTheme"
+                app:navigationIcon="@drawable/ic_left_arrow_white"
+                app:title="Dashboard" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <LinearLayout
+                    android:id="@+id/previewLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@color/alternateRow"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+                    <ImageView
+                        android:id="@+id/filterImageView"
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_dropdown" />
+
+
+                    <TextView
+                        android:id="@+id/dateTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="Filter"
+                        android:textColor="@color/black"
+                        tools:ignore="HardcodedText,MissingConstraints" />
+
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/ic_dropdown" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="10dp"
+                    tools:ignore="MissingConstraints">
+
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:text="District"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:layout_height="wrap_content" />
+
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Health Office"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:text="Institution"
+                        android:layout_height="wrap_content" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginTop="3dp"
+                    tools:ignore="MissingConstraints">
+
+
+
+                    <Spinner
+                        android:id="@+id/district_spinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_height="35dp" />
+
+
+                    <Spinner
+                        android:id="@+id/health_spinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_height="35dp" />
+                    <Spinner
+                        android:id="@+id/institution_spinner"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:padding="10dp"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_height="35dp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:weightSum="5"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardBackgroundColor="@color/white">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_health_office" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingEnd="0dp"
+                                    android:text="Health Office"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="1234"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginEnd="20dp"
+
+                        app:cardBackgroundColor="@color/white">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_institute" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingEnd="0dp"
+                                    android:text="Institution"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="1234"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardBackgroundColor="@color/white">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_department" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingEnd="0dp"
+                                    android:text="Department"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="1234"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginEnd="20dp"
+                        app:cardBackgroundColor="@color/white">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_roles" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingEnd="0dp"
+                                    android:text="Roles"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="1234"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardCornerRadius="5dp"
+                        app:cardBackgroundColor="@color/white">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="45dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center_vertical"
+                                app:srcCompat="@drawable/ic_user" />
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="3dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingEnd="0dp"
+                                    android:text="User Profile"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="25dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:text="1234"
+                                    android:textColor="@color/black"
+                                    android:textSize="14sp"
+                                    tools:ignore="HardcodedText" />
+
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="5"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+
+
+
+
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="3"
+                android:layout_marginLeft="10dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="Office Type"
+                    android:textColor="@color/navColor"
+                    android:textSize="16dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="Institution Type"
+                    android:textColor="@color/navColor"
+                    android:textSize="16dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="45dp"
+                    android:gravity="left"
+                    android:layout_weight="1"
+                    android:text="Active Users"
+                    android:textColor="@color/navColor"
+                    android:textSize="16dp" />
+
+
+
+
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="wrap_content"
+                        android:background="#CCCCCC" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:weightSum="3"
+                        android:orientation="horizontal">
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+                            <TableRow
+                                android:background=" #f5f4f4"
+                                android:weightSum="2"
+                                android:paddingLeft="0dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="@string/Type"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="Count"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+
+                            </TableRow>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@+id/titleTL"
+                                    android:fillViewport="true">
+
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="0dp"
+                                        android:paddingRight="0dp">
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:weightSum="2"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="@string/Type"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="Count"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+
+                                        </TableRow>
+
+                                    </TableLayout>
+                                </ScrollView>
+                            </LinearLayout>
+
+
+                        </TableLayout>
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+                            <TableRow
+                                android:background=" #f5f4f4"
+                                android:weightSum="2"
+                                android:paddingLeft="0dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="@string/Type"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="Count"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+
+                            </TableRow>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@+id/titleTL"
+                                    android:fillViewport="true">
+
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="0dp"
+                                        android:paddingRight="0dp">
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:weightSum="2"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="@string/Type"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="Count"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+
+                                        </TableRow>
+
+                                    </TableLayout>
+                                </ScrollView>
+                            </LinearLayout>
+
+
+                        </TableLayout>
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+                            <TableRow
+                                android:background=" #f5f4f4"
+                                android:weightSum="2"
+                                android:paddingLeft="0dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="Name"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:layout_weight="1"
+                                    android:drawableLeft="@drawable/sort"
+                                    android:text="Count"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+
+                            </TableRow>
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@+id/titleTL"
+                                    android:fillViewport="true">
+
+                                    <TableLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:paddingLeft="0dp"
+                                        android:paddingRight="0dp">
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:weightSum="2"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="@string/Type"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="center"
+                                                android:layout_weight="1"
+                                                android:text="Count"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+
+                                        </TableRow>
+
+                                    </TableLayout>
+                                </ScrollView>
+                            </LinearLayout>
+
+
+                        </TableLayout>
+
+
+
+
+                        <!--
+                        &lt;!&ndash;
+                                                <TableLayout
+                                                    android:id="@+id/creditSalesTL1"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:layout_weight="1"
+                                                    android:layout_marginTop="10dp"
+                                                    android:layout_marginBottom="50dp"
+                                                    android:paddingLeft="0dp"
+                                                    android:paddingRight="0dp">
+
+
+                                                    <TableRow
+                                                        android:background=" #f5f4f4"
+                                                        android:paddingLeft="0dp">
+
+                                                        <TextView
+                                                            android:layout_width="100dp"
+                                                            android:layout_height="45dp"
+                                                            android:background="@drawable/color_shape"
+                                                            android:gravity="center"
+                                                            android:drawableLeft="@drawable/ic_down_arrow"
+                                                            android:text="@string/Type"
+                                                            android:textColor="@color/navColor"
+                                                            android:textSize="16dp" />
+
+                                                        <TextView
+                                                            android:layout_width="150dp"
+                                                            android:layout_height="45dp"
+                                                            android:background="@drawable/color_shape"
+                                                            android:gravity="center"
+                                                            android:drawableLeft="@drawable/ic_down_arrow"
+                                                            android:text="Count"
+                                                            android:textColor="@color/navColor"
+                                                            android:textSize="16dp" />
+
+
+                                                    </TableRow>
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="150dp"
+                                                        android:layout_above="@+id/bottom_bar"
+                                                        android:orientation="vertical">
+
+                                                        <ScrollView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="match_parent"
+                                                            android:layout_below="@+id/titleTL"
+                                                            android:fillViewport="true">
+
+                                                            <TableLayout
+                                                                android:layout_width="wrap_content"
+                                                                android:layout_height="150dp"
+                                                                android:layout_above="@+id/bottom_bar"
+                                                                android:paddingLeft="0dp"
+                                                                android:paddingRight="0dp">
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="100dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:text="@string/Type"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="center"
+                                                                        android:text="Count"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+
+                                                                </TableRow>
+
+
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="100dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="cash"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="300dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="card"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+
+
+
+
+
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="300dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="usable_loyality_amount"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+
+                                                            </TableLayout>
+                                                        </ScrollView>
+                                                    </LinearLayout>
+                                                </TableLayout>
+                        &ndash;&gt;
+
+
+                                                <TableLayout
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="match_parent"
+                                                    android:layout_marginLeft="20dp"
+                                                    android:layout_weight="1"
+                                                    android:layout_marginTop="10dp"
+                                                    android:layout_marginBottom="50dp"
+                                                    android:paddingLeft="0dp"
+                                                    android:paddingRight="0dp">
+
+
+                                                    <TableRow
+                                                        android:background=" #f5f4f4"
+                                                        android:paddingLeft="0dp">
+
+                                                        <TextView
+                                                            android:layout_width="100dp"
+                                                            android:layout_height="45dp"
+                                                            android:background="@drawable/color_shape"
+                                                            android:gravity="center"
+                                                            android:drawableLeft="@drawable/ic_down_arrow"
+                                                            android:text="@string/Type"
+                                                            android:textColor="@color/navColor"
+                                                            android:textSize="16dp" />
+
+                                                        <TextView
+                                                            android:layout_width="150dp"
+                                                            android:layout_height="45dp"
+                                                            android:background="@drawable/color_shape"
+                                                            android:gravity="center"
+                                                            android:drawableLeft="@drawable/ic_down_arrow"
+                                                            android:text="Count"
+                                                            android:textColor="@color/navColor"
+                                                            android:textSize="16dp" />
+
+
+                                                    </TableRow>
+
+                                                    <LinearLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="150dp"
+                                                        android:layout_above="@+id/bottom_bar"
+                                                        android:orientation="vertical">
+
+                                                        <ScrollView
+                                                            android:layout_width="wrap_content"
+                                                            android:layout_height="match_parent"
+                                                            android:layout_below="@+id/titleTL"
+                                                            android:fillViewport="true">
+
+                                                            <TableLayout
+                                                                android:layout_width="wrap_content"
+                                                                android:layout_height="150dp"
+                                                                android:layout_above="@+id/bottom_bar"
+                                                                android:paddingLeft="0dp"
+                                                                android:paddingRight="0dp">
+
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="100dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="cash"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="300dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="card"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+
+
+
+
+
+
+                                                                <TableRow
+                                                                    android:background=" #f5f4f4"
+                                                                    android:paddingLeft="0dp">
+
+                                                                    <TextView
+                                                                        android:layout_width="300dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="left"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:text="usable_loyality_amount"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                    <TextView
+                                                                        android:layout_width="150dp"
+                                                                        android:layout_height="45dp"
+                                                                        android:background="@drawable/cell_shape"
+                                                                        android:gravity="right"
+                                                                        android:paddingLeft="15dp"
+                                                                        android:paddingTop="10dp"
+                                                                        android:paddingRight="5dp"
+                                                                        android:text="0.00"
+                                                                        android:textAlignment="gravity"
+                                                                        android:textColor="@color/navColor"
+                                                                        android:textSize="16dp" />
+
+                                                                </TableRow>
+
+
+                                                            </TableLayout>
+                                                        </ScrollView>
+                                                    </LinearLayout>
+                                                </TableLayout>
+                        -->
+<!--
+                        <TableLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="20dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="50dp"
+                            android:paddingLeft="0dp"
+                            android:paddingRight="0dp">
+
+
+                            <TableRow
+                                android:background=" #f5f4f4"
+                                android:paddingLeft="0dp">
+
+                                <TextView
+                                    android:layout_width="100dp"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:drawableLeft="@drawable/ic_down_arrow"
+                                    android:text="@string/Type"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="150dp"
+                                    android:layout_height="45dp"
+                                    android:background="@drawable/color_shape"
+                                    android:gravity="center"
+                                    android:drawableLeft="@drawable/ic_down_arrow"
+                                    android:text="Count"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="16dp" />
+
+
+                            </TableRow>
+
+                            <LinearLayout
+                                android:id="@+id/scrollLL"
+                                android:layout_width="wrap_content"
+                                android:layout_height="150dp"
+                                android:layout_above="@+id/bottom_bar"
+                                android:orientation="vertical">
+
+                                <ScrollView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:layout_below="@+id/titleTL"
+                                    android:fillViewport="true">
+
+                                    <TableLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="150dp"
+                                        android:layout_above="@+id/bottom_bar"
+                                        android:paddingLeft="0dp"
+                                        android:paddingRight="0dp">
+
+
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:id="@+id/cashTxt"
+                                                android:layout_width="100dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="left"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:text="cash"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:layout_width="150dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="right"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:paddingRight="5dp"
+                                                android:text="0.00"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                        </TableRow>
+
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:id="@+id/cardTxt"
+                                                android:layout_width="300dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="left"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:text="card"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:id="@+id/cardVal"
+                                                android:layout_width="150dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="right"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:paddingRight="5dp"
+                                                android:text="0.00"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                        </TableRow>
+
+
+
+
+
+
+
+                                        <TableRow
+                                            android:background=" #f5f4f4"
+                                            android:paddingLeft="0dp">
+
+                                            <TextView
+                                                android:id="@+id/usableLOyalityTxt"
+                                                android:layout_width="300dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="left"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:text="usable_loyality_amount"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:id="@+id/usableLoyalityVal"
+                                                android:layout_width="150dp"
+                                                android:layout_height="45dp"
+                                                android:background="@drawable/cell_shape"
+                                                android:gravity="right"
+                                                android:paddingLeft="15dp"
+                                                android:paddingTop="10dp"
+                                                android:paddingRight="5dp"
+                                                android:text="0.00"
+                                                android:textAlignment="gravity"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16dp" />
+
+                                        </TableRow>
+
+
+                                    </TableLayout>
+                                </ScrollView>
+                            </LinearLayout>
+                        </TableLayout>
+-->
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="276dp"
+                        android:layout_below="@+id/paymentTxtLL"
+                        android:background="#CCCCCC" />
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>

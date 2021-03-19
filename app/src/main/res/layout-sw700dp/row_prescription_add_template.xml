@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/mainLinearLayout"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.20"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="1"
+            android:id="@+id/serialNumberTextView"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="10dp"
+            android:id="@+id/drugNameTextView"
+            android:text="Drug Name"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.60"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="10dp"
+            android:text="Route"
+            android:id="@+id/routeTextView"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.60"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingStart="10dp"
+            android:id="@+id/frequencyTextView"
+            android:text="Frequency"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:layout_gravity="center_vertical"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Duration"
+            android:id="@+id/durationTextView"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.43"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="period"
+            android:id="@+id/periodTxt"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.60"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Instruction"
+            android:layout_gravity="center"
+            android:id="@+id/instructionTextView"
+            android:gravity="center"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:gravity="center"
+            android:id="@+id/deleteImageView"
+            android:paddingStart="10dp"
+            android:text="Action"
+            app:srcCompat="@drawable/ic_delete_black"
+            android:textSize="17sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

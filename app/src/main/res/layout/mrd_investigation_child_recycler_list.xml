@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinearLayout"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/serialNum"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="S.No"
+            android:textColor="@color/navColor"
+            android:textSize="14sp">
+
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:id="@+id/codeText"
+            android:text="Date"
+            android:textColor="@color/navColor"
+            android:textSize="14sp">
+
+        </TextView>
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:id="@+id/testNameText"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="OP"
+            android:textColor="@color/navColor"
+            android:textSize="14sp">
+
+        </TextView>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.75"
+            android:id="@+id/tyepText"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="ASthma"
+            android:textColor="@color/navColor"
+            android:textSize="14sp">
+
+        </TextView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

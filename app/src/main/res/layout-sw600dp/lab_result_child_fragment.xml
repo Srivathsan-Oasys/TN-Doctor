@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.lab_result.view_model.LabResultViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <FrameLayout
+            android:id="@+id/labResultChildframeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/calendarEditText"
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:drawableRight="@drawable/ic_calendar"
+                            android:hint="Choose date"
+                            android:padding="@dimen/_5sdp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/compareCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginEnd="22dp"
+                            android:layout_marginBottom="10dp"
+                            app:cardBackgroundColor="@color/orange"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Compare"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                app:drawableStartCompat="@drawable/ic_transfer_white_16" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/noDataText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_bold"
+                        android:gravity="center"
+                        android:text="No Data Available"
+                        android:textColor="@color/navColor"
+                        android:visibility="gone">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:id="@+id/parentLinearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        tools:ignore="MissingConstraints">
+
+                        <androidx.core.widget.NestedScrollView
+                            android:id="@+id/activity_main"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/LabResultRecyclerView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:nestedScrollingEnabled="true"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                tools:ignore="UnusedAttribute" />
+                        </androidx.core.widget.NestedScrollView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginEnd="22dp"
+                        android:gravity="end"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/nextCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/secondaryColor"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_next"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Next"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clearCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Clear"
+                                android:textColor="@color/white"
+                                android:textSize="16sp" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+        </FrameLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

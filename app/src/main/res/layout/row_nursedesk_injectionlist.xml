@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/mainLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="9">
+
+        <TextView
+            android:id="@+id/serialNo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:text="S.No"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/ordDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.30"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="ordDate"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/ordNumb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".80"
+            android:gravity="center"
+            android:text="ordNum"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/injPin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="PIN"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/injPatientName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.20"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="patName"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/injectionName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="InjName"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/qty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="qty"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/prescBy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="prescby"
+            android:textColor="@color/navColor"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.20"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+
+            <ImageView
+                android:id="@+id/injectionItemAdministrator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/navColor"
+                app:srcCompat="@drawable/ic_save_blue" />
+
+            <ImageView
+                android:id="@+id/injectionItemView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/navColor"
+                app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+
+            <ImageView
+                android:id="@+id/injectionItemComments"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/navColor"
+                app:srcCompat="@drawable/ic_comment_yellow_24dp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:id="@+id/mainChildLayout"
+        android:visibility="gone"
+        android:padding="@dimen/_3ssp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/liteBlue"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".50"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="S.No"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.50"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="Injection Name"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Frequency"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="Action"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvInjectionChildList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".50"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="S.No"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.50"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:paddingStart="10dp"
+                android:text="Injection Name"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+
+                <ImageView
+                    android:id="@+id/injectionItemAdministratorExp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/navColor"
+                    app:srcCompat="@drawable/ic_save_blue" />
+
+                <ImageView
+                    android:id="@+id/injectionItemViewExp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/navColor"
+                    app:srcCompat="@drawable/ic_baseline_remove_red_eye_24" />
+
+                <ImageView
+                    android:id="@+id/injectionItemCommentsExp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="@color/navColor"
+                    app:srcCompat="@drawable/ic_comment_yellow_24dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>-->
+
+    </LinearLayout>
+
+</LinearLayout>

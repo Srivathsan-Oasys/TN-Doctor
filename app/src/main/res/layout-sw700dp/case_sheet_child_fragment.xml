@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.mrd.view_model.MRDViewModel" />
+    </data>
+
+
+    <FrameLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:animateLayoutChanges="true"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardElevation="4dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/allergyresultLinearLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:animateLayoutChanges="true"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/white"
+                                app:cardElevation="4dp">
+
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="45dp"
+                                            android:background="@drawable/edittext_border_white"
+                                            android:orientation="horizontal"
+                                            android:weightSum="10">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="0.50"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="S.No"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="14sp">
+
+                                            </TextView>
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="2.50"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Date"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="14sp">
+
+                                            </TextView>
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="2"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Type"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="14sp">
+
+                                            </TextView>
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="2"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Doctor"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="14sp">
+
+                                            </TextView>
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="3"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Department"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="14sp">
+
+                                            </TextView>
+
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+                                            <androidx.recyclerview.widget.RecyclerView
+                                                android:id="@+id/mrdRecyclerView"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:clipToPadding="false"
+                                                android:scrollbars="horizontal"
+                                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                                        </LinearLayout>
+                                        <ProgressBar
+                                            android:id="@+id/progressBar"
+                                            style="?android:attr/progressBarStyleHorizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="-7dp"
+                                            android:layout_marginBottom="-7dp"
+                                            android:indeterminate="true"
+                                            android:max="100"
+                                            android:visibility="@{viewModel.progress}" />
+
+
+                                    </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical|end">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical|end"
+                            android:orientation="horizontal"
+                            android:paddingEnd="@dimen/_5sdp"
+                            tools:ignore="MissingConstraints">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/dmPrint"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:visibility="gone"
+                                app:cardBackgroundColor="@color/hmis_background"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_printing_tool"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="DM print"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/Print"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardBackgroundColor="@color/hmis_background"
+                                app:cardCornerRadius="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_printing_tool"
+                                    android:drawablePadding="7dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="7dp"
+                                    android:text=" PDF"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/close"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground"
+                                app:cardBackgroundColor="@color/grey"
+                                app:cardCornerRadius="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_close_white_12"
+                                    android:drawablePadding="7dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="7dp"
+                                    android:text="Close"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </androidx.core.widget.NestedScrollView>
+
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+</layout>

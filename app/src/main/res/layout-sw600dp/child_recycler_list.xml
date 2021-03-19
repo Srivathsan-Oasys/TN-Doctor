@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#f4f4f4"
+    android:id="@+id/mainLinearLayout"
+    tools:ignore="MissingDefaultResource">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:background="#e5e9e6"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp" >
+            <TableRow android:background="#e5e9e6"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sNoTextView"
+                    android:textColor="@color/black"
+                    android:text="1"
+                    tools:ignore="HardcodedText" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/nameTextView"
+                    android:textColor="@color/black"
+                    android:text="Jagadeesh"
+                    tools:ignore="HardcodedText" />
+            </TableRow>
+
+        </TableLayout>
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_20sdp"
+            tools:ignore="MissingConstraints">
+
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Repeat"
+                android:textAllCaps="false"
+                android:background="@color/orange"
+                android:textSize="@dimen/_8sdp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modify"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@color/Skyblue"
+                android:textSize="@dimen/_8sdp"
+                android:textStyle="normal" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/white"
+                android:text="View"
+                android:textAllCaps="false"
+                android:background="@color/orange"
+                android:textSize="@dimen/_8sdp" />
+
+        </LinearLayout>
+-->
+
+
+        <!--
+                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:background="#e5e9e6"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp" >
+                    <TableRow android:background="#e5e9e6"
+                        android:padding="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/sNoTextView"
+                            android:layout_weight="1"
+                            android:text="1" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/nameTextView"
+                            android:layout_weight="1"
+                            android:text="Suresh Dasari" />
+                    </TableRow>
+
+                </TableLayout>
+        -->
+
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llNurseDeskCCCPatientRow"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/tvSNo"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:paddingHorizontal="5dp"
+        android:text="1"
+        android:textColor="@color/black"
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvPin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="5dp"
+        android:text="555555100101379"
+        android:textColor="@color/black"
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvMobile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="25"
+        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="5dp"
+        android:text="9876543210"
+        android:textColor="@color/black"
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvPatientInformation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="5dp"
+        android:text="Mr. Gopal Singh Dhanik/M/45"
+        android:textColor="@color/black"
+        android:textSize="11sp" />
+</LinearLayout>

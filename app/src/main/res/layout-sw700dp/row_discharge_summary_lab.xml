@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llLabMainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:divider="@drawable/divider_color_white_bottom"
+        app:showDividers="middle">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/previewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:divider="@drawable/divider_color_white"
+            app:showDividers="middle">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabSno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.05"
+                android:gravity="center"
+                android:text="@string/s_no"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".3"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/date"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".1"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/Type"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabDepartment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/department_label"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabGivenBy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/given_by"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvLabInstitution"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".35"
+                android:gravity="center"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="@string/institution"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".15"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivLabDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/ic_delete_black" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivLabInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="4dp"
+                    app:srcCompat="@drawable/ic_discharge_summary_right_arrow" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/view" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/resultLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="1dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                android:orientation="vertical"
+                app:divider="@drawable/divider_color_white_bottom"
+                app:showDividers="middle">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#f4f4f4"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="5dp"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.50"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="S.No"
+                        android:textColor="@color/navColor"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/codeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Code"
+                        android:textColor="@color/navColor"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.50"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Test Name"
+                        android:textColor="@color/navColor"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/typeTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Type"
+                        android:textColor="@color/navColor"
+                        android:textSize="16sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvLabList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/discharge_child_recycler_list" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.cardview.widget.CardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

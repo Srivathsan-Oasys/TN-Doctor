@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.emr_workflow.discharge_summary.ui.DischargeSummaryChildFragment"
+    tools:ignore="MissingDefaultResource">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.view_model.DischargeSummaryViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:divider="@drawable/divider"
+                    app:showDividers="middle">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="0dp"
+                            android:text="@string/patient_status_label" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:padding="4dp"
+                                android:text="@string/deceased"
+                                android:textSize="16sp" />
+
+                            <androidx.appcompat.widget.SwitchCompat
+                                android:id="@+id/swDischargeSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/outPtientGreen"
+                                tools:targetApi="lollipop" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_medium"
+                                android:padding="4dp"
+                                android:text="@string/alive"
+                                android:textSize="16sp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spDischargeType"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/discharge_type"
+                        android:inputType="textNoSuggestions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="18sp" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spDeathType"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/death_type"
+                        android:inputType="textNoSuggestions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spDischargeSummaryDoctorName"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/death_type"
+                        android:inputType="textNoSuggestions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp"
+                        android:visibility="visible" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_weight="1">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etDischargeSummaryDate"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/ic_calendar"
+                            android:focusable="false"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:hint="@string/date_time_label"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tlDischargeSummaryDeathPlace"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_weight="1"
+                        android:visibility="gone">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etDischargeSummaryDeathPlace"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:hint="@string/death_place_label"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:orientation="vertical">
+
+                        <!--  Allergy View -->
+                        <include
+                            android:id="@+id/layoutAllergy"
+                            layout="@layout/layout_allergy_view" />
+                        <!-- End Allergy View -->
+
+                        <!--  Diagonosis View -->
+                        <include
+                            android:id="@+id/layoutDiagonosis"
+                            layout="@layout/layout_diagonosis_view" />
+                        <!-- End Diagonosis View -->
+
+                        <!-- Prescription View -->
+                        <include
+                            android:id="@+id/layoutPrescription"
+                            layout="@layout/layout_prescription_view" />
+                        <!--End Prescription View -->
+
+                        <!-- Lab View -->
+                        <include
+                            android:id="@+id/layoutLab"
+                            layout="@layout/layout_lab_view" />
+                        <!--End Lab View -->
+
+                        <!-- Radiology View -->
+                        <include
+                            android:id="@+id/layoutRadioLogy"
+                            layout="@layout/layout_radiology_view" />
+                        <!--End Radiology View -->
+
+                        <!-- Vitals View -->
+                        <include
+                            android:id="@+id/layoutVital"
+                            layout="@layout/layout_vital_view" />
+                        <!--End Vitals View -->
+
+                        <!-- Investigation View -->
+                        <include
+                            android:id="@+id/layoutInvestigation"
+                            layout="@layout/layout_investigation_view" />
+                        <!--End Investigation View -->
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/spTemplate"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center_vertical"
+                                android:hint="@string/template_label"
+                                android:inputType="textNoSuggestions"
+                                android:prompt="@string/template_label"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="18sp" />
+
+                            <CheckBox
+                                android:id="@+id/cbSaveAsDefault"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="48dp"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center_vertical"
+                                android:text="@string/save_as_default_label" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/etTemplateNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/edit_text_bg_selector"
+                            android:fontFamily="@font/poppins_medium"
+                            android:hint="@string/typing_label"
+                            android:inputType="textMultiLine"
+                            android:lines="4"
+                            android:maxLines="4"
+                            android:textSize="14sp" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="24dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="center_vertical|end"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cvPrintDischargeSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/colorPrimary"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_black"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="@string/print_label"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cvSaveDischargeSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_black"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="@string/save_label"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cvApproveDischargeSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/orange"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_thumb"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Approval"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cvClearDischargeSummary"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                app:cardBackgroundColor="@color/primaryGrey"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_eraser"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="@string/clear_label"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.core.widget.NestedScrollView>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/DSDrawerCardView"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="60dp"
+                app:cardBackgroundColor="@color/colorPrimary"
+                app:cardCornerRadius="22dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    app:srcCompat="@drawable/ic_favourite_back_arrow" />
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="500dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:background="@android:color/white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:text="@string/summary_discharge_previous_summary_label"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorPrimary" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginEnd="22dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingStart="0dp"
+                            android:paddingEnd="8dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="0.25"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="@string/sno"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                tools:ignore="HardcodedText" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.75"
+                                android:drawableEnd="@drawable/sort"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="@string/date"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:drawableEnd="@drawable/sort"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="@string/name"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.50"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:text="@string/action"
+                                android:textColor="@color/black"
+                                android:textSize="17sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_discharge_summary_previous"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/row_discharge_summary_previous" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_marginBottom="@dimen/_3sdp"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/_5sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    tools:ignore="MissingConstraints">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cvCancel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_edit"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="@string/modify"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.admission.viewmodel.HistoryAdmissionViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="@dimen/_2sdp"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/view" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="5"
+            android:id="@+id/hideLayout">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="S.No"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.20"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="10dp"
+                android:text="Date"
+                android:textSize="18sp"
+
+                
+                android:gravity="center"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.15"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Doctor Name"
+                
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="18sp"
+
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.25"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="10dp"
+                
+                android:text="Department"
+                android:textSize="18sp"
+
+                android:gravity="center"
+                android:textColor="@color/black"
+
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.90"
+                android:fontFamily="@font/poppins_semibold"
+                android:paddingStart="10dp"
+                android:textSize="18sp"
+                android:text="Institution"
+                
+                android:gravity="center"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/historyLabRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noRecordsTextView"
+            android:text="Currently no records!!"
+            android:textSize="@dimen/_10sdp"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_50sdp"/>
+
+    </LinearLayout>
+
+</layout>

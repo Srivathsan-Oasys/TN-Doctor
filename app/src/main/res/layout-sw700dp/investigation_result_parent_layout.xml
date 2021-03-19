@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/patientCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/previewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/discharge_summary_color"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <CheckBox
+                android:id="@+id/cbInvestigation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp" />
+
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/buttonPDF"
+                android:layout_toEndOf="@+id/cbInvestigation"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:text="10_Sep-2020 10:00 AM - Dermotologist-OP"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/buttonPDF"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/ic_dropdown" />
+
+        </RelativeLayout>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:id="@+id/resultLinearLayout"
+            android:visibility="visible"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="2dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_margin="15dp"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/Description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/navColor"
+                android:fontFamily="@font/poppins_bold"
+                android:text=" Description"
+                android:textSize="16sp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/DescriptionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/navColor"
+                android:text=" Description"
+                android:textSize="16sp">
+
+            </TextView>
+            <TextView
+                android:id="@+id/DescriptionText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/navColor"
+                android:text=" Description"
+                android:textSize="16sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_bold"
+                android:text=" View Result">
+
+            </TextView>
+
+
+
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/child_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

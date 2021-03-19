@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.quick_reg.view_model.LabTestProcessViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="345dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="4dp"
+        android:padding="15dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp">
+
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="345dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@color/hmis_background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_weight=".5"
+                    android:paddingStart="10dp"
+                    android:text="Order Process"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+
+                    android:id="@+id/closeImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_weight=".1"
+                    android:paddingStart="10dp"
+                    android:src="@drawable/ic_close_white"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/order_process_dateRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:nestedScrollingEnabled="true"
+                tools:ignore="UnusedAttribute" />
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

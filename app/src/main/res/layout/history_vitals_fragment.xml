@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.vitals.model.viewmodel.HistoryVitalsViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingEnd="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".10"
+            android:orientation="vertical">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:visibility="visible"
+                app:cardBackgroundColor="@android:color/white"
+                tools:ignore="MissingDefaultResource">
+
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/mainLayout"
+                        android:layout_width="800dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/view" />
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/hideLayout"
+                            android:layout_width="700dp"
+                            android:layout_height="35dp"
+                            android:weightSum="5"
+                            app:divider="@drawable/divider_color_white"
+                            app:showDividers="middle">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight=".40"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="S.No"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.25"
+
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:text="Date"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1.15"
+
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:text="Vital Name"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.20"
+
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:text="Vital Value"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center"
+                                android:paddingStart="10dp"
+                                android:text="UOM"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                tools:ignore="HardcodedText,RtlSymmetry" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/view" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/historyVitalsRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/row_history_vitals" />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/noRecordsTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:text="Currently no records!!"
+                android:textSize="@dimen/_10sdp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

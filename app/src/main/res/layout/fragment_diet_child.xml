@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.diet.view_model.DietViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <LinearLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/favouriteDrawerCardView"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_gravity="end"
+                android:background="@drawable/semi_rec"
+                android:gravity="center"
+                android:text="FAV"
+                android:textColor="@color/white">
+
+            </TextView>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@android:color/white"
+                        tools:ignore="MissingDefaultResource">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:overScrollMode="never">
+
+                            <LinearLayout
+                                android:id="@+id/mainLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="700dp"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="700dp"
+                                        android:layout_height="35dp"
+                                        android:background="@drawable/edittext_border_white"
+                                        android:gravity="center"
+                                        android:orientation="horizontal"
+                                        android:weightSum="14">
+
+                                        <TextView
+                                            android:id="@+id/serialNumberTextView"
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:gravity="center"
+                                            android:text="S.No"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="15sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="3.5"
+                                            android:gravity="center_vertical"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="3.5"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:gravity="center"
+                                                android:text="@string/namecode"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="15sp">
+
+                                            </TextView>
+
+                                        </LinearLayout>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="2"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:gravity="center"
+                                            android:text="@string/qty"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="15sp">
+
+                                        </TextView>
+
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="3"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:gravity="center"
+                                            android:text="@string/str_category"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="15sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="3"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:gravity="center"
+                                            android:text="@string/frequency"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="15sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1.5"
+                                            android:fontFamily="@font/poppins_semibold"
+                                            android:gravity="center"
+                                            android:text="Action"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="15sp">
+
+                                        </TextView>
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/savelabRecyclerView"
+                                        android:layout_width="700dp"
+                                        android:layout_height="wrap_content"
+                                        android:overScrollMode="never"
+                                        android:scrollbars="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="1dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardElevation="2dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginBottom="-8dp"
+                                android:layout_weight="0.5"
+                                android:orientation="vertical">
+
+                                <EditText
+                                    android:id="@+id/instruction"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:gravity="top"
+                                    android:hint="@string/instruction"
+                                    android:inputType="textMultiLine"
+                                    android:lines="4"
+                                    android:overScrollMode="always"
+                                    android:paddingStart="6dp"
+                                    android:paddingTop="6dp"
+                                    android:scrollbarStyle="insideInset"
+                                    android:scrollbars="vertical"
+                                    android:text=""
+                                    android:textSize="14sp" />
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/saveAsTempCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/hmis_background"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_white_12"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="5dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Save Template"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/saveCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_next"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="5dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="order"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/clearCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                app:cardBackgroundColor="@color/primaryGrey"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_eraser_12"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="5dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Clear"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:background="#FFFFFF">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="scrollable" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+        </com.google.android.material.navigation.NavigationView>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

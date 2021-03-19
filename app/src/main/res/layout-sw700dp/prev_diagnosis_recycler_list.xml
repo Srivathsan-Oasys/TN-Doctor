@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/mainLinearLayout"
+        android:weightSum="4"
+        tools:ignore="MissingConstraints">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.30"
+            android:id="@+id/sNoTextView"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/cell_shape"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/cell_shape"
+            android:id="@+id/dateTextView"
+            android:textColor="@color/navColor"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:paddingStart="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/cell_shape"
+            android:id="@+id/typeTextView"
+            android:textColor="@color/navColor"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7"
+            android:paddingStart="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:background="@drawable/cell_shape"
+            android:id="@+id/codeTextView"
+            android:textColor="@color/navColor"
+            android:textSize="14sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:padding="5dp"
+            android:maxLines="2"
+            android:textSize="14sp"
+            android:background="@drawable/cell_shape"
+            android:id="@+id/nameTextview"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

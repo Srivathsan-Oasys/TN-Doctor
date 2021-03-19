@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/edittext_border_white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/serialNoTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.50"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:text="@string/sno"
+            android:textSize="@dimen/dr_small_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/pinTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="5dp"
+            android:text="@string/pin"
+            android:textSize="@dimen/dr_small_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.30"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="5dp"
+            android:text="@string/name"
+            android:textSize="@dimen/dr_small_text">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/genderTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.70"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="5dp"
+            android:text="@string/gender"
+            android:textSize="@dimen/dr_small_text"
+            android:visibility="gone">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/dateTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:fontFamily="@font/poppins"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="5dp"
+            android:text="@string/last_visit_date"
+            android:textSize="@dimen/dr_small_text"
+            tools:ignore="SmallSp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

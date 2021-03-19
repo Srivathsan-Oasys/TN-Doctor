@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbAppointment"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:navigationIcon="@drawable/ic_favourite_back_arrow"
+        app:title="@string/book_appointment"
+        app:titleTextAppearance="@style/AppTheme.Main.ToolBarTitle"
+        app:titleTextColor="@android:color/white"
+        tools:targetApi="lollipop" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivAppointmentProfile"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        tools:ignore="VectorDrawableCompat" />
+</RelativeLayout>

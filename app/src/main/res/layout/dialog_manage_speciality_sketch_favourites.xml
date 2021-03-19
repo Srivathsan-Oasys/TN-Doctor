@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.speciality_sketch.viewmodel.ManageSpecialitySketchFavouriteViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@android:color/white"
+            tools:ignore="MissingDefaultResource">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_25sdp"
+                        android:background="@color/hmis_background"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_weight=".5"
+                            android:gravity="center_vertical"
+                            android:paddingStart="10dp"
+                            android:text="@string/MT_fav_title"
+                            android:textColor="@color/white"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/closeImageView"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight=".1"
+                            android:paddingStart="10dp"
+                            android:src="@drawable/ic_close_white"
+                            tools:ignore="VectorDrawableCompat" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Speciality Sketch"
+                            android:textColor="@color/navColor"
+                            android:textSize="15sp" />
+
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                            android:id="@+id/autoCompleteTextName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_search_black"
+                            android:imeOptions="actionDone"
+                            android:singleLine="true"
+                            android:textColor="@color/navColor"
+                            android:textSize="13sp" />
+
+                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Display Order"
+                            android:textColor="@color/navColor"
+                            android:textSize="15sp" />
+
+                        <EditText
+                            android:id="@+id/displayOrderTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:singleLine="true"
+                            android:textColor="@color/navColor"
+                            android:textSize="13sp"
+                            tools:ignore="UnusedAttribute" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="@string/status"
+                                android:textColor="@color/navColor"
+                                android:textSize="@dimen/_14sdp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/inactive"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13sp" />
+
+                                <Switch
+                                    android:id="@+id/switchCheck"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_marginRight="10dp"
+                                    android:checked="true"
+                                    android:theme="@style/SwitchTheme" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/active"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:backgroundTint="@color/hmis_background"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/add"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            app:cardBackgroundColor="@color/hmis_background"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:id="@+id/buttonstatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_add_12"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:text="Add"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="5dp"
+                            app:cardBackgroundColor="@color/grey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser_12"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:text="Clear"
+                                android:textColor="@color/white"
+                                android:textSize="12sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="4dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardElevation="2dp">
+
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <LinearLayout
+                                android:id="@+id/listLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="500dp"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4">
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.2"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:text="S.No"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="15sp">
+
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="0.7"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:text="Name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="15sp">
+
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:text="Display Order"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="15sp">
+
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1.1"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:text="Action"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="15sp">
+
+                                    </TextView>
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/list_data"
+                                    android:layout_width="500dp"
+                                    android:layout_height="wrap_content" />
+
+
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

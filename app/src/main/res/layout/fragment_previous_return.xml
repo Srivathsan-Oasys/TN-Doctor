@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.pharmacy_management.returns.viewmodel.PreviousReturnViewModel" />
+    </data>
+
+            <LinearLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Find Pharmacy Dispense(s)"
+                        android:textColor="@color/hmis_background"
+                        android:textSize="@dimen/_15sdp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/_20sdp"
+                    android:gravity="right">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/totalCount"
+                        android:layout_width="185dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginBottom="5dp"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/prescriptionsYellow"
+                        app:cardCornerRadius="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:layout_weight="0.9"
+                                android:textSize="12sp"
+                                android:paddingEnd="@dimen/_5sdp"
+                                android:textColor="@color/white"
+                                android:text="Dispense(s)"
+                                />
+
+                            <TextView
+                                android:id="@+id/txtDispenseCount"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:layout_weight="1.1"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginRight="@dimen/_5sdp"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:background="@color/white"
+                                android:text="0"
+                                />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="4.10">
+
+
+                            <androidx.core.widget.NestedScrollView
+                                android:id="@+id/nestedScrollView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginTop="@dimen/_10sdp"
+                                        android:background="@color/view" />
+                                    <LinearLayout
+                                        android:layout_width="500dp"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:weightSum="5">
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="S.No"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Return No"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Dispense No"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Return Date"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+                                        <TextView
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:text="Returned By"
+                                            android:textColor="@color/black"
+                                            android:textSize="11sp" />
+
+                                        <View
+                                            android:layout_width="2dp"
+                                            android:layout_height="match_parent"
+                                            android:background="@color/view" />
+
+
+                                    </LinearLayout>
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="2dp"
+                                        android:layout_marginBottom="@dimen/_10sdp"
+                                        android:background="@color/view" />
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/dispenseRecyclerView"
+                                        android:layout_width="500dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:scrollbars="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            </androidx.core.widget.NestedScrollView>
+
+                </LinearLayout>
+                </HorizontalScrollView>
+
+
+            </LinearLayout>
+</layout>

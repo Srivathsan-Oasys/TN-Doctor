@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/hideLayout"
+        android:layout_width="700dp"
+        android:layout_height="wrap_content"
+
+        android:weightSum="6"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/historyRadioSerialno"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".50"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="S.No"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/historyRadioDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.20"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+
+            android:text="Date"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/historyRadioCode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".90"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Code"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/historyRadioName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:text="Name"
+
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/historyRadioType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".90"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+
+            android:text="@string/Type"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/historyRadioOrderLocation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.50"
+            android:gravity="center"
+
+            android:padding="10dp"
+            android:text="Order to Location"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+</LinearLayout>

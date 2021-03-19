@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.dateswise.view_model.DateSummaryViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/listLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:padding="@dimen/_5sdp"
+                    android:visibility="visible"
+                    android:background="@drawable/edittext_border_white"
+                    android:orientation="vertical">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:fillViewport="true">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/pdfHeaderLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:weightSum="3"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".30"
+                                android:src="@drawable/tnlogo">
+
+                            </ImageView>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.40"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible"
+                                    android:id="@+id/instituteHeader"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Rajiv Gandhi Governoment General Hospital Chennai "
+                                    android:textSize="12sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible"
+                                    android:id="@+id/dateHeader"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Date Wise Report "
+                                    android:textSize="12sp">
+
+                                </TextView>
+                            </LinearLayout>
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight=".30"
+                                android:src="@mipmap/ic_launcher">
+
+                            </ImageView>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                        android:id="@+id/dateLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:weightSum="2"
+                        android:orientation="horizontal">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Start Date: "
+                            android:id="@+id/startDateLable"
+                            android:textSize="12sp">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/startDate"
+                            android:text=""
+                            android:textSize="12sp">
+
+                        </TextView>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:layout_marginLeft="@dimen/_20sdp"
+                            android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:layout_marginLeft="10dp"
+                            android:text="End Date: "
+                            android:id="@+id/endDateLable"
+                            android:textSize="12sp">
+
+                        </TextView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:id="@+id/endDate"
+                            android:text=""
+                            android:textSize="12sp">
+
+                        </TextView>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/datewisetRecycleview"
+                        android:layout_width="800dp"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                    </LinearLayout>
+                    </HorizontalScrollView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="@dimen/_15sdp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_8sdp"
+                            android:gravity="right"
+                            android:orientation="horizontal"
+                            android:paddingEnd="@dimen/_3sdp">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/pdfDownload"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_20sdp"
+                                app:cardBackgroundColor="@color/outPtientGreen"
+                                android:visibility="visible"
+                                android:layout_gravity="center"
+                                app:cardCornerRadius="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_pdf"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:gravity="center"
+                                    android:text="Pdf"
+                                    android:paddingTop="@dimen/_5sdp"
+                                    android:paddingBottom="@dimen/_5sdp"
+                                    android:paddingLeft="@dimen/_10sdp"
+                                    android:paddingRight="@dimen/_10sdp"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+
+
+    </LinearLayout>
+</layout>

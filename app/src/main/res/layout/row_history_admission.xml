@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/parentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="5"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/historyLabSerialno"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".30"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="S.No"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/historyLabDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Date"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/doctorName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.15"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:id="@+id/departmentAdmisson"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.25"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text=""
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/institutionAdmission"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.30"
+            android:gravity="center"
+            android:padding="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+</LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:id="@+id/mainLinearLayout"
+        android:background="@drawable/edittext_border_white"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:gravity="center"
+            android:id="@+id/serialNumberTextView"
+            android:fontFamily="@font/poppins_bold"
+            android:text="S.No"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.40"
+            android:gravity="center"
+            android:id="@+id/textProcess"
+            android:fontFamily="@font/poppins_bold"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/institution_spinner"
+            android:layout_width="0dp"
+            android:layout_weight="1.10"
+            android:layout_height="match_parent" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/lab_spinner"
+            android:layout_width="0dp"
+            android:enabled="false"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

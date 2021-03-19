@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llDailyNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llUser1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:background="@color/view" />
+
+            <ImageView
+                android:id="@+id/imgUser1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_user" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:background="@color/view" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/notes_right"
+            android:backgroundTint="#e4e4e4"
+            android:minHeight="50dp"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/tvDailyName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:text="HMIS Admin - COVID" />
+
+                <TextView
+                    android:id="@+id/tvDailyTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="end"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    tools:text="04 Dec 2019 11:00AM" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvDailyNotes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    tools:text="Need weekly checkup to maintain the sugar and BP" />
+
+                <ImageView
+                    android:id="@+id/imgDailyEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_edit_blue" />
+
+                <ImageView
+                    android:id="@+id/imgDailyDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_delete_black" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSpecialNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/llUser2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"
+                android:background="@color/view" />
+
+            <ImageView
+                android:id="@+id/imgUser2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_user" />
+
+            <View
+                android:layout_width="5dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/view" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/notes_right"
+            android:backgroundTint="#d4d4d4"
+            android:minHeight="50dp"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/tvSpecialName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        tools:text="HMIS Admin - COVID" />
+
+                    <TextView
+                        android:id="@+id/tvSpecialTime"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="end"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        tools:text="04 Dec 2019 11:00AM" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvSpecialNotes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/poppins"
+                    android:padding="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    tools:text="Need weekly checkup to maintain the sugar and BP" />
+
+                <ImageView
+                    android:id="@+id/imgSpecialEdit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_edit_blue" />
+
+                <ImageView
+                    android:id="@+id/imgSpecialDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_delete_black" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

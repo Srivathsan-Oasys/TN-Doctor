@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainLinearLayout"
+
+        android:orientation="horizontal"
+        android:weightSum="7">
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.25">
+        </CheckBox>
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.30"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:id="@+id/patient_info"
+            android:textColor="@color/navColor"
+            android:text="Patient Info"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.05"
+            android:text="20-04-2020"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/navColor"
+            android:id="@+id/dateText"
+            android:gravity="center"
+            android:textSize="14sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="1.30">
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:contentDescription="Layouts"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radiobutton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/hmis_background"
+                    android:textColor="@color/navColor"
+                    android:text="P"
+                    android:textSize="14sp" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/hmis_background"
+                    android:textColor="@color/navColor"
+                    android:text="N"
+                    android:textSize="14sp" />
+                <RadioButton
+                    android:id="@+id/radiobutton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/hmis_background"
+                    android:textColor="@color/navColor"
+                    android:text="E"
+                    android:textSize="14sp" />
+
+
+            </RadioGroup>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.20"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/navColor"
+            android:id="@+id/testMethod"
+            android:textSize="14sp"
+            android:text="Status">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".90"
+            android:gravity="center"
+            android:id="@+id/status"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/navColor"
+            android:textSize="14sp"
+            android:text="Status">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="center"
+            android:id="@+id/orderNumber"
+            android:textColor="@color/navColor"
+            android:textSize="14sp"
+            android:text="Status">
+
+        </TextView>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

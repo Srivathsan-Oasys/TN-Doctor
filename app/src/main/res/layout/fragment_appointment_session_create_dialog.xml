@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <RelativeLayout
+            android:id="@+id/mainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llSessionCreateMain"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@color/hmis_background"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:id="@+id/tvAppointmentDialogTitle"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight=".5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center_vertical"
+                    android:text="@string/add_new_appointment_session"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCloseDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close_white"
+                    tools:ignore="VectorDrawableCompat" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llSessionCreateContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llSessionCreateMain">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="2dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlSessionName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tlDoctor"
+                            android:hint="@string/appointment_session_name_label">
+
+                            <EditText
+                                android:id="@+id/etSessionName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:imeOptions="actionNext"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:lines="1"
+                                android:maxLines="1"
+                                android:textAllCaps="false"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlSessionStartTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tlDoctor"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/appointment_session_start_time">
+
+                            <EditText
+                                android:id="@+id/etSessionStartTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:fontFamily="@font/poppins"
+                                android:imeOptions="actionNext"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlSessionEndTime"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tlDoctor"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/appointment_session_end_time">
+
+                            <EditText
+                                android:id="@+id/etSessionEndTime"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="false"
+                                android:fontFamily="@font/poppins"
+                                android:imeOptions="actionNext"
+                                android:importantForAutofill="no"
+                                android:inputType="textCapSentences"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlSessionSlotDuration"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tlDoctor"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/appointment_session_slot_duration">
+
+                            <EditText
+                                android:id="@+id/etSessionSlotDuration"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:imeOptions="actionDone"
+                                android:importantForAutofill="no"
+                                android:inputType="number"
+                                android:maxLength="2"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tlSessionCharges"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tlDoctor"
+                            android:layout_marginTop="8dp"
+                            android:hint="@string/appointment_session_consultation_charges"
+                            android:visibility="gone">
+
+                            <EditText
+                                android:id="@+id/etSessionCharges"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:imeOptions="actionDone"
+                                android:importantForAutofill="no"
+                                android:inputType="number"
+                                android:maxLength="5"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/poppins"
+                                android:maxLines="1"
+                                android:text="@string/repeat"
+                                android:textColor="@color/grey"
+                                android:textSize="16sp"
+                                android:visibility="visible" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvCalendarDays"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clipToPadding="false"
+                                android:paddingTop="8dp"
+                                android:overScrollMode="never"
+                                android:paddingBottom="8dp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/cbSessionEConsult"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingStart="8dp"
+                            app:buttonTint="@color/grey"
+                            android:fontFamily="@font/poppins"
+                            android:paddingEnd="8dp"
+                            android:text="@string/appointment_session_e_consultation" />
+
+
+                        <com.google.android.material.checkbox.MaterialCheckBox
+                            android:id="@+id/cbSessionRegularConsult"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:paddingStart="8dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingEnd="8dp"
+                            app:buttonTint="@color/grey"
+                            android:text="@string/appointment_session_regular_consultation" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llPatientListSearchBottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llSessionCreateContent"
+                android:gravity="end"
+                android:orientation="horizontal"
+                android:padding="6dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveAppointmentCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llCalendarAvailability"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@+id/btnCancelAppointment"
+                    android:text="@string/save"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/availability_color"
+                    app:icon="@drawable/ic_check_white"
+                    app:rippleColor="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancelAppointmentCreate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/llCalendarAvailability"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/cancel"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:backgroundTint="@color/grey"
+                    app:icon="@drawable/ic_clear_white"
+                    app:rippleColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>

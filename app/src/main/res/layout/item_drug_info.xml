@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".4" />
+
+            <TextView
+                android:id="@+id/tvStoreNameLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Store Name:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvStoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintBottom_toBottomOf="@id/tvStoreNameLabel"
+                app:layout_constraintStart_toStartOf="@+id/gd"
+                app:layout_constraintTop_toTopOf="@id/tvStoreNameLabel"
+                tools:text="Injection Room" />
+
+            <TextView
+                android:id="@+id/tvBatchNoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins"
+                android:text="Batch No:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvStoreNameLabel" />
+
+            <TextView
+                android:id="@+id/tvBatchNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintBottom_toBottomOf="@id/tvBatchNoLabel"
+                app:layout_constraintStart_toStartOf="@+id/gd"
+                app:layout_constraintTop_toTopOf="@id/tvBatchNoLabel"
+                tools:text="SAX" />
+
+            <TextView
+                android:id="@+id/tvExpiryDateLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins"
+                android:text="Expiry Date:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBatchNoLabel" />
+
+            <TextView
+                android:id="@+id/tvExpiryDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintBottom_toBottomOf="@id/tvExpiryDateLabel"
+                app:layout_constraintStart_toStartOf="@+id/gd"
+                app:layout_constraintTop_toTopOf="@id/tvExpiryDateLabel"
+                tools:text="12-2027" />
+
+            <TextView
+                android:id="@+id/tvQtyLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/poppins"
+                android:text="Quantity:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvExpiryDateLabel" />
+
+            <TextView
+                android:id="@+id/tvQty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dr_small_text"
+                app:layout_constraintBottom_toBottomOf="@id/tvQtyLabel"
+                app:layout_constraintStart_toStartOf="@+id/gd"
+                app:layout_constraintTop_toTopOf="@id/tvQtyLabel"
+                tools:text="5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

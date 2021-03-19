@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainLayout"
+
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@color/white"
+            android:id="@+id/parentLinearLayout"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/activity_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/previewRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="true"
+                    tools:ignore="UnusedAttribute" />
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
+        <!--
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="right"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:paddingEnd="@dimen/_5sdp"
+                    tools:ignore="MissingConstraints">
+
+
+                    <Button
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:textColor="@color/white"
+                        android:text="Repeat"
+                        android:textAllCaps="false"
+                        android:background="@color/orange"
+                        android:textSize="@dimen/_8sdp" />
+
+                    <Button
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:text="Modify"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/white"
+                        android:background="@color/Skyblue"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/_8sdp"
+                        android:textStyle="normal" />
+
+
+                    <Button
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:textColor="@color/white"
+                        android:text="View"
+                        android:textAllCaps="false"
+                        android:background="@color/orange"
+                        android:textSize="@dimen/_8sdp" />
+
+                </LinearLayout>
+        -->
+
+    </LinearLayout>
+
+
+
+
+</layout>

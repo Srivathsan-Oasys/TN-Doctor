@@ -1,0 +1,10 @@
+package com.oasys.digihealth.doctor.ui.emr_workflow.anesthesia_notes.model
+
+data class Categories(
+    var category_group_uuid: Int?,
+    var category_type_uuid: Int?,
+    var code: String?,
+    var description: String?,
+    var name: String?,
+    var uuid: Int?
+)

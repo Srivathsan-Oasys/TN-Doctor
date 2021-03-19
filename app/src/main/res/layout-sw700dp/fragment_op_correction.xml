@@ -1,0 +1,1413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.quickregistration.viewmodel.QuickRegistrationNewViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_5sdp"
+                        android:text="@string/OPCorrection"
+                        android:textColor="@color/hmis_background"
+                        android:textSize="@dimen/dr_title_text" />
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/buttonstatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold|italic"
+                    android:visibility="gone" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sessionlist"
+                    android:layout_width="match_parent"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp" />
+
+                <RelativeLayout
+                    android:id="@+id/searchLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/edtSeachPin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/poppins"
+                        android:hint="@string/pin_mobile_number"
+                        android:inputType="number"
+                        android:maxLength="14"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/Search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/edtSeachPin"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/search_button"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_search_white"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="@string/search"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/pinLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/lastpin"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="@color/primaryGrey">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:text="@string/pin"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/LastPin"
+                        android:layout_width="175dp"
+                        android:layout_height="36dp"
+                        android:background="@drawable/edittext_border_white"
+                        android:drawablePadding="10dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="15dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="15dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        tools:text="7664323276656" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="13dp"
+                android:animateLayoutChanges="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardElevation="4dp">
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/listscroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        tools:ignore="MissingDefaultResource">
+
+                        <RadioGroup
+                            android:id="@+id/toggle"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="50dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/pink_out_line"
+                            android:checkedButton="@+id/offer"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <RadioButton
+                                android:id="@+id/search"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="1dp"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="Casuality"
+                                android:textColor="@color/white" />
+
+                            <RadioButton
+                                android:id="@+id/offer"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginRight="1dp"
+                                android:layout_marginBottom="1dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/toggle_widget_background"
+                                android:button="@null"
+                                android:gravity="center"
+                                android:text="Evening"
+                                android:textColor="@color/white" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:id="@+id/salutaionText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/salutation"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/salutaionList"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/salutation"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="textNoSuggestions"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="@dimen/dr_medium_text" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/proftext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/professional"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <LinearLayout
+
+                            android:id="@+id/proflist"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1">
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/profesitonal"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="textNoSuggestions"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="18sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:drawableEnd="@drawable/ic_asterisk"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/name"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/quick_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ."
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="100"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+
+                        <TextView
+                            android:id="@+id/middlenametext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/middlename"
+
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/etmiddlename"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ."
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="100"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <TextView
+                            android:id="@+id/lastnametext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/lastname"
+
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/etLastname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ."
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="100"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+
+                        <TextView
+                            android:id="@+id/suffixtext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/suffixcode"
+                            android:textColor="@color/navColor"
+
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/suffixlist"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/suffixcode"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:inputType="textNoSuggestions"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="12sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/fathernametext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/fathername"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/etFathername"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ ./"
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="100"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="3dp"
+                                    android:drawableEnd="@drawable/ic_asterisk"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:text="@string/age"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="@dimen/dr_medium_text">
+
+                                </TextView>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="@string/Period"
+                                android:textColor="@color/navColor"
+                                android:textSize="@dimen/dr_medium_text">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/quick_age"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:layout_weight=".5"
+                                android:fontFamily="@font/poppins"
+                                android:hint="@string/age"
+                                android:inputType="number"
+                                android:maxLength="3"
+                                android:singleLine="true"
+                                android:textSize="@dimen/dr_medium_text" />
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".5">
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/qucik_period"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="@string/Period"
+                                    android:inputType="textNoSuggestions"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="12sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/dobtext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/DOB"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:id="@+id/doblayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:visibility="visible">
+
+                                <EditText
+                                    android:id="@+id/dob"
+                                    style="@style/Widget.AppCompat.EditText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:drawableRight="@drawable/ic_calendar"
+                                    android:focusable="false"
+                                    android:fontFamily="@font/poppins"
+                                    android:singleLine="true"
+                                    android:textSize="@dimen/dr_medium_text" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:drawableEnd="@drawable/ic_asterisk"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/Gender"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1">
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/qucik_gender"
+                                    style="@style/Widget.AppCompat.Spinner.Underlined"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/poppins"
+                                    android:hint="@string/Gender"
+                                    android:inputType="textNoSuggestions"
+                                    android:maxLines="1"
+                                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                    android:textSize="132sp" />
+                            </com.google.android.material.textfield.TextInputLayout>
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:drawableEnd="@drawable/ic_asterisk"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/MobileNumber"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/quick_mobile"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint=""
+                            android:inputType="number"
+                            android:maxLength="10"
+                            android:singleLine="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+
+                        <TextView
+                            android:id="@+id/aathertext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/Aadhaar_number"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/quick_aather"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint=""
+                            android:inputType="number"
+                            android:maxLength="12"
+                            android:singleLine="true"
+                            android:textSize="@dimen/dr_medium_text" />
+                        <!--
+                                                <TextView
+                                                    android:id="@+id/comtext"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="3dp"
+                                                    android:fontFamily="@font/poppins_bold"
+                                                    android:text="@string/Community"
+
+                                                    android:textColor="@color/navColor"
+                                                    android:textSize="@dimen/dr_medium_text">
+
+                                                </TextView>
+
+
+                                                <LinearLayout
+                                                    android:id="@+id/comlist"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:orientation="horizontal"
+                                                    android:weightSum="1">
+
+
+                                                    <com.google.android.material.textfield.TextInputLayout
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_marginTop="5dp"
+                                                        android:layout_weight="1">
+
+                                                        <androidx.appcompat.widget.AppCompatSpinner
+                                                            android:id="@+id/community"
+                                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                            android:layout_width="match_parent"
+                                                            android:layout_height="wrap_content"
+                                                            android:fontFamily="@font/poppins"
+                                                            android:inputType="textNoSuggestions"
+                                                            android:maxLines="1"
+                                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                            android:textSize="@dimen/dr_medium_text" />
+                                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                                </LinearLayout>
+
+
+                                                <TextView
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_marginLeft="3dp"
+                                                    android:fontFamily="@font/poppins_bold"
+                                                    android:text="@string/DepartmentName"
+                                                    android:textColor="@color/navColor"
+                                                    android:drawableEnd="@drawable/ic_asterisk"
+                                                    android:textSize="@dimen/dr_medium_text">
+
+                                                </TextView>
+
+
+                                                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                                    android:id="@+id/department"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:fontFamily="@font/poppins"
+                                                    android:inputType="text"
+                                                    android:maxLength="100"
+                                                    android:singleLine="true"
+                                                    android:textAllCaps="true"
+                                                    android:textSize="@dimen/dr_medium_text" />
+
+
+                        <TextView
+                            android:id="@+id/unittext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/Unit"
+
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/unit"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/remarknametext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="@string/remark"
+                            android:textColor="@color/navColor"
+                            android:textSize="@dimen/dr_medium_text">
+
+                        </TextView>
+
+
+                        <EditText
+                            android:id="@+id/etRemarkname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="100"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="@dimen/dr_medium_text" />
+
+
+                        <LinearLayout
+                            android:id="@+id/metanitylayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".3"
+                            android:backgroundTint="@color/hmis_background"
+                            android:hint="Display Order"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="@string/Maternity"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="@dimen/dr_medium_text" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/inactive"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/dr_medium_text" />
+
+                                <Switch
+                                    android:id="@+id/switchCheck"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="false"
+                                    android:theme="@style/SwitchTheme" />
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/active"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/dr_medium_text" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+-->
+
+                        <LinearLayout
+                            android:id="@+id/addressheader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/discharge_summary_color"
+                            android:orientation="horizontal"
+                            tools:ignore="MissingConstraints">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".95"
+                                android:fontFamily="@font/poppins_bold"
+                                android:gravity="center_vertical"
+                                android:padding="5dp"
+                                android:text="@string/Address"
+                                android:textColor="@color/navColor"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".05"
+                                app:srcCompat="@drawable/ic_dropdown" />
+
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/addressresultlayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:animateLayoutChanges="true"
+                            android:visibility="visible"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardElevation="4dp">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border"
+                                android:orientation="vertical"
+                                android:padding="10dp"
+                                android:visibility="visible">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:id="@+id/drno"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="3dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/DoorNo"
+                                        android:textColor="@color/navColor"
+
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    <TextView
+                                        android:id="@+id/streetname"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/StreetName"
+                                        android:textColor="@color/navColor"
+
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    <TextView
+                                        android:id="@+id/countrytext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/Country"
+                                        android:textColor="@color/navColor">
+
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <EditText
+                                        android:id="@+id/doorNo"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins"
+                                        android:singleLine="true"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+                                    <EditText
+                                        android:id="@+id/quick_address"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_marginTop="5dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="textPersonName|textCapWords"
+                                        android:singleLine="true"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/countrylist"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/qucik_country"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins"
+                                            android:hint="@string/Country"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="16sp" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+
+                                    <TextView
+                                        android:id="@+id/statetext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="3dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/State"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    <TextView
+                                        android:id="@+id/disticttext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/District"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                    <TextView
+                                        android:id="@+id/zonelist"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/Taluk"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/statelist"
+                                        android:layout_width="0dp"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/qucik_state"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins"
+                                            android:hint="@string/State"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                            android:textSize="16sp" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/distictlist"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="4dp"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1">
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/qucik_district"
+                                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:textSize="16sp"
+                                            android:fontFamily="@font/poppins"
+                                            android:inputType="textNoSuggestions"
+                                            android:maxLines="1"
+                                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    <LinearLayout
+                                        android:id="@+id/zonetext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal"
+                                        android:weightSum="1">
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="4dp"
+                                            android:layout_weight="1">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/qucik_block"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:fontFamily="@font/poppins"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="16sp" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+                                    <TextView
+                                        android:id="@+id/villagelist"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_marginLeft="3dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/Village"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+                                    <TextView
+                                        android:id="@+id/pincodetext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:text="@string/PinCode"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_medium_text">
+
+                                    </TextView>
+
+
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="3">
+
+
+                                    <LinearLayout
+                                        android:id="@+id/villagetext"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="bottom"
+                                        android:orientation="horizontal"
+                                        android:weightSum="1">
+
+
+                                        <com.google.android.material.textfield.TextInputLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_marginTop="4dp"
+                                            android:layout_weight="1">
+
+                                            <androidx.appcompat.widget.AppCompatSpinner
+                                                android:id="@+id/qucik_village"
+                                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:fontFamily="@font/poppins"
+                                                android:hint="@string/Village"
+                                                android:inputType="textNoSuggestions"
+                                                android:maxLines="1"
+                                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                                android:textSize="16sp" />
+                                        </com.google.android.material.textfield.TextInputLayout>
+
+                                    </LinearLayout>
+
+
+                                    <EditText
+                                        android:id="@+id/quick_pincode"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="7dp"
+                                        android:layout_weight="1"
+                                        android:layout_marginTop="4dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="number"
+                                        android:maxLength="6"
+                                        android:singleLine="true"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:id="@+id/reasonheader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginTop="10dp"
+                            android:background="@color/discharge_summary_color"
+                            android:orientation="horizontal"
+                            tools:ignore="MissingConstraints">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".95"
+                                android:background="@color/fadeBlue"
+                                android:fontFamily="@font/poppins_bold"
+                                android:gravity="center_vertical"
+                                android:padding="5dp"
+                                android:text="@string/ReasonforCorrection"
+                                android:textColor="@color/navColor"
+                                android:textSize="18sp">
+
+                            </TextView>
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight=".05"
+                                app:srcCompat="@drawable/ic_dropdown" />
+
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/reasonresultlayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:animateLayoutChanges="true"
+                            android:visibility="gone"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardElevation="4dp">
+
+
+                            <!--            <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/edittext_border"
+                                            android:orientation="vertical"
+                                            android:padding="10dp"
+                                            android:visibility="visible">
+            -->
+                            <EditText
+                                android:id="@+id/ReasonEdt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/edittext_border"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="text"
+                                android:padding="15dp"
+                                android:textSize="@dimen/dr_medium_text" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/saveCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:id="@+id/saveTextview"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_white"
+                                    android:drawablePadding="5dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="5dp"
+                                    android:text="@string/save"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/saveOrderCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_white"
+                                    android:drawablePadding="3dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="5dp"
+                                    android:text="@string/SaveOrder"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/clearCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                app:cardBackgroundColor="@color/clear_button"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:drawableStart="@drawable/ic_eraser"
+                                    android:drawablePadding="3dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="5dp"
+                                    android:text="@string/clear"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="10dp"
+                                app:cardBackgroundColor="@color/hmis_background"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_printing_tool"
+                                    android:drawablePadding="3dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="5dp"
+                                    android:text="Print"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:visibility="visible"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:visibility="gone"
+                                app:cardBackgroundColor="@color/hmis_background"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_printing_tool"
+                                    android:drawablePadding="3dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="5dp"
+                                    android:text=" DM Print"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </androidx.core.widget.NestedScrollView>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

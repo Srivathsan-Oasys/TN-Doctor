@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.myprofile.viewmodel.MyProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolbarTheme"
+                app:navigationIcon="@drawable/back_to_home_button_white"
+                app:title="@string/my_profile">
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical"
+        tools:ignore="DisableBaselineAlignment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout"
+            android:layout_gravity="center"
+            android:weightSum="2"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1.50">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1.20">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Name"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="Rajitha"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="0.80">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="DOB"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/profileDateOfBirthTxt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="Rajitha"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Gender"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/genderTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="Female"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="@string/Department"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/departmentTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="General"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Mobile Number "
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/mobileTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:text="66666666"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1.50">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Email ID"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/emailTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="Rajitha.b@oasys.co"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.80">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Designation"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/designationTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="Rajitha"
+                            android:textColor="@color/navColor"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight=".70">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Qualification"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/qualificationTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text=""
+                            android:textColor="@color/navColor"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="2">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="0.80">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Resgistered Number"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/registeredNumberTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="12345"
+                            android:textColor="@color/navColor"
+                            android:layout_marginTop="2dp"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1.20">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Address"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/addressTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:text=""
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Created On"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/createdOnTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="12345"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Modified On"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/modifiedTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:layout_centerHorizontal="true"
+                            android:text="12345"
+                            android:textColor="@color/navColor"
+                            android:background="@drawable/edit_text_bottom_border"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".50">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:gravity="center"
+                        android:text="Attach Image"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/profile"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_gravity="center"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:background="@drawable/frame_image_view"
+                        android:padding="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sample_profile_img"
+                        app:civ_border_color="#FFFFFFFF"
+                        app:civ_border_width="3dp" />
+
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_25sdp"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="5dp"
+                android:id="@+id/save"
+                app:cardBackgroundColor="@color/secondaryColor">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_save_black"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/poppins"
+                    android:paddingStart="15dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="7dp"
+                    android:text="Save"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+<!--
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/header_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/nav_menu_header_bg"
+                    app:srcCompat="@drawable/nav_menu_header_bg" />
+
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-130dp"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_profile_img"
+                    app:civ_border_color="#FFFFFFFF"
+                    app:civ_border_width="3dp" />
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header_cover_image"
+                    android:background="#ebca0707"
+                    android:elevation="4dp"
+                    android:paddingBottom="24dp">
+
+
+                    <ImageView
+                        android:id="@+id/edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:clickable="true"
+
+                        android:src="@android:drawable/ic_menu_edit" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="70dp"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/designation"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Surat"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/designation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="(Adhyaksh)"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/profile_layout"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="com.appsnipp.profiledesigns.ProfileActivity">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="20dp"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/dobImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_mobile" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/dobImageView"
+                                android:text="DOB" />
+
+                            <TextView
+                                android:id="@+id/profileDateOfBirthTxt"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/dobImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/genderImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_email" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/genderImageView"
+                                android:text="Gender" />
+
+                            <TextView
+                                android:id="@+id/genderTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/genderImageView"
+                                android:text="developer@appsnipp.com" />
+
+                        </RelativeLayout>
+                        </LinearLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/departmentImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_address" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/departmentImageView"
+                                android:text="Department" />
+
+                            <TextView
+                                android:id="@+id/departmentTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/departmentImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/mobileImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/mobileImageView"
+                                android:text="Mobile Number" />
+
+                            <TextView
+                                android:id="@+id/mobileTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/mobileImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/emailImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/emailImageView"
+                                android:text="Email Id" />
+
+                            <TextView
+                                android:id="@+id/emailTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/emailImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/designationImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/designationImageView"
+                                android:text="Designation" />
+
+                            <TextView
+                                android:id="@+id/designationTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/designationImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/qualificationImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/qualificationImageView"
+                                android:text="Qualification" />
+
+                            <TextView
+                                android:id="@+id/qualificationTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/qualificationImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/registeredNumberImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/registeredNumberImageView"
+                                android:text="Registered Number" />
+
+                            <TextView
+                                android:id="@+id/registeredNumberTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/registeredNumberImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/addressImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/addressImageView"
+                                android:text="Address" />
+
+                            <TextView
+                                android:id="@+id/addressTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/addressImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/createdImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/createdImageView"
+                                android:text="Created On" />
+
+                            <TextView
+                                android:id="@+id/createdOnTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/createdImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+
+                            <ImageView
+                                android:id="@+id/modifiedOnImageView"
+                                style="@style/profileDetailsImage"
+                                android:src="@drawable/ic_dob" />
+
+                            <TextView
+                                style="@style/profileDetailsTextMain"
+                                android:layout_toRightOf="@id/modifiedOnImageView"
+                                android:text="Modified On" />
+
+                            <TextView
+                                android:id="@+id/modifiedTextView"
+                                style="@style/profileDetailsMiniText"
+                                android:layout_toRightOf="@id/modifiedOnImageView" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+        </LinearLayout>
+-->
+    </LinearLayout>
+
+
+</layout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlAgendaItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivEventDecoration"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/event_selected_background"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ProgressBar
+        android:id="@+id/pbOperationRDV"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:visibility="gone" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llEvent"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAgendaDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:gravity="center_horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAgendaNotification"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_marginEnd="2dp"
+                android:background="@drawable/event_date_bg"
+                android:fontFamily="@font/poppins"
+                android:visibility="invisible" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAgendaNotificationMore"
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:background="@drawable/event_date_bg"
+                android:fontFamily="@font/poppins"
+                android:visibility="gone" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

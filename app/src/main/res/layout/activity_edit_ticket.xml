@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.EditTicketViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:weightSum="5">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_5sdp"
+                        android:text="Ticket"
+                        android:textColor="@color/hmis_background"
+                        android:textSize="@dimen/_15sdp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/view"
+                        />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:orientation="vertical">
+
+
+                    <EditText
+                        android:id="@+id/edtInstitution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Institution"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:padding="10dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Department"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:padding="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+
+                    <EditText
+                        android:id="@+id/edtTicketId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="TicketId"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:focusable="false"
+                        android:padding="10dp"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtSubject"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Subject"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:focusable="false"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Problem Description"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:focusable="false"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtCreatedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Created by"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:focusable="false"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/edtCreatedOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Created On"
+                        android:inputType="textNoSuggestions"
+                        android:maxLines="1"
+                        android:padding="10dp"
+                        android:focusable="false"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="16sp" />
+
+
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewAssetId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/hmis_background"
+                        android:drawableRight="@drawable/ic_search_black"
+                        android:hint="Asset Id"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_5sdp"/>
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/categorySpinner"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint="Category"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/subcategorySpinner"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint="Sub Category"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/prioritySpinner"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint="Priority"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/statusSpinner"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:hint="Status"
+                            android:inputType="textNoSuggestions"
+                            android:maxLines="1"
+                            android:padding="5dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/_3sdp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/searchButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/outPtientGreen"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_save_white"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:text="Update"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="90dp"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:gravity="center"
+                                android:text="Cancel"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</layout>

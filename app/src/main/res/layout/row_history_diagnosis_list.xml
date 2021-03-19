@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/hideLayout"
+        android:layout_width="600dp"
+        android:layout_height="wrap_content"
+        android:weightSum="6"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/tvS_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".5"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="@string/hash"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tvDiagnosisDateTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+
+        <TextView
+            android:id="@+id/tvDiagnosisType"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDiagnosisName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvDiagnosisRemarks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+
+        <ImageView
+            android:id="@+id/editDiagnosis"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".5"
+            android:padding="@dimen/_5sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:srcCompat="@drawable/ic_edit_blue" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</LinearLayout>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.immunization.viewmodel.HistoryImmunizationViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contentLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_2sdp"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/hideLayout"
+                android:weightSum="7">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:gravity="center"
+                    android:text="@string/s_no"
+                    android:textSize="17dp"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.50"
+                    android:gravity="center"
+                    android:text="Date and Time"
+                    android:textSize="17dp"
+                    
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/type"
+                    android:textSize="17dp"
+                    
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Name"
+                    android:textSize="17dp"
+                    
+                    android:gravity="center"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.50"
+                    android:gravity="center"
+                    android:text="Institution"
+                    
+                    android:textSize="17dp"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Remarks"
+                    
+                    android:textSize="17dp"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:gravity="center"
+                    android:text="@string/action"
+                    android:textSize="17dp"
+                    android:padding="@dimen/_5sdp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp"
+                android:id="@+id/hideLayoutSub"
+                android:background="@color/poweredBy"
+                android:weightSum="7">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    android:gravity="center"
+                    android:text="@string/hash"
+                    android:textSize="18dp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.50"
+                    android:id="@+id/etImmunizationDateTime"
+                    android:clickable="false"
+                    android:textAlignment="center"
+                    android:focusable="false"
+                    android:hint="@string/date_time" />
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/encounterTypeSpinner"
+                    android:textAlignment="center"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+
+                <Spinner
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/nameSpinner"
+                    android:textAlignment="center"
+                    style="@style/Base.Widget.AppCompat.Spinner.Underlined"/>
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/autoCompleteTextViewInstitutionName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.50"
+                    android:textAlignment="center"
+                    android:backgroundTint="@color/hmis_background"
+                    android:drawableRight="@drawable/ic_search_black"
+                    android:hint="Institution" />
+
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:id="@+id/etImmunizationRemarks"
+                    android:digits="0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
+                    android:hint="Remarks" />
+
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".50"
+                    app:srcCompat="@drawable/ic_add_blue"
+                    android:id="@+id/addNewImmunizationIconView"
+                    android:layout_gravity="center"/>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/immunizationRecyclerView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/noRecordsTextView"
+                android:text="Currently no records!!"
+                android:textSize="@dimen/_10sdp"
+                android:fontFamily="@font/poppins_bold"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_50sdp"/>
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

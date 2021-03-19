@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    android:orientation="vertical"
+    app:cardElevation="10dp"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.50"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Name"
+            android:textColor="@color/navColor"
+            android:textSize="@dimen/dr_small_text"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:id="@+id/backCenterLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight=".50"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_edit_blue" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".50"
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_delete_appointment" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/moreImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            app:srcCompat="@drawable/ic_more" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

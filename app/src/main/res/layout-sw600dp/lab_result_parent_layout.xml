@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/patientCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/previewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/fadeBlue"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/dateCheckbox"
+                android:layout_marginLeft="8dp"
+                android:layout_gravity="center_vertical">
+
+            </CheckBox>
+
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_2sdp"
+                android:text="10_Sep-2020 10:00 AM - Dermotologist-OP"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/buttonPDF"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/ic_dropdown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/resultLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:paddingStart="10dp"
+                tools:ignore="MissingConstraints">
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="5dp"
+                android:layout_weight="6"
+                android:layout_marginTop="10dp"
+                android:paddingEnd="0dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.20"
+                    android:id="@+id/sNoTextView"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="S.No"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.35"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="Observation"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Result"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.30"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="Uom"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.70"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center"
+                    android:text="Reference Range"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.40"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="@string/Action"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/view" />
+
+
+            </LinearLayout>
+
+
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/child_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        </LinearLayout>
+<!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/_5sdp"
+            tools:ignore="MissingConstraints">
+
+
+
+
+            <Button
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:background="@color/outPtientGreen"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="Next"
+                android:padding="5dp"
+                android:drawableLeft="@drawable/ic_next"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:textStyle="normal" />
+            <Button
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:background="@color/hintColor"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/cancel"
+                android:padding="5dp"
+                android:drawableLeft="@drawable/ic_close_white"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+
+
+
+        </LinearLayout>
+-->
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

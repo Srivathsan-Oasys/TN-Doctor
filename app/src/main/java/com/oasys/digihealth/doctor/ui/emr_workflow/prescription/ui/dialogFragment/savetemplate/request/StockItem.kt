@@ -1,0 +1,30 @@
+package com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.request
+
+data class StockItem(
+    var base_uom_uuid: Int = 0,
+    var buffer_percentage: String = "",
+    var created_by: Int = 0,
+    var created_date: String = "",
+    var facility_uuid: Int = 0,
+    var is_active: Boolean = false,
+    var item_master_uuid: Int = 0,
+    var lead_time: Int = 0,
+    var max_quantity: Int = 0,
+    var min_quantity: Int = 0,
+    var modified_by: Int = 0,
+    var modified_date: String = "",
+    var purchase_uom_uuid: Int = 0,
+    var quantity: Int = 0,
+    var re_order_quantity: Int = 0,
+    var revision: Int = 0,
+    var safety_quantity: Int = 0,
+    var sale_uom_uuid: Int = 0,
+    var shelf: String = "",
+    var status: Boolean = false,
+    var stock_serial_items: List<Any> = listOf(),
+    var store_master: StoreMaster = StoreMaster(),
+    var store_master_uuid: Int = 0,
+    var store_rack_uuid: Int = 0,
+    var tray: String = "",
+    var uuid: Int = 0
+)

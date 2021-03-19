@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="1200dp"
+            android:layout_height="65dp"
+            android:background="@drawable/edittext_border_white"
+            android:orientation="horizontal"
+            android:weightSum="44">
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:id="@+id/snoTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.5"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="1"
+                android:paddingLeft="@dimen/_5sdp"
+                android:textColor="@color/navColor"
+                android:textSize="12sp"/>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:id="@+id/districtTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:fontFamily="@font/poppins"
+                android:gravity="left|center_vertical"
+                android:text=""
+                android:paddingLeft="@dimen/_5sdp"
+                android:textColor="@color/navColor"
+                android:textSize="12sp">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:id="@+id/institutionTxt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.5"
+                android:fontFamily="@font/poppins"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text=""
+                android:textColor="@color/navColor"
+                android:textSize="12sp">
+
+            </TextView>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="4.5">
+
+                    <TextView
+                        android:id="@+id/totalBedTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/navColor"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/totalOccupiedBedTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:id="@+id/totalAvailableBedTxt"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:fontFamily="@font/poppins"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/navColor"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4.5">
+
+                            <TextView
+                                android:id="@+id/covidTotalBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/covidOccupiedBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/covidAvailableBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4.5">
+
+                            <TextView
+                                android:id="@+id/oxygenTotalBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/oxygenOccupiedBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/oxygenAvailableBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4.5">
+
+                            <TextView
+                                android:id="@+id/ventilatorTotalBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/ventilatorOccupiedBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/ventilatorAvailableBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="7">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="4.5">
+
+                            <TextView
+                                android:id="@+id/nonCovidTotalBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/nonCovidOccupiedBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="12sp" />
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <TextView
+                                android:id="@+id/nonCovidAvailableBedTxt"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.5"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+        </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

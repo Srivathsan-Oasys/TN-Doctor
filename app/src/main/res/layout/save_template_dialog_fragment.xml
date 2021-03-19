@@ -1,0 +1,804 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.SaveTemplateViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:cardBackgroundColor="@android:color/white"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:id="@+id/mainLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                tools:context=".MainActivity">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@color/hmis_background"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight=".9"
+                        android:gravity="center_vertical"
+                        android:text="@string/manage_template"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+
+                        android:id="@+id/closeImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_25sdp"
+                        android:layout_gravity="center"
+                        android:layout_weight=".1"
+                        android:src="@drawable/ic_close_white"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:backgroundTint="@color/hmis_background"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Name* "
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteTextViewTestName"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/hmis_background"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:backgroundTint="@color/hmis_background"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Description"
+
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <AutoCompleteTextView
+                                android:id="@+id/autoCompleteTextViewDescription"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/hmis_background"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:backgroundTint="@color/hmis_background"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Display Order*    "
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <EditText
+                                android:id="@+id/autoCompleteTextViewDispalyName"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_centerInParent="true"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp">
+
+                                <requestFocus />
+                            </EditText>
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:backgroundTint="@color/hmis_background"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Drug Name*"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                android:id="@+id/autoCompleteTextViewDrugName"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".3"
+                                android:backgroundTint="@color/hmis_background"
+                                android:drawableRight="@drawable/ic_search_black"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Strength"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <Spinner
+                                android:id="@+id/StrengthSpnner"
+                                style="@android:style/Widget.Material.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:hint="Description"
+                                android:visibility="gone"
+                                tools:ignore="NewApi" />
+
+                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                android:id="@+id/StrengthSpinner"
+                                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:focusable="false"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp"
+                                tools:ignore="NewApi" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight=".3"
+                                android:editable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Route*"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <Spinner
+                                android:id="@+id/routeSpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1.30"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Frequency*"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp"
+                                tools:ignore="NewApi" />
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <Spinner
+                                android:id="@+id/frequencySpinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:gravity="center_vertical"
+                                android:text="Duration*"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <EditText
+                                android:id="@+id/autoCompleteTextViewDuration"
+                                android:layout_width="0dp"
+                                android:layout_height="45dp"
+                                android:layout_centerInParent="true"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:paddingLeft="10dp"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp">
+
+                                <requestFocus />
+                            </EditText>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Period*   "
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp"
+                                tools:ignore="NewApi" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <Spinner
+                                android:id="@+id/PeriodSpinner"
+                                style="@android:style/Widget.Material.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:padding="@dimen/_5sdp"
+                                tools:ignore="NewApi" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:weightSum="4">
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Instruction"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp"
+                                tools:ignore="NewApi" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <Spinner
+                                android:id="@+id/instructionSpinner"
+                                style="@android:style/Widget.Material.Spinner.Underlined"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                tools:ignore="NewApi" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/hmis_background"
+                                android:hint="User"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/share"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="15sp" />
+
+
+                                <RadioGroup
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:contentDescription="Layouts"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:id="@+id/mySelf"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/hmis_background"
+                                        android:checked="true"
+                                        android:gravity="center"
+                                        android:text="@string/share_radio1"
+                                        android:textSize="13sp" />
+
+                                    <RadioButton
+                                        android:id="@+id/myDepartment"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@color/hmis_background"
+                                        android:gravity="center"
+                                        android:text="@string/share_radio2"
+                                        android:textSize="13sp" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/hmis_background"
+                                android:hint="Display Order"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="7dp"
+                                    android:layout_marginTop="5dp"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:text="@string/status"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="15sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="7dp"
+
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/inactive"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="13sp" />
+
+                                    <Switch
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        android:thumbTint="@color/colorPrimary" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/active"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="13sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:weightSum="1">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/hmis_background"
+                                android:gravity="end"
+                                android:hint="Test Name"
+
+                                android:orientation="horizontal">
+
+
+                                <androidx.cardview.widget.CardView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    app:cardBackgroundColor="@color/hmis_background"
+                                    app:cardCornerRadius="8dp">
+
+                                    <TextView
+                                        android:id="@+id/addTemp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_add_12"
+                                        android:drawablePadding="7dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:padding="7dp"
+                                        android:text="Add"
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        tools:ignore="HardcodedText" />
+                                </androidx.cardview.widget.CardView>
+
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/clear"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/_10sdp"
+
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    app:cardBackgroundColor="@color/primaryGrey"
+                                    app:cardCornerRadius="8dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_eraser_12"
+                                        android:drawablePadding="7dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:padding="7dp"
+                                        android:text="Clear"
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        tools:ignore="HardcodedText" />
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/zeroStockRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:backgroundTint="@color/hmis_background"
+                            android:hint="Test Name"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/updateTemp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="gone"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_black"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Update"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/save"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_white_12"
+                                    android:drawablePadding="7dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="7dp"
+                                    android:text="Save"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cancel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_10sdp"
+
+                                android:clickable="true"
+                                android:focusable="true"
+                                app:cardBackgroundColor="@color/primaryGrey"
+                                app:cardCornerRadius="8dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_close_white_12"
+                                    android:drawablePadding="7dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:padding="7dp"
+                                    android:text="Cancel"
+                                    android:textColor="@color/white"
+                                    android:textSize="12sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>
+
+

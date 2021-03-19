@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edittext_border_white"
+    android:orientation="horizontal"
+    android:weightSum="5">
+
+    <TextView
+        android:id="@+id/serialNum"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.50"
+        android:gravity="center"
+        android:text="S.no"
+        android:textColor="@color/navColor" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/pinNum"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="PIN"
+        android:textColor="@color/navColor"
+        android:textSize="14sp"/>
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/patient_info"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.30"
+        android:gravity="center"
+        android:text="Patient Info"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/TestName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.20"
+        android:gravity="center"
+        android:text="Test Name"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/order_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Test Name"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+</LinearLayout>

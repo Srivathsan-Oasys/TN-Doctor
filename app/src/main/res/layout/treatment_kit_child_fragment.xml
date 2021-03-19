@@ -1,0 +1,1308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp">
+
+            <TextView
+                android:id="@+id/favouriteDrawerCardView"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/semi_rec"
+                android:gravity="center"
+                android:text="FAV"
+                android:textColor="@color/white">
+
+            </TextView>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/buttonBar"
+                android:layout_below="@id/favouriteDrawerCardView">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/searchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:hint="@string/search_with_3_letters"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/llAddDiagnosis"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@color/blueprintborder"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:text="Add Diagnosis"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/imgDownDiagnosis"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_right"
+                                    app:tint="@color/grey" />
+
+                            </LinearLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/llAddDiagnosisDetail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:animateLayoutChanges="true"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:padding="5dp"
+                                        android:text="Code"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvDiagnosisCode"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:imeOptions="actionSearch"
+                                        android:minHeight="30dp"
+                                        android:textSize="@dimen/dr_small_text" />
+
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:padding="5dp"
+                                        android:text="Diagnosis"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvDiagnosis"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:imeOptions="actionSearch"
+                                        android:minHeight="30dp"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="4dp"
+                                        android:gravity="end">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvDiagnosisAdd"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="5dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/hmis_background">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_plus"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/add"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvDiagnosisClear"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/grey">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_eraser"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/clear"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/saveDiagonosisRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_mobile_treatmentkit_diagnosis_list" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/llAddPrescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@color/blueprintborder"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:text="Add Prescription"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/imgDownPrescription"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_right"
+                                    app:tint="@color/grey" />
+
+                            </LinearLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/addMedicine_detail_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/margin_right"
+                                    android:animateLayoutChanges="true"
+                                    android:orientation="vertical"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:id="@+id/tvStoreName"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="2dp"
+                                        android:text="Store Name:"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text"/>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="3dp"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="2dp"
+                                        android:text="@string/DrugName"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/PresAutoCompleteTextView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="@dimen/dr_small_text" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="2dp"
+                                        android:text="@string/Route"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+
+                                    <androidx.appcompat.widget.AppCompatSpinner
+                                        android:id="@+id/route_spinner"
+                                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="textNoSuggestions"
+                                        android:maxLines="1"
+                                        android:paddingHorizontal="0dp"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_small_text" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/Strength"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+                                    <EditText
+                                        android:id="@+id/Strength"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:clickable="false"
+                                        android:cursorVisible="false"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/poppins"
+                                        android:textSize="@dimen/dr_small_text" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/Frequency"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+
+                                    <androidx.appcompat.widget.AppCompatSpinner
+                                        android:id="@+id/frequency_spinner"
+                                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="textNoSuggestions"
+                                        android:maxLines="1"
+                                        android:paddingHorizontal="0dp"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_small_text" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="@string/Duration"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+
+                                        <androidx.appcompat.widget.AppCompatEditText
+                                            android:id="@+id/duration"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight=".5"
+                                            android:inputType="number"
+                                            android:maxLength="3"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/durationRecyclerView"
+                                            android:layout_width="0dp"
+                                            android:layout_height="45dp"
+                                            android:layout_marginEnd="3dp"
+                                            android:layout_weight=".5"
+                                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins_bold"
+                                        android:paddingHorizontal="4dp"
+                                        android:text="Inst./Inj. Room"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="@dimen/dr_small_text">
+
+                                    </TextView>
+
+                                    <androidx.appcompat.widget.AppCompatSpinner
+                                        android:id="@+id/instruction_spinner"
+                                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/poppins"
+                                        android:inputType="textNoSuggestions"
+                                        android:maxLines="1"
+                                        android:paddingHorizontal="0dp"
+                                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                        android:textSize="@dimen/dr_medium_text" />
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="4dp"
+                                        android:gravity="end">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/addCardView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="5dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/hmis_background">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_plus"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/add"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/clearPresCardView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/grey">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_eraser"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/clear"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/savePrescriptionRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_mobile_prescription" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/llAddLab"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@color/blueprintborder"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:text="Add Lab"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/imgDownLab"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_right"
+                                    app:tint="@color/grey" />
+
+                            </LinearLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/llAddLabDetail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingBottom="8dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Code"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/act_lab_code"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Test Name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/act_lab_test_name"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Priority"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinner_lab_priority"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Test Method"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp"
+                                        android:visibility="gone" />
+
+                                    <Spinner
+                                        android:id="@+id/spinner_test_method"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp"
+                                        android:visibility="gone" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Order ToLocation"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinner_lab_order_location"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="4dp"
+                                        android:gravity="end">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvLabAdd"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="5dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/hmis_background">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_plus"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/add"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvLabClear"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/grey">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_eraser"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/clear"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/savelabRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_lab" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/llAddRadiology"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@color/blueprintborder"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:text="Add Radiology"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/imgDownRadiology"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_right"
+                                    app:tint="@color/grey" />
+
+                            </LinearLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/llAddRadiologyDetail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingBottom="8dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Code"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvRadiologyCode"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Test Name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvRadiologyTestName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Priority"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerRadiologyPriority"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Order To Location"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerRadiologyOrderLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="4dp"
+                                        android:gravity="end">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvRadiologyAdd"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="5dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/hmis_background">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_plus"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/add"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvRadiologyClear"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/grey">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_eraser"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/clear"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/saveRadiologyRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_mobile_radiology" />
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        app:cardUseCompatPadding="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:id="@+id/llAddInvestigation"
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:background="@color/blueprintborder"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="5dp"
+                                    android:text="Add Investigation"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/imgDownInvestigation"
+                                    android:layout_width="50dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="3dp"
+                                    android:rotation="90"
+                                    android:src="@drawable/ic_arrow_right"
+                                    app:tint="@color/grey" />
+
+                            </LinearLayout>
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <LinearLayout
+                                    android:id="@+id/llAddInvestigationDetail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical"
+                                    android:paddingBottom="8dp"
+                                    android:visibility="gone">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Code"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvInvestigationCode"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Test Name"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                        android:id="@+id/actvInvestigationTestName"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:drawableEnd="@drawable/ic_search"
+                                        android:fontFamily="@font/poppins"
+                                        android:hint="@string/search_with_3_letters"
+                                        android:textSize="12sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Priority"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerInvestigationPriority"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="3dp"
+                                        android:drawableEnd="@drawable/ic_asterisk"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Order To Location"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="12sp" />
+
+                                    <Spinner
+                                        android:id="@+id/spinnerInvestigationOrderLocation"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="3dp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1dp"
+                                        android:layout_marginStart="3dp"
+                                        android:layout_marginEnd="3dp"
+                                        android:background="@color/grey" />
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_margin="4dp"
+                                        android:gravity="end">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvInvestigationAdd"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="5dp"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/hmis_background">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_plus"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/add"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                        <androidx.cardview.widget.CardView
+                                            android:id="@+id/cvInvestigationClear"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:clickable="true"
+                                            android:focusable="true"
+                                            app:cardBackgroundColor="@color/grey">
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:drawableStart="@drawable/ic_eraser"
+                                                android:drawablePadding="7dp"
+                                                android:fontFamily="@font/poppins"
+                                                android:paddingLeft="20dp"
+                                                android:paddingTop="4dp"
+                                                android:paddingRight="20dp"
+                                                android:paddingBottom="4dp"
+                                                android:text="@string/clear"
+                                                android:textColor="@color/white"
+                                                android:textSize="12sp" />
+                                        </androidx.cardview.widget.CardView>
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                            </ScrollView>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/saveInvestigationRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/row_mobile_investigation" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <LinearLayout
+                android:id="@+id/buttonBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/saveTreatmentKit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/colorPrimaryDark"
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_save_white_12"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/poppins"
+                            android:padding="7dp"
+                            android:text="Save as TreatmentKit"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ordercardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/secondaryColor"
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_save_white_12"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/poppins"
+                            android:padding="7dp"
+                            android:text="Order"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/saveandOrder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/secondaryColor"
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_save_white_12"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/poppins"
+                            android:padding="7dp"
+                            android:text="Save&amp;Order"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/clearCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_7sdp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_eraser_12"
+                            android:drawablePadding="7dp"
+                            android:fontFamily="@font/poppins"
+                            android:padding="7dp"
+                            android:text="Clear"
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/diagnosis_navigationView"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:background="#FFFFFF">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    style="@style/TabTextAppearance.TabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/colorPrimaryDark"
+                    app:tabTextColor="@color/black" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+
+        </com.google.android.material.navigation.NavigationView>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+</layout>

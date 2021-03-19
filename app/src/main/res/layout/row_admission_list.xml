@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edittext_border_white"
+            android:minHeight="45dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sNo_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="@string/sno"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:id="@+id/pin_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.2"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/pin"
+                android:textAllCaps="true"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:id="@+id/ip_number_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.3"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/ip_number"
+                android:textAllCaps="true"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:id="@+id/patient_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4.3"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/patient_info"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:id="@+id/mobileNumber_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/mobile_number"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:id="@+id/ward_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:maxLines="2"
+                android:paddingHorizontal="10dp"
+                android:text="@string/ward"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:id="@+id/admissionDate_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.7"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/admission_status"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+            <TextView
+                android:id="@+id/admissionStatus_txt"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center_vertical"
+                android:paddingHorizontal="10dp"
+                android:text="@string/admission_status"
+                android:textColor="@color/navColor"
+                android:textSize="@dimen/dr_small_text">
+
+            </TextView>
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <ImageView
+                android:id="@+id/viewActionEdit"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgActionEdit"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_edit_blue" />
+
+            <ImageView
+                android:id="@+id/imgActionView"
+                android:layout_width="0dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_view_red" />
+
+            <ImageView
+                android:id="@+id/imgWardTransfer"
+                android:layout_width="0dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_transfer_blue_24" />
+
+            <ImageView
+                android:id="@+id/imgDischarge"
+                android:layout_width="0dp"
+                android:layout_height="13dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_discharge_summary_action" />
+
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="1dp"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

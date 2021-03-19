@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/mainLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/heading"
+        android:fontFamily="@font/poppins"
+        android:text="tiele"
+        android:textColor="@color/hmis_background"
+        android:layout_margin="10dp"
+        android:textSize="@dimen/dr_medium_text" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/hmis_background"
+        android:id="@+id/viewtitle"
+        />
+</LinearLayout>

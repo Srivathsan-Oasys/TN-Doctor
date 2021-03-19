@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentSaveOrderKitViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="360dp"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@android:color/white"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:layout_width="360dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".MainActivity">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/hmis_background"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".9"
+                        android:padding="10dp"
+                        android:text="@string/MT_treatmentkit"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+
+                        android:id="@+id/closeImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".1"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_close_white"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Treatment Code"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <EditText
+                                android:id="@+id/treatmentCode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPersonName|textCapWords"
+                                android:padding="15dp" />
+
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Treatment Name"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <EditText
+                                android:id="@+id/treatmentName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPersonName|textCapWords"
+                                android:padding="15dp" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Treatment Description"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <EditText
+                                android:id="@+id/treatmentDescription"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="textPersonName|textCapWords"
+                                android:padding="15dp" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Department"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <Spinner
+                                android:id="@+id/spinnerInvestdepartment"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="45dp" />
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Active From"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp"
+                                android:visibility="gone" />
+
+                            <EditText
+                                android:id="@+id/actvieFromDateEditText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableEnd="@drawable/ic_calendar"
+                                android:focusable="false"
+                                android:inputType="textPersonName|textCapWords"
+                                android:padding="15dp"
+                                android:visibility="gone" />
+
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="5dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Active To"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp"
+                                android:visibility="gone" />
+
+                            <EditText
+                                android:id="@+id/actvieTo"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableEnd="@drawable/ic_calendar"
+                                android:focusable="false"
+                                android:inputType="textPersonName|textCapWords"
+                                android:padding="15dp"
+                                android:visibility="gone" />
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="@dimen/_20sdp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/hmis_background"
+                                android:hint="User"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/share" />
+
+
+                                <RadioGroup
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:contentDescription="Layouts"
+                                    android:orientation="horizontal">
+
+                                    <RadioButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@android:color/holo_green_dark"
+                                        android:checked="true"
+                                        android:gravity="center"
+                                        android:text="@string/share_radio1"
+                                        android:textSize="16sp" />
+
+                                    <RadioButton
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:buttonTint="@android:color/holo_green_dark"
+                                        android:gravity="center"
+                                        android:text="@string/share_radio2"
+                                        android:textSize="16sp" />
+
+                                </RadioGroup>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:backgroundTint="@color/hmis_background"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="@string/status" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/inactive"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="16sp" />
+
+                                    <Switch
+                                        android:id="@+id/switchStatus"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="10dp"
+                                        android:layout_marginRight="10dp"
+                                        android:checked="true"
+                                        android:thumbTint="@android:color/holo_green_dark" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/active"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="16sp" />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/saveTreatement"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:id="@+id/tvSave"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_next"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Save"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/clearCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                app:cardBackgroundColor="@color/primaryGrey"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_eraser"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Clear"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

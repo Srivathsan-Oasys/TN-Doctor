@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.rmis.rmisTest.viewModel.RmisTestViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="345dp"
+        android:layout_height="match_parent"
+        app:cardCornerRadius="4dp"
+        android:padding="15dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp">
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="345dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@color/hmis_background"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_weight=".5"
+                    android:paddingStart="10dp"
+                    android:text="Reject"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+
+                    android:id="@+id/closeImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_18sdp"
+                    android:layout_weight=".1"
+                    android:layout_gravity="center"
+                    android:paddingStart="10dp"
+                    android:src="@drawable/ic_close_white"
+                    tools:ignore="VectorDrawableCompat" />
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:text="Reason*"
+                android:textColor="@color/black"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1" />
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/order_process"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:hint="Reason*"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edit_text_bottom_border"
+                android:inputType="textNoSuggestions"
+                android:theme="@style/Widget.AppCompat.Light.DropDownItem.Spinner"
+                android:maxLines="1"
+                android:padding="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:layout_marginLeft="10dp"
+                android:text="Comments"
+                android:textColor="@color/black"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1" />
+
+            <EditText
+                android:id="@+id/comment_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:layout_margin="10dp"
+                android:inputType="textNoSuggestions"
+                android:background="@drawable/edittext_border_white"
+                android:maxLines="1"
+                android:padding="10dp" />
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingEnd="@dimen/_3sdp">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/saveCardView"
+                    android:layout_marginStart="5dp"
+                    app:cardBackgroundColor="@color/colorPrimaryDark"
+                    app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/ic_tick_12"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="15dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp"
+                        android:text="OK"
+                        android:textColor="@color/white"
+                        android:textSize="10dp"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cancelCardView"
+                    android:layout_marginStart="5dp"
+                    app:cardBackgroundColor="@color/grey"
+                    app:cardCornerRadius="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/ic_close_white_12"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="15dp"
+                        android:paddingTop="7dp"
+                        android:paddingEnd="10dp"
+                        android:paddingBottom="7dp"
+                        android:text="Cancel"
+                        android:textColor="@color/white"
+                        android:textSize="10dp"
+                        tools:ignore="HardcodedText" />
+
+                </androidx.cardview.widget.CardView>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </androidx.cardview.widget.CardView>
+</layout>

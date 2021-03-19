@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/patientCardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/previewLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/fadeBlue"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/_5sdp"
+                android:text="10_Sep-2020 10:00 AM - Dermotologist-OP"
+                android:textColor="@color/black"
+                tools:ignore="HardcodedText,MissingConstraints" />
+
+            <ImageView
+                android:id="@+id/buttonPDF"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_dropdown" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:id="@+id/resultLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    tools:ignore="MissingConstraints">
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        tools:ignore="MissingConstraints">
+
+                        <TextView
+                            android:id="@+id/byTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Ordered BY"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+
+
+                        <TextView
+                            android:id="@+id/drName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Venkatddddd"
+                            android:textSize="@dimen/_6sdp" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginEnd="10dp"
+                            android:layerType="software"
+                            android:src="@drawable/dotted" />
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/statusTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Status"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="16sp"
+                            tools:ignore="HardcodedText" />
+
+                        <TextView
+                            android:id="@+id/statusTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:text="Comleated"
+                            android:textSize="@dimen/_6sdp" />
+
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="1.5dp"
+                            android:layout_marginTop="3dp"
+                            android:layerType="software"
+                            android:src="@drawable/dotted" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="7dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="2dp">
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="500dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="10dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:weightSum="5">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="0.40"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center"
+                                    android:text="S.No"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    tools:ignore="HardcodedText" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/view" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="0.80"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center"
+                                    android:text="Code"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/view" />
+
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.40"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center"
+                                    android:text="Test Name"
+                                    android:textColor="@color/black"
+
+                                    android:textSize="11sp"
+                                    tools:ignore="HardcodedText,RtlSymmetry" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/view" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center"
+                                    android:text="Type"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    tools:ignore="HardcodedText" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@color/view" />
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="1.20"
+                                    android:fontFamily="@font/poppins_semibold"
+                                    android:gravity="center"
+                                    android:text="Order to Location"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp"
+                                    tools:ignore="HardcodedText" />
+
+
+                            </LinearLayout>
+
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/child_recycler"
+                                android:layout_width="500dp"
+                                android:layout_height="wrap_content"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        </LinearLayout>
+                    </HorizontalScrollView>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:gravity="right"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:elevation="5dp"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+
+                <Button
+                    android:id="@+id/repeatLab"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/orange"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Repeat"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:elevation="5dp"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <Button
+                    android:id="@+id/modifyLab"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/outPtientGreen"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:text="Modify"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:elevation="5dp"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <Button
+                    android:id="@+id/viewButton"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:background="@color/colorPrimary"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:padding="5dp"
+                    android:text="View"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:textStyle="normal" />
+
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/_7sdp"
+                android:elevation="5dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="@color/primaryGrey"
+                app:cardCornerRadius="8dp"
+                android:clickable="true"
+                android:focusable="true">
+                <Button
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:padding="5dp"
+                    android:text="Add New"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="10sp"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,3372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.sessionwise.view_model.SessionSummaryViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/listLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:orientation="vertical"
+                        android:padding="@dimen/_5sdp"
+                        android:weightSum="1"
+                        android:visibility="visible">
+
+                        <androidx.core.widget.NestedScrollView
+                            android:id="@+id/nestedScrollView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.1"
+                            android:fillViewport="true">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:fillViewport="true">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="0.3">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:weightSum="3"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight=".30"
+                                android:src="@drawable/tnlogo">
+
+                            </ImageView>
+
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2.40"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible"
+                                    android:id="@+id/instituteHeader"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Rajiv Gandhi Governoment General Hospital Chennai "
+                                    android:textSize="12sp">
+
+                                </TextView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible"
+                                    android:id="@+id/dateHeader"
+                                    android:textColor="@color/colorPrimaryDark"
+                                    android:text="Date Wise Report "
+                                    android:textSize="12sp">
+
+                                </TextView>
+                            </LinearLayout>
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="40dp"
+                                android:layout_weight=".30"
+                                android:src="@mipmap/ic_launcher">
+
+                            </ImageView>
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:id="@+id/institutionLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:visibility="gone"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Institution : "
+                                android:textSize="12sp">
+
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:id="@+id/detailInstitutionName"
+                                android:text=""
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/dateLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:text="Start Date: "
+                                android:textSize="12sp">
+
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:id="@+id/startDate"
+                                android:text=""
+                                android:textSize="12sp">
+
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:layout_marginLeft="20dp"
+                                android:text="End Date: "
+                                android:textSize="12sp">
+
+                            </TextView>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:id="@+id/endDate"
+                                android:text=""
+                                android:textSize="12sp">
+
+                            </TextView>
+
+
+                        </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                            android:id="@+id/header_layout"
+                            android:layout_width="800dp"
+                            android:layout_height="90dp"
+                            android:background="@drawable/edittext_border_white"
+                            android:orientation="horizontal"
+                            android:visibility="visible"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins_bold"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Session"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="New"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="12sp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Adult"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Total"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Child"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Total"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Total"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:gravity="center"
+                                    android:padding="@dimen/_3sdp"
+                                    android:text="Old"
+                                    android:textColor="@color/navColor"
+                                    android:textSize="12sp" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Adult"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="18dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Child"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins_bold"
+                                                android:gravity="center"
+                                                android:text="Total"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:gravity="center"
+                                            android:padding="@dimen/_3sdp"
+                                            android:text="Total"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins_bold"
+                                android:gravity="center"
+                                android:text="Grand Total"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/mrgLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_alternate"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Morning"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mrgNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mrgNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:gravity="center"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/mrgNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mrgOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mrgOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mrgOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/mrgOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/mrgrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/eveLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_white"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Evening"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/eveNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/eveNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/eveNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/eveOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/eveOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/eveOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/eveOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/eveGrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/emergencyLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_alternate"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Emergency / Casualty"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/emergencyNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/emergencyOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/emergencyOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/emergencyGrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/mlcLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_white"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="MLC"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mlcNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mlcNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/mlcNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mlcOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/mlcOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/mlcOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/mlcOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/mlcGrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/specialityLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_alternate"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Super Speciality"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/specialityNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/specialityNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/specialityNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/specialityOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/specialityOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/specialityOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/specialityOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/specialityGrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/totalLayout"
+                            android:layout_width="800dp"
+                            android:layout_height="45dp"
+                            android:background="@drawable/edittext_border_white"
+                            android:orientation="horizontal"
+                            android:weightSum="30">
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="left|center_vertical"
+                                android:paddingLeft="@dimen/_5sdp"
+                                android:text="Total"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/totalNewAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalNewAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalNewAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalNewAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/totalNewChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalNewChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalNewChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/totalNewGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="12"
+                                android:orientation="vertical">
+
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@color/view" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:weightSum="12">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.1"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/totalOldAdultMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalOldAdultFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalOldAdultTG"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="TG"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalOldAdultTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="3.8"
+                                        android:orientation="vertical">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:id="@+id/totalOldChildMale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="M"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalOldChildFemale"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="F"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                            <TextView
+                                                android:id="@+id/totalOldChildTotal"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:fontFamily="@font/poppins"
+                                                android:gravity="center"
+                                                android:text="0"
+                                                android:textColor="@color/navColor"
+                                                android:textSize="12sp" />
+
+                                            <View
+                                                android:layout_width="2dp"
+                                                android:layout_height="match_parent"
+                                                android:background="@color/view" />
+
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="5.1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/totalOldGrandTotal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="0"
+                                            android:textColor="@color/navColor"
+                                            android:textSize="12sp" />
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1dp"
+                                            android:background="@color/view" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                            <TextView
+                                android:id="@+id/totalGrandTotal"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/poppins"
+                                android:gravity="center"
+                                android:text="0"
+                                android:textColor="@color/navColor"
+                                android:textSize="12sp">
+
+                            </TextView>
+
+                            <View
+                                android:layout_width="2dp"
+                                android:layout_height="match_parent"
+                                android:background="@color/view" />
+
+
+                        </LinearLayout>
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/sessionWiseRecyclerView"/>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        </HorizontalScrollView>
+                            </LinearLayout>
+
+                      </androidx.core.widget.NestedScrollView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="0.9"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:paddingEnd="@dimen/_3sdp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:orientation="horizontal">
+
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/pdfDownload"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_20sdp"
+                                    app:cardBackgroundColor="@color/outPtientGreen"
+                                    android:visibility="visible"
+                                    android:layout_gravity="center"
+                                    app:cardCornerRadius="8dp">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:drawableStart="@drawable/ic_save_pdf"
+                                        android:drawablePadding="10dp"
+                                        android:fontFamily="@font/poppins"
+                                        android:gravity="center"
+                                        android:text="Pdf"
+                                        android:paddingTop="@dimen/_5sdp"
+                                        android:paddingBottom="@dimen/_5sdp"
+                                        android:paddingLeft="@dimen/_10sdp"
+                                        android:paddingRight="@dimen/_10sdp"
+                                        android:textColor="@color/white"
+                                        android:textSize="12sp"
+                                        tools:ignore="HardcodedText" />
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+            </LinearLayout>
+
+</layout>

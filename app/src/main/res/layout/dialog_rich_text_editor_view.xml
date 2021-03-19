@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="360dp"
+    android:layout_height="500dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/poppins_bold"
+        android:padding="8dp"
+        android:text="Description"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toStartOf="@+id/ivClose"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_white" />
+
+
+<!--    <ScrollView-->
+<!--        android:id="@+id/scrollView2"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="400dp"-->
+<!--        android:maxHeight="400dp"-->
+<!--        android:scrollbars="vertical"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/tools"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tvTitle"-->
+<!--        app:layout_constraintVertical_bias="0">-->
+
+
+        <com.jkcarino.rtexteditorview.RTextEditorView
+            android:id="@+id/editor_view"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            app:layout_constraintBottom_toTopOf="@+id/toolbar_scrollview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+        
+<!--    </ScrollView>-->
+
+    <HorizontalScrollView
+        android:id="@+id/toolbar_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/saveCardView"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="horizontal">
+
+        <com.jkcarino.rtexteditorview.RTextEditorToolbar
+            android:id="@+id/editor_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_bold"
+                app:toolType="bold" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_italic"
+                app:toolType="italic" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_underlined"
+                app:toolType="underline" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_strikethrough"
+                app:toolType="strikethrough" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_clear"
+                app:toolType="removeFormat" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_normal"
+                app:toolType="normal" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h1"
+                app:toolType="h1" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h2"
+                app:toolType="h2" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h3"
+                app:toolType="h3" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h4"
+                app:toolType="h4" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h5"
+                app:toolType="h5" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_h6"
+                app:toolType="h6" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_superscript"
+                app:toolType="superscript" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_subscript"
+                app:toolType="subscript" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:id="@+id/text_fore_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_color_text"
+                app:toolType="textForeColor" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:id="@+id/text_back_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_color_fill"
+                app:toolType="textBackColor" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_list_bulleted"
+                app:toolType="unordered" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_list_numbered"
+                app:toolType="ordered" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_quote"
+                app:toolType="blockQuote" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_code"
+                app:toolType="blockCode" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_align_left"
+                app:toolType="alignLeft" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_align_center"
+                app:toolType="alignCenter" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:id="@+id/format_align_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_align_right"
+                app:toolType="alignRight" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_align_justify"
+                app:toolType="alignJustify" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_insert_line"
+                app:toolType="horizontalRule" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_indent_increase"
+                app:toolType="indent" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_format_indent_decrease"
+                app:toolType="outdent" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:id="@+id/insert_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_insert_table"
+                app:toolType="table" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:id="@+id/insert_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_insert_link"
+                app:toolType="link" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_insert_link_off"
+                app:toolType="unlink" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_html_clear"
+                app:toolType="clear" />
+
+            <com.jkcarino.rtexteditorview.RTextEditorButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:padding="16dp"
+                app:srcCompat="@drawable/ic_view_code"
+                app:toolType="editHtml" />
+        </com.jkcarino.rtexteditorview.RTextEditorToolbar>
+    </HorizontalScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/saveCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/secondaryColor"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/clearCardView"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_next_12"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins"
+            android:paddingStart="15dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="7dp"
+            android:text="Save"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/clearCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardBackgroundColor="@color/primaryGrey"
+        app:cardCornerRadius="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_eraser_12"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/poppins"
+            android:paddingStart="15dp"
+            android:paddingTop="7dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="7dp"
+            android:text="Clear"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

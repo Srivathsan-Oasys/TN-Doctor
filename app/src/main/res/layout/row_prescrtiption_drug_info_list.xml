@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/tvSNoDrugInfo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.50"
+            android:gravity="center"
+            android:text="S.No"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/tvStoreName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="Drug Code"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/tvBatchNo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.50"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text="Drug Name "
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:id="@+id/tvExpiryDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:id="@+id/tvQuantity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:text=" "
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+</LinearLayout>

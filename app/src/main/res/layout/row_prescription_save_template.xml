@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/mainLinearLayout"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle"
+        android:orientation="horizontal"
+        android:weightSum="8.5">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:fontFamily="@font/poppins"
+            android:textColor="@color/navColor"
+            android:text="1"
+            android:id="@+id/serialNumberTextView"
+            android:gravity="center"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText" />
+
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.80"
+            android:layout_gravity="center"
+            android:id="@+id/drugNameTextView"
+            android:text="Drug Name"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Route"
+            android:id="@+id/routeTextView"
+            android:gravity="center"
+            android:textColor="@color/navColor"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.10"
+            android:id="@+id/frequencyTextView"
+            android:text="Frequency"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:textColor="@color/navColor"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.10"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:text="Duration"
+            android:id="@+id/durationTextView"
+            android:paddingEnd="10dp"
+            android:textSize="13sp"
+            android:textColor="@color/navColor"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.80"
+            android:text="period"
+            android:id="@+id/periodTxt"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/navColor"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.30"
+            android:text="Instruction"
+            android:layout_gravity="center"
+            android:id="@+id/instructionTextView"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:textColor="@color/navColor"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.80"
+            android:gravity="center"
+            android:id="@+id/deleteImageView"
+            android:text="Action"
+            app:srcCompat="@drawable/ic_delete_black"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+</LinearLayout>

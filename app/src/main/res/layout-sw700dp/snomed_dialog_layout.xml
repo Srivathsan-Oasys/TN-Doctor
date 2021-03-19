@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="@dimen/_40sdp"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.view.snomed_dialog.SnomedDialogviewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardBackgroundColor="@android:color/white"
+            tools:ignore="MissingDefaultResource">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@color/hmis_background"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_weight=".9"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="10dp"
+                        android:text="@string/Snomed_title"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dr_title_text" />
+
+                    <ImageView
+
+                        android:id="@+id/closeImageView"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_weight=".1"
+
+                        android:padding="10dp"
+                        android:src="@drawable/ic_close_white"
+                        tools:ignore="VectorDrawableCompat" />
+                </LinearLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:layout_marginStart="10dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/searchText"
+                                android:layout_width="250dp"
+                                android:layout_marginTop="5dp"
+                                android:hint="Search"
+                                android:fontFamily="@font/poppins"
+                                android:layout_height="wrap_content" />
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/snoomed"
+                                android:layout_marginStart="20dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:layout_gravity="center"
+                                app:cardBackgroundColor="@color/colorPrimary"
+                                app:cardCornerRadius="5dp">
+
+                                <TextView
+                                    android:id="@+id/snomedCardView"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingStart="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="@string/Snomed"
+                                    android:textColor="@color/white"
+                                    android:textSize="18sp"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            tools:ignore="MissingDefaultResource">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="40dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="4"
+                                    android:padding="5dp">
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="0.50"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:text="@string/s_no"
+                                        android:textColor="@color/navColor"
+                                        android:textSize="16sp" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:textColor="@color/navColor"
+
+                                        android:text="Concept Id"
+                                        android:textSize="16sp" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1.50"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:textColor="@color/navColor"
+
+                                        android:text="Concept Name"
+                                        android:textSize="16sp" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:gravity="center"
+                                        android:textColor="@color/navColor"
+
+                                        android:text="@string/action"
+                                        android:textSize="16sp" />
+
+                                    <View
+                                        android:layout_width="2dp"
+                                        android:layout_height="match_parent"
+                                        android:background="@color/view" />
+
+                                </LinearLayout>
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/mainList"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="5dp" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:padding="10dp"
+                            android:text="Mapping List"
+                            android:textColor="@color/hmis_background"
+                            android:textSize="16dp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            tools:ignore="MissingDefaultResource">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_weight=".5"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:text="Parent Data"
+                                            android:textColor="@color/black"
+                                            android:textSize="16dp" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:weightSum="4"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:gravity="center"
+                                                android:layout_weight="0.50"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="@string/s_no"
+                                                android:textColor="@color/navColor"
+
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:gravity="center"
+                                                android:textColor="@color/navColor"
+
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="Concept Id"
+                                                android:textSize="16dp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1.50"
+                                                android:gravity="center"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="Concept Name"
+                                                android:textColor="@color/navColor"
+
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:gravity="center"
+                                                android:text="@string/action"
+                                                android:textColor="@color/navColor"
+
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/parentList"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="@dimen/_5sdp"
+                                        android:layout_weight=".5"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:text="Child Data"
+                                            android:textColor="@color/black"
+                                            android:textSize="16dp" />
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="40dp"
+                                            android:weightSum="4"
+                                            android:orientation="horizontal">
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="0.50"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:textColor="@color/navColor"
+                                                android:text="@string/s_no"
+                                                android:gravity="center"
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="Concept Id"
+                                                android:gravity="center"
+
+                                                android:textColor="@color/navColor"
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1.50"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="Concept Name"
+                                                android:gravity="center"
+                                                android:textColor="@color/navColor"
+
+                                                android:textSize="16sp" />
+
+                                            <TextView
+                                                android:layout_width="0dp"
+                                                android:layout_height="match_parent"
+                                                android:layout_weight="1"
+                                                android:background="@drawable/edittext_border_white"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:gravity="center"
+                                                android:textColor="@color/navColor"
+                                                android:text="@string/action"
+                                                android:textSize="16sp" />
+                                        </LinearLayout>
+
+                                        <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/childList"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+
+                                            />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="22dp"
+                            android:layout_marginTop="50dp"
+                            android:layout_marginEnd="22dp"
+                            android:layout_marginBottom="10dp"
+                            android:gravity="end"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/save"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:cardBackgroundColor="@color/secondaryColor"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_save_white"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Save"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/clearCardView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                app:cardBackgroundColor="@color/primaryGrey"
+                                >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:drawableStart="@drawable/ic_close_white"
+                                    android:drawablePadding="10dp"
+                                    android:fontFamily="@font/poppins"
+                                    android:paddingStart="15dp"
+                                    android:paddingTop="7dp"
+                                    android:paddingEnd="10dp"
+                                    android:paddingBottom="7dp"
+                                    android:text="Cancel"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/dr_medium_text"
+                                    tools:ignore="HardcodedText" />
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="7.5">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.3" />
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/patient_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.3"
+        android:gravity="center"
+        android:text="Patient Info"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/sample_id"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:text="3456"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/test_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.40"
+        android:gravity="center"
+        android:text="Test Name"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/dateText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="20-04-2020"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/testMethod"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.50"
+        android:gravity="center"
+        android:text="Status"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.7"
+        android:gravity="center"
+        android:text="Status"
+        android:textColor="@color/navColor"
+        android:textSize="14sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <ImageView
+        android:id="@+id/print"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight=".5"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:textColor="@color/navColor"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_print" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+</LinearLayout>

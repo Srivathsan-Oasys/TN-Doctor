@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.myprofile.viewmodel.MyProfileViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorPrimary"
+                android:theme="@style/ToolbarTheme"
+                app:navigationIcon="@drawable/ic_left_arrow_white"
+                app:title="Configuration"></androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="DisableBaselineAlignment">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/layout">
+
+                <ImageView
+                    android:id="@+id/header_cover_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/nav_menu_header_bg"
+                    app:srcCompat="@drawable/nav_menu_header_bg" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:clickable="true"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="#FFFFFFFF"
+                    android:id="@+id/profile"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-130dp"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/sample_profile_img" />
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/header_cover_image"
+                    android:background="#ebca0707"
+                    android:elevation="4dp"
+                    android:paddingBottom="24dp">
+
+
+                    <ImageView
+                        android:id="@+id/edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp"
+                        android:clickable="true"
+
+                        android:src="@android:drawable/ic_menu_edit" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="70dp"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/designation"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="Surat"
+                        android:textColor="#fff"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/mobileNumText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#fff"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/profile_layout"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    tools:context="com.appsnipp.profiledesigns.ProfileActivity">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp">
+
+                        <!--<RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/nameImageView"
+                                android:src="@drawable/ic_name"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Name"
+                                android:layout_toRightOf="@id/nameImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/nameTextView"
+                                android:layout_toRightOf="@id/nameImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />-->
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/dobImageView"
+                                android:src="@drawable/ic_mobile"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="DOB"
+                                android:layout_toRightOf="@id/dobImageView"
+                                style="@style/profileDetailsTextMain"/>
+
+                            <TextView
+                                android:id="@+id/profileDateOfBirthTxt"
+                                android:layout_toRightOf="@id/dobImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/genderImageView"
+                                android:src="@drawable/ic_email"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Gender"
+                                android:layout_toRightOf="@id/genderImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/genderTextView"
+                                android:text="developer@appsnipp.com"
+                                android:layout_toRightOf="@id/genderImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/departmentImageView"
+                                android:src="@drawable/ic_address"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Department"
+                                android:layout_toRightOf="@id/departmentImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/departmentTextView"
+                                android:layout_toRightOf="@id/departmentImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/mobileImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Mobile Number"
+                                android:layout_toRightOf="@id/mobileImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/mobileTextView"
+                                android:layout_toRightOf="@id/mobileImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/emailImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Email Id"
+                                android:layout_toRightOf="@id/emailImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/emailTextView"
+                                android:layout_toRightOf="@id/emailImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+
+                        <View style="@style/proifleDetailsView" />
+
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/designationImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Designation"
+                                android:layout_toRightOf="@id/designationImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/designationTextView"
+                                android:layout_toRightOf="@id/designationImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/qualificationImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Qualification"
+                                android:layout_toRightOf="@id/qualificationImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/qualificationTextView"
+                                android:layout_toRightOf="@id/qualificationImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/registeredNumberImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Registered Number"
+                                android:layout_toRightOf="@id/registeredNumberImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/registeredNumberTextView"
+                                android:layout_toRightOf="@id/registeredNumberImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/addressImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Address"
+                                android:layout_toRightOf="@id/addressImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/addressTextView"
+                                android:layout_toRightOf="@id/addressImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/createdImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Created On"
+                                android:layout_toRightOf="@id/createdImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/createdOnTextView"
+                                android:layout_toRightOf="@id/createdImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                        <RelativeLayout style="@style/profileDetailsLayout">
+                            <ImageView
+                                android:id="@+id/modifiedOnImageView"
+                                android:src="@drawable/ic_dob"
+                                style="@style/profileDetailsImage" />
+
+                            <TextView
+                                android:text="Modified On"
+                                android:layout_toRightOf="@id/modifiedOnImageView"
+                                style="@style/profileDetailsTextMain" />
+
+                            <TextView
+                                android:id="@+id/modifiedTextView"
+                                android:layout_toRightOf="@id/modifiedOnImageView"
+                                style="@style/profileDetailsMiniText" />
+
+                        </RelativeLayout>
+                        <View style="@style/proifleDetailsView" />
+
+                    </LinearLayout>
+
+                </androidx.core.widget.NestedScrollView>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</layout>

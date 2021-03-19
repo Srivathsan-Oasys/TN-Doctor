@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.view_model.AdmissionViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingEnd="12dp"
+            android:weightSum="3">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/resultLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="4"
+                android:visibility="visible"
+                app:cardBackgroundColor="@android:color/white"
+                tools:ignore="MissingDefaultResource">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <RadioGroup
+                            android:id="@+id/radioGroup"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/referDept"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="true"
+                                android:text="Refer to Ward"
+                                android:textSize="16sp"
+                                android:theme="@style/RadioButtonTheme" />
+
+                            <RadioButton
+                                android:id="@+id/referInst"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Refer to Institution"
+                                android:textSize="16sp"
+                                android:theme="@style/RadioButtonTheme" />
+
+                        </RadioGroup>
+
+
+                        <LinearLayout
+                            android:id="@+id/wardLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/headingTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center_vertical"
+                                android:maxLines="2"
+                                android:text="Transfer to Ward"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp" />
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Department"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                android:id="@+id/autoCompleteTextViewDepartment"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:drawableRight="@drawable/ic_search_black"
+                                android:padding="10dp"
+                                android:textColor="@color/navColor"
+                                android:textSize="16sp"
+                                android:visibility="visible" />
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Ward"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/ward_spinner"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="12sp" />
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Reason"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/ward_reason"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="16sp" />
+
+                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Remarks"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <EditText
+                                android:id="@+id/ward_remarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/navColor"
+
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/institutionLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/poppins_medium"
+                                android:gravity="center_vertical"
+                                android:text="Transfer to Institution"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Institution"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                                android:id="@+id/autoCompleteTextViewInstitution"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:drawableRight="@drawable/ic_search_black"
+                                android:padding="10dp"
+                                android:textColor="@color/navColor"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Department"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/institution_department"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Reason"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                android:id="@+id/institution_reason"
+                                style="@style/Widget.AppCompat.Spinner.Underlined"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="3dp"
+                                android:layout_marginTop="8dp"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:text="Remarks"
+                                android:textColor="@color/navColor"
+                                android:textSize="15sp" />
+
+                            <EditText
+                                android:id="@+id/institution_remarks"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/poppins"
+                                android:inputType="textNoSuggestions"
+                                android:maxLines="1"
+                                android:padding="10dp"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textColor="@color/navColor"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </ScrollView>
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="8dp"
+                android:layout_weight="0.50"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/saveCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/secondaryColor"
+                    app:cardCornerRadius="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_save_white"
+                        android:drawablePadding="7dp"
+                        android:fontFamily="@font/poppins"
+                        android:padding="7dp"
+                        android:text="Save"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/clearCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_7sdp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/primaryGrey"
+                    app:cardCornerRadius="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/ic_eraser_12"
+                        android:drawablePadding="7dp"
+                        android:fontFamily="@font/poppins"
+                        android:padding="7dp"
+                        android:text="Clear"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        tools:ignore="HardcodedText" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

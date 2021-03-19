@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:id="@+id/mainLinearLayout"
+        android:orientation="horizontal"
+        android:paddingStart="5dp"
+        android:weightSum="5"
+        android:paddingEnd="0dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.40"
+            android:id="@+id/serialNumber"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="S.No"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.80"
+            android:id="@+id/codeTextView"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Code"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.40"
+            android:id="@+id/textName"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Test Name"
+            android:textColor="@color/black"
+
+            android:textSize="11sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:text="Type"
+            android:id="@+id/type"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1.20"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:id="@+id/orderToLocation"
+            android:text="Order to Location"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            tools:ignore="HardcodedText" />
+
+
+
+    </LinearLayout>
+
+    <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:id="@+id/mainLinearLayout"
+            android:paddingStart="5dp"
+            android:weightSum="3"
+            android:paddingEnd="0dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0.40"
+                android:id="@+id/serialNumber"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="S.No"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText" />
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.80"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:id="@+id/codeTextView"
+                android:text="Code"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.40"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:id="@+id/textName"
+                android:text="Test Name"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText,RtlSymmetry" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:id="@+id/type"
+                android:text="Type"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@color/view" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1.20"
+                android:id="@+id/orderToLocation"
+                android:fontFamily="@font/poppins_semibold"
+                android:gravity="center"
+                android:text="Order to Location"
+                android:textColor="@color/black"
+                android:textSize="11sp"
+                tools:ignore="HardcodedText" />
+
+
+
+        </LinearLayout>
+    -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

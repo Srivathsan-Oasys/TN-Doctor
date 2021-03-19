@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.out_patient.view_model.DischargePatientViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="2dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/browser_actions_bg_grey"
+            android:orientation="horizontal"
+            android:paddingTop="4dp"
+            android:paddingEnd="4dp"
+            android:paddingBottom="4dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/qr_code_imageview"
+                android:fontFamily="@font/poppins_bold"
+                android:paddingStart="@dimen/_10sdp"
+                android:text="Discharge Patient"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="@dimen/_15sdp" />
+
+            <ImageView
+                android:id="@+id/qr_code_imageview"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
+                android:padding="6dp"
+                app:srcCompat="@drawable/ic_scan_blue" />
+
+            <ImageView
+                android:id="@+id/ivOutpatientHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:padding="6dp"
+                app:srcCompat="@drawable/ic_question_blue" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:layout_weight=".8"
+                android:focusable="false"
+                app:iconifiedByDefault="false"
+                app:queryHint="Search By Mobile Number/PIN" />
+
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-7dp"
+            android:layout_marginBottom="-7dp"
+            android:indeterminate="true"
+            android:max="100"
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_header"
+                android:padding="3dp"
+                android:layout_width="match_parent"
+                android:background="@color/blueprintborder"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_click"
+                    android:layout_width="wrap_content"
+                    android:text="Search"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textSize="14sp"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_arrow_right"
+                    android:tint="@color/grey"
+                    android:rotation="90"
+                    android:layout_height="wrap_content">
+                </ImageView>
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_DropDownView"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Search with any 3 characters"
+                    android:textColor="@color/navColor"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:id="@+id/et_search"
+                    android:imeOptions="actionSearch"
+                    android:hint="Search with any 3 characters"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="12sp"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:layout_height="wrap_content"
+                    />
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="end"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/searchButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardBackgroundColor="@color/Skyblue"
+                            app:cardCornerRadius="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_search_white"
+                                android:drawablePadding="5dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="5dp"
+                                android:text="Search"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clearcardview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser"
+                                android:drawablePadding="6dp"
+                                android:fontFamily="@font/poppins"
+                                android:padding="6dp"
+                                android:text="Clear"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/mainLayout"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/main_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</layout>

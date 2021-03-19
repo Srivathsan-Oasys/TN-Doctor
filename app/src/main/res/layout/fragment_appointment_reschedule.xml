@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/rlAppointmentResult"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layout_doctor_info"
+        layout="@layout/holder_appointment_doctor_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlAppointmentResult"
+        android:layout_margin="12dp" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/rlAppointmentCalendar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_doctor_info"
+        android:overScrollMode="never">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp">
+
+            <RelativeLayout
+                android:id="@+id/rlCalendarView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCalendarPrevious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_navigation_previous" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCalendarNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/ic_navigate_next" />
+
+                <com.oasys.digihealth.doctor.component.custom.DayOfWeekLayout
+                    android:id="@+id/dayCalendarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="75dp"
+                    android:layout_toStartOf="@+id/ivCalendarNext"
+                    android:layout_toEndOf="@+id/ivCalendarPrevious" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/ivCalendarNext"
+                    android:layout_toEndOf="@+id/ivCalendarPrevious"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llDoctorAvailability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlCalendarView"
+                android:layout_margin="8dp"
+                android:background="@drawable/box_calendar">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvDoctorAvailability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:padding="4dp"
+                    android:visibility="gone"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:spanCount="5"
+                    tools:targetApi="lollipop" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvNoSlot"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/poppins"
+                    android:gravity="center"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="24dp"
+                    android:text="No Slot Available"
+                    android:textColor="@color/grey"
+                    android:textSize="18sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llCalendarAvailability"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llDoctorAvailability"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:visibility="invisible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvConsultant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.35"
+                    android:drawableStart="@drawable/ic_eye_close"
+                    android:drawablePadding="4dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical"
+                    android:text="@string/consultation"
+                    android:textSize="10sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.04"
+                    android:background="@color/availability_color" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAvailability"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="@string/available"
+                    android:textSize="10sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.04"
+                    android:background="@color/selected_color" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvSelected"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="@string/selected"
+                    android:textSize="10sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="12dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.04"
+                    android:background="@color/booked_color" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvBooked"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.19"
+                    android:fontFamily="@font/poppins_medium"
+                    android:gravity="center_vertical"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:text="@string/booked"
+                    android:textSize="10sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveAppointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llCalendarAvailability"
+                android:layout_marginEnd="16dp"
+                android:layout_toStartOf="@+id/btnCancelAppointment"
+                android:text="@string/ok"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                app:icon="@drawable/ic_check_white"
+                app:rippleColor="@color/white" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnCancelAppointment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/llCalendarAvailability"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="16dp"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:backgroundTint="@color/grey"
+                app:icon="@drawable/ic_clear_white"
+                app:rippleColor="@color/white" />
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/pbDoctorDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="30dp"
+        app:contentPadding="4dp">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

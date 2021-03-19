@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.dashboard.view_model.CovidRegistrationViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="@dimen/_450sdp"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/mainLayout"
+            android:layout_width="@dimen/_450sdp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                tools:ignore="RtlHardcoded,UselessParent">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:drawableLeft="@drawable/ic_search_white"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="Search     "
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:id="@+id/closeImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_close_white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="@dimen/_2sdp">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/view" />
+
+                <LinearLayout
+                    android:id="@+id/hideLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:weightSum="8">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight=".50"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="S.No"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:drawableRight="@drawable/sort"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="PIN"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:drawableRight="@drawable/sort"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Name"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.50"
+                        android:drawableRight="@drawable/sort"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="Gender"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:drawableRight="@drawable/sort"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="last Visit Date"
+                        android:textColor="@color/black"
+                        android:textSize="17sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/view" />
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/searchListRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

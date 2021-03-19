@@ -1,0 +1,33 @@
+package com.oasys.digihealth.doctor.ui.quick_reg.model
+
+data class PatientDetails(
+    val aadhaar_number: String? = "",
+    val address_line1: String? = "",
+    val address_line2: String? = "",
+    val address_line5: String? = "",
+    val block_uuid: Int? = 0,
+    val community_uuid: Int? = 0,
+    val country_uuid: Int? = 0,
+    val created_by: String? = "",
+    val created_date: String? = "",
+    val district_uuid: Int? = 0,
+    val email: String? = "",
+    val height: String? = "",
+    val ili: String? = "",
+    val is_rapid_test: String? = "",
+    val lab_to_facility_uuid: Int? = 0,
+    val mobile: String? = "",
+    val modified_by: String? = "",
+    val modified_date: String? = "",
+    val no_symptom: Int? = 0,
+    val photo_path: String? = "",
+    val pincode: String? = "",
+    val revision: Int? = 0,
+    val sample_type_uuid: Int? = 0,
+    val sari: String? = "",
+    val smart_ration_number: String? = "",
+    val state_uuid: Int? = 0,
+    val taluk_uuid: Int? = 0,
+    val village_uuid: Int? = 0,
+    val weight: String? = ""
+)

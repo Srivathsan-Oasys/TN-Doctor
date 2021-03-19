@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.tutorial.viewmodel.UserManualViewModel" />
+    </data>
+
+            <LinearLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="5">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.20"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:padding="@dimen/_5sdp"
+                        android:text="User Manual"
+                        android:textColor="@color/hmis_background"
+                        android:textSize="@dimen/_15sdp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/view"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="4.10">
+
+
+                            <androidx.core.widget.NestedScrollView
+                                android:id="@+id/nestedScrollView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fillViewport="true">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/userProfileRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:scrollbars="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                                    <LinearLayout
+                                        android:id="@+id/departmentLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/_5sdp"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:padding="@dimen/_5sdp"
+                                            android:text="Department"
+                                            android:textColor="@color/hmis_background"
+                                            android:textSize="@dimen/_15sdp" />
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="2dp"
+                                            android:background="@color/view"
+                                            />
+
+                                    </LinearLayout>
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/departmentRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:scrollbars="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                    <LinearLayout
+                                        android:id="@+id/institutionLayout"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:visibility="gone">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginLeft="@dimen/_5sdp"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:padding="@dimen/_5sdp"
+                                            android:text="Institution"
+                                            android:textColor="@color/hmis_background"
+                                            android:textSize="@dimen/_15sdp" />
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="2dp"
+                                            android:background="@color/view"
+                                            />
+
+                                    </LinearLayout>
+
+
+                                    <androidx.recyclerview.widget.RecyclerView
+                                        android:id="@+id/institutionRecyclerView"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="10dp"
+                                        android:scrollbars="horizontal"
+                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                            </androidx.core.widget.NestedScrollView>
+
+                </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressbar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:backgroundTint="@color/red"
+                    android:indeterminateTint="#1a09d6"
+                    android:layout_marginTop="-7dp"/>
+
+            </LinearLayout>
+</layout>

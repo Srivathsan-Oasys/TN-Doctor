@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.oasys.digihealth.doctor">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:name=".application.HmisApplication"
+        android:allowBackup="false"
+        android:usesCleartextTraffic="true"
+        tools:ignore="UnusedAttribute"
+        tools:replace="android:label,android:allowBackup"
+        android:icon="@mipmap/ic_launcher_pune_foreground"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_pune_round"
+        android:screenOrientation="landscape"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        android:requestLegacyExternalStorage="true">
+        <activity android:name=".ui.home.HomeActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden">
+        </activity>
+<!--        <activity android:name=".ui.DocumentationActivity" />-->
+        <activity android:name=".ui.login.view.TermsAndConditionActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".ui.SplashScreenActivity"
+            android:windowSoftInputMode="adjustResize">
+            <!--   android:theme="@style/Hmis.Splash"-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.login.view.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Hmis.Login"
+            >
+
+        </activity>
+
+        <activity
+            android:name=".ui.myprofile.view.MyProfileActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.dashboard.view.CovidRegistrationActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
+        <activity
+            android:name=".ui.telemedicine.AppointmentActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppThemeAppointment" />
+        <activity
+            android:name=".ui.telemedicine.videocall.VideoCallActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:theme="@style/AppThemeAppointment" />
+        <activity
+            android:name=".ui.telemedicine.TelemedicineActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppThemeAppointment" />
+        <activity
+            android:name=".ui.telemedicine.TelemedicineEMRActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppThemeAppointment" />
+
+        <activity android:name=".ui.scanner.ScannerActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:theme="@style/AppThemeAppointment" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+
+    </application>
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true"
+        tools:ignore="ManifestOrder" />
+</manifest>

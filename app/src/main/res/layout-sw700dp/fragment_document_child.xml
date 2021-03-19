@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.documents.view_model.DocumentViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/mainLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/previewLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/fadeBlue"
+                    android:orientation="horizontal"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/dateTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="@dimen/_10sdp"
+                        android:text="Add New Document"
+
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText,MissingConstraints" />
+
+                    <ImageView
+                        android:id="@+id/buttonPDF"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        app:srcCompat="@drawable/ic_dropdown" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/resultLinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        tools:ignore="MissingConstraints">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.90">
+
+                            <EditText
+                                android:id="@+id/calendarEditText"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableRight="@drawable/ic_calendar"
+                                android:focusable="false"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:hint="date &amp; time"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.appcompat.widget.AppCompatSpinner
+                            android:id="@+id/type_spinner"
+                            style="@style/Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="0.90"
+                            android:fontFamily="@font/poppins"
+
+                            android:hint="Period"
+                            android:inputType="textNoSuggestions"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/black"
+                            android:textSize="18sp" />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.20">
+
+                            <EditText
+                                android:id="@+id/editfilename"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+
+                                android:hint=" File Name *"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2"
+                        tools:ignore="MissingConstraints">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/comments"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_semibold"
+                                android:hint="Comments *"
+
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/edtFileuploadName"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:drawableRight="@drawable/ic_upload"
+                                android:focusable="false"
+                                android:fontFamily="@font/poppins_semibold"
+
+                                android:hint="File Upload *"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
+                        android:gravity="right"
+                        android:orientation="horizontal"
+                        android:paddingEnd="@dimen/_5sdp"
+                        tools:ignore="MissingConstraints">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/saveCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/colorPrimaryDark"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_add"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="ADD"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clearCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Clear"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    tools:ignore="MissingConstraints">
+
+                    <EditText
+                        android:id="@+id/searchView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableEnd="@drawable/ic_search"
+                        android:focusable="false"
+                        android:hint="search Filename / Type"
+                        android:inputType="text"
+                        android:padding="10dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:iconifiedByDefault="false" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <EditText
+                            android:id="@+id/calendarEditText1"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_calendar"
+                            android:focusable="false"
+                            android:fontFamily="@font/poppins_semibold"
+                            android:hint="Date Range"
+                            android:padding="10dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:weightSum="6">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="0.35"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="S.No"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="1.25"
+                        
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="Visit Date"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="Type"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.25"
+                        
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:text="File Name"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.25"
+                        
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="Comments"
+
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+
+                    <View
+                        android:layout_width="2dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/view" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.90"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:gravity="center"
+                        android:paddingStart="10dp"
+                        android:text="Action"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        tools:ignore="HardcodedText,RtlSymmetry" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/documentRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="afterDescendants"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            </LinearLayout>
+
+
+        </FrameLayout>
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

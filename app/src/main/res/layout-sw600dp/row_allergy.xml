@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLinearLayout"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="8"
+        android:id="@+id/hideLayout"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="jggfd"
+            android:textColor="@color/navColor"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:id="@+id/serialNumber" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:textSize="16sp"
+            android:text="jfdzbgcxdzfcgvb"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:id="@+id/dateTimeTxt" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/typeTxt"
+            android:textSize="16sp"
+            android:text="jggdf"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:layout_weight=".80" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="16sp"
+            android:text="jhgfds"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:focusable="false"
+            android:id="@+id/allergyName" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.20"
+            android:textSize="16sp"
+            android:textColor="@color/navColor"
+            android:gravity="center"
+            android:text="jgfds"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:id="@+id/allergySource" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1.50"
+            android:paddingTop="@dimen/_5sdp"
+            android:text="gdxv"
+            android:paddingBottom="@dimen/_5sdp"
+            android:textSize="16sp"
+            android:textColor="@color/navColor"
+            android:id="@+id/durationTextView"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:text="hgfdzs"
+            android:textColor="@color/navColor"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:id="@+id/allergySeverty" />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            app:srcCompat="@drawable/ic_edit_blue"
+            android:id="@+id/editImageView"
+            android:layout_gravity="center"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

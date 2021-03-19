@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.emr_workflow.certificate.view_model.CertificateViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/ICDdrawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <RelativeLayout
+            android:id="@+id/diagnosisFrameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:orientation="vertical">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/poppins_bold"
+                                            android:textSize="24sp"
+                                            android:textColor="@color/navColor"
+                                            android:text="Certificte">
+                                        </TextView>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins_bold"
+                        android:text="Template"
+                        android:drawableRight="@drawable/ic_asterisk_small"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/opNotesSpinner"
+                            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+                            android:layout_width="@dimen/_200sdp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/PrevCertificate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            app:cardBackgroundColor="@color/orange"
+                            app:cardCornerRadius="10dp">
+
+                            <TextView
+                                android:id="@+id/patient_count"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="prev Certificate"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+                    </LinearLayout>
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="60dp"-->
+<!--                        android:layout_marginTop="20dp"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        android:background="@drawable/edittext_border_gray"-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:weightSum="2">-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight="1.80">-->
+
+<!--                        </LinearLayout>-->
+
+<!--                        <View-->
+<!--                            android:layout_width="2dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:background="@color/poweredBy" />-->
+
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:layout_weight=".20">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent"-->
+<!--                                android:layout_gravity="center"-->
+<!--                                android:padding="15dp"-->
+<!--                                app:srcCompat="@drawable/ic_down_arrow">-->
+
+<!--                            </ImageView>-->
+
+
+<!--                        </LinearLayout>-->
+
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:id="@+id/templateLayout"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="5dp"-->
+<!--                        android:background="@drawable/edittext_border_gray"-->
+<!--                        android:padding="20dp">-->
+
+<!--                        <EditText-->
+<!--                            android:id="@+id/TemplateData"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/poppins_semibold"-->
+<!--                            android:hint="comment here"-->
+<!--                            android:textSize="18sp">-->
+
+<!--                        </EditText>-->
+
+<!--                    </LinearLayout>-->
+
+                    <!-- Begin Editor toolbar -->
+
+                    <HorizontalScrollView
+                        android:id="@+id/tools"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="8dp"
+                        android:layout_height="wrap_content"
+                        android:background="#e6e6e6"
+                        android:scrollbars="none">
+
+                        <include layout="@layout/editor_toolbar_linearlayout_horizontal" />
+
+
+                    </HorizontalScrollView>
+                    <!--End of Editor toolbar -->
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="?attr/actionBarSize"
+                        android:background="@color/white">
+
+
+
+                        <ScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginBottom="40dp"
+                            android:scrollbars="vertical">
+
+                            <com.github.irshulx.Editor
+                                android:id="@+id/TemplateData"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="20dp"
+                                android:paddingTop="10dp"
+                                android:paddingRight="20dp"
+                                android:paddingBottom="70dp"
+                                app:placeholder="Start writing here..."
+                                app:render_type="Editor"/>
+                        </ScrollView>
+                    </RelativeLayout>
+
+
+
+
+
+                    <LinearLayout
+                        android:id="@+id/llButtons"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="22dp"
+                        android:layout_marginVertical="8dp"
+                        android:gravity="end"
+                        android:layout_alignParentBottom="true"
+                        android:orientation="horizontal">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/saveCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/secondaryColor"
+                            app:cardCornerRadius="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_next"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Save"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clearCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Clear"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                tools:ignore="HardcodedText" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+
+
+        </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

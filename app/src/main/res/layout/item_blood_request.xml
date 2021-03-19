@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    app:divider="@drawable/divider_color_white"
+    app:showDividers="middle"
+    android:weightSum="2">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.4"
+        android:gravity="center">
+
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/chkBloodComponent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <EditText
+        android:id="@+id/etBloodComponent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.6"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:inputType="number"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="12sp"
+        tools:hint="" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

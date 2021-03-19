@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:minHeight="45dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/sNo_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:text="@string/sno"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/instituion_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:paddingHorizontal="5dp"
+        android:text="@string/Instit"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/wardcode_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:fontFamily="@font/poppins"
+        android:paddingHorizontal="5dp"
+        android:gravity="start"
+        android:text="@string/Wardcode"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/wardname_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:paddingHorizontal="5dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:text="@string/ward_name"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/wardtype_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.5"
+        android:paddingHorizontal="5dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:text="@string/wardtype"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/department_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.8"
+        android:paddingHorizontal="5dp"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:text="@string/department"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/Status_txt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:fontFamily="@font/poppins"
+        android:gravity="start"
+        android:text="@string/status"
+        android:paddingHorizontal="5dp"
+        android:textColor="@color/navColor"
+        android:textSize="@dimen/dr_small_text">
+
+    </TextView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <ImageView
+        android:id="@+id/imgActionEdit"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        app:srcCompat="@drawable/ic_edit_blue" />
+
+    <ImageView
+        android:id="@+id/imgActionView"
+        android:layout_width="0dp"
+        android:layout_height="13dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        app:srcCompat="@drawable/ic_view_red" />
+
+    <ImageView
+        android:id="@+id/imgActionDelete"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_gravity="center"
+        android:layout_weight="0.5"
+        app:srcCompat="@drawable/ic_delete_black" />
+
+</LinearLayout>

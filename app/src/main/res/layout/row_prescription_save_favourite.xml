@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/listLayout"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="850dp"
+        android:layout_height="wrap_content"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.50"
+            android:id="@+id/serialNumberTextView"
+            android:gravity="center"
+            android:text="S.no"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText" />
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:id="@+id/drugNameTextView"
+            android:text="Drug Name"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="0.60"
+            android:gravity="center"
+            android:text="Route"
+            android:id="@+id/routeTextView"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Frequency"
+            android:id="@+id/frequencyTextView"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:id="@+id/durationTextView"
+            android:text="Duration"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Period"
+            android:id="@+id/periodTxt"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Instruction"
+            android:id="@+id/instructionTextView"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.30"
+            android:gravity="center"
+            android:text="Display order"
+            android:id="@+id/displayOrderTxt"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.60"
+            android:gravity="center"
+            android:id="@+id/deleteImageView"
+            android:paddingStart="10dp"
+            android:text="Action"
+            app:srcCompat="@drawable/ic_eraser"
+            tools:ignore="HardcodedText,RtlSymmetry" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</LinearLayout>

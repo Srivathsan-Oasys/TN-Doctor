@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/rlAppointmentToolbar"
+        layout="@layout/layout_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layoutDoctorInfo"
+        layout="@layout/layout_appointment_doctor_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rlAppointmentToolbar"
+        android:layout_margin="12dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tlDoctor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutDoctorInfo"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/doctor">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etDoctorName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_search_grey"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:lines="1"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tlDepartment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tlDoctor"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/department">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etDepartmentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_search_grey"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:imeOptions="actionNext"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:lines="1"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tlRadiologyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tlDepartment"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:hint="@string/radiology_lab"
+        android:lines="1"
+        android:maxLines="1">
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/etRadiologyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_search_grey"
+            android:fontFamily="@font/poppins"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tlLabName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tlRadiologyName"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:hint="@string/lab_label"
+        android:lines="1"
+        android:maxLines="1">
+
+        <EditText
+            android:id="@+id/etLabName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_search_grey"
+            android:fontFamily="@font/poppins"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/etRequest"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tlLabName">
+
+        <requestFocus />
+    </androidx.appcompat.widget.AppCompatEditText>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSearchAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etRequest"
+        android:layout_alignTop="@+id/btnClearAppointment"
+        android:layout_toStartOf="@+id/btnClearAppointment"
+        android:fontFamily="@font/poppins"
+        android:text="@string/search"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@color/search_button"
+        app:cornerRadius="4dp"
+        app:elevation="8dp"
+        app:icon="@drawable/ic_search_grey"
+        app:rippleColor="@android:color/white" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClearAppointment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etRequest"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="@string/clear"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:backgroundTint="@color/grey"
+        app:cornerRadius="4dp"
+        app:elevation="8dp"
+        app:icon="@drawable/ic_clear"
+        app:rippleColor="@android:color/white" />
+
+    <View
+        android:id="@+id/viewSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/btnClearAppointment"
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llDoctorAvailability"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/viewSeparator"
+        android:animateLayoutChanges="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNoRecordDoctorList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:layout_above="@+id/btnDownloadAppointment"
+            android:layout_below="@+id/llMainAppointmentList"
+            android:layout_gravity="center"
+            android:text="No Records found !"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvBookedAppointments"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <ProgressBar
+        android:id="@+id/pbAppointmentSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+</RelativeLayout>

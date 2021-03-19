@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:padding="8dp">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:id="@+id/mainLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_asterisk"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/institution_name"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerInstitution"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etInstitution"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_asterisk"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/Wardcode"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etWardCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_asterisk"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/wardname"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etWardName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_asterisk"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/type"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerType"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/discription"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_asterisk"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/Department"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerDepartment"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etDepartment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/Numberofrooms"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etNumberOfRoom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/number_of_beds"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etNumberOfBed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/bed_number_start"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etBedNumberStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/bed_number_end"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etBedNumberEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/floor_bed_allowed"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <LinearLayout
+                        android:id="@+id/llFloorBedAllowed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <Switch
+                            android:id="@+id/switchFloorBedAllowed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/SwitchTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etFloorBedAllowed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+
+                        android:text="@string/number_of_floor_beds"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etNumberOfFloorBed"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/number_of_oxygen"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etNumberOfOxygenBeds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/number_of_ventilor"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etNumberOfVentilatorBeds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/Gender"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerGender"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Age From"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etAgeFrom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Age To"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etAgeTo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Block"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerBlock"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etBlock"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Building"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerBuilding"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etBuilding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Floor"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerFloor"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etFloor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Room"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerRoom"
+                        style="@style/Widget.AppCompat.Spinner.Underlined"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <EditText
+                        android:id="@+id/etRoom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:fontFamily="@font/poppins"
+                        android:paddingHorizontal="0dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Casualty"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <LinearLayout
+                        android:id="@+id/llCasualty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <Switch
+                            android:id="@+id/switchCasualty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:theme="@style/SwitchTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="Yes"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etCasualty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Status"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text" />
+
+                    <LinearLayout
+                        android:id="@+id/llStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="4dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="@string/inactive"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+
+                        <Switch
+                            android:id="@+id/switchStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:theme="@style/SwitchTheme" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:minWidth="60dp"
+                            android:text="@string/active"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dr_medium_text" />
+                    </LinearLayout>
+
+                    <EditText
+                        android:id="@+id/etStatus"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvCreatedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Created By"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/etCreatedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvCreatedOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Created On"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/etCreatedOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvModifiedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Modified By"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/etModifiedBy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvModifiedOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:paddingHorizontal="4dp"
+                        android:text="Modified On"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <EditText
+                        android:id="@+id/etModifiedOn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:textSize="@dimen/dr_medium_text"
+                        android:visibility="gone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/saveCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:cardBackgroundColor="@color/secondaryColor"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_next"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="Next"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dr_btn_text" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/clearCardView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            app:cardBackgroundColor="@color/primaryGrey"
+                            app:cardCornerRadius="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_eraser"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="15dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="10dp"
+                                android:paddingBottom="7dp"
+                                android:text="@string/clear"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/dr_btn_text" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
+</layout>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/hideLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="8"
+        app:divider="@drawable/divider_color_white"
+        app:showDividers="middle">
+
+
+        <TextView
+            android:id="@+id/serialNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="jggfd"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/dateTimeTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="jfdzbgcxdzfcgvb"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/typeTxt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".80"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="jggdf"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/allergyName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="jhgfds"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/allergySource"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.20"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="jgfds"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.50"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="gdxv"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/allergySeverty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:text="hgfdzs"
+            android:textColor="@color/navColor"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/editImageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight=".50"
+            app:srcCompat="@drawable/ic_edit_blue" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+    android:gravity="center">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="48dp">
+
+        <RelativeLayout
+            android:id="@+id/mainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llNotification"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:background="@color/colorPrimary"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_weight=".5"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:gravity="center_vertical"
+                    android:text="Incoming Call"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCloseDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close_white"
+                    tools:ignore="VectorDrawableCompat" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivNotificationPatient"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_below="@+id/llNotification"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_placeholder"
+                tools:ignore="VectorDrawableCompat" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvNotificationPatientName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ivNotificationPatient"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                tools:text="@tools:sample/first_names" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/llSessionCreateContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNotificationPatientName"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivNotificationVideoMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardBackgroundColor="@color/save_button"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_video_on"
+                        tools:ignore="UnusedAttribute,VectorDrawableCompat" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivNotificationAcceptCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:clickable="true"
+                    app:cardBackgroundColor="@color/session"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:rotation="270"
+                        android:src="@drawable/ic_call_end"
+                        tools:ignore="UnusedAttribute,VectorDrawableCompat" />
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivNotificationEndCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/cancelled_status_color"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="4dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_call_end"
+                        tools:ignore="UnusedAttribute,VectorDrawableCompat" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>

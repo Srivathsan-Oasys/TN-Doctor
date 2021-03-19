@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/mainLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edittext_border_white"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <TextView
+            android:id="@+id/serialNumberTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.40"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="S.No"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/textProcess"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.25"
+
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:text="Test/Profile name"
+            android:textSize="11sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <Spinner
+            android:id="@+id/result_spinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_weight="1.70"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/resultData"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.70"
+            android:gravity="center"
+            android:inputType="number"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/resultDataAlphanumeric"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.70"
+            android:digits="abcdefghijklmnopqrstuvwzyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 "
+            android:gravity="center"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/resultDataSplcase"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.70"
+            android:gravity="center"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/resultDataNoneditable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.70"
+            android:focusable="false"
+            android:gravity="center"
+            android:singleLine="true"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/resultLongText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.70"
+            android:visibility="gone" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <ImageView
+            android:id="@+id/uom_Image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.65"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+
+            android:text=""
+            android:textSize="11sp">
+
+        </ImageView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <LinearLayout
+            android:id="@+id/normal_val_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:text=""
+            android:textSize="11sp">
+
+            <ImageView
+                android:id="@+id/imgUpload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_attachment_24" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

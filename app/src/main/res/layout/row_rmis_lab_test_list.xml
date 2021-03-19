@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.30"
+        android:padding="5dp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/patient_info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.40"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Patient Info" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/order_num"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.9"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Order No" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvAccessionId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.9"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Acc Id" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvDateTime"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.9"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Date Time" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="wrap_content"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/tvPin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.90"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="6755457" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/test_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Test Name" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvProfileName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Profile Name" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <TextView
+        android:id="@+id/tvTestMethod"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="13sp"
+        tools:text="Test Name" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+<!--    <Spinner-->
+<!--        android:id="@+id/spinnerLabName"-->
+<!--        style="@style/Widget.AppCompat.Spinner.Underlined"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_weight="1" />-->
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.3"
+        android:padding="8dp">
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="Layouts"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radiobutton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/hmis_background"
+                android:text="P"
+                android:textColor="@color/navColor"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/radiobutton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/hmis_background"
+                android:text="N"
+                android:textColor="@color/navColor"
+                android:textSize="11sp" />
+
+            <RadioButton
+                android:id="@+id/radiobutton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/hmis_background"
+                android:text="E"
+                android:textColor="@color/navColor"
+                android:textSize="11sp" />
+
+
+        </RadioGroup>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1.10"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="Status"
+        android:textColor="@color/navColor"
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+
+    <ImageView
+        android:id="@+id/print"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:fontFamily="@font/poppins"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/navColor"
+        android:textSize="14sp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_print">
+
+    </ImageView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/view" />
+</LinearLayout>

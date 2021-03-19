@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.dashboard.view_model.DashboardViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end"
+        android:layout_height="match_parent">
+
+
+
+<LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:orientation="vertical">
+
+     <!--   <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_weight=".50"
+                    android:background="@color/colorPrimary"
+                    android:theme="@style/ToolbarTheme"
+                    app:navigationIcon="@drawable/ic_left_arrow_white"
+                    app:title="Dashboard" />
+
+                <TextView
+                    android:id="@+id/officeName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_weight=".50"
+                    android:gravity="end"
+                    android:text="Rajiv Gandhi Government Hospitals"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_8sdp" />
+
+            </LinearLayout>
+        </com.google.android.material.appbar.AppBarLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_gravity="center"
+                android:textSize="@dimen/_8sdp"
+                android:textColor="@color/hmis_background"
+
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+           >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/emr_view"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/outPatientCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardBackgroundColor="@color/outPtientGreen">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="false"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:padding="0dp"
+                            app:srcCompat="@drawable/ic_out_patient" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Out Patient"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/inPatientCardView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:cardCornerRadius="4dp"
+                    app:cardBackgroundColor="@color/colorPrimary">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="false"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_inpatient" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:paddingStart="5dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="5dp"
+                        android:paddingBottom="10dp"
+                        android:text="In Patient"
+                        android:textColor="@color/white"
+                        android:textSize="21sp"
+                        tools:ignore="HardcodedText" />
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        app:cardCornerRadius="8dp"
+                        android:visibility="visible"
+                        app:cardBackgroundColor="@color/configurationOrange">
+                        <LinearLayout
+                            android:id="@+id/confifav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="0dp"
+                                android:layout_gravity="center"
+                                app:srcCompat="@drawable/ic_config" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:paddingStart="5dp"
+                                android:paddingTop="10dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="10dp"
+                                android:text="Configuration"
+                                android:textColor="@color/white"
+                                android:textSize="21sp"
+                                tools:ignore="HardcodedText" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/imgFilter"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:srcCompat="@drawable/ic_filter"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
+                    android:tint="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:id="@+id/register_view"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/outPtientGreen">
+                    <LinearLayout
+                        android:id="@+id/quickRegisiter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_out_patient" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Quick Registration"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:cardBackgroundColor="@color/colorAccent">
+                    <LinearLayout
+                        android:id="@+id/covidRegisterButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_inpatient" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Covid Registartion"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:id="@+id/LMIS_view"
+                android:visibility="gone"
+                android:orientation="horizontal"
+                android:padding="16dp">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/outPtientGreen">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_out_patient" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Lab Test"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    app:cardBackgroundColor="@color/colorPrimary">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_inpatient" />
+
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Test Process"
+
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:visibility="visible"
+                    app:cardBackgroundColor="@color/colorAccent">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="0dp"
+                            android:layout_gravity="center"
+                            app:srcCompat="@drawable/ic_config" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="5dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="5dp"
+                            android:paddingBottom="10dp"
+                            android:text="Test Approval"
+                            android:textColor="@color/white"
+                            android:textSize="21sp"
+                            tools:ignore="HardcodedText" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPatientsCount"
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.appbar.AppBarLayout
+                    android:layout_width="match_parent"
+                    android:theme="@style/customeTheme"
+                    android:layout_height="300dp">
+
+                    <com.google.android.material.appbar.CollapsingToolbarLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <com.github.mikephil.charting.charts.LineChart
+                                android:id="@+id/graphview"
+                                android:layout_marginTop="8dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@color/white"/>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/tabLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="8dp"
+                        app:tabMode="fixed"
+                        app:tabGravity="fill"
+                        android:layout_gravity="bottom"
+                        app:tabInlineLabel="true">
+                    </com.google.android.material.tabs.TabLayout>
+
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+            <!--  <LinearLayout
+                  android:id="@+id/rl_tab_view"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="start"
+                  >
+
+
+
+
+
+              </LinearLayout>-->
+
+        </LinearLayout>
+    </LinearLayout>
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationView"
+            android:layout_width="@dimen/nav_drawer_width"
+            android:visibility="visible"
+            android:padding="16dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/session_mandatory"
+                    style="@style/TabTitleCommonTextView"
+                    />
+
+                <Spinner
+                    android:id="@+id/spinnerSession"
+                    android:layout_marginStart="3dp"
+                    style="@style/MobileSpinnerStyle1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_mandatory"
+                    style="@style/TabTitleCommonTextView"
+                    android:textSize="12sp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerGender"
+                    android:layout_marginStart="3dp"
+                    style="@style/MobileSpinnerStyle1"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilStartDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etStartDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_calendar"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="Begin Date"
+                        android:paddingBottom="16dp"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilEndDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/etEndDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:drawableEnd="@drawable/ic_calendar"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="End Date"
+                        android:paddingBottom="16dp"
+                        android:textSize="18sp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnApply"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Apply"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/btnCancel"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Cancel"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </com.google.android.material.navigation.NavigationView>
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

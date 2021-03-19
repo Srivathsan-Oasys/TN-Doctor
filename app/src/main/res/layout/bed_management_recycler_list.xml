@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    tools:ignore="MissingConstraints,MissingDefaultResource">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/view"
+        tools:ignore="MissingConstraints" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:weightSum="6.20">
+
+
+        <TextView
+            android:id="@+id/serialNumberTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".50"
+            android:fontFamily="@font/poppins"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="S.no"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dr_medium_text" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/pin"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_weight="1.20"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:text="2345678910"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dr_medium_text" />
+
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/mobileNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_weight="1.25"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:text="ramuuuu"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dr_medium_text" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <TextView
+            android:id="@+id/patient_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_weight="1.25"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:text="age"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dr_medium_text" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+        <TextView
+            android:id="@+id/bed_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_left"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins"
+            android:gravity="left"
+            android:paddingVertical="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/dr_medium_text" />
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:id="@+id/bed"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:scaleType="centerCrop"
+                android:textColor="@color/navColor"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_bed_management_green">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/shift"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:textColor="@color/navColor"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_transfer_blue_24">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/revert"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:textColor="@color/navColor"
+                android:textSize="14sp"
+                android:visibility="visible"
+                app:srcCompat="@drawable/ic_revert">
+
+            </ImageView>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:background="@color/view"
+            android:visibility="gone" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

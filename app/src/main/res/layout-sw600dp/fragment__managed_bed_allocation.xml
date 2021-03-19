@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.view_model.BedManagementViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="false"
+        tools:openDrawer="end">
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:orientation="vertical">
+
+
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/mainLayout"
+                            android:layout_width="1000dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:layout_width="1000dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Bed"
+                                    android:layout_marginStart="10dp"
+                                    android:textSize="18sp"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textColor="@color/navColor">
+
+                                </TextView>
+
+
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/bedManagementAllocationRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="1000dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Floor Bed"
+                                    android:textSize="18sp"
+                                    android:layout_marginStart="10dp"
+
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textColor="@color/navColor">
+
+                                </TextView>
+
+
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/floorBedRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="1000dp"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Room Bed"
+                                    android:textSize="18sp"
+                                    android:layout_marginStart="10dp"
+
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:textColor="@color/navColor">
+
+                                </TextView>
+
+
+
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/roomBedRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                            </LinearLayout>
+
+                            <include
+                                android:id="@+id/llProgressBar"
+
+                                layout="@layout/layout_progress_bar_with_text"/>
+
+
+
+
+                        </LinearLayout>
+
+
+
+                    </HorizontalScrollView>
+
+
+
+
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:background="@color/outPtientGreen">
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/navColor"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_marginStart="5dp"
+                        android:text="Available">
+
+                    </TextView>
+                    <LinearLayout
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@color/black">
+
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/navColor"
+                        android:fontFamily="@font/poppins_bold"
+                        android:layout_marginStart="5dp"
+                        android:text=" Not Available">
+
+                    </TextView>
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:text="Note : Please choose any 2 beds for shuffle">
+
+                </TextView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_marginEnd="22dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ahuffleCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_shuffle"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="Shuffle"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/saveCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        app:cardBackgroundColor="@color/secondaryColor"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_save_white_12"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="@string/save"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/clearCardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        app:cardBackgroundColor="@color/primaryGrey"
+                        app:cardCornerRadius="5dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_close_white_12"
+                            android:drawablePadding="10dp"
+                            android:fontFamily="@font/poppins"
+                            android:paddingStart="15dp"
+                            android:paddingTop="7dp"
+                            android:paddingEnd="10dp"
+                            android:paddingBottom="7dp"
+                            android:text="@string/clear"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            tools:ignore="HardcodedText" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+</layout>

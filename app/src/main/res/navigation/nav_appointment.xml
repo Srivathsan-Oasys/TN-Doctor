@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_appointment_patient_list">
+
+    <fragment
+        android:id="@+id/nav_appointment_patient_list"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentListMainFragment"
+        android:label="AppointmentListMainFragment"
+        tools:layout="@layout/fragment_appointment_list_main">
+
+        <action
+            android:id="@+id/action_patient_list_to_nav_appointment_main_search"
+            app:destination="@+id/nav_appointment_main_search"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_appointment_main_search"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentMainSearchFragment"
+        android:label="AppointmentSearchFragment"
+        tools:layout="@layout/fragment_appointment_search">
+
+
+        <action
+            android:id="@+id/action_appointment_main_search_to_nav_appointment_search"
+            app:destination="@+id/nav_appointment_search"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <!--<action
+            android:id="@+id/action_appointment_main_search_to_nav_patient_list_dialog"
+            app:destination="@+id/nav_patient_list_Search_dialog"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />-->
+
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_appointment_search"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.AppointmentSearchFragment"
+        android:label="AppointmentSearchFragment"
+        tools:layout="@layout/fragment_appointment_search">
+
+        <action
+            android:id="@+id/action_nav_appointment_doctors_to_appointment_doctors"
+            app:destination="@+id/nav_appointment_doctors"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_nav_appointment_search_to_appointment_booking"
+            app:destination="@+id/nav_appointment_booking"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/nav_appointment_doctors"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.AppointmentDoctorsFragment"
+        android:label="AppointmentDoctorsFragment"
+        tools:layout="@layout/fragment_appointment_doctors">
+
+        <action
+            android:id="@+id/action_nav_appointment_doctors_to_appointment_booking"
+            app:destination="@+id/nav_appointment_booking"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_appointment_booking"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentSlotBookFragment"
+        android:label="AppointmentSearchFragment"
+        tools:layout="@layout/fragment_appointment_search">
+
+        <action
+            android:id="@+id/action_nav_booking_to_appointment_patient_list"
+            app:destination="@+id/nav_appointment_patient_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            app:popUpTo="@+id/nav_appointment_patient_list"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+    <!--<dialog
+        android:id="@+id/nav_patient_list_Search_dialog"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.PatientListDialogFragment"
+        android:label="PatientListDialogFragment"
+        tools:layout="@layout/fragment_patient_list_dialog" />-->
+
+
+    <!-- Appointment session list to appointment book  -->
+    <fragment
+        android:id="@+id/nav_appointment_session_list"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionListFragment"
+        android:label="AppointmentSessionListFragment"
+        tools:layout="@layout/fragment_appointment_session_list">
+
+        <action
+            android:id="@+id/action_nav_appointment_session_list_to_appointment_create_session"
+            app:destination="@+id/nav_appointment_session_create"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_nav_appointment_session_list_to_nav_appointment_session_view"
+            app:destination="@+id/nav_appointment_session_view"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_appointment_session_create"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionCreateFragment"
+        android:label="AppointmentSessionCreateFragment"
+        tools:layout="@layout/fragment_appointment_session_create">
+
+        <action
+            android:id="@+id/action_nav_appointment_create_session_to_session_dialog"
+            app:destination="@+id/nav_appointment_session_dialog"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_appointment_session_view"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionViewFragment"
+        android:label="AppointmentSessionViewFragment"
+        tools:layout="@layout/fragment_appointment_session_view">
+
+        <action
+            android:id="@+id/action_nav_appointment_view_session_to_session_dialog"
+            app:destination="@+id/nav_appointment_session_dialog"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+
+    <dialog
+        android:id="@+id/nav_appointment_session_dialog"
+        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionCreateDialogFragment"
+        android:label="AppointmentSessionCreateDialogFragment"
+        tools:layout="@layout/fragment_appointment_session_create_dialog" />
+
+    <!-- Appointment finish   -->
+
+</navigation>

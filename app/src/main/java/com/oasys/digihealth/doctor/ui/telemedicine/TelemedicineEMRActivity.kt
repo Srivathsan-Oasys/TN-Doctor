@@ -18,6 +18,8 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.data.event.NetworkEvent
 import com.oasys.digihealth.doctor.databinding.ActivityTelemedicineEmrBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.ui.AdmissionFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.ui.ChiefComplaintsFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.ui.LabFragment
@@ -69,8 +71,8 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_telemedicine_emr)
         viewModel = EmrViewModelFactory(application).create(EmrViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         appPreferences = AppPreferences.getInstance(this, AppConstants.SHARE_PREFERENCE_NAME)
 
         patientUuid = appPreferences?.getInt(AppConstants.PATIENT_UUID)!!
@@ -81,15 +83,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)!!
 
         viewModel!!.errorText.observe(this, Observer { toastMessage ->
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, toastMessage)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
         })
 
+        binding?.contentLinearLayout?.visibility = View.INVISIBLE
+        binding?.noDataFoundTextView?.visibility = View.INVISIBLE
 
-        binding.contentLinearLayout.visibility = View.INVISIBLE
-        binding.noDataFoundTextView.visibility = View.INVISIBLE
-
-
-        viewModel.getEncounter(
+        viewModel?.getEncounter(
             facility_id,
             patientUuid,
             encounterType,
@@ -97,14 +97,14 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         )
         patientUuid = 435
 
-        viewModel.getStoreMaster(facility_id, department_uuid, getStoreMasterRetrofitCallback)
-        viewModel.getPatientLatestRecord(
+        viewModel?.getStoreMaster(facility_id, department_uuid, getStoreMasterRetrofitCallback)
+        viewModel?.getPatientLatestRecord(
             facility_id,
             patientUuid,
             encounterType,
             getPatientLatestEncCallback
         )
-        viewModel.getPatientById(facility_id, patientUuid, encounterType, getPatientByIdCallback)
+        viewModel?.getPatientById(facility_id, patientUuid, encounterType, getPatientByIdCallback)
         /*binding?.ivConsultingView?.setOnClickListener {
             if (binding?.llConsultingView?.isVisible!!) {
                 binding?.llConsultingView?.visibility = View.GONE
@@ -115,17 +115,17 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         }*/
 
         userDetailsRoomRepository = UserDetailsRoomRepository(application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
-        tokenBearer = AppConstants.BEARER_AUTH + userDataStoreBean.access_token
-        userUUID = userDataStoreBean.uuid!!
+        tokenBearer = AppConstants.BEARER_AUTH + userDataStoreBean?.access_token
+        userUUID = userDataStoreBean?.uuid!!
         initToolBar()
         initUI()
         subscribeToNetworkEvents()
     }
 
     private fun initToolBar() {
-        binding.tbEmr.run {
+        binding?.tbEmr?.run {
             this.setNavigationOnClickListener {
                 finish()
             }
@@ -144,13 +144,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                 NetworkEvent.Success -> showLoading(false)
                 is NetworkEvent.ApiMessage -> {
                     showLoading(false)
-                    it.getContentIfNotHandled().run {
+                    it.getContentIfNotHandled()?.run {
                         toast(it.msg)
                     }
                 }
                 is NetworkEvent.Failure -> {
                     showLoading(false)
-                    it.getContentIfNotHandled().run {
+                    it.getContentIfNotHandled()?.run {
                         toast(it.res)
                     }
                 }
@@ -164,9 +164,9 @@ class TelemedicineEMRActivity : AppCompatActivity() {
     private fun setupViewPager(tabsArrayList: List<ResponseContent?>) {
         viewpageradapter = EMRPagerAdapter(supportFragmentManager)
         for (i in tabsArrayList.indices) {
-            if (tabsArrayList[i].activity_code == AppConstants.ACTIVITY_CODE_CHIEF_COMPLAINTS) {
+            if (tabsArrayList[i]?.activity_code == AppConstants.ACTIVITY_CODE_CHIEF_COMPLAINTS) {
                 viewpageradapter!!.addFragment(ChiefComplaintsFragment(), "Chief Complaints")
-            } else if (tabsArrayList[i].activity_code == AppConstants.ACTIVITY_CODE_LAB) {
+            } else if (tabsArrayList[i]?.activity_code == AppConstants.ACTIVITY_CODE_LAB) {
                 viewpageradapter!!.addFragment(LabFragment(), "Lab")
             } else if (tabsArrayList[i]!!.activity_code == AppConstants.ACTIVITY_CODE_RADIOLOGY) {
                 viewpageradapter!!.addFragment(RadiologyFragment(), "Radiology")
@@ -245,19 +245,19 @@ class TelemedicineEMRActivity : AppCompatActivity() {
 //                viewpageradapter!!.addFragment(CertificateFragment(), "Certificate")
             }
         }
-        binding.viewPager.adapter = viewpageradapter
+        binding?.viewPager?.adapter = viewpageradapter
         viewpageradapter?.notifyDataSetChanged()
     }
 
-    private val emrWorkFlowRetrofitCallBack = object {
+    private val emrWorkFlowRetrofitCallBack = object : RetrofitCallback<EmrWorkFlowResponseModel> {
         override fun onSuccessfulResponse(response: Response<EmrWorkFlowResponseModel>) {
-            if (response.body().responseContents.isNotEmpty()!!) {
-                binding.contentLinearLayout.visibility = View.VISIBLE
-                binding.noDataFoundTextView.visibility = View.INVISIBLE
-                tabsArrayList = response.body().responseContents!!
+            if (response.body()?.responseContents?.isNotEmpty()!!) {
+                binding?.contentLinearLayout?.visibility = View.VISIBLE
+                binding?.noDataFoundTextView?.visibility = View.INVISIBLE
+                tabsArrayList = response.body()?.responseContents!!
                 setupViewPager(tabsArrayList!!)
-                binding.viewPager!!.setOffscreenPageLimit(2)
-                binding.tabLayout!!.setupWithViewPager(binding.viewPager!!)
+                binding?.viewPager!!.setOffscreenPageLimit(2)
+                binding?.tabLayout!!.setupWithViewPager(binding?.viewPager!!)
                 Log.e("tabsArrayList", "_______" + tabsArrayList?.size)
                 for (i in tabsArrayList!!.indices) {
                     val layoutInflater: View? =
@@ -265,12 +265,12 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                             .inflate(R.layout.treatment_custom_tab_row, null, false)
                     val tabImageView = layoutInflater?.findViewById(R.id.tabImageView) as ImageView
                     val tabTextView = layoutInflater.findViewById(R.id.tabTextView) as TextView
-                    tabTextView.text = tabsArrayList!![i].activity_name
-                    binding.tabLayout.getTabAt(i).customView = layoutInflater
+                    tabTextView.text = tabsArrayList!![i]?.activity_name
+                    binding?.tabLayout?.getTabAt(i)?.customView = layoutInflater
                 }
             } else {
-                binding.contentLinearLayout.visibility = View.INVISIBLE
-                binding.noDataFoundTextView.visibility = View.VISIBLE
+                binding?.contentLinearLayout?.visibility = View.INVISIBLE
+                binding?.noDataFoundTextView?.visibility = View.VISIBLE
             }
         }
 
@@ -284,13 +284,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -300,7 +300,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -308,7 +308,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -316,13 +316,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -330,13 +330,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         }
     }
     private val fetchEncounterRetrofitCallBack =
-        object {
+        object : RetrofitCallback<FectchEncounterResponseModel> {
             override fun onSuccessfulResponse(response: Response<FectchEncounterResponseModel>) {
-                if (response.body().responseContents.isNotEmpty()!!) {
-                    encounterResponseContent = response.body().responseContents!!
+                if (response.body()?.responseContents?.isNotEmpty()!!) {
+                    encounterResponseContent = response.body()?.responseContents!!
                     encounter_doctor_uuid =
-                        encounterResponseContent.get(0).encounter_doctors.get(0).uuid
-                    encounter_uuid = encounterResponseContent.get(0).uuid
+                        encounterResponseContent.get(0)?.encounter_doctors?.get(0)?.uuid
+                    encounter_uuid = encounterResponseContent.get(0)?.uuid
                     appPreferences?.saveInt(
                         AppConstants.ENCOUNTER_DOCTOR_UUID,
                         encounter_doctor_uuid!!
@@ -345,7 +345,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                     callEmrWorkFlow()
 
                 } else {
-                    viewModel.createEncounter(
+                    viewModel?.createEncounter(
                         patientUuid,
                         encounterType,
                         createEncounterRetrofitCallback
@@ -363,13 +363,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -379,7 +379,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -387,7 +387,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -395,13 +395,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -409,17 +409,17 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             }
         }
 
-    val createEncounterRetrofitCallback = object {
+    val createEncounterRetrofitCallback = object : RetrofitCallback<CreateEncounterResponseModel> {
         override fun onSuccessfulResponse(response: Response<CreateEncounterResponseModel>) {
 
             encounter_doctor_uuid =
-                response.body().responseContents.encounterDoctor.uuid!!.toInt()
-            encounter_uuid = response.body().responseContents.encounter.uuid!!.toInt()
+                response?.body()?.responseContents?.encounterDoctor?.uuid!!.toInt()
+            encounter_uuid = response?.body()?.responseContents?.encounter?.uuid!!.toInt()
             patientUuid =
-                response.body().responseContents.encounterDoctor.patient_uuid!!.toInt()
+                response?.body()?.responseContents?.encounterDoctor?.patient_uuid!!.toInt()
             appPreferences?.saveInt(AppConstants.ENCOUNTER_DOCTOR_UUID, encounter_doctor_uuid!!)
             appPreferences?.saveInt(AppConstants.ENCOUNTER_UUID, encounter_uuid!!)
-            appPreferences?.saveInt(AppConstants.PATIENT_UUID, patientUuid)
+            appPreferences?.saveInt(AppConstants.PATIENT_UUID, patientUuid!!)
             callEmrWorkFlow()
         }
 
@@ -479,9 +479,9 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         }
     }
 
-    private val getPatientByIdCallback = object {
+    private val getPatientByIdCallback = object : RetrofitCallback<PatientDetailResponse> {
         override fun onSuccessfulResponse(response: Response<PatientDetailResponse>) {
-            val data = response.body().responseContent
+            val data = response.body()?.responseContent
             if (data != null) {
                 /*if (data.salutation_details?.name != null) {
                     binding?.tvPatientName?.text =
@@ -491,12 +491,12 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                     binding?.tvPatientName?.text = " " + data.first_name
                 }*/
 
-                binding.tvPatientName.text = " " + data.first_name
-                binding.tvAgeGender.text =
-                    " / " + data.age.toString() + " Year(s)" + " / " + data.gender_details.name
-            } else {
-                binding.tvPatientName.text = "-"
-                binding.tvAgeGender.text = ""
+                binding?.tvPatientName?.text = " " + data.first_name
+                binding?.tvAgeGender?.text =
+                    " / " + data.age.toString() + " Year(s)" + " / " + data.gender_details?.name
+            }else{
+                binding?.tvPatientName?.text = "-"
+                binding?.tvAgeGender?.text = ""
             }
 
 
@@ -512,13 +512,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -528,7 +528,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -536,7 +536,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -544,13 +544,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -560,9 +560,9 @@ class TelemedicineEMRActivity : AppCompatActivity() {
     }
 
     private val getPatientLatestEncCallback =
-        object {
+        object : RetrofitCallback<PatientLatestRecordResponse> {
             override fun onSuccessfulResponse(response: Response<PatientLatestRecordResponse>) {
-                val data = response.body().responseContents
+                val data = response.body()?.responseContents
 //                if (data != null)
                 /*binding?.tvConsultentView?.text =
                     data?.doctorFirstName + " / " + data?.departmentName + " / " + data?.createdDate*/
@@ -578,13 +578,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -594,7 +594,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -602,7 +602,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -610,13 +610,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -626,25 +626,25 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         }
 
     private val getStoreMasterRetrofitCallback =
-        object {
+        object : RetrofitCallback<GetStoreMasterResponseModel> {
             override fun onSuccessfulResponse(response: Response<GetStoreMasterResponseModel>) {
 
-                if (response.body().responseContents.isNotEmpty()!!) {
-                    val listData = response.body().responseContents
-                    getStoreMasterId = response.body().responseContents!!
+                if (response.body()?.responseContents?.isNotEmpty()!!) {
+                    val listData = response.body()?.responseContents
+                    getStoreMasterId = response.body()?.responseContents!!
 
 
                     for (i in getStoreMasterId.size - 1 downTo 0) {
 
-                        if (getStoreMasterId[i].store_type_uuid == 2) {
+                        if (getStoreMasterId[i]?.store_type_uuid == 2) {
 
-                            store_master_uuid = getStoreMasterId[i].store_master_uuid!!.toInt()
+                            store_master_uuid = getStoreMasterId[i]?.store_master_uuid!!.toInt()
                             appPreferences?.saveInt(
                                 AppConstants.STOREMASTER_UUID,
                                 store_master_uuid!!
                             )
 
-                            var store_name = getStoreMasterId[i].store_master!!.store_name
+                            var store_name = getStoreMasterId[i]?.store_master!!.store_name
 
                             appPreferences?.saveString(AppConstants.STOREMASTER_NAME, store_name)
 
@@ -680,13 +680,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -696,7 +696,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -704,7 +704,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -712,13 +712,13 @@ class TelemedicineEMRActivity : AppCompatActivity() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -727,7 +727,7 @@ class TelemedicineEMRActivity : AppCompatActivity() {
         }
 
     fun callEmrWorkFlow() {
-        viewModel.getEmrWorkFlow(emrWorkFlowRetrofitCallBack, 2)
+        viewModel?.getEmrWorkFlow(emrWorkFlowRetrofitCallBack, 2)
         /*if (flow.equals(AppConstants.OUT_PATIENT)) {
             viewModel?.getEmrWorkFlow(emrWorkFlowRetrofitCallBack, 2)
         } else {

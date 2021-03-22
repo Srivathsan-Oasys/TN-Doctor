@@ -26,14 +26,15 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityVideoTutorialBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.tutorial.model.RoleControlActivityResponseContent
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserManualDeleteResponseModel
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserManualResponseModel
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserModuleResponseContent
 import com.oasys.digihealth.doctor.ui.tutorial.viewmodel.VideoTutorialViewModel
 import com.oasys.digihealth.doctor.ui.tutorial.viewmodel.VideoTutorialViewModelFactory
-import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -83,8 +84,8 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
             requireActivity().application
         )
             .create(VideoTutorialViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         clickListener = this
@@ -97,14 +98,14 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
         customProgressDialog = CustomProgressDialog(requireContext())
 
-        binding.userManualRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding?.userManualRecyclerView?.layoutManager = LinearLayoutManager(context)
 
         userManuvel = VideoManualMainAdapter(
             requireContext(), ArrayList(),
             clickListener as VideoTutorialActivity, viewModel!!
         )
 
-        binding.userManualRecyclerView.adapter = userManuvel
+        binding?.userManualRecyclerView?.adapter = userManuvel
 
 
         getTutoriaList()
@@ -127,7 +128,8 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
     }
 
-    val tutorialListResponseRetrofitCallback = object {
+    val tutorialListResponseRetrofitCallback = object :
+        RetrofitCallback<UserManualResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<UserManualResponseModel>?) {
 
             var responsedata = Gson().toJson(responseBody?.body()?.responseContents)
@@ -138,12 +140,12 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
                 userManuvel!!.addAll(responseBody.body()!!.responseContents)
 
-                binding.progressbar!!.setVisibility(View.GONE)
+                binding?.progressbar!!.visibility = View.GONE
 
             } else {
                 Toast.makeText(context!!, "No records found", Toast.LENGTH_LONG).show()
 
-                binding.progressbar!!.setVisibility(View.GONE)
+                binding?.progressbar!!.visibility = View.GONE
 
             }
 
@@ -159,13 +161,13 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -175,7 +177,7 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -183,7 +185,7 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -191,13 +193,13 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -261,7 +263,7 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
     }
 
     val downloadimagecallback =
-        object {
+        object : RetrofitCallback<ResponseBody> {
             override fun onSuccessfulResponse(response: Response<ResponseBody>) {
 
                 Log.i("", "message")
@@ -292,13 +294,13 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         response.message()
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -308,7 +310,7 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -316,7 +318,7 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -324,13 +326,13 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -429,106 +431,106 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
     }
 
-    val deleteAPIResponseRetrofitCallback = object {
-        override fun onSuccessfulResponse(responseBody: Response<UserManualDeleteResponseModel>?) {
+    val deleteAPIResponseRetrofitCallback =
+        object : RetrofitCallback<UserManualDeleteResponseModel> {
+            override fun onSuccessfulResponse(responseBody: Response<UserManualDeleteResponseModel>?) {
 
-            var responsedata = Gson().toJson(responseBody?.body()!!)
-            Log.e("tutorialList", "" + responsedata)
-            Toast.makeText(context!!, responseBody.body()?.msg, Toast.LENGTH_LONG).show()
-            binding.progressbar!!.setVisibility(View.VISIBLE)
-            binding.roleLayout!!.setVisibility(View.GONE)
-            binding.bloodIssueLayout!!.setVisibility(View.GONE)
-            userProfileAdpater!!.clearAll()
-            bloodIssueAdapter!!.clearAll()
-            roleAdapter!!.clearAll()
-            getTutoriaList()
-        }
+                val responsedata = Gson().toJson(responseBody?.body()!!)
+                Log.e("tutorialList", "" + responsedata)
+                Toast.makeText(context!!, responseBody.body()?.msg, Toast.LENGTH_LONG).show()
+                binding?.progressbar!!.visibility = View.VISIBLE
+                binding?.roleLayout!!.visibility = View.GONE
+                binding?.bloodIssueLayout!!.visibility = View.GONE
+                userProfileAdpater!!.clearAll()
+                bloodIssueAdapter!!.clearAll()
+                roleAdapter!!.clearAll()
+                getTutoriaList()
+            }
 
-        override fun onBadRequest(errorBody: Response<UserManualDeleteResponseModel>?) {
-            val gson = GsonBuilder().create()
-            val responseModel: UserManualDeleteResponseModel
-            try {
-                responseModel = gson.fromJson(
-                    errorBody!!.errorBody()!!.string(),
-                    UserManualDeleteResponseModel::class.java
-                )
+            override fun onBadRequest(errorBody: Response<UserManualDeleteResponseModel>?) {
+                val gson = GsonBuilder().create()
+                val responseModel: UserManualDeleteResponseModel
+                try {
+                    responseModel = gson.fromJson(
+                        errorBody!!.errorBody()!!.string(),
+                        UserManualDeleteResponseModel::class.java
+                    )
+                    utils?.showToast(
+                        R.color.negativeToast,
+                        binding?.mainLayout!!,
+                        responseModel.msg!!
+                    )
+                } catch (e: Exception) {
+                    utils?.showToast(
+                        R.color.negativeToast,
+                        binding?.mainLayout!!,
+                        getString(R.string.something_went_wrong)
+                    )
+                    e.printStackTrace()
+                }
+            }
+
+            override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
-                    responseModel.msg!!
-                )
-            } catch (e: Exception) {
-                utils?.showToast(
-                    R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
-                e.printStackTrace()
+            }
+
+            override fun onUnAuthorized() {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    getString(R.string.unauthorized)
+                )
+            }
+
+            override fun onForbidden() {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    getString(R.string.something_went_wrong)
+                )
+            }
+
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
+            }
+
+            override fun onEverytime() {
+                viewModel!!.progress.value = 8
+            }
+
+        }
+
+    val updateDownloadCountResponseRetrofitCallback =
+        object : RetrofitCallback<UserManualDeleteResponseModel> {
+
+            override fun onSuccessfulResponse(responseBody: Response<UserManualDeleteResponseModel>?) {
+                val responsedata = Gson().toJson(responseBody?.body()!!)
+                Log.e("Download response", "" + responsedata)
+            }
+
+            override fun onBadRequest(errorBody: Response<UserManualDeleteResponseModel>?) {
+            }
+
+            override fun onServerError(response: Response<*>) {
+            }
+
+            override fun onUnAuthorized() {
+            }
+
+            override fun onForbidden() {
+            }
+
+            override fun onFailure(failure: String) {
+            }
+
+            override fun onEverytime() {
+                viewModel!!.progress.value = 8
             }
         }
-
-        override fun onServerError(response: Response<*>) {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding.mainLayout!!,
-                getString(R.string.something_went_wrong)
-            )
-        }
-
-        override fun onUnAuthorized() {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding.mainLayout!!,
-                getString(R.string.unauthorized)
-            )
-        }
-
-        override fun onForbidden() {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding.mainLayout!!,
-                getString(R.string.something_went_wrong)
-            )
-        }
-
-        override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
-        }
-
-        override fun onEverytime() {
-            viewModel!!.progress.value = 8
-        }
-
-    }
-
-    val updateDownloadCountResponseRetrofitCallback = object {
-        override fun onSuccessfulResponse(responseBody: Response<UserManualDeleteResponseModel>?) {
-
-            var responsedata = Gson().toJson(responseBody?.body()!!)
-            Log.e("Download response", "" + responsedata)
-        }
-
-        override fun onBadRequest(errorBody: Response<UserManualDeleteResponseModel>?) {
-        }
-
-        override fun onServerError(response: Response<*>) {
-        }
-
-        override fun onUnAuthorized() {
-        }
-
-        override fun onForbidden() {
-        }
-
-        override fun onFailure(failure: String) {
-        }
-
-        override fun onEverytime() {
-            viewModel!!.progress.value = 8
-        }
-
-    }
-
 
     private fun showLoading(isLoading: Boolean) {
 //        binding?.pbDischargeSummaryLL?.isVisible = isLoading
@@ -539,6 +541,4 @@ class VideoTutorialActivity : Fragment(), TutorialCallback {
 
         }
     }
-
-
 }

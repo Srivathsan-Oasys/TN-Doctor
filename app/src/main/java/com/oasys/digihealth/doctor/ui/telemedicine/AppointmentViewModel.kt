@@ -2,8 +2,8 @@ package com.oasys.digihealth.doctor.ui.telemedicine
 
 import androidx.lifecycle.*
 import com.makkalnalam.data.networking.api.req.ReqUpdateBooking
-import com.oasys.digihealth.doctor.data.networking.api.res.*
 import com.oasys.digihealth.doctor.data.networking.api.req.*
+import com.oasys.digihealth.doctor.data.networking.api.res.*
 import com.oasys.digihealth.doctor.data.repository.AppointmentRepository
 import kotlinx.coroutines.launch
 

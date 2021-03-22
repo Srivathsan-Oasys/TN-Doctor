@@ -46,7 +46,6 @@ class QuickRegistrationNewViewModel(
     application!!
 ) {
 
-
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
     var enterConfirmPasswordEditText = MutableLiveData<String>()
@@ -81,7 +80,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: QuickRegistrationRequestModel,
         PatientNameRetrofitCallback: RetrofitCallback<QuickRegistrationSaveResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -104,7 +103,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: RegistrationUatSaveRequest,
         PatientNameRetrofitCallback: RetrofitCallback<QuickRegistrationSaveResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -127,7 +126,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: QuickRegWItholdpinSaveReq,
         PatientNameRetrofitCallback: RetrofitCallback<QuickRegistrationSaveResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -157,7 +156,7 @@ class QuickRegistrationNewViewModel(
         // progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidNameTitle(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
@@ -172,7 +171,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: QuickRegistrationUpdateRequestModel,
         updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -195,7 +194,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: QuickRegistrationUpdateRequest,
         updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -218,7 +217,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: OpCorrectionRequest,
         updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -241,7 +240,7 @@ class QuickRegistrationNewViewModel(
         requestRegistration: QuickRegistrationUpdateRequestWitholdPin,
         updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -264,7 +263,7 @@ class QuickRegistrationNewViewModel(
         requestPDF: PDFRequestModel,
         GetPDFRetrofitCallback: RetrofitCallback<ResponseBody>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -295,7 +294,7 @@ class QuickRegistrationNewViewModel(
         //  progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidPeriod(
             AppConstants.ACCEPT_LANGUAGE_EN,
@@ -318,7 +317,7 @@ class QuickRegistrationNewViewModel(
         //   progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         val jsonBody = JSONObject()
@@ -356,7 +355,7 @@ class QuickRegistrationNewViewModel(
         //progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
@@ -378,7 +377,7 @@ class QuickRegistrationNewViewModel(
         //     progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidGender(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
@@ -400,7 +399,7 @@ class QuickRegistrationNewViewModel(
         //     progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getAllActiveNationality(
             AppConstants.ACCEPT_LANGUAGE_EN,
@@ -420,7 +419,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("country_uuid", country_id)
@@ -457,7 +456,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -491,7 +490,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("district_uuid", uuid)
@@ -524,7 +523,7 @@ class QuickRegistrationNewViewModel(
         getPrivilageRetrofitCallback: RetrofitCallback<ResponsePrivillageModule>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -557,7 +556,7 @@ class QuickRegistrationNewViewModel(
         ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -601,7 +600,7 @@ class QuickRegistrationNewViewModel(
         ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -644,7 +643,7 @@ class QuickRegistrationNewViewModel(
         search: String,
         GetPDFRetrofitCallback: RetrofitCallback<LabNameSearchResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -691,7 +690,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facility_uuid", facility)
@@ -726,7 +725,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", id)
@@ -759,7 +758,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         //      progress.value = 0
@@ -782,7 +781,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
         try {
@@ -820,7 +819,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -855,7 +854,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -889,7 +888,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -923,7 +922,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("talukId", uuid)
@@ -954,7 +953,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -988,7 +987,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("uuid", department_UUID)
@@ -1019,7 +1018,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
         try {
@@ -1065,7 +1064,7 @@ class QuickRegistrationNewViewModel(
         //      progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getTest(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
@@ -1102,7 +1101,7 @@ class QuickRegistrationNewViewModel(
         //    progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getReference(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
@@ -1151,11 +1150,11 @@ class QuickRegistrationNewViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatientcovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
             searchPatientRequestModelCovid
         )!!.enqueue(
@@ -1186,11 +1185,11 @@ class QuickRegistrationNewViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatientcovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
             searchPatientRequestModelCovid
         )!!.enqueue(
@@ -1216,11 +1215,11 @@ class QuickRegistrationNewViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOldPincovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
             searchPatientRequestModelCovid
         )!!.enqueue(
@@ -1235,7 +1234,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("searchKeyWord", "")
@@ -1278,7 +1277,7 @@ class QuickRegistrationNewViewModel(
 
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val createEncounterRequestModel = CreateEncounterRequestModel()
 
@@ -1302,7 +1301,7 @@ class QuickRegistrationNewViewModel(
         val encounterDoctor = EncounterDoctor()
         encounterDoctor.department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
         encounterDoctor.dept_visit_type_uuid = 0
-        encounterDoctor.doctor_uuid = userDataStoreBean.uuid
+        encounterDoctor.doctor_uuid = userDataStoreBean?.uuid
         encounterDoctor.doctor_visit_type_uuid = 0
         encounterDoctor.patient_uuid = patientUUId
         encounterDoctor.session_type_uuid = 0
@@ -1315,8 +1314,8 @@ class QuickRegistrationNewViewModel(
         createEncounterRequestModel.encounterDoctor = encounterDoctor
 
         apiService?.createEncounter(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             createEncounterRequestModel
 
         )!!.enqueue(
@@ -1333,7 +1332,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
@@ -1356,7 +1355,7 @@ class QuickRegistrationNewViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facilityId", facilityId)
@@ -1392,7 +1391,7 @@ class QuickRegistrationNewViewModel(
         //     progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getActivitySession(
             "en",
@@ -1416,7 +1415,7 @@ class QuickRegistrationNewViewModel(
         //     progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getRoleControlQuick(
             "en",

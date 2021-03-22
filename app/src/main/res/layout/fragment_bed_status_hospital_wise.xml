@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.bed_manage_reports.viewmodel.BedStatusHospitalWiseViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.bed_manage_reports.viewmodel.BedStatusHospitalWiseViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

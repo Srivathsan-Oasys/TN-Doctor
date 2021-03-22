@@ -15,6 +15,7 @@ class InpatientAdapter(val context: Context) :
     private var responseContent: ArrayList<InPatientResponseData?>? = ArrayList()
     private var onItemClickListener: OnItemClickListener? = null
     private var isLoadingAdded = false
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.row_patient, parent, false)
         return MyViewHolder(view)

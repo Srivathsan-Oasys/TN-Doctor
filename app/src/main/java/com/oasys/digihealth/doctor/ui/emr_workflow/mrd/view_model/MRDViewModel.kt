@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
@@ -72,7 +72,7 @@ class MRDViewModel(
             userDataStoreBean?.uuid!!, facilityid!!, patientId!!,
             encounter_uuid.toString(),
             encounter_type.toString(), visitDate
-        ).enqueue(RetrofitMainCallback(mrdRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(mrdRetrofitCallback))
     }
 
     fun getCaseSheet_Records(
@@ -198,7 +198,7 @@ class MRDViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 

@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.ip_case_sheet.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.ip_case_sheet.model.add_consultations.IpCaseSheetAddConsultationsReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ip_case_sheet.model.add_consultations.IpCaseSheetAddConsultationsResp
@@ -61,7 +61,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             facility_uuid,
             profileType,
             departmentId
-        ).enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
     }
 
     fun getCaseSheet(
@@ -85,7 +85,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profileUuid
-        ).enqueue(RetrofitMainCallback(getCaseSheetRestRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getCaseSheetRestRetrofitCallback))
     }
 
     fun getEncounter(
@@ -115,7 +115,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getIpCaseSheetEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getIpCaseSheetEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(
@@ -196,7 +196,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             saveCaseSheetDetailsReq
-        ).enqueue(RetrofitMainCallback(saveCaseSheetDetailsRespCallback))
+        )?.enqueue(RetrofitMainCallback(saveCaseSheetDetailsRespCallback))
     }
 
     fun getDefault(
@@ -220,7 +220,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profile_type_uuid
-        ).enqueue(RetrofitMainCallback(getIpCaseSheetDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(getIpCaseSheetDefaultRespCallback))
     }
 
     fun setDefault(
@@ -244,7 +244,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             setIpCaseSheetDefaultReq
-        ).enqueue(RetrofitMainCallback(setIpCaseSheetDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(setIpCaseSheetDefaultRespCallback))
     }
 
     fun getPreviousRecords(
@@ -270,7 +270,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             facility_uuid,
             patientId,
             profileType
-        ).enqueue(RetrofitMainCallback(getIpCaseSheetPreviousRecordsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getIpCaseSheetPreviousRecordsRespCallback))
     }
 
     fun getObservedValues(
@@ -294,7 +294,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             patientId
-        ).enqueue(RetrofitMainCallback(getIpCaseSheetObservedValuesRespCallback))
+        )?.enqueue(RetrofitMainCallback(getIpCaseSheetObservedValuesRespCallback))
     }
 
     fun getEmrWorkflow(
@@ -315,7 +315,7 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             contextId
-        ).enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
     }
 
     fun addConsultations(
@@ -339,6 +339,6 @@ class IpCaseSheetViewModel(application: Application) : AndroidViewModel(applicat
             userDataStoreBean?.uuid!!,
             facility_uuid,
             ipCaseSheetAddConsultationsReq
-        ).enqueue(RetrofitMainCallback(ipCaseSheetAddConsultationsRespCallback))
+        )?.enqueue(RetrofitMainCallback(ipCaseSheetAddConsultationsRespCallback))
     }
 }

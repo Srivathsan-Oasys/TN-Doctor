@@ -11,6 +11,8 @@ import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
@@ -94,7 +96,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -117,7 +119,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -140,7 +142,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -161,7 +163,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
         return
     }
     //updateQuickRegistration
@@ -185,7 +187,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
 
     }
 
@@ -208,7 +210,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
 
     }
 
@@ -231,7 +233,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
 
     }
 
@@ -254,7 +256,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        ).enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
 
     }
 
@@ -277,7 +279,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestPDF
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
@@ -300,7 +302,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
         return
     }
 
@@ -338,7 +340,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
 
-        ).enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
         return
     }
 
@@ -361,7 +363,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facility_id!!, tablename
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -382,7 +384,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidGenderResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidGenderResponseCallback))
         return
     }
 
@@ -405,7 +407,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_id!!
-        ).enqueue(RetrofitMainCallback(covidNationalityResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidNationalityResponseCallback))
         return
     }
 
@@ -439,7 +441,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
 
         return
@@ -476,7 +478,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(distictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
         return
 
@@ -510,7 +512,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(distictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
         return
 
@@ -546,7 +548,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, "en",
             userDataStoreBean?.uuid!!, facilityId!!,
             body
-        ).enqueue(RetrofitMainCallback(getPrivilageRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getPrivilageRetrofitCallback))
 
     }
 
@@ -590,7 +592,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -634,7 +636,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -676,7 +678,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
@@ -710,7 +712,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -745,7 +747,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -768,7 +770,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -805,7 +807,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -839,7 +841,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -874,7 +876,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -910,7 +912,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -942,7 +944,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -973,7 +975,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -1007,7 +1009,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -1039,7 +1041,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -1069,7 +1071,7 @@ class QuickRegistrationNewViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -1107,7 +1109,7 @@ class QuickRegistrationNewViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -1256,7 +1258,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants?.ACCEPT_LANGUAGE_EN, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -1341,7 +1343,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -1375,7 +1377,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, AppConstants?.ACCEPT_LANGUAGE_EN,
             body
-        ).enqueue(RetrofitMainCallback(sessionResponseCallback))
+        )?.enqueue(RetrofitMainCallback(sessionResponseCallback))
     }
 
     fun getActivitySession(
@@ -1397,7 +1399,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(activitysessionResponseCallback))
+        )?.enqueue(RetrofitMainCallback(activitysessionResponseCallback))
         return
 
     }
@@ -1421,7 +1423,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId, 2
-        ).enqueue(RetrofitMainCallback(activityPrivilageRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(activityPrivilageRetrofitCallback))
         return
 
 

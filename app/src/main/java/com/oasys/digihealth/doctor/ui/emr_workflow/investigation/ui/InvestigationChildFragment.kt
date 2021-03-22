@@ -49,8 +49,8 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.GetToLocation
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.RadiologyEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.ui.RadiologyAdapter
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.lab.ui.PrevInvestigationFragment
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.SimpleResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.ui.login.model.SimpleResponseModel
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import kotlinx.android.synthetic.main.fragment_lab_child_new.*
 import retrofit2.Response
@@ -1637,15 +1637,13 @@ class InvestigationChildFragment : Fragment(), InvestigationFavouriteFragment.Fa
 
         }
 
-
-        var req = InvUpdateRequest(
+        val req = InvUpdateRequest(
             new_details = new_details,
             existing_details = existing_details,
             removed_details = removed_details
 
         )
         viewModel?.UpdateInv(req, updareInvRetrofitCallback)
-
 
     }
 

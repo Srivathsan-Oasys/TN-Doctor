@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.institute.view
 
-
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -17,6 +16,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogManageinstituteListBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseContent
 import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseModel
@@ -27,7 +27,6 @@ import com.oasys.digihealth.doctor.ui.institute.view_model.ManageInstituteViewMo
 import com.oasys.digihealth.doctor.utils.Utils
 import kotlinx.android.synthetic.main.land_layout.*
 import retrofit2.Response
-
 
 class ManageInstituteDialogFragment : DialogFragment() {
 
@@ -45,8 +44,8 @@ class ManageInstituteDialogFragment : DialogFragment() {
     private var arraylist_department: ArrayList<DepartmentResponseContent?> = ArrayList()
     var appPreferences: AppPreferences? = null
 
-    private val hashInstitutionSpinnerList: HashMap<Int, Int> = HashMap()
-    private val hashDepartmentSpinnerList: HashMap<Int, Int> = HashMap()
+    private val hashInstitutionSpinnerList: HashMap<Int,Int> = HashMap()
+    private val hashDepartmentSpinnerList: HashMap<Int,Int> = HashMap()
 
     var dialogListener: DialogListener? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,40 +61,34 @@ class ManageInstituteDialogFragment : DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(
-            inflater,
-            R.layout.dialog_manageinstitute_list,
-            container,
-            false
-        )
+        binding = DataBindingUtil.inflate(inflater, R.layout.dialog_manageinstitute_list, container, false)
         viewModel = ManageInstituteViewModelFactory(
             requireActivity().application
         )
             .create(ManageInstituteViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
 
-        appPreferences =
-            AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
+        appPreferences = AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
 
         office_UUID = appPreferences?.getInt(AppConstants.OFFICE_UUID)
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
-        viewModel?.getInstitutionList(office_UUID, instituteRetrofitCallBack)
+        viewModel?.getInstitutionList(office_UUID,instituteRetrofitCallBack)
 
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
-        binding.clear.setOnClickListener {
+        binding?.clear?.setOnClickListener {
             dialog?.dismiss()
         }
-        binding.save.setOnClickListener {
+        binding?.save?.setOnClickListener {
             if (office_UUID != 0 && department_uuid != 0 && facilitylevelID != 0) {
                 utils?.showToast(
                     R.color.positiveToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.data_save)
                 )
 
@@ -117,17 +110,17 @@ class ManageInstituteDialogFragment : DialogFragment() {
             } else {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.empty_item)
                 )
             }
         }
 
-        institutionDropDownAdapter = InstitutionDropDownAdapter(context!!, ArrayList())
+        institutionDropDownAdapter = InstitutionDropDownAdapter(requireContext(), ArrayList())
 
-        departmentDropDownAdapter = DepartmentDropDownAdapter(context!!, ArrayList())
+        departmentDropDownAdapter = DepartmentDropDownAdapter(requireContext(), ArrayList())
 
-        binding.spinnerInstitution.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerInstitution?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -141,35 +134,28 @@ class ManageInstituteDialogFragment : DialogFragment() {
                     institution_NAME = institutionListGetDetails?.get(position)?.name
 
                     if (facilitylevelID != 0) {
-                        viewModel?.getDepartmentList(facilitylevelID, departmentRetrofitCallBack)
+                        viewModel?.getDepartmentList(facilitylevelID,departmentRetrofitCallBack)
                     }
                     return
                 }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                if (institutionDropDownAdapter?.count!! != 0) {
+                if(institutionDropDownAdapter?.count!! !=0) {
                     val institutionListGetDetails = institutionDropDownAdapter?.getlistDetails()
-
                     facilitylevelID = institutionListGetDetails?.get(0)?.uuid
                     institution_NAME = institutionListGetDetails?.get(0)?.name
 
                     //appPreferences?.saveString(AppConstants.INSTITUTION_NAME, institution_NAME!!)
 
                     if (facilitylevelID != 0) {
-
-                        viewModel?.getDepartmentList(facilitylevelID, departmentRetrofitCallBack)
-
+                        viewModel?.getDepartmentList(facilitylevelID,departmentRetrofitCallBack)
                     }
-
                     return
                 }
-
             }
-
         }
-        binding.spinnerDeparment.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerDeparment?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -178,66 +164,50 @@ class ManageInstituteDialogFragment : DialogFragment() {
             ) {
                 val departmentListGetDetails = departmentDropDownAdapter?.getlistDetails()
                 department_uuid = departmentListGetDetails?.get(position)?.department_uuid
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
                 val departmentListGetDetails = departmentDropDownAdapter?.getlistDetails()
                 department_uuid = departmentListGetDetails?.get(0)?.department_uuid
-
             }
-
         }
-
-        return binding.root
+        return binding?.root
     }
 
 
     val instituteRetrofitCallBack =
-        object {
+        object : RetrofitCallback<InstitutionResponseModel> {
             override fun onSuccessfulResponse(response: Response<InstitutionResponseModel>) {
                 //Log.i("Instection",""+response.body()?.responseContents)
                 hashInstitutionSpinnerList.clear()
 
-                var isprocess: Boolean = false
+                var isprocess:Boolean=false
 
-                for (i in response.body()?.responseContents!!.indices) {
+                for(i in response.body()?.responseContents!!.indices){
 
-                    hashInstitutionSpinnerList[response.body()?.responseContents!![i]!!.uuid!!] = i
+                    hashInstitutionSpinnerList[response.body()?.responseContents!![i]!!.uuid!!]=i
 
-                    if ((response.body()?.responseContents!![i]!!.uuid!!) == appPreferences!!.getInt(
-                            AppConstants.FACILITY_UUID
-                        )
-                    ) {
+                    if((response.body()?.responseContents!![i]!!.uuid!!)==appPreferences!!.getInt(AppConstants.FACILITY_UUID)){
 
-                        isprocess = true
+                        isprocess=true
 
                     }
 
                 }
-                institutionDropDownAdapter?.setInstitutionListDetails(response.body()?.responseContents)
-                binding.spinnerInstitution.adapter = institutionDropDownAdapter
+                institutionDropDownAdapter?.setInstitutionListDetails(response.body()?.responseContents as ArrayList<InstitutionResponseContent?>?)
+                binding?.spinnerInstitution?.adapter = institutionDropDownAdapter
 
-                Log.i("responseData", "" + response.body()?.responseContents)
-                Log.i("hashmap", "" + hashInstitutionSpinnerList)
-                Log.i(
-                    "FactryID",
-                    "" + facilitylevelID + "" + hashInstitutionSpinnerList[appPreferences?.getInt(
-                        AppConstants.FACILITY_UUID
-                    )]
-                )
+                Log.i("responseData",""+response.body()?.responseContents)
+                Log.i("hashmap",""+hashInstitutionSpinnerList)
+                Log.i("FactryID",""+facilitylevelID +""+hashInstitutionSpinnerList[appPreferences?.getInt(AppConstants.FACILITY_UUID)])
 
                 if (isprocess) {
 
-                    binding.spinnerInstitution!!.setSelection(
-                        hashInstitutionSpinnerList[appPreferences?.getInt(
-                            AppConstants.FACILITY_UUID
-                        )]!!
-                    )
+                    binding?.spinnerInstitution!!.setSelection(hashInstitutionSpinnerList[appPreferences?.getInt(AppConstants.FACILITY_UUID)]!!)
 
-                } else {
-                    binding.spinnerInstitution!!.setSelection(0)
+                }
+                else{
+                    binding?.spinnerInstitution!!.setSelection(0)
 
                 }
 
@@ -253,13 +223,13 @@ class ManageInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -269,7 +239,7 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -277,7 +247,7 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -285,13 +255,13 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -300,44 +270,37 @@ class ManageInstituteDialogFragment : DialogFragment() {
         }
 
     val departmentRetrofitCallBack =
-        object {
+        object : RetrofitCallback<DepartmentResponseModel> {
             override fun onSuccessfulResponse(response: Response<DepartmentResponseModel>) {
                 //Log.i("", "" + response.body());
                 hashDepartmentSpinnerList.clear()
 
-                var isProcess: Boolean = false
+                var isProcess:Boolean=false
 
-                for (i in response.body()?.responseContents!!.indices) {
+                for(i in response.body()?.responseContents!!.indices){
 
-                    hashDepartmentSpinnerList[response.body()?.responseContents!![i]!!.department_uuid!!] =
-                        i
+                    hashDepartmentSpinnerList[response.body()?.responseContents!![i]!!.department_uuid!!]=i
 
-                    if ((response.body()?.responseContents!![i]!!.department_uuid!!) == appPreferences?.getInt(
-                            AppConstants.DEPARTMENT_UUID
-                        )
-                    ) {
+                    if((response.body()?.responseContents!![i]!!.department_uuid!!)==appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)){
 
-                        isProcess = true
+                        isProcess=true
 
                     }
 
                 }
 
-                Log.e("DepData", hashDepartmentSpinnerList.toString())
+                Log.e("DepData",hashDepartmentSpinnerList.toString())
                 departmentDropDownAdapter?.setDepatmentListDetails(response.body()?.responseContents as ArrayList<DepartmentResponseContent?>?)
-                binding.spinnerDeparment.adapter = departmentDropDownAdapter
+                binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
 
-                if (isProcess) {
+                if(isProcess) {
 
-                    binding.spinnerDeparment!!.setSelection(
-                        hashDepartmentSpinnerList.get(
-                            appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
-                        )!!
-                    )
+                    binding?.spinnerDeparment!!.setSelection(hashDepartmentSpinnerList.get(appPreferences?.getInt(AppConstants.DEPARTMENT_UUID))!!)
 
-                } else {
+                }
+                else{
 
-                    binding.spinnerDeparment!!.setSelection(0)
+                    binding?.spinnerDeparment!!.setSelection(0)
 
                 }
             }
@@ -352,13 +315,13 @@ class ManageInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -368,7 +331,7 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -376,7 +339,7 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -384,13 +347,13 @@ class ManageInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -399,17 +362,15 @@ class ManageInstituteDialogFragment : DialogFragment() {
         }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return object : Dialog(activity!!, theme) {
+        return object : Dialog(requireActivity(), theme) {
             override fun onBackPressed() {
             }
         }
     }
 
-
     interface DialogListener {
         fun onInstitutionCallback()
     }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try { /* this line is main difference for fragment to fragment communication & fragment to activity communication
@@ -420,7 +381,4 @@ class ManageInstituteDialogFragment : DialogFragment() {
         } catch (e: ClassCastException) {
         }
     }
-
 }
-
-

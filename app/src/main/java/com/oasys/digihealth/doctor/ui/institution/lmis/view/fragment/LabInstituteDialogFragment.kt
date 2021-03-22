@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.institution.lmis.view.fragment
 
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
@@ -18,7 +17,8 @@ import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteBinding
+import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteLabBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMaster
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMasterResponseModel
@@ -30,7 +30,6 @@ import com.oasys.digihealth.doctor.ui.login.model.institution_response.Instituti
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 
-
 class LabInstituteDialogFragment : DialogFragment() {
 
     private var department_uuid: Int? = null
@@ -41,7 +40,7 @@ class LabInstituteDialogFragment : DialogFragment() {
     private var institution_NAME: String? = null
     private var content: String? = null
     private var viewModel: InstituteViewModel? = null
-    var binding: DialogSelectInstituteBinding? = null
+    var binding: DialogSelectInstituteLabBinding? = null
     private var utils: Utils? = null
 
     private var institutionDropDownAdapter: SelectInstituteDropDownAdapter? = null
@@ -66,7 +65,12 @@ class LabInstituteDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_select_institute, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.dialog_select_institute_lab,
+                container,
+                false
+            )
 
         return binding?.root
     }

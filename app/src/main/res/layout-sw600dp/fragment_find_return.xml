@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.pharmacy_management.returns.viewmodel.FindReturnViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.returns.viewmodel.FindReturnViewModel" />-->
     </data>
 
             <LinearLayout

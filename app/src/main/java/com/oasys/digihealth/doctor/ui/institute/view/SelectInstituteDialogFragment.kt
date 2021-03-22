@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.institute.view
 
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -20,18 +19,20 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.InstitutionresponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.SurgeryInstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
-import com.oasys.digihealth.doctor.ui.institute.model.*
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
+import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseModel
+import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseContent
+import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModelFactory
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.LocationMaster
 import com.oasys.digihealth.doctor.ui.quick_reg.model.LocationMasterResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
-
 
 class SelectInstituteDialogFragment : DialogFragment() {
 
@@ -101,7 +102,7 @@ class SelectInstituteDialogFragment : DialogFragment() {
 
                 AnalyticsManager.getAnalyticsManager().trackLoginSuccess(requireContext())
 
-                startActivity(Intent(context, MainLandScreenActivity::class.java))
+                startActivity(Intent(context, HomeActivity::class.java))
 
                 requireActivity().finish()
             } else {
@@ -140,8 +141,8 @@ class SelectInstituteDialogFragment : DialogFragment() {
                 if (position != institutionDropDownAdapter?.count!!) {
                     val institutionListGetDetails = institutionDropDownAdapter?.getlistDetails()
 
-                    facilitylevelID = institutionListGetDetails?.get(position).facility_uuid
-                    institution_NAME = institutionListGetDetails?.get(position).facility!!.name
+                    facilitylevelID = institutionListGetDetails?.get(position)?.facility_uuid
+                    institution_NAME = institutionListGetDetails?.get(position)?.facility!!.name
                     appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
                     appPreferences?.saveString(AppConstants.INSTITUTION_NAME, institution_NAME!!)
                     if (facilitylevelID != 0) {
@@ -165,7 +166,7 @@ class SelectInstituteDialogFragment : DialogFragment() {
             ) {
                 val departmentListGetDetails = departmentDropDownAdapter?.getlistDetails()
 
-                department_uuid = departmentListGetDetails?.get(position).department_uuid
+                department_uuid = departmentListGetDetails?.get(position)?.department_uuid
 
                 appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, department_uuid!!)
 
@@ -229,7 +230,7 @@ class SelectInstituteDialogFragment : DialogFragment() {
     }
 
     val officeRetrofitCallBack =
-        object {
+        object : RetrofitCallback<OfficeResponseModel> {
             override fun onSuccessfulResponse(response: Response<OfficeResponseModel>) {
                 Log.i("", "" + response.body())
                 if (response.body()?.responseContents!!.isNotEmpty()) {
@@ -296,17 +297,17 @@ class SelectInstituteDialogFragment : DialogFragment() {
         }
 
     val facilitycallbackRetrofitCallback =
-        object {
+        object : RetrofitCallback<SurgeryInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(responseBody: Response<SurgeryInstitutionResponseModel>?) {
 
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
 
-                institutionDropDownAdapter?.setInstitutionListDetails(responseBody!!.body().responseContents as ArrayList<InstitutionresponseContent?>?)
+                institutionDropDownAdapter?.setInstitutionListDetails(responseBody!!.body()?.responseContents as ArrayList<InstitutionresponseContent?>?)
 
-                facilitylevelID = responseBody?.body().responseContents.get(0).facility_uuid
+                facilitylevelID = responseBody?.body()?.responseContents?.get(0)?.facility_uuid
 
                 appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
 
@@ -371,7 +372,7 @@ class SelectInstituteDialogFragment : DialogFragment() {
         }
 
     val departmentRetrofitCallBack =
-        object {
+        object : RetrofitCallback<DepartmentResponseModel> {
             override fun onSuccessfulResponse(response: Response<DepartmentResponseModel>) {
                 Log.i("", "" + response.body())
 
@@ -464,17 +465,15 @@ class SelectInstituteDialogFragment : DialogFragment() {
             }
         }
 
-    val LocationMasterResponseCallback = object {
+    val LocationMasterResponseCallback = object : RetrofitCallback<LocationMasterResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<LocationMasterResponseModel>?) {
             Log.i("", "locationdata" + responseBody!!.body()!!.responseContents)
             val data = responseBody.body()!!.responseContents
             if (data.isNotEmpty()) {
 
-                departmentDropDownAdapter?.setDepatmentListDetails(responseBody.body().responseContents as ArrayList<LocationMaster?>?)
+                departmentDropDownAdapter?.setDepatmentListDetails(responseBody.body()?.responseContents as ArrayList<LocationMaster?>?)
                 binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
-
             }
-
         }
 
         override fun onBadRequest(errorBody: Response<LocationMasterResponseModel>?) {
@@ -499,7 +498,6 @@ class SelectInstituteDialogFragment : DialogFragment() {
                 )
                 e.printStackTrace()
             }
-
         }
 
         override fun onServerError(response: Response<*>?) {
@@ -544,9 +542,7 @@ class SelectInstituteDialogFragment : DialogFragment() {
         }
 
         override fun onEverytime() {
-
             viewModel!!.progress.value = 8
-
         }
     }
 
@@ -557,8 +553,4 @@ class SelectInstituteDialogFragment : DialogFragment() {
             }
         }
     }
-
-
 }
-
-

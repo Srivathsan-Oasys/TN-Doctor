@@ -52,7 +52,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.view_model.Do
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.view_model.DocumentViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.RecyclerDto
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.MediaType
 import okhttp3.MultipartBody

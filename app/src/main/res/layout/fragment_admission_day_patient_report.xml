@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_day_wise_patient_report.view_model.AdmissionDayPatientReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_day_wise_patient_report.view_model.AdmissionDayPatientReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

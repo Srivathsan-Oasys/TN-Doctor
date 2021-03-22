@@ -1,4 +1,4 @@
-package com.oasys.digihealth.doctor.utils
+package com.oasys.digihealth.doctor.utils.custom_views
 
 import android.app.Dialog
 import android.content.Context

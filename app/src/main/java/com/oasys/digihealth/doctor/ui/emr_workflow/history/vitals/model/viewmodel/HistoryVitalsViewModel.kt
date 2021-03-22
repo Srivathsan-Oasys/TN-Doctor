@@ -8,7 +8,7 @@ import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.vitals.model.response.HistoryVitalsResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 
@@ -46,7 +46,7 @@ class HistoryVitalsViewModel(
             facility_uuid,
             patient_uuid,
             department_uuid
-        ).enqueue(RetrofitMainCallback(getHistoryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getHistoryRetrofitCallBack))
         return
     }
 }

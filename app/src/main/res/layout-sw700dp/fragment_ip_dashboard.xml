@@ -7,9 +7,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.ipManagement.ipManagementDashBoard.viewModel.IpManageDashboardViewmodel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.ipManagement.ipManagementDashBoard.viewModel.IpManageDashboardViewmodel" />-->
     </data>
 
 

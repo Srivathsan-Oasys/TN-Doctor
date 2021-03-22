@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.EmrWorkFlowResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
@@ -70,7 +70,7 @@ class OtNotesViewModel(
             facility_uuid,
             profileType,
             departmentId
-        ).enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
     }
 
     fun getOtNotes(
@@ -94,7 +94,7 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profileUuid
-        ).enqueue(RetrofitMainCallback(getOtNotesRestRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getOtNotesRestRetrofitCallback))
     }
 
     fun getEncounter(
@@ -124,7 +124,7 @@ class OtNotesViewModel(
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getOtNotesEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOtNotesEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(
@@ -205,7 +205,7 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             saveOtNotesDetailsReq
-        ).enqueue(RetrofitMainCallback(saveOtNotesDetailsRespCallback))
+        )?.enqueue(RetrofitMainCallback(saveOtNotesDetailsRespCallback))
     }
 
     fun getDefault(
@@ -229,7 +229,7 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profile_type_uuid
-        ).enqueue(RetrofitMainCallback(getOtNotesDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOtNotesDefaultRespCallback))
     }
 
     fun setDefault(
@@ -253,7 +253,7 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             setOtNotesDefaultReq
-        ).enqueue(RetrofitMainCallback(setOtNotesDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(setOtNotesDefaultRespCallback))
     }
 
     fun getPreviousRecords(
@@ -279,7 +279,7 @@ class OtNotesViewModel(
             facility_uuid,
             patientId,
             profileType
-        ).enqueue(RetrofitMainCallback(getOtNotesPreviousRecordsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOtNotesPreviousRecordsRespCallback))
     }
 
     fun getObservedValues(
@@ -303,7 +303,7 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             patientId
-        ).enqueue(RetrofitMainCallback(getOtNotesObservedValuesRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOtNotesObservedValuesRespCallback))
     }
 
     fun getEmrWorkflow(
@@ -324,7 +324,7 @@ class OtNotesViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             contextId
-        ).enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
     }
 
     fun addConsultations(
@@ -348,6 +348,6 @@ class OtNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             otNotesAddConsultationsReq
-        ).enqueue(RetrofitMainCallback(otNotesAddConsultationsRespCallback))
+        )?.enqueue(RetrofitMainCallback(otNotesAddConsultationsRespCallback))
     }
 }

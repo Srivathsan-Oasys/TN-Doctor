@@ -6,13 +6,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.requset.LabWiseReportRequestModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabConsolidatedReportLabelResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabFilterResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabWiseReportLabelResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabWiseReportResponseModel
@@ -22,16 +21,16 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-class DistrictWiseReportViewModel(application: Application?)
-    : AndroidViewModel(application!!){
+class DistrictWiseReportViewModel(application: Application?) : AndroidViewModel(application!!) {
 
     var progress = MutableLiveData<Int>()
     var errorText = MutableLiveData<String>()
 
-    var facility_id:Int?=0
+    var facility_id: Int? = 0
 
     var appPreferences: AppPreferences? = null
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
+
     init {
 
         userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
@@ -44,42 +43,12 @@ class DistrictWiseReportViewModel(application: Application?)
 
 
     //op services
-    fun getDistPatientCountTable(toggle: String,labWiseReportRequestModel: LabWiseReportRequestModel, labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabWiseReportResponseModel>) {
-
-        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-
-        if (!Utils.isNetworkConnected(getApplication())) {
-            errorText.value = getApplication<Application>().getString(R.string.no_internet)
-            return
-        }
-        progress.value = 0
-        val aiiceApplication = HmisApplication.get(getApplication())
-        val apiService = aiiceApplication.getRetrofitService()
-
-        if(toggle.equals("OP")){
-            apiService?.getDistPatientCountTable(AppConstants.ACCEPT_LANGUAGE_EN,
-                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
-                labWiseReportRequestModel
-            )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
-
-        }else{
-            apiService?.getDistPatientCountTableIp(AppConstants.ACCEPT_LANGUAGE_EN,
-                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
-                labWiseReportRequestModel
-            )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
-
-        }
-
-
-    }
-    fun getDistPatientCountLabel(toggle: String,requestLabWiseReportListRequest: LabWiseReportRequestModel, GetLabWiseListRetrofitCallback: RetrofitCallback<LabWiseReportLabelResponseModel>
+    fun getDistPatientCountTable(
+        toggle: String,
+        labWiseReportRequestModel: LabWiseReportRequestModel,
+        labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabWiseReportResponseModel>
     ) {
 
-        Log.e("getList fun","inside")
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -90,17 +59,59 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistPatientCountLabel(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistPatientCountTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!,
+                facility_id!!, userDataStoreBean.user_name,
+                labWiseReportRequestModel
+            )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
+
+        } else {
+            apiService?.getDistPatientCountTableIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
+                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+                userDataStoreBean?.uuid!!,
+                facility_id!!, userDataStoreBean.user_name,
+                labWiseReportRequestModel
+            )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
+
+        }
+
+
+    }
+
+    fun getDistPatientCountLabel(
+        toggle: String,
+        requestLabWiseReportListRequest: LabWiseReportRequestModel,
+        GetLabWiseListRetrofitCallback: RetrofitCallback<LabWiseReportLabelResponseModel>
+    ) {
+
+        Log.e("getList fun", "inside")
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
+
+        if (!Utils.isNetworkConnected(getApplication())) {
+            errorText.value = getApplication<Application>().getString(R.string.no_internet)
+            return
+        }
+        progress.value = 0
+        val aiiceApplication = HmisApplication.get(getApplication())
+        val apiService = aiiceApplication.getRetrofitService()
+
+        if (toggle.equals("OP")) {
+            apiService?.getDistPatientCountLabel(
+                AppConstants.ACCEPT_LANGUAGE_EN,
+                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 requestLabWiseReportListRequest
             )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
 
-        }else{
-            apiService?.getDistPatientCountLabelIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistPatientCountLabelIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 requestLabWiseReportListRequest
             )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
 
@@ -109,9 +120,13 @@ class DistrictWiseReportViewModel(application: Application?)
     }
 
 
-    fun getDistrictHud(toggle: String,district_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictHud(
+        toggle: String,
+        district_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
@@ -126,7 +141,7 @@ class DistrictWiseReportViewModel(application: Application?)
         try {
 
             jsonBody.put("user_Id", userDataStoreBean?.uuid!!)
-            jsonBody.putOpt("district_Id",districtID)
+            jsonBody.putOpt("district_Id", districtID)
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -141,32 +156,38 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
+        if (toggle.equals("OP")) {
             apiService?.getDistHUDSpinner(
                 AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
+        } else {
             apiService?.getDistHUDSpinnerIp(
                 AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
         }
 
     }
-    fun getDistrictBlock(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+
+    fun getDistrictBlock(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
@@ -195,34 +216,43 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistBlockSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistBlockSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistBlockSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistBlockSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
         }
 
     }
-    fun getDistrictOffice(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+
+    fun getDistrictOffice(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
@@ -252,17 +282,19 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistOfficeSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistOfficeSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistOfficeSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistOfficeSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -270,7 +302,11 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getLabDistrictReportListSecond(toggle: String,labWiseReportRequestModel: LabWiseReportRequestModel, labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabWiseReportResponseModel>) {
+    fun getLabDistrictReportListSecond(
+        toggle: String,
+        labWiseReportRequestModel: LabWiseReportRequestModel,
+        labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabWiseReportResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -282,17 +318,19 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistPatientCountTable(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistPatientCountTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 labWiseReportRequestModel
             )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
 
-        }else{
-            apiService?.getDistPatientCountTableIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistPatientCountTableIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 labWiseReportRequestModel
             )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
 
@@ -301,10 +339,13 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getDistrictDropDown(toggle: String, ResponseDistrictRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictDropDown(
+        toggle: String,
+        ResponseDistrictRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-        Log.i("dataaaaa",userDataStoreBean.toString())
+        Log.i("dataaaaa", userDataStoreBean.toString())
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -329,17 +370,19 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistDropDownSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistDropDownSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
-        }else{
-            apiService?.getDistDropDownSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistDropDownSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
@@ -347,22 +390,29 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getDistrictInstitutionType(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>,office_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictInstitutionType(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        office_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
         val officeID = JSONArray()
-        for(item in office_id){
+        for (item in office_id) {
             officeID.put(item)
         }
 
@@ -393,17 +443,19 @@ class DistrictWiseReportViewModel(application: Application?)
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        if(toggle.equals("OP")){
-            apiService?.getDistInstitutionTypeSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistInstitutionTypeSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistInstitutionTypeSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistInstitutionTypeSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -413,25 +465,33 @@ class DistrictWiseReportViewModel(application: Application?)
     }
 
 
-    fun getDistrictInstitution(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>,office_id: MutableList<Int>,institutionType_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictInstitution(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        office_id: MutableList<Int>,
+        institutionType_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
         val officeID = JSONArray()
-        for(item in office_id){
+        for (item in office_id) {
             officeID.put(item)
         }
         val institutionTypeID = JSONArray()
-        for(item in institutionType_id){
+        for (item in institutionType_id) {
             institutionTypeID.put(item)
         }
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
@@ -463,17 +523,19 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistInstitutionSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistInstitutionSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistInstitutionSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistInstitutionSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -481,7 +543,11 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getDistrictTestName(toggle: String,institutionId :  MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictTestName(
+        toggle: String,
+        institutionId: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -493,7 +559,7 @@ class DistrictWiseReportViewModel(application: Application?)
 
         try {
             val institution = JSONArray()
-            for(item in institutionId){
+            for (item in institutionId) {
                 institution.put(item)
             }
             jsonBody.put("user_Id", userDataStoreBean?.uuid!!)
@@ -512,17 +578,19 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistTestNameSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistTestNameSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistTestNameSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistTestNameSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -530,7 +598,11 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getDistrictLabName(toggle: String,institutionId :  MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictLabName(
+        toggle: String,
+        institutionId: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -542,7 +614,7 @@ class DistrictWiseReportViewModel(application: Application?)
 
         try {
             val institution = JSONArray()
-            for(item in institutionId){
+            for (item in institutionId) {
                 institution.put(item)
             }
             jsonBody.put("user_Id", userDataStoreBean?.uuid!!)
@@ -560,19 +632,21 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistLabNameSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistLabNameSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistLabNameSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistLabNameSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -580,7 +654,10 @@ class DistrictWiseReportViewModel(application: Application?)
 
     }
 
-    fun getDistrictGender(toggle: String, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrictGender(
+        toggle: String,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -607,26 +684,32 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistGenderSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistGenderSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistGenderSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistGenderSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
         }
 
     }
-    fun getDistrictStatus(toggle: String, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+
+    fun getDistrictStatus(
+        toggle: String,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -652,19 +735,21 @@ class DistrictWiseReportViewModel(application: Application?)
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getDistStatusSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getDistStatusSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getDistStatusSpinnerIp(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getDistStatusSpinnerIp(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
-                facility_id!!, userDataStoreBean?.user_name,
+                facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 

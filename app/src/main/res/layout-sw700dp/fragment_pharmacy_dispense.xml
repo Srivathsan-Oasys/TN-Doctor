@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dispense.viewmodel.PharmacyDispenseViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dispense.viewmodel.PharmacyDispenseViewModel" />-->
     </data>
 
             <LinearLayout

@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_prescription.viewmodel.NurseDeskPrescriptionViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_prescription.viewmodel.NurseDeskPrescriptionViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

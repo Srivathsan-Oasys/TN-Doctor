@@ -26,7 +26,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.model.NewLmisOr
 import com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.model.ResponseContentslmisorder
 import com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.view_model.LmisNewOrderViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.view_model.LmisNewOrderViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import kotlinx.android.synthetic.main.fragment_new_order.*
 import retrofit2.Response

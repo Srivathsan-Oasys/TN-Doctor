@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.rmis.rmisTest.viewModel.RmisTestViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.rmis.rmisTest.viewModel.RmisTestViewModel" />-->
     </data>
 
     <androidx.cardview.widget.CardView

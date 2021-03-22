@@ -28,7 +28,7 @@ import com.oasys.digihealth.doctor.databinding.MrdPdfviewBinding
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.DischargePDFRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.mrd.view_model.MRDViewModel
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.SampleErrorResponse
 import com.oasys.digihealth.doctor.ui.quickregistration.ui.QuickRegistrationNew
@@ -92,11 +92,11 @@ class DialogMrdPDFViewerActivity : Fragment() {
             if (from == "Quick") {
                 val mrdtemplatedialog = QuickRegistrationNew()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(mrdtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(mrdtemplatedialog)
             } else {
                 val mrdtemplatedialog = MRDChildFragment()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(mrdtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(mrdtemplatedialog)
             }
         }
 

@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_wardwise_report.viewmodel.WardWiseSummaryViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_wardwise_report.viewmodel.WardWiseSummaryViewModel" />-->
     </data>
 
 

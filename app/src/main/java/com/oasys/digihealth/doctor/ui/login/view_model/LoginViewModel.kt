@@ -8,6 +8,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMasterResponseModel
 import com.oasys.digihealth.doctor.ui.login.model.ChangePasswordOTPResponseModel

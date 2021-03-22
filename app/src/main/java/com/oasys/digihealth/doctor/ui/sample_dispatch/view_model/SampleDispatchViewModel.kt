@@ -8,6 +8,8 @@ import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethod
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabAssignedToResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabTestApprovalResponseModel
@@ -56,7 +58,7 @@ class SampleDispatchViewModel(
         requestLabApprovalListRequest: SampleDispatchRequest,
         GetLabTestApprovalListRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -71,7 +73,7 @@ class SampleDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, true,
             requestLabApprovalListRequest
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -79,7 +81,7 @@ class SampleDispatchViewModel(
         requestLabApprovalListRequest: SampleDispatchRequest,
         GetLabTestApprovalListRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -94,7 +96,7 @@ class SampleDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, true,
             requestLabApprovalListRequest
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -102,7 +104,7 @@ class SampleDispatchViewModel(
         req: DispatchReq,
         GetLabTestSampleListRetrofitCallback: RetrofitCallback<SampleDispatchResponseModel>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -117,7 +119,7 @@ class SampleDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
-        ).enqueue(RetrofitMainCallback(GetLabTestSampleListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestSampleListRetrofitCallback))
 
     }
 
@@ -126,7 +128,7 @@ class SampleDispatchViewModel(
         ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -160,7 +162,7 @@ class SampleDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -169,7 +171,7 @@ class SampleDispatchViewModel(
         ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabAssignedToResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -205,7 +207,7 @@ class SampleDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId, true,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
     }
 

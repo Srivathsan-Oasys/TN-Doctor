@@ -35,7 +35,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.con
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.ui.criticalcarechartconfig.ConfigCCCFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.view_model.CriticalCareChartViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.text.SimpleDateFormat

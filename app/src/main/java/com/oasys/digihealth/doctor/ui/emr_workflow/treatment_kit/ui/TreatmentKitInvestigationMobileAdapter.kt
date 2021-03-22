@@ -529,9 +529,9 @@ class TreatmentKitInvestigationMobileAdapter(
 
     fun setadapterTestMethodValue(responseContents: List<ResponseTestMethodContent?>?) {
         testMethodArrayList = responseContents
-        testMethodMap = responseContents?.map { it.uuid!! to it.name!! }!!.toMap().toMutableMap()
+        testMethodMap = responseContents?.map { it?.uuid!! to it.name!! }!!.toMap().toMutableMap()
         for (i in responseContents.indices) {
-            hashMaptestMethodMap[responseContents[i].uuid!!] = i
+            hashMaptestMethodMap[responseContents[i]?.uuid!!] = i
         }
         notifyDataSetChanged()
     }

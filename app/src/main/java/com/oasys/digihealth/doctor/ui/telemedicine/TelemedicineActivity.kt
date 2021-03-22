@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.component.extention.toast
@@ -11,6 +12,7 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.data.event.NetworkEvent
 import com.oasys.digihealth.doctor.data.networking.api.req.ReqAppointmentSession
 import com.oasys.digihealth.doctor.data.networking.api.res.ResAppointmentBookedList
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.ui.telemedicine.booking.adapter.AdapterBookedPatients
 import com.oasys.digihealth.doctor.ui.viewmodel.AppointmentViewModel
 import kotlinx.android.synthetic.main.activity_telemedicine.*
@@ -36,10 +38,10 @@ class TelemedicineActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_telemedicine)
         userDetailsRoomRepository = UserDetailsRoomRepository(application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
-        tokenBearer = AppConstants.BEARER_AUTH + userDataStoreBean.access_token
-        userUUID = userDataStoreBean.uuid!!
+        tokenBearer = AppConstants.BEARER_AUTH + userDataStoreBean?.access_token
+        userUUID = userDataStoreBean?.uuid!!
         initToolBar()
         initUI()
         clickListener()

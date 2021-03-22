@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
@@ -75,7 +75,7 @@ class ManageInvestFavourteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -111,7 +111,7 @@ class ManageInvestFavourteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -148,7 +148,7 @@ class ManageInvestFavourteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -170,7 +170,7 @@ class ManageInvestFavourteViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!, requestbody
-        ).enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
         return
 
     }
@@ -194,7 +194,7 @@ class ManageInvestFavourteViewModel(
         apiService?.getFavddAllInvestList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, favuoritedId!!, favourite_type_id!!
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
         return
 
     }
@@ -229,7 +229,7 @@ class ManageInvestFavourteViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -272,7 +272,7 @@ class ManageInvestFavourteViewModel(
         apiService?.labEditFav(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, body
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
         return
 
 

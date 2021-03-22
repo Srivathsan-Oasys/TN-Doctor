@@ -32,7 +32,7 @@ class RadiologyDropDownAdapter(
         //params.height = 60
         view.layoutParams = params
 
-        if (listOfficeItems[position].location_name.equals("")) {
+        if (listOfficeItems[position]?.location_name.equals("")) {
             vh.label.hint = "Please select Department"
         } else {
             vh.label.text = listOfficeItems[position]!!.location_name

@@ -14,6 +14,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogCovidSearchListBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.CovidRegistrationSearchResponseContent
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.CovidRegistrationSearchResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.CovidRegistrationViewModel
@@ -57,8 +58,8 @@ class SearchPatientListDialogFragment : DialogFragment() {
             requireActivity().application
         )
             .create(CovidRegistrationViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
 
         appPreferences =
@@ -67,7 +68,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
         searchListAdapter =
@@ -76,7 +77,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
                 ArrayList()
             )
 
-        binding.searchListRecyclerView!!.adapter = searchListAdapter
+        binding?.searchListRecyclerView!!.adapter = searchListAdapter
 
 
         val args = arguments
@@ -108,7 +109,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
             }
         })
 
-        return binding.root
+        return binding?.root
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -118,7 +119,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
         }
     }
 
-    val CovidSearchNameCallBack = object {
+    val CovidSearchNameCallBack = object : RetrofitCallback<CovidRegistrationSearchResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidRegistrationSearchResponseModel>?) {
             autocompleteNameTestResponse = responseBody?.body()?.responseContents
             searchListAdapter?.setData(responseBody?.body()?.responseContents)
@@ -134,13 +135,13 @@ class SearchPatientListDialogFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -150,7 +151,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -158,7 +159,7 @@ class SearchPatientListDialogFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -166,13 +167,13 @@ class SearchPatientListDialogFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {

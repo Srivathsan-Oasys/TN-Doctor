@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PresDrugInfoResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PrescriptionInfoResponsModel
 import com.oasys.digihealth.doctor.utils.Utils
@@ -61,7 +61,7 @@ class InfoViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.getPrescriptionInfo(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(prescriptionInfoRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(prescriptionInfoRetrofitCallback))
         return
     }
 
@@ -98,7 +98,7 @@ class InfoViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.getPrescriptionDrugInfo(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(prescriptionInfoRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(prescriptionInfoRetrofitCallback))
         return
     }
 

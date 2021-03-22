@@ -5,16 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.EncounterDoctor
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.op_notes.model.GetOpNotesEncounterByDocAndPatientIdResp
+import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.PharmacyDispenseResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.delete.DeleteOtScheduleReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.delete.DeleteOtScheduleResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.modify.ModifyOtScheduleReq
@@ -26,7 +27,6 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.responseadd
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.responseaddsurgery.spinners.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.view.ViewOtScheduleReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.view.ViewOtScheduleResp
-import com.oasys.digihealth.doctor.ui.pharmacy_management.dispense.model.PharmacyDispenseResponse
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -84,7 +84,7 @@ class AddSurgeryViewModel(
         apiService?.getOtName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
     fun getOtType(facilityid: Int?, otTypeRetrofitCallback: RetrofitCallback<OtTypeResponseModel>) {
@@ -113,7 +113,7 @@ class AddSurgeryViewModel(
         apiService?.getOtType(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
 
@@ -153,7 +153,7 @@ class AddSurgeryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
 
@@ -184,7 +184,7 @@ class AddSurgeryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(cheifRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(cheifRetrofitCallback))
     }
 
     //getSurgeon
@@ -219,7 +219,7 @@ class AddSurgeryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(surgeonRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(surgeonRetrofitCallback))
     }
 
     //getNurse
@@ -253,7 +253,7 @@ class AddSurgeryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(nurseRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(nurseRetrofitCallback))
     }
 
 
@@ -288,7 +288,7 @@ class AddSurgeryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(AnesthetistRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(AnesthetistRetrofitCallback))
     }
 
     fun getLessionSpinner(
@@ -320,7 +320,7 @@ class AddSurgeryViewModel(
         apiService?.getSpinnerLession(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(lessionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(lessionRetrofitCallback))
     }
 
     fun getSpinnerSide(
@@ -351,7 +351,7 @@ class AddSurgeryViewModel(
         apiService?.getSpinnerSide(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(sideRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(sideRetrofitCallback))
     }
 
     fun getAnaeesthesia(
@@ -382,7 +382,7 @@ class AddSurgeryViewModel(
         apiService?.getAnaeesthesia(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(anaeesthesiaRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(anaeesthesiaRetrofitCallback))
     }
 
     fun getPositions(
@@ -413,7 +413,7 @@ class AddSurgeryViewModel(
         apiService?.getPosition(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(positionsRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(positionsRetrofitCallback))
     }
 
 
@@ -446,7 +446,7 @@ class AddSurgeryViewModel(
         apiService?.getPriority(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(priorityRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(priorityRetrofitCallback))
     }
 
     fun getGrade(facilityid: Int?, gradeRetrofitCallback: RetrofitCallback<GradeResponseModel>) {
@@ -475,7 +475,7 @@ class AddSurgeryViewModel(
         apiService?.getGrade(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(gradeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(gradeRetrofitCallback))
     }
 
     fun getSurgeryName(
@@ -514,7 +514,7 @@ class AddSurgeryViewModel(
         apiService?.getSurgerySearchName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(surgerySearchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(surgerySearchRetrofitCallback))
     }
 
     //getDiagnosis
@@ -550,7 +550,7 @@ class AddSurgeryViewModel(
         apiService?.getDiagnosis(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(diagRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(diagRetrofitCallback))
     }
 
 
@@ -570,7 +570,7 @@ class AddSurgeryViewModel(
         apiService?.addSurgery(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(surgeryAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(surgeryAddRetrofitCallback))
     }
 
     fun viewOtSchedule(
@@ -592,7 +592,7 @@ class AddSurgeryViewModel(
             facilityid!!,
             viewOtScheduleReq
 
-        ).enqueue(RetrofitMainCallback(viewOtScheduleRespCallback))
+        )?.enqueue(RetrofitMainCallback(viewOtScheduleRespCallback))
     }
 
     fun modifyOtSchedule(
@@ -613,7 +613,7 @@ class AddSurgeryViewModel(
             userDataStoreBean?.uuid!!,
             facilityid!!,
             modifyOtScheduleReq
-        ).enqueue(RetrofitMainCallback(modifyOtScheduleRespCallback))
+        )?.enqueue(RetrofitMainCallback(modifyOtScheduleRespCallback))
     }
 
     fun deleteOtSchedule(
@@ -634,7 +634,7 @@ class AddSurgeryViewModel(
             userDataStoreBean?.uuid!!,
             facilityid!!,
             deleteOtScheduleReq
-        ).enqueue(RetrofitMainCallback(deleteOtScheduleRespCallback))
+        )?.enqueue(RetrofitMainCallback(deleteOtScheduleRespCallback))
     }
 
     fun getEncounter(
@@ -664,7 +664,7 @@ class AddSurgeryViewModel(
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getOpNotesEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOpNotesEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(
@@ -751,8 +751,9 @@ class AddSurgeryViewModel(
         apiService?.getPatientById(
             "accept",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_UUID!!,
-            body!!
-        ).enqueue(RetrofitMainCallback(getPreviousDietOrderRespCallback))
+            userDataStoreBean?.uuid!!,
+            facility_UUID!!,
+            body
+        )?.enqueue(RetrofitMainCallback(getPreviousDietOrderRespCallback))
     }
 }

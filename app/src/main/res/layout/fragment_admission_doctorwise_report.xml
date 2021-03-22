@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.AdmissionDoctorWiseReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.AdmissionDoctorWiseReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

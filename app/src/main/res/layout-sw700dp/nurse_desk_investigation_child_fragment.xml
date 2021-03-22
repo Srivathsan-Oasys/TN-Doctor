@@ -5,10 +5,11 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_investigation.view_model.NurseDeskInvestigationViewModel" />
+        <!--        <variable-->
+        <!--            name="viewModel"-->
+        <!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_investigation.view_model.NurseDeskInvestigationViewModel" />-->
     </data>
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
@@ -19,33 +20,36 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
+                android:id="@+id/mainLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/mainLayout"
 
                 android:orientation="vertical">
+
                 <androidx.appcompat.widget.SearchView
                     android:id="@+id/searchView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_margin="12sp"
                     android:background="@drawable/edit_text_bottom_border"
                     android:focusable="false"
-                    android:layout_gravity="center"
                     android:inputType="text"
                     app:iconifiedByDefault="false"
                     app:queryHint="search with 3 letters" />
 
                 <LinearLayout
+                    android:id="@+id/parentLinearLayout"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_marginEnd="@dimen/_5sdp"
-                    android:background="@color/white"
-                    android:id="@+id/parentLinearLayout"
                     android:layout_weight="1"
+                    android:background="@color/white"
                     android:orientation="vertical"
                     tools:ignore="MissingConstraints">
+
                     <androidx.cardview.widget.CardView
                         android:id="@+id/searchDrawerCardView"
                         android:layout_width="35dp"
@@ -66,13 +70,12 @@
                     </androidx.cardview.widget.CardView>
 
 
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_marginEnd="@dimen/_5sdp"
-                        android:background="@color/white"
                         android:layout_weight="1"
+                        android:background="@color/white"
                         android:orientation="vertical"
                         tools:ignore="MissingConstraints">
 
@@ -85,8 +88,8 @@
                                 android:id="@+id/investigationparentRecyclerView"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 android:nestedScrollingEnabled="true"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                                 tools:ignore="UnusedAttribute" />
                         </androidx.core.widget.NestedScrollView>
 
@@ -94,20 +97,10 @@
                 </LinearLayout>
 
 
-
             </LinearLayout>
 
 
-
-
-
         </FrameLayout>
-
-
-
-
-
-
 
 
         <com.google.android.material.navigation.NavigationView
@@ -122,6 +115,7 @@
                 android:layout_height="match_parent"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true">
+
                 <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -169,9 +163,9 @@
 
 
                             <TextView
+                                android:id="@+id/advanceSearchText"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:id="@+id/advanceSearchText"
                                 android:fontFamily="@font/poppins_semibold"
                                 android:gravity="end"
                                 android:text="Advance Search"
@@ -180,11 +174,11 @@
                                 tools:ignore="HardcodedText,RtlSymmetry" />
 
                             <LinearLayout
+                                android:id="@+id/advanceSearchLayout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/advanceSearchLayout"
-                                android:visibility="gone"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="gone">
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
@@ -195,8 +189,8 @@
                                         android:layout_width="fill_parent"
                                         android:layout_height="wrap_content"
                                         android:hint="PIN*"
-                                        android:maxLength="14"
                                         android:inputType="number"
+                                        android:maxLength="14"
                                         android:padding="15dp" />
                                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -213,21 +207,21 @@
                                         android:padding="15dp"
                                         android:singleLine="true" />
                                 </com.google.android.material.textfield.TextInputLayout>
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:textColor="@color/colorPrimaryDark"
                                     android:layout_marginLeft="10dp"
-                                    android:text="Test name">
+                                    android:text="Test name"
+                                    android:textColor="@color/colorPrimaryDark">
 
                                 </TextView>
 
 
-
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:layout_width="match_parent"
-                                    android:layout_marginTop="5dp"
-                                    android:layout_height="wrap_content">
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp">
 
                                     <androidx.appcompat.widget.AppCompatSpinner
                                         android:id="@+id/test_name"
@@ -239,9 +233,6 @@
                                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                         android:textSize="18sp" />
                                 </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
 
                             </LinearLayout>
@@ -309,13 +300,6 @@
 
 
         </com.google.android.material.navigation.NavigationView>
-
-
-
-
-
-
-
 
 
     </androidx.drawerlayout.widget.DrawerLayout>

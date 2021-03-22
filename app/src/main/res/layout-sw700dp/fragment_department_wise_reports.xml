@@ -6,11 +6,10 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.departmentWiseReport.viewModel.DepartmentWiseReportViewModel"></variable>
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.departmentWiseReport.viewModel.DepartmentWiseReportViewModel"/>-->
     </data>
-
 
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -35,8 +34,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
 
                     <LinearLayout
@@ -48,9 +47,10 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -72,9 +72,9 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
                                 android:layout_weight="1.5"
-                                android:gravity="right">
+                                android:gravity="right"
+                                android:orientation="horizontal">
 
                                 <androidx.cardview.widget.CardView
                                     android:id="@+id/favouriteDrawerCardView"
@@ -94,11 +94,11 @@
 
                             </LinearLayout>
                         </LinearLayout>
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="2dp"
-                            android:background="@color/view"
-                            />
+                            android:background="@color/view" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -112,8 +112,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardCornerRadius="5dp">
 
@@ -122,15 +122,14 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:gravity="center"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/tv_dme"
@@ -147,8 +146,8 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1.1"
-                                            app:srcCompat="@drawable/ic_filter"
-                                            android:textSize="@dimen/dr_medium_text" />
+                                            android:textSize="@dimen/dr_medium_text"
+                                            app:srcCompat="@drawable/ic_filter" />
 
                                     </LinearLayout>
 
@@ -162,8 +161,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardCornerRadius="5dp">
 
@@ -172,16 +171,15 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:gravity="center"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
 
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/tv_dms"
@@ -198,8 +196,8 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1.1"
-                                            app:srcCompat="@drawable/ic_filter"
-                                            android:textSize="@dimen/dr_medium_text" />
+                                            android:textSize="@dimen/dr_medium_text"
+                                            app:srcCompat="@drawable/ic_filter" />
 
                                     </LinearLayout>
 
@@ -213,8 +211,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardCornerRadius="5dp">
 
@@ -223,16 +221,15 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:gravity="center"
-                                    android:orientation="vertical"
-                                   >
+                                    android:orientation="vertical">
 
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/tv_dph"
@@ -250,8 +247,8 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1.1"
-                                            app:srcCompat="@drawable/ic_filter"
-                                            android:textSize="@dimen/dr_medium_text" />
+                                            android:textSize="@dimen/dr_medium_text"
+                                            app:srcCompat="@drawable/ic_filter" />
 
                                     </LinearLayout>
 
@@ -265,8 +262,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardCornerRadius="5dp">
 
@@ -275,16 +272,15 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:gravity="center"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
 
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/tv_gcc"
@@ -301,8 +297,8 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1.1"
-                                            app:srcCompat="@drawable/ic_filter"
-                                            android:textSize="@dimen/dr_medium_text" />
+                                            android:textSize="@dimen/dr_medium_text"
+                                            app:srcCompat="@drawable/ic_filter" />
 
                                     </LinearLayout>
 
@@ -316,8 +312,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardCornerRadius="5dp">
 
@@ -326,16 +322,15 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:gravity="center"
-                                    android:orientation="vertical"
-                                    >
+                                    android:orientation="vertical">
 
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/tv_pvh"
@@ -352,8 +347,8 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1.1"
-                                            app:srcCompat="@drawable/ic_filter"
-                                            android:textSize="@dimen/dr_medium_text" />
+                                            android:textSize="@dimen/dr_medium_text"
+                                            app:srcCompat="@drawable/ic_filter" />
 
                                     </LinearLayout>
 
@@ -365,6 +360,7 @@
 
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -377,8 +373,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardBackgroundColor="@color/reports_patients"
                                 app:cardCornerRadius="5dp">
@@ -394,8 +390,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:layout_width="match_parent"
@@ -424,8 +420,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/totalPatientsAdultCount"
@@ -457,13 +453,12 @@
                             </androidx.cardview.widget.CardView>
 
 
-
                             <androidx.cardview.widget.CardView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardBackgroundColor="@color/cp"
                                 app:cardCornerRadius="5dp">
@@ -480,8 +475,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:layout_width="match_parent"
@@ -510,8 +505,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/newPatientsAdultCount"
@@ -546,8 +541,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardBackgroundColor="@color/colorPrimary"
                                 app:cardCornerRadius="5dp">
@@ -564,8 +559,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:layout_width="match_parent"
@@ -595,8 +590,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/oldPatientsAdultCount"
@@ -631,8 +626,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardBackgroundColor="@color/configurationOrange"
                                 app:cardCornerRadius="5dp">
@@ -649,8 +644,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:layout_width="match_parent"
@@ -679,8 +674,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/adultMaleCount"
@@ -726,8 +721,8 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
-                                android:layout_weight="1"
                                 android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
                                 android:visibility="visible"
                                 app:cardBackgroundColor="@color/search_button"
                                 app:cardCornerRadius="5dp">
@@ -744,8 +739,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:layout_width="match_parent"
@@ -774,8 +769,8 @@
                                         android:layout_width="match_parent"
                                         android:layout_height="50dp"
                                         android:orientation="horizontal"
-                                        android:weightSum="2"
-                                        android:padding="@dimen/_5sdp">
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
                                         <TextView
                                             android:id="@+id/childMaleCount"
@@ -814,8 +809,8 @@
                             android:layout_height="250dp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
-                            android:visibility="gone"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/lineChartView"
@@ -837,8 +832,7 @@
                                 android:id="@+id/nestedScrollView_bottom"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:fillViewport="true"
-                                >
+                                android:fillViewport="true">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -852,54 +846,58 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginTop="@dimen/_5sdp"
                                         android:layout_marginBottom="@dimen/_5sdp"
+                                        android:orientation="vertical"
                                         android:padding="@dimen/_5sdp"
-                                        android:visibility="visible"
-                                        android:orientation="vertical">
+                                        android:visibility="visible">
 
                                         <LinearLayout
                                             android:id="@+id/dateLayout"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
-                                            android:padding="10dp"
-                                            android:orientation="horizontal">
+                                            android:orientation="horizontal"
+                                            android:padding="10dp">
+
                                             <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:textColor="@color/colorPrimaryDark"
-                                                android:text="Start Date: "
-                                                android:fontFamily="@font/poppins_semibold"
                                                 android:id="@+id/startDateLable"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="Start Date: "
+                                                android:textColor="@color/colorPrimaryDark"
                                                 android:textSize="@dimen/dr_medium_text">
 
                                             </TextView>
+
                                             <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:textColor="@color/colorPrimaryDark"
                                                 android:id="@+id/startDate"
-                                                android:text=""
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
                                                 android:fontFamily="@font/poppins_semibold"
+                                                android:text=""
+                                                android:textColor="@color/colorPrimaryDark"
                                                 android:textSize="@dimen/dr_medium_text">
 
                                             </TextView>
+
                                             <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:textColor="@color/colorPrimaryDark"
-                                                android:layout_marginLeft="20dp"
-                                                android:text="End Date: "
-                                                android:fontFamily="@font/poppins_semibold"
                                                 android:id="@+id/endDateLable"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginLeft="20dp"
+                                                android:fontFamily="@font/poppins_semibold"
+                                                android:text="End Date: "
+                                                android:textColor="@color/colorPrimaryDark"
                                                 android:textSize="@dimen/dr_medium_text">
 
                                             </TextView>
+
                                             <TextView
+                                                android:id="@+id/endDate"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:textColor="@color/colorPrimaryDark"
-                                                android:id="@+id/endDate"
-                                                android:text=""
                                                 android:fontFamily="@font/poppins_semibold"
+                                                android:text=""
+                                                android:textColor="@color/colorPrimaryDark"
                                                 android:textSize="@dimen/dr_medium_text">
 
                                             </TextView>
@@ -1398,9 +1396,9 @@
                                         </LinearLayout>
 
                                         <androidx.recyclerview.widget.RecyclerView
+                                            android:id="@+id/sessionWiseRecyclerView"
                                             android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:id="@+id/sessionWiseRecyclerView"/>
+                                            android:layout_height="wrap_content" />
 
 
                                         <LinearLayout
@@ -1408,17 +1406,16 @@
                                             android:layout_height="wrap_content"
                                             android:layout_marginTop="@dimen/_8sdp"
                                             android:gravity="right"
-                                            android:orientation="horizontal"
-                                            >
+                                            android:orientation="horizontal">
 
                                             <androidx.cardview.widget.CardView
                                                 android:id="@+id/pdfDownload"
                                                 android:layout_width="wrap_content"
                                                 android:layout_height="wrap_content"
-                                                android:layout_marginRight="10dp"
-                                                app:cardBackgroundColor="@color/outPtientGreen"
-                                                android:visibility="visible"
                                                 android:layout_gravity="center"
+                                                android:layout_marginRight="10dp"
+                                                android:visibility="visible"
+                                                app:cardBackgroundColor="@color/outPtientGreen"
                                                 app:cardCornerRadius="8dp">
 
                                                 <TextView
@@ -1428,11 +1425,11 @@
                                                     android:drawablePadding="10dp"
                                                     android:fontFamily="@font/poppins"
                                                     android:gravity="center"
-                                                    android:text="Pdf"
-                                                    android:paddingTop="7dp"
-                                                    android:paddingBottom="7dp"
                                                     android:paddingLeft="15dp"
+                                                    android:paddingTop="7dp"
                                                     android:paddingRight="15dp"
+                                                    android:paddingBottom="7dp"
+                                                    android:text="Pdf"
                                                     android:textColor="@color/white"
                                                     android:textSize="@dimen/dr_medium_text"
                                                     tools:ignore="HardcodedText" />
@@ -1509,12 +1506,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
-                                    android:textSize="@dimen/dr_medium_text"
-                                    android:focusable="false"
                                     android:background="@drawable/edit_text_bottom_border"
                                     android:drawableRight="@drawable/ic_calendar"
+                                    android:focusable="false"
                                     android:hint="From date"
-                                    android:padding="5dp" />
+                                    android:padding="5dp"
+                                    android:textSize="@dimen/dr_medium_text" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -1527,12 +1524,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="@dimen/_5sdp"
-                                    android:textSize="@dimen/dr_medium_text"
-                                    android:focusable="false"
                                     android:background="@drawable/edit_text_bottom_border"
                                     android:drawableRight="@drawable/ic_calendar"
+                                    android:focusable="false"
                                     android:hint="To date"
-                                    android:padding="5dp" />
+                                    android:padding="5dp"
+                                    android:textSize="@dimen/dr_medium_text" />
                             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -1540,11 +1537,11 @@
                                 android:id="@+id/etDistrictspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select District"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select District"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
 
@@ -1552,44 +1549,44 @@
                                 android:id="@+id/etHudspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Hud"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select Hud"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etBlockspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Block"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select Block"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etOfficespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select office"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select office"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etInstitutionTypespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Institution Type"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select Institution Type"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="@dimen/dr_medium_text" />
 
 
@@ -1597,22 +1594,22 @@
                                 android:id="@+id/etInstitutionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Institution"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select Institution"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etSessionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Department"
                                 android:layout_marginTop="20dp"
-                                android:textColor="@color/black"
+                                android:autofillHints="Select Department"
                                 android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
+                                android:textColor="@color/black"
                                 android:textSize="14sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -1625,14 +1622,14 @@
                                     android:id="@+id/adultOrChildSpinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@null"
                                     android:fontFamily="@font/poppins"
                                     android:hint="Adult / Child"
                                     android:inputType="textNoSuggestions"
                                     android:maxLines="1"
                                     android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
                                     android:paddingRight="5dp"
-                                    android:background="@null"
+                                    android:paddingBottom="5dp"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                     android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>
@@ -1647,14 +1644,14 @@
                                     android:id="@+id/genderSpinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@null"
                                     android:fontFamily="@font/poppins"
                                     android:hint="Gender"
                                     android:inputType="textNoSuggestions"
                                     android:maxLines="1"
                                     android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
                                     android:paddingRight="5dp"
-                                    android:background="@null"
+                                    android:paddingBottom="5dp"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                     android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>

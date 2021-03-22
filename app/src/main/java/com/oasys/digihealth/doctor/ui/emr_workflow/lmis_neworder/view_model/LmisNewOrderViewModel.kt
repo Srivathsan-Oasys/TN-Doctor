@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddResponseModel
@@ -170,7 +170,7 @@ class LmisNewOrderViewModel(
             facility_id!!,
             labid!!,
             AppConstants.FAV_TYPE_ID_LAB
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
 
         /*if(department_UUID!=0){
 
@@ -206,7 +206,7 @@ class LmisNewOrderViewModel(
             facility_id!!,
             labid!!,
             AppConstants.FAV_TYPE_ID_LAB
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
 
         /*   if(department_UUID!=0){
                apiService?.getLmisTemplete(AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!, department_UUID!!,facility_id!!,
@@ -253,7 +253,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -289,7 +289,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -335,7 +335,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -367,7 +367,7 @@ class LmisNewOrderViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -416,7 +416,7 @@ class LmisNewOrderViewModel(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!, facility_id!!, true,
                 req
-            ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+            )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
         } else {
 
@@ -467,7 +467,7 @@ class LmisNewOrderViewModel(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!, facility_id!!, true,
                 body
-            ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+            )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
 
         }
@@ -510,7 +510,7 @@ class LmisNewOrderViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -544,7 +544,7 @@ class LmisNewOrderViewModel(
         apiService?.getPrevLmisLab(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(historyRadiologyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(historyRadiologyRetrofitCallback))
     }
 
 
@@ -576,7 +576,7 @@ class LmisNewOrderViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -607,7 +607,7 @@ class LmisNewOrderViewModel(
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -636,7 +636,7 @@ class LmisNewOrderViewModel(
                 templateId!!,
                 AppConstants.FAV_TYPE_ID_LAB,
                 department_UUID!!
-            ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+            )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         } else {
             apiService?.getLmisLastTemplate(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
@@ -645,7 +645,7 @@ class LmisNewOrderViewModel(
                 templateId!!,
                 AppConstants.FAV_TYPE_ID_LAB,
                 LabID!!
-            ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+            )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         }
 
         return
@@ -668,7 +668,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             EmrRequestData
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -691,7 +691,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             labModifiyRequest
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -727,7 +727,7 @@ class LmisNewOrderViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -818,7 +818,7 @@ class LmisNewOrderViewModel(
             userDataStoreBean?.uuid!!,
             facilityId, body
 
-        ).enqueue(RetrofitMainCallback(doctorNameCallback))
+        )?.enqueue(RetrofitMainCallback(doctorNameCallback))
     }
 
     fun getEncounter(
@@ -880,7 +880,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
         return
     }
 
@@ -903,8 +903,8 @@ class LmisNewOrderViewModel(
             AppConstants.LANGUAGE,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
-            patientId!!
-        ).enqueue(RetrofitMainCallback(wardIdRetrofitCallback))
+            patientId
+        )?.enqueue(RetrofitMainCallback(wardIdRetrofitCallback))
         return
 
     }
@@ -955,7 +955,7 @@ class LmisNewOrderViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_id!!, body
-        ).enqueue(RetrofitMainCallback(labToLoctionTestRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToLoctionTestRetrofitCallback))
         return
 
     }

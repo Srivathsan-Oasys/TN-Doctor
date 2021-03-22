@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.FAV_TYPE_ID_INVESTIGATION
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.model.duration.DurationResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.investigation.model.*
@@ -24,7 +24,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesRes
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.fetch_encounters_response.FectchEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.GetToLocationTestResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.RadiologyEncounterResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.SimpleResponseModel
+import com.oasys.digihealth.doctor.ui.login.model.SimpleResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -68,7 +68,7 @@ class InvestigationViewModel(
             facility_UUID!!,
             departmentID!!,
             FAV_TYPE_ID_INVESTIGATION
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -85,7 +85,7 @@ class InvestigationViewModel(
         apiService?.getDuration(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 
@@ -119,7 +119,7 @@ class InvestigationViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(radioSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(radioSearchRetrofitCallBack))
         return
     }
 
@@ -155,7 +155,7 @@ class InvestigationViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -178,7 +178,7 @@ class InvestigationViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -200,7 +200,7 @@ class InvestigationViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             EmrRequestData
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -236,7 +236,7 @@ class InvestigationViewModel(
         apiService?.getInvestigationToLocationMapId(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(prevLabrecordsRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(prevLabrecordsRetrofitCallback))
     }
 
 
@@ -270,7 +270,7 @@ class InvestigationViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -355,7 +355,7 @@ class InvestigationViewModel(
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getEncounterByDocAndPatientIdRespCallback))
     }
 
     /*
@@ -378,7 +378,7 @@ class InvestigationViewModel(
             department_UUID!!,
             facility_UUID!!,
             AppConstants.FAV_TYPE_ID_INVESTIGATION
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -405,7 +405,7 @@ class InvestigationViewModel(
             templateId!!,
             AppConstants.FAV_TYPE_ID_INVESTIGATION,
             department_UUID!!
-        ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         return
     }
 
@@ -436,7 +436,7 @@ class InvestigationViewModel(
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 

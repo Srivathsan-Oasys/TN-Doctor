@@ -9,6 +9,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.ui.chiefcomplaintadddialog.model.request.ChiefCompliantAddRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.diagonosissearch.DiagonosisSearchResponse
@@ -61,7 +62,7 @@ class DiagonosisDialogViewModel(
         apiService?.getDiagonosisName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!, "filterbythree", query
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(complaintSearchRetrofitCallBack)
         )
         return
@@ -88,7 +89,7 @@ class DiagonosisDialogViewModel(
             userDataStoreBean?.uuid!!,
             facilityUuid,
             emrFavRequestModel
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(addFavRetrofitCallBack)
         )
         return
@@ -117,7 +118,7 @@ class DiagonosisDialogViewModel(
             facility_UUID!!,
             departmentID!!,
             AppConstants.FAV_TYPE_ID_CHIEF_COMPLAINTS
-        ).enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
         return
     }
 
@@ -149,7 +150,7 @@ class DiagonosisDialogViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -188,7 +189,7 @@ class DiagonosisDialogViewModel(
         apiService?.labEditFav(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, body
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
         return
 
 
@@ -213,7 +214,7 @@ class DiagonosisDialogViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, favouriteMasterID!!,
             0
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
         return
 
     }

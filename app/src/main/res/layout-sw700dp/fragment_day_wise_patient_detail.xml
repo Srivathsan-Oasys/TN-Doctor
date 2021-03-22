@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.daywisepatientlist.viewmodel.DayWisePatientDetailViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.daywisepatientlist.viewmodel.DayWisePatientDetailViewModel" />-->
     </data>
 
     <LinearLayout

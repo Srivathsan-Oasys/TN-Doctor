@@ -9,6 +9,8 @@ import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
@@ -48,7 +50,7 @@ class TicketsViewModel(
     ) {
 
         Log.e("getTicketList", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -69,7 +71,7 @@ class TicketsViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -80,7 +82,7 @@ class TicketsViewModel(
     ) {
 
         Log.e("getTicketList", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -101,7 +103,7 @@ class TicketsViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 

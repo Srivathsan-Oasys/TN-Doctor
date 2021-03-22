@@ -5,13 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
-import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.*
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddTestNameResponse
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.LabFavManageResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.faveditresponse.FavEditResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.favresponse.FavAddListResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.request.RequestLabFavModel
@@ -72,7 +74,7 @@ class ManageLmisLabFavouriteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -106,7 +108,7 @@ class ManageLmisLabFavouriteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -127,7 +129,7 @@ class ManageLmisLabFavouriteViewModel(
         apiService?.getFavddAll(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!, requestbody
-        ).enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
         return
 
     }
@@ -150,7 +152,7 @@ class ManageLmisLabFavouriteViewModel(
         apiService?.getFavddAllList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, favouriteMasterID!!, 0
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
         return
 
     }
@@ -192,7 +194,7 @@ class ManageLmisLabFavouriteViewModel(
         apiService?.labEditFav(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, body
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
         return
 
     }
@@ -230,7 +232,7 @@ class ManageLmisLabFavouriteViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 }

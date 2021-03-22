@@ -72,7 +72,7 @@ class UserManualViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -102,7 +102,7 @@ class UserManualViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -132,7 +132,7 @@ class UserManualViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -160,7 +160,7 @@ class UserManualViewModel(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(downloadfile))
+        )?.enqueue(RetrofitMainCallback(downloadfile))
 
     }
 

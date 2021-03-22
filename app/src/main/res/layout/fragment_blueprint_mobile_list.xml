@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.ip_management.bluePrint.viewModel.BluePrintViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.ip_management.bluePrint.viewModel.BluePrintViewModel" />-->
     </data>
 
     <LinearLayout

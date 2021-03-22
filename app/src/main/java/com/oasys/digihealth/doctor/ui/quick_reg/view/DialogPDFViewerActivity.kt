@@ -23,11 +23,11 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.PdfviewBinding
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.PDFRequestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.SampleErrorResponse
@@ -40,8 +40,8 @@ import retrofit2.Response
 import java.io.*
 
 
-class DialogPDFViewerActivity : Fragment(){
-    private var destinationFile: File?=null
+class DialogPDFViewerActivity : Fragment() {
+    private var destinationFile: File? = null
     var binding: PdfviewBinding? = null
     private var department_uuid: Int? = null
     private var facilitylevelID: Int? = null
@@ -49,13 +49,13 @@ class DialogPDFViewerActivity : Fragment(){
 
     var downloadZipFileTask: DownloadZipFileTask? =
         null
-    var pdfRequestModel : PDFRequestModel = PDFRequestModel()
+    var pdfRequestModel: PDFRequestModel = PDFRequestModel()
     private var utils: Utils? = null
     var appPreferences: AppPreferences? = null
 
-    var from:String=""
+    var from: String = ""
 
-    var nextpageStatus:Int=0
+    var nextpageStatus: Int = 0
 
     companion object {
         const val PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 101
@@ -89,20 +89,19 @@ class DialogPDFViewerActivity : Fragment(){
         binding!!.closeImageView.setOnClickListener {
 
 
-
-            if(from=="Quick"){
+            if (from == "Quick") {
                 val labtemplatedialog = QuickRegistrationNew()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
-            }
-            else {
+                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
+            } else {
                 val labtemplatedialog = QuickRegistrationActivity()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
             }
         }
 
-        appPreferences = AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
+        appPreferences =
+            AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
@@ -116,9 +115,9 @@ class DialogPDFViewerActivity : Fragment(){
 
             pdfRequestModel = args.getParcelable(AppConstants.RESPONSECONTENT)!!
 
-            nextpageStatus=args.getInt(AppConstants.RESPONSENEXT)
+            nextpageStatus = args.getInt(AppConstants.RESPONSENEXT)
 
-            from= args.getString("From")!!
+            from = args.getString("From")!!
 
             Log.i("calback", "..................$pdfRequestModel")
 
@@ -127,7 +126,7 @@ class DialogPDFViewerActivity : Fragment(){
 
                 var Lab = LabTestActivity()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(Lab)
+                (activity as HomeActivity).replaceFragmentNoBack(Lab)
 
             }*/
 
@@ -136,7 +135,7 @@ class DialogPDFViewerActivity : Fragment(){
 
             } else {
 
-                if(pdfRequestModel.uuid!=0) {
+                if (pdfRequestModel.uuid != 0) {
                     viewModel?.GetPDFf(pdfRequestModel, GetPDFRetrofitCallback)
                 }
             }
@@ -163,7 +162,10 @@ class DialogPDFViewerActivity : Fragment(){
     }
 
     private fun runTimePermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
             != PackageManager.PERMISSION_GRANTED
         ) {
             requestPermissions(
@@ -172,13 +174,12 @@ class DialogPDFViewerActivity : Fragment(){
                 ), PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE
             )
             return
-        }
-
-        else{
-            viewModel?.GetPDFf(pdfRequestModel,GetPDFRetrofitCallback)
+        } else {
+            viewModel?.GetPDFf(pdfRequestModel, GetPDFRetrofitCallback)
             return
         }
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -190,11 +191,11 @@ class DialogPDFViewerActivity : Fragment(){
 
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // now, you have permission go ahead
-                viewModel?.GetPDFf(pdfRequestModel,GetPDFRetrofitCallback)
+                viewModel?.GetPDFf(pdfRequestModel, GetPDFRetrofitCallback)
 
             } else {
                 getCustomDialog()
-                }
+            }
 
         }
 
@@ -229,30 +230,33 @@ class DialogPDFViewerActivity : Fragment(){
             downloadZipFileTask = DownloadZipFileTask()
             downloadZipFileTask!!.execute(responseBody?.body())
 
-            if(nextpageStatus==0){
+            if (nextpageStatus == 0) {
 
                 var Lab = LabTestActivity()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(Lab)
+                (activity as HomeActivity).replaceFragmentNoBack(Lab)
 
             }
         }
 
         override fun onBadRequest(response: Response<ResponseBody>?) {
 
-            Log.e("badreq",response.toString())
+            Log.e("badreq", response.toString())
             val gson = GsonBuilder().create()
             val responseModel: QuickRegistrationSaveResponseModel
             var mError = SampleErrorResponse()
             try {
-                mError = gson.fromJson(response!!.errorBody()!!.string(), SampleErrorResponse::class.java)
+                mError = gson.fromJson(
+                    response!!.errorBody()!!.string(),
+                    SampleErrorResponse::class.java
+                )
 
 
-                if(mError.statusCode==422 && mError.printValidationError!!.field=="uhid"){
+                if (mError.statusCode == 422 && mError.printValidationError!!.field == "uhid") {
 
                     activity!!.finish()
 
-                    startActivity(Intent(context,LabTestActivity::class.java))
+                    startActivity(Intent(context, LabTestActivity::class.java))
 
                 }
 
@@ -281,19 +285,16 @@ class DialogPDFViewerActivity : Fragment(){
         }
 
     }
+
     inner class DownloadZipFileTask :
         AsyncTask<ResponseBody?, Pair<Int?, Long?>?, String?>() {
 
-        override fun onPreExecute() {
-            super.onPreExecute()
-
-        }
         fun doProgress(progressDetails: Pair<Int?, Long?>?) {
             publishProgress(progressDetails)
         }
 
         override fun onPostExecute(result: String?) {
-            binding?.progressbar!!.setVisibility(View.GONE);
+            binding?.progressbar!!.visibility = View.GONE
 
             binding?.pdfView!!.fromFile(destinationFile)
                 .password(null)
@@ -315,12 +316,12 @@ class DialogPDFViewerActivity : Fragment(){
 
 
         }
+
         override fun doInBackground(vararg params: ResponseBody?): String? {
             saveToDisk(params[0]!!, "${pdfRequestModel.firstName} ${pdfRequestModel.uuid}.pdf")
             return null
-        }}
-
-
+        }
+    }
 
 
     private fun saveToDisk(body: ResponseBody, filename: String) {
@@ -329,7 +330,7 @@ class DialogPDFViewerActivity : Fragment(){
                 getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
                 filename
             )
-            val inputstream : InputStream? = body.byteStream()
+            val inputstream: InputStream? = body.byteStream()
             val os: OutputStream = FileOutputStream(destinationFile)
             val buffer = ByteArray(1024)
             var bytesRead: Int

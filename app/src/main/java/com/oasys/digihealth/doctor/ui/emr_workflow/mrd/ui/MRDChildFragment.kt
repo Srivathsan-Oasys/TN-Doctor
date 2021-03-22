@@ -37,7 +37,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.mrd.models.CaseSheetResponseC
 import com.oasys.digihealth.doctor.ui.emr_workflow.mrd.models.MRDResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.mrd.view_model.MRDViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.mrd.view_model.MRDViewModelFactory
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.utils.Utils
 import org.json.JSONObject
 import retrofit2.Response
@@ -271,7 +271,7 @@ class MRDChildFragment : Fragment() {
 
         val mrdtemplatedialog = DialogMrdPDFViewerActivity()
 
-        (activity as MainLandScreenActivity).replaceFragment(mrdtemplatedialog)
+        (activity as HomeActivity).replaceFragment(mrdtemplatedialog)
     }
 
 

@@ -15,7 +15,7 @@ import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.SendIdList
 import com.oasys.digihealth.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModel
 import com.oasys.digihealth.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModelFactory
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import java.util.*
 
 
@@ -55,8 +55,8 @@ class SampleDispatchRejectDialogFragment : DialogFragment() {
 
         )
             .create(SampleDispatchViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
         customProgressDialog = CustomProgressDialog(requireContext())
 
@@ -65,26 +65,16 @@ class SampleDispatchRejectDialogFragment : DialogFragment() {
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
-
-
-
-
-
-
-
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             //Call back
             dialog?.dismiss()
         }
 
-        binding.cancelCardView.setOnClickListener {
+        binding?.cancelCardView?.setOnClickListener {
             //Call back
             dialog?.dismiss()
         }
-
-        return binding.root
+        return binding?.root
     }
-
-
 }
 

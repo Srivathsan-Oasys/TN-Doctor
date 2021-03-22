@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.rmis.rmisdashboard.viewmodel.RMISDashboardViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.rmis.rmisdashboard.viewmodel.RMISDashboardViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

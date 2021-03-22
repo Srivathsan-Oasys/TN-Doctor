@@ -5,10 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.compare_data.GetCriticalCareChartCompareDataResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.config.CriticalCareChartFilterHeadingsResponse
@@ -54,7 +55,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getCriticalCareChartHeadingsReq
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
     }
 
     fun getCriticalCareChartMaster(
@@ -79,7 +80,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getCriticalCareChartMasterReq
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartMasterRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartMasterRespCallback))
     }
 
     fun getCriticalCareChartByPatientId(
@@ -106,7 +107,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             facility_uuid,
             patientUuid,
             criticalCareType
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartByPatientIdResp))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartByPatientIdResp))
     }
 
     fun getCriticalCareChartEncounter(
@@ -136,7 +137,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             doctorId!!,
             departmentId!!,
             encounterType
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartEncounterRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartEncounterRespCallback))
     }
 
     fun createEncounter(
@@ -216,7 +217,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             userDataStoreBean?.uuid!!,
             facility_uuid,
             postCriticalCareChartCreateReq
-        ).enqueue(RetrofitMainCallback(postCriticalCareChartCreateRespCallback))
+        )?.enqueue(RetrofitMainCallback(postCriticalCareChartCreateRespCallback))
     }
 
     fun postCriticalCareChartUpdate(
@@ -240,7 +241,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             userDataStoreBean?.uuid!!,
             facility_uuid,
             postCriticalCareChartUpdateReq
-        ).enqueue(RetrofitMainCallback(postCriticalCareChartUpdateRespCallback))
+        )?.enqueue(RetrofitMainCallback(postCriticalCareChartUpdateRespCallback))
     }
 
     fun getCriticalCareChartCompareData(
@@ -270,7 +271,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             criticalCareType,
             fromDate,
             toDate
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartCompareDataRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartCompareDataRespCallback))
     }
 
 
@@ -295,7 +296,7 @@ class CriticalCareChartViewModel(application: Application) : AndroidViewModel(ap
             userDataStoreBean?.uuid!!,
             facility_uuid,
             appPreferences!!.getInt(AppConstants.PATIENT_UUID)
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
     }
 
 }

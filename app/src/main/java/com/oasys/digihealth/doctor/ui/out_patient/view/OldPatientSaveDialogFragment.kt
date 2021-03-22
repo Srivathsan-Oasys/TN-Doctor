@@ -14,6 +14,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogOldPatientFragmentBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
@@ -70,7 +72,6 @@ class OldPatientSaveDialogFragment : DialogFragment() {
     private var CovidPeriodList = mutableMapOf<Int, String>()
     private var CovidSalutationList = mutableMapOf<Int, String>()
 
-
     private val hashPeriodSpinnerList: HashMap<Int, Int> = HashMap()
     private val hashGenderSpinnerList: HashMap<Int, Int> = HashMap()
     private val hashSalutationSpinnerList: HashMap<Int, Int> = HashMap()
@@ -103,13 +104,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         )
             .create(OldPatientSaveViewModel::class.java)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         tat_start_time = sdf.format(Date())
 
@@ -117,13 +118,12 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         deparment_UUID = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
 
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
-        binding.cancel.setOnClickListener {
+        binding?.cancel?.setOnClickListener {
             dialog?.dismiss()
         }
-
 
         val args = arguments
         if (args == null) {
@@ -137,8 +137,8 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             creatdate = args.getString(AppConstants.Createdate)
             gender = args.getString(AppConstants.GENDER)
             age = args.getInt(AppConstants.AGE)
-            binding.edtage.setText("" + age)
-            binding.name.setText(firstName)
+            binding?.edtage?.setText("" + age)
+            binding?.name?.setText(firstName)
 
             /*val sdf1 = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
             val sdf = SimpleDateFormat("yyyy")
@@ -150,36 +150,36 @@ class OldPatientSaveDialogFragment : DialogFragment() {
 
         }
 
-        binding.cancel.setOnClickListener({
+        binding?.cancel?.setOnClickListener {
             dialog!!.dismiss()
-        })
-        binding.savecardview.setOnClickListener({
-            val namefield = binding.name.text.toString()
-            var edtagefiedl = binding.name.text.toString()
+        }
+        binding?.savecardview?.setOnClickListener {
+            val namefield = binding?.name?.text.toString()
+            var edtagefiedl = binding?.name?.text.toString()
             val oldpinnumber = oldPINnumber
-            val mobilenumber = binding.mobilenumber.text.toString()
+            val mobilenumber = binding?.mobilenumber?.text.toString()
 
-            if (namefield.isEmpty()!!) {
+            if (namefield.isEmpty()) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the name"
                 )
                 return@setOnClickListener
             }
 
-            if (edtagefiedl.isEmpty()!!) {
+            if (edtagefiedl.isEmpty()) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the age"
                 )
                 return@setOnClickListener
             }
-            if (mobilenumber.isEmpty()!!) {
+            if (mobilenumber.isEmpty()) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the mobile number"
                 )
                 return@setOnClickListener
@@ -188,7 +188,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             if (A1selectPeriodUuid == 0) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the Period"
                 )
                 return@setOnClickListener
@@ -196,7 +196,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             if (A1selectSalutationUuid == 0) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the Salutation"
                 )
                 return@setOnClickListener
@@ -205,7 +205,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             if (A1selectGenderUuid == 0) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Enter the Gender"
                 )
                 return@setOnClickListener
@@ -271,10 +271,10 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                 saveAddPatientRetrofitCallback
             )
 
-        })
-        binding.viewModel.getAllDepartment(facility_UUID, favLabAddAllDepartmentCallBack)
+        }
+        binding?.viewModel?.getAllDepartment(facility_UUID, favLabAddAllDepartmentCallBack)
 
-        binding.gender!!.setOnTouchListener(object : View.OnTouchListener {
+        binding?.gender!!.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
                     MotionEvent.ACTION_DOWN ->
@@ -287,7 +287,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             }
         })
 
-        binding.gender.onItemSelectedListener =
+        binding?.gender?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -307,13 +307,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
 
                     Log.e(
                         "Gender",
-                        binding.gender.selectedItem.toString() + "-" + A1selectGenderUuid
+                        binding?.gender?.selectedItem.toString() + "-" + A1selectGenderUuid
                     )
                 }
 
             }
 
-        binding.period!!.setOnTouchListener(object : View.OnTouchListener {
+        binding?.period!!.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
                     MotionEvent.ACTION_DOWN ->
@@ -326,7 +326,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             }
         })
 
-        binding.salutationSpinner!!.setOnTouchListener(object : View.OnTouchListener {
+        binding?.salutationSpinner!!.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 when (event?.action) {
                     MotionEvent.ACTION_DOWN ->
@@ -335,15 +335,12 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                             facility_UUID!!,
                             covidSalutationResponseCallback
                         )
-
-
                 }
-
                 return v?.onTouchEvent(event) ?: true
             }
         })
 
-        binding.salutationSpinner.onItemSelectedListener =
+        binding?.salutationSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -363,13 +360,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
 
                     Log.e(
                         "Salutation",
-                        binding.salutationSpinner.selectedItem.toString() + "-" + A1selectSalutationUuid
+                        binding?.salutationSpinner?.selectedItem.toString() + "-" + A1selectSalutationUuid
                     )
                 }
 
             }
 
-        binding.period.onItemSelectedListener =
+        binding?.period?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -391,7 +388,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
 
                     Log.e(
                         "Period",
-                        binding.period.selectedItem.toString() + "-" + A1selectPeriodUuid
+                        binding?.period?.selectedItem.toString() + "-" + A1selectPeriodUuid
                     )
                 }
 
@@ -399,7 +396,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         return binding!!.root
     }
 
-    val covidGenderResponseCallback = object {
+    val covidGenderResponseCallback = object : RetrofitCallback<CovidGenderResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidGenderResponseModel>?) {
 
             A1selectGenderUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -416,13 +413,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -433,7 +430,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -441,7 +438,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -449,13 +446,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -477,14 +474,14 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         if (gender != null) {
             when {
                 gender.equals("SXML") -> {
-                    binding.period!!.setSelection(hashGenderSpinnerList.get(1)!!)
+                    binding?.period!!.setSelection(hashGenderSpinnerList.get(1)!!)
                 }
                 gender.equals("SXFML") -> {
-                    binding.period!!.setSelection(hashGenderSpinnerList.get(2)!!)
+                    binding?.period!!.setSelection(hashGenderSpinnerList.get(2)!!)
                 }
             }
         } else {
-            binding.period!!.setSelection(hashGenderSpinnerList.get(3)!!)
+            binding?.period!!.setSelection(hashGenderSpinnerList.get(3)!!)
         }
 
         val adapter = ArrayAdapter<String>(
@@ -493,11 +490,11 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             CovidGenderList.values.toMutableList()
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.gender!!.adapter = adapter
+        binding?.gender!!.adapter = adapter
 
     }
 
-    val covidPeriodResponseCallback = object {
+    val covidPeriodResponseCallback = object : RetrofitCallback<CovidPeriodResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidPeriodResponseModel>?) {
 
             A1selectPeriodUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -514,13 +511,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -531,7 +528,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -539,7 +536,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -547,13 +544,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -572,7 +569,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             hashPeriodSpinnerList[responseContents[i]!!.uuid!!] = i
         }
 
-        binding.period!!.setSelection(hashPeriodSpinnerList.get(4)!!)
+        binding?.period!!.setSelection(hashPeriodSpinnerList.get(4)!!)
 
 
         val adapter = ArrayAdapter<String>(
@@ -581,12 +578,12 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             CovidPeriodList.values.toMutableList()
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.period!!.adapter = adapter
+        binding?.period!!.adapter = adapter
 
     }
 
     val covidSalutationResponseCallback =
-        object {
+        object : RetrofitCallback<CovidSalutationTitleResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidSalutationTitleResponseModel>?) {
                 A1selectSalutationUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
                 setSalutation(responseBody.body()?.responseContents)
@@ -603,13 +600,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.req!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -620,7 +617,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>?) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -628,7 +625,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -636,13 +633,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
             }
 
             override fun onEverytime() {
@@ -665,17 +662,17 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             CovidSalutationList.values.toMutableList()
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.salutationSpinner!!.adapter = adapter
+        binding?.salutationSpinner!!.adapter = adapter
 
     }
 
-    val favLabAddAllDepartmentCallBack = object {
+    val favLabAddAllDepartmentCallBack = object : RetrofitCallback<FavAddAllDepatResponseModel> {
         @SuppressLint("NewApi")
         override fun onSuccessfulResponse(responseBody: Response<FavAddAllDepatResponseModel>?) {
-            Log.i("", "" + responseBody?.body().responseContents)
-            listAllAddDepartmentItems = responseBody?.body().responseContents!!
+            Log.i("", "" + responseBody?.body()?.responseContents)
+            listAllAddDepartmentItems = responseBody?.body()?.responseContents!!
             favAddResponseMap =
-                listAllAddDepartmentItems.map { it.uuid!! to it.name }.toMap().toMutableMap()
+                listAllAddDepartmentItems.map { it?.uuid!! to it.name }.toMap().toMutableMap()
 
             val adapter =
                 ArrayAdapter<String>(
@@ -685,7 +682,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                 )
 
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.spinnerFavLabdepartment!!.adapter = adapter
+            binding?.spinnerFavLabdepartment!!.adapter = adapter
 
         }
 
@@ -699,13 +696,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -715,7 +712,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -723,7 +720,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -731,13 +728,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -755,7 +752,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
     }
 
     val facilityLocationResponseCallback =
-        object {
+        object : RetrofitCallback<FacilityLocationResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<FacilityLocationResponseModel>?) {
 
                 if (responseBody!!.body()!!.responseContents != null) {
@@ -791,13 +788,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         "Something Wrong"
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -808,7 +805,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>?) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -816,7 +813,7 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -824,13 +821,13 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
             }
 
             override fun onEverytime() {
@@ -838,7 +835,8 @@ class OldPatientSaveDialogFragment : DialogFragment() {
             }
         }
 
-    var saveAddPatientRetrofitCallback = object {
+    var saveAddPatientRetrofitCallback = object : RetrofitCallback<ResponseAddPatient> {
+
         override fun onSuccessfulResponse(responseBody: Response<ResponseAddPatient>?) {
 
             utils?.showToast(

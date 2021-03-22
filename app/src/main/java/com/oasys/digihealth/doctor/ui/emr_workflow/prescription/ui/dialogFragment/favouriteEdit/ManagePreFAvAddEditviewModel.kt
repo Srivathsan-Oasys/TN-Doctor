@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddResponseModel
@@ -81,7 +81,7 @@ class ManagePreFAvAddEditviewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -150,7 +150,7 @@ class ManagePreFAvAddEditviewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -188,7 +188,7 @@ class ManagePreFAvAddEditviewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(instructionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(instructionRetrofitCallback))
         return
 
     }
@@ -232,7 +232,7 @@ class ManagePreFAvAddEditviewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(searchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(searchRetrofitCallback))
 
 
     }
@@ -257,7 +257,7 @@ class ManagePreFAvAddEditviewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             saveTemplateRequestModel
-        ).enqueue(RetrofitMainCallback(saveTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(saveTemplateRetrofitCallback))
 
 
     }
@@ -282,7 +282,7 @@ class ManagePreFAvAddEditviewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             updateRequestModel
-        ).enqueue(RetrofitMainCallback(updateTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(updateTemplateRetrofitCallback))
 
     }
 
@@ -303,7 +303,7 @@ class ManagePreFAvAddEditviewModel(
         apiService?.getPrescriptionFavAddAll(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!, requestbody
-        ).enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
         return
 
     }
@@ -327,7 +327,7 @@ class ManagePreFAvAddEditviewModel(
         apiService?.getFavddAllList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, favouriteMasterID!!, favouriteTypeId
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
         return
 
     }
@@ -365,7 +365,7 @@ class ManagePreFAvAddEditviewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -387,7 +387,7 @@ class ManagePreFAvAddEditviewModel(
         apiService?.PresEditFav(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!, updatePrescriptionRequest
-        ).enqueue(RetrofitMainCallback(presFavEditRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(presFavEditRetrofitCallback))
         return
     }
 
@@ -423,7 +423,7 @@ class ManagePreFAvAddEditviewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -458,7 +458,7 @@ class ManagePreFAvAddEditviewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -495,7 +495,7 @@ class ManagePreFAvAddEditviewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }

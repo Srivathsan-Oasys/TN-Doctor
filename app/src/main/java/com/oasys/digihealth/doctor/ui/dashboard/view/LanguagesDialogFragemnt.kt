@@ -15,6 +15,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogChangeLanguageBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.LanguagesViewModel
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.LanguagesViewModelFactory
 import com.oasys.digihealth.doctor.utils.Utils
@@ -51,10 +52,10 @@ class LanguagesDialogFragemnt : DialogFragment() {
             requireActivity().application
         )
             .create(LanguagesViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application!!)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         val facility_uuid = appPreferences?.getInt(AppConstants.FACILITY_UUID)
@@ -69,15 +70,15 @@ class LanguagesDialogFragemnt : DialogFragment() {
         val language = appPreferences?.getString(AppConstants.LANGUAGE)
         if (language?.isNotEmpty()!!) {
             if (language.equals("Tamil")) {
-                binding.tamilText.isChecked = true
+                binding?.tamilText?.isChecked = true
             } else if (language.equals("English")) {
-                binding.englishText.isChecked = true
+                binding?.englishText?.isChecked = true
             }
         }
 
 
 // Get radio group selected item using on checked change listener
-        binding.radiogroup!!.setOnCheckedChangeListener(
+        binding?.radiogroup!!.setOnCheckedChangeListener(
             RadioGroup.OnCheckedChangeListener { group, checkedId ->
                 val radio: RadioButton = requireView().findViewById(checkedId)
                 when (checkedId) {
@@ -93,8 +94,8 @@ class LanguagesDialogFragemnt : DialogFragment() {
                 }
 
             })
-        binding.saveTextview!!.setOnClickListener {
-            val intSelectButton: Int = binding.radiogroup!!.checkedRadioButtonId
+        binding?.saveTextview!!.setOnClickListener {
+            val intSelectButton: Int = binding?.radiogroup!!.checkedRadioButtonId
             val radioButton = requireView().findViewById<RadioButton>(intSelectButton)
             Toast.makeText(requireContext(), "" + radioButton.text, Toast.LENGTH_SHORT).show()
             appPreferences?.saveString(AppConstants.LANGUAGE, radioButton.text as String?)
@@ -103,9 +104,9 @@ class LanguagesDialogFragemnt : DialogFragment() {
             dismiss()
         }
 
-        binding.cancelCardView.setOnClickListener({
+        binding?.cancelCardView?.setOnClickListener {
             dialog!!.dismiss()
-        })
+        }
 /*
         // Get radio group selected item using on checked change listener
         binding?.radiogroup!!.setOnCheckedChangeListener(
@@ -131,10 +132,10 @@ class LanguagesDialogFragemnt : DialogFragment() {
                     Toast.LENGTH_SHORT).show()
             }
         }*/
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
-        return binding.root
+        return binding?.root
     }
 
     // or a separate test implementation.

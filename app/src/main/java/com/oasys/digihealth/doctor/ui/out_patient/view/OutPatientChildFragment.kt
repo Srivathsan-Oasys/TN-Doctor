@@ -42,7 +42,7 @@ class OutPatientChildFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_inpatient_child, container, false)
 
-        utils = Utils(this.context!!)
+        utils = Utils(this.requireContext())
         if (activity !is FragmentBackClick) {
 //            throw ClassCastException("Hosting activity must implement BackHandlerInterface")
         } else {
@@ -55,9 +55,9 @@ class OutPatientChildFragment : Fragment() {
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         val facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
-        setupViewPager(binding.viewPager!!)
-        binding.viewPager!!.setOffscreenPageLimit(2)
-        binding.tabLayout!!.setupWithViewPager(binding.viewPager!!)
+        setupViewPager(binding?.viewPager!!)
+        binding?.viewPager!!.setOffscreenPageLimit(2)
+        binding?.tabLayout!!.setupWithViewPager(binding?.viewPager!!)
 
 
         return binding!!.root

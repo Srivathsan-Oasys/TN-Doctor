@@ -16,14 +16,11 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogBedViewFragmentBinding
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.nurse_desk.BedDetailsResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.nurse_desk.BedManagementPatientListResponseContent
+import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.nurse_desk.BedManagementPatientListResponseMosel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.view_model.BedViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.view_model.BedViewModelFactory
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.Model.request.BedDetailsResponseModel
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.Model.request.BedManagementPatientListResponseContent
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.Model.request.BedManagementPatientListResponseMosel
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.ui.ManageBedAllocateAdapter
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.ui.ManageFloorBedAllocateAdapter
-import com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.ui.ManageRoomBedAllocateAdapter
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.util.*
@@ -128,7 +125,7 @@ class BedViewDialogFragment : DialogFragment() {
     val getbedListRetrofitCallBack =
         object : RetrofitCallback<BedDetailsResponseModel> {
             override fun onSuccessfulResponse(response: Response<BedDetailsResponseModel>) {
-                val responseContents = response.body().responseContents
+                val responseContents = response.body()?.responseContents
 
                 viewModel!!.progress.value = 0
 
@@ -148,13 +145,13 @@ class BedViewDialogFragment : DialogFragment() {
 
                 var rmnav: Int = 0
 
-                val wadbed = responseContents!!.ward_bed_info
+                val wadbed = responseContents.ward_bed_info
 
-                val floorbed = responseContents!!.ward_floor_bed_info
+                val floorbed = responseContents.ward_floor_bed_info
 
-                val roombed = responseContents!!.ward_room_bed_info
+                val roombed = responseContents.ward_room_bed_info
 
-                for (i in wadbed!!.indices) {
+                for (i in wadbed.indices) {
 
                     if (wadbed[i].is_occupied) {
 
@@ -166,7 +163,7 @@ class BedViewDialogFragment : DialogFragment() {
                     }
                 }
 
-                for (j in floorbed!!.indices) {
+                for (j in floorbed.indices) {
 
                     if (floorbed[j].is_occupied) {
 
@@ -178,7 +175,7 @@ class BedViewDialogFragment : DialogFragment() {
                     }
                 }
 
-                for (k in roombed!!.indices) {
+                for (k in roombed.indices) {
 
                     if (roombed[k].is_occupied) {
 
@@ -194,7 +191,7 @@ class BedViewDialogFragment : DialogFragment() {
 
                 val avdata = nav + rmnav + flnav
 
-                val totaldata = wadbed.size + floorbed.size + roombed.size
+                var totaldata = wadbed.size + floorbed.size + roombed.size
 
                 binding?.notavailable?.text = "Not Available(${totaldata - avdata})"
 
@@ -209,31 +206,31 @@ class BedViewDialogFragment : DialogFragment() {
                     bedalocated = true
 
 
-                    bedManagementAdapter.allocated(bedalocated!!)
+                    bedManagementAdapter?.allocated(bedalocated!!)
 
-                    manageFloorBedAllocateAdapter.allocated(bedalocated!!)
+                    manageFloorBedAllocateAdapter?.allocated(bedalocated!!)
 
-                    manageRoomBedAllocateAdapter.allocated(bedalocated!!)
+                    manageRoomBedAllocateAdapter?.allocated(bedalocated!!)
 
-                    val wardList = responseContents!!.ward_bed_info
+                    val wardList = responseContents.ward_bed_info
 
-                    val floorList = responseContents!!.ward_floor_bed_info
+                    val floorList = responseContents.ward_floor_bed_info
 
-                    val roomList = responseContents!!.ward_room_bed_info
+                    val roomList = responseContents.ward_room_bed_info
 
-                    val wardcheck = wardList.any { it!!.bed_number == data.wbm_bed_number }
+                    val wardcheck = wardList.any { it.bed_number == data.wbm_bed_number }
 
-                    val floorcheck = floorList.any { it!!.bed_number == data.wbm_bed_number }
+                    val floorcheck = floorList.any { it.bed_number == data.wbm_bed_number }
 
-                    val roomcheck = roomList.any { it!!.bed_number == data.wbm_bed_number }
+                    val roomcheck = roomList.any { it.bed_number == data.wbm_bed_number }
 
 
                     if (wardcheck) {
 
-                        bedManagementAdapter.setSelecetedData(data.wbm_bed_number)
+                        bedManagementAdapter?.setSelecetedData(data.wbm_bed_number)
                     } else if (floorcheck) {
 
-                        manageFloorBedAllocateAdapter.setSelecetedData(data.wbm_bed_number)
+                        manageFloorBedAllocateAdapter?.setSelecetedData(data.wbm_bed_number)
 
                     } else if (roomcheck) {
 
@@ -247,11 +244,11 @@ class BedViewDialogFragment : DialogFragment() {
 
                     bedalocated = false
 
-                    bedManagementAdapter.allocated(bedalocated!!)
+                    bedManagementAdapter?.allocated(bedalocated!!)
 
-                    manageFloorBedAllocateAdapter.allocated(bedalocated!!)
+                    manageFloorBedAllocateAdapter?.allocated(bedalocated!!)
 
-                    manageRoomBedAllocateAdapter.allocated(bedalocated!!)
+                    manageRoomBedAllocateAdapter?.allocated(bedalocated!!)
                     /*    binding?.shuffleCardView?.alpha = 0.2f
                         binding?.shuffleCardView?.isEnabled = false*/
                 }
@@ -271,7 +268,7 @@ class BedViewDialogFragment : DialogFragment() {
                     utils?.showToast(
                         R.color.negativeToast,
                         binding?.mainLayout!!,
-                        responseModel.message!!
+                        responseModel.message
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
@@ -315,5 +312,4 @@ class BedViewDialogFragment : DialogFragment() {
                 viewModel!!.progress.value = 8
             }
         }
-
 }

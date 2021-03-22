@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.diagonosissearch.DiagonosisSearchResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.investigation.model.InvestigationLoationResponseModel
@@ -92,7 +92,7 @@ class TreatmentKitViewModel(
             FacilityID!!,
             departmentID!!,
             AppConstants.FAV_TYPE_ID_PRESCRIPTION
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -113,7 +113,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             FacilityID!!,
             departmentId.toString()
-        ).enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
         return
     }
 
@@ -135,7 +135,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!,
             "filterbythree", query
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
     fun getPrescriptionComplaintSearchResult(
@@ -170,7 +170,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -204,7 +204,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -236,7 +236,7 @@ class TreatmentKitViewModel(
         apiService?.getLAbSearchResult(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(CodeSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(CodeSearchRetrofitCallBack))
         return
     }
 
@@ -259,7 +259,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -282,7 +282,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -322,7 +322,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -359,7 +359,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -398,7 +398,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(radiologyTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(radiologyTypeRetrofitCallback))
         return
 
     }
@@ -435,7 +435,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -472,7 +472,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(radioSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(radioSearchRetrofitCallBack))
         return
     }
 
@@ -507,7 +507,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -529,7 +529,7 @@ class TreatmentKitViewModel(
         apiService?.getDiagonosisName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!, "filterbythree", query
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(complaintSearchRetrofitCallBack)
         )
         return
@@ -568,7 +568,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -606,7 +606,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(instructionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(instructionRetrofitCallback))
         return
 
     }
@@ -642,7 +642,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -677,7 +677,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
         return
 
     }
@@ -713,7 +713,7 @@ class TreatmentKitViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -734,7 +734,7 @@ class TreatmentKitViewModel(
         apiService?.getDiagonosisName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!, "filterbythree", query
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(complaintSearchRetrofitCallBack)
         )
         return
@@ -811,7 +811,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             tkOrderRequestModel
-        ).enqueue(RetrofitMainCallback(createTreatmentmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(createTreatmentmentRetrofitCallBack))
         return
     }
 
@@ -834,7 +834,7 @@ class TreatmentKitViewModel(
             FacilityID!!,
             treatmentId!!,
             favouriteId!!
-        ).enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
         return
     }
 
@@ -860,7 +860,7 @@ class TreatmentKitViewModel(
             facility_uuid,
             orderId,
             updateTreatmentKitPreviousOrderReq
-        ).enqueue(RetrofitMainCallback(updateTreatmentKitPreviousOrderRespCallback))
+        )?.enqueue(RetrofitMainCallback(updateTreatmentKitPreviousOrderRespCallback))
     }
 
     fun getInjectionDetails(
@@ -898,8 +898,8 @@ class TreatmentKitViewModel(
             AppConstants.LANGUAGE,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            facilityId!!, userDataStoreBean?.user_name, body
-        ).enqueue(RetrofitMainCallback(injectionRetrofitCallback))
+            facilityId!!, userDataStoreBean.user_name, body
+        )?.enqueue(RetrofitMainCallback(injectionRetrofitCallback))
         return
 
     }
@@ -1033,7 +1033,7 @@ class TreatmentKitViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -1059,7 +1059,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             autoSearchReq
-        ).enqueue(RetrofitMainCallback(autoSearchRespCallback))
+        )?.enqueue(RetrofitMainCallback(autoSearchRespCallback))
     }
 
     fun treatmentKitFavourite(
@@ -1085,7 +1085,7 @@ class TreatmentKitViewModel(
             facility_uuid,
             treatmentId,
             favouriteId
-        ).enqueue(RetrofitMainCallback(treatmentKitFavouriteRespCallback))
+        )?.enqueue(RetrofitMainCallback(treatmentKitFavouriteRespCallback))
     }
 
     fun getRadiologyCodeSearch(
@@ -1109,7 +1109,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityUuid,
             getRadiologyCodeSearchReq
-        ).enqueue(RetrofitMainCallback(getRadiologyCodeSearchRespCallback))
+        )?.enqueue(RetrofitMainCallback(getRadiologyCodeSearchRespCallback))
     }
 
     fun getInvestigationCodeSearch(
@@ -1133,7 +1133,7 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityUuid,
             getInvestigationCodeSearchReq
-        ).enqueue(RetrofitMainCallback(getInvestigationCodeSearchRespCallback))
+        )?.enqueue(RetrofitMainCallback(getInvestigationCodeSearchRespCallback))
     }
 
     fun getDrugInfo(
@@ -1156,6 +1156,6 @@ class TreatmentKitViewModel(
             userDataStoreBean?.uuid!!,
             facilityID,
             getDrugInfoReq
-        ).enqueue(RetrofitMainCallback(getDrugInfoRespCallback))
+        )?.enqueue(RetrofitMainCallback(getDrugInfoRespCallback))
     }
 }

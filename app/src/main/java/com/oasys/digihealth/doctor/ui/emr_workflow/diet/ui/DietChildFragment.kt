@@ -43,7 +43,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_respon
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.templete.TempDetails
 import com.oasys.digihealth.doctor.ui.emr_workflow.op_notes.model.GetOpNotesEncounterByDocAndPatientIdResp
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.text.SimpleDateFormat

@@ -35,7 +35,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.templete.TempDetails
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.SaveTemplateDialogFragment
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

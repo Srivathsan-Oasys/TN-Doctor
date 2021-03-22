@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppConstants.DEPARTMENT_UUID
@@ -13,6 +12,7 @@ import com.oasys.digihealth.doctor.config.AppConstants.FACILITY_UUID
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.EmrWorkFlowResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.GetStoreMasterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.PatientDetailResponse
@@ -179,7 +179,7 @@ class EmrViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, body
-        ).enqueue(RetrofitMainCallback(getStoreMasterRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getStoreMasterRetrofitCallBack))
         return
     }
 
@@ -203,10 +203,10 @@ class EmrViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid,
-            userDataStoreBean?.user_name,
+            userDataStoreBean.user_name,
             patientUuid,
             encounterType
-        ).enqueue(RetrofitMainCallback(getPatientLatestEncCallback))
+        )?.enqueue(RetrofitMainCallback(getPatientLatestEncCallback))
         return
     }
 
@@ -239,8 +239,8 @@ class EmrViewModel(
         apiService?.getPatientById(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid, userDataStoreBean?.user_name, body
-        ).enqueue(RetrofitMainCallback(getPatientByIdCallback))
+            userDataStoreBean?.uuid!!, facility_uuid, userDataStoreBean.user_name, body
+        )?.enqueue(RetrofitMainCallback(getPatientByIdCallback))
         return
     }
 

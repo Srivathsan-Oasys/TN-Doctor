@@ -2,8 +2,9 @@ package com.oasys.digihealth.doctor.ui.helpdesk.view
 
 
 import android.os.Bundle
-import android.view.*
-
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -13,9 +14,9 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityAgentTicketBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.AgentTicketViewModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.AgentTicketViewModelFactory
-import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.utils.Utils
 
 
@@ -44,8 +45,8 @@ class AgentNewTicketFragment : Fragment() {
             requireActivity().application
         )
             .create(AgentTicketViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         appPreferences = AppPreferences.getInstance(
@@ -53,13 +54,13 @@ class AgentNewTicketFragment : Fragment() {
             AppConstants.SHARE_PREFERENCE_NAME
         )
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
 
-        setupViewPager(binding.viewpager!!)
-        binding.viewpager!!.setOffscreenPageLimit(2)
-        binding.tabs!!.setupWithViewPager(binding.viewpager)
+        setupViewPager(binding?.viewpager!!)
+        binding?.viewpager!!.offscreenPageLimit = 2
+        binding?.tabs!!.setupWithViewPager(binding?.viewpager)
 
 
         return binding!!.root

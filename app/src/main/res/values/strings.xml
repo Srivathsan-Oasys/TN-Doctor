@@ -1,14 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
     <string name="facebook_app_id" tools:ignore="ExtraTranslation">968305966936614</string>
     <string name="health_info">HEALTH MANAGEMENT INFORMATION SYSTEM</string>
     <string name="Department">Department </string>
     <string name="signinbutton">SIGN IN</string>
-
+    <string name="password_changed">Password Changes Successfully</string>
 
     <string name="ward_selection">Ward </string>
     <string name="Wardcode">Code</string>
 
     <string name="Store">Store </string>
+
+    <string name="department_title">Department</string>
 
     <string name="Radilogy">Radilogy </string>
     <string name="fav_add_success">Favourite added successfully</string>
@@ -966,8 +969,6 @@ Ministry of Health &amp; Family Welfare does not guarantee that linked websites 
     <string name="Frequency">Frequency</string>
     <string name="Duration">Duration</string>
     <string name="Instruction">Instruction</string>
-
-
 
 
     <string name="select_any_slot_alert_message" translatable="false">Select any one slot to process</string>

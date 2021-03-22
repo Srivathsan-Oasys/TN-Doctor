@@ -10,7 +10,8 @@
     <color name="colorPrimaryDark">#0066CC</color>
     <color name="colorAccent">#FFA31A</color>
     <color name="secondaryColor">#00bfa5</color>
-    <color name="save">#00B28A</color>
+    <color name="save">#00bfa5</color>
+    <color name="clear">#6F6F6F</color>
     <color name="grey">#999999</color>
     <color name="colorLightGrey">#f9f9f9</color>
     <color name="colorDarkGrey">#6F6F6F</color>

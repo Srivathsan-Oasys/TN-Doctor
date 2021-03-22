@@ -30,7 +30,7 @@ class LmisLabNameSearch(
     }
 
     override fun getItemId(p0: Int): Long {
-        return mPois.get(p0).uuid.toLong()!!
+        return mPois.get(p0).uuid?.toLong()!!
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -65,7 +65,7 @@ class LmisLabNameSearch(
                     allPois
                 else
                     allPois.filter {
-                        it.name.toLowerCase().contains(queryString)!!
+                        it.name?.toLowerCase()?.contains(queryString)!!
                     }
                 return filterResults
             }

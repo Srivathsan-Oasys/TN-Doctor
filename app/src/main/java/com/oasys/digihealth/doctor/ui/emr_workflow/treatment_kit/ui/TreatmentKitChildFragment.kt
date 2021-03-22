@@ -77,7 +77,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.model.treatment
 import com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModelFactory
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethodContent
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import kotlinx.android.synthetic.main.treatment_kit_child_fragment.*
 import retrofit2.Response
@@ -3820,8 +3820,6 @@ class TreatmentKitChildFragment : Fragment(),
 
             customProgressDialog!!.dismiss()
         }
-
-
     }
 
     private fun orderMobile() {

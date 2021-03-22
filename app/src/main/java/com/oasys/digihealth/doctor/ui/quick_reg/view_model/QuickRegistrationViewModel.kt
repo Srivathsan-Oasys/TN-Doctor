@@ -6,22 +6,24 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
-
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
+import com.oasys.digihealth.doctor.ui.dashboard.model.CovidGenderResponseModel
+import com.oasys.digihealth.doctor.ui.dashboard.model.CovidNationalityResponseModel
+import com.oasys.digihealth.doctor.ui.dashboard.model.CovidPeriodResponseModel
+import com.oasys.digihealth.doctor.ui.dashboard.model.CovidSalutationTitleResponseModel
+import com.oasys.digihealth.doctor.ui.dashboard.model.registration.CovidRegistrationSearchResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.DistrictListResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.StateListResponseModel
-import com.oasys.digihealth.doctor.ui.dashboard.model.*
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.EncounterDoctor
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
-import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.ui.quick_reg.model.*
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.LabNameSearchResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.QuickRegistrationRequestModel
@@ -44,7 +46,6 @@ class QuickRegistrationViewModel(
 ) {
 
 
-
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
     var enterConfirmPasswordEditText = MutableLiveData<String>()
@@ -53,12 +54,11 @@ class QuickRegistrationViewModel(
 
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
 
-    var facility_id:Int?=0
+    var facility_id: Int? = 0
 
-    var departMentId:Int?=0
+    var departMentId: Int? = 0
 
     var appPreferences: AppPreferences? = null
-
 
 
     init {
@@ -70,11 +70,13 @@ class QuickRegistrationViewModel(
         progress.value = 8
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
 
-        departMentId= appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
+        departMentId = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
     }
 
 
-    fun quickRegistrationSaveList(requestRegistration: QuickRegistrationRequestModel, PatientNameRetrofitCallback: RetrofitCallback<QuickRegistrationSaveResponseModel>
+    fun quickRegistrationSaveList(
+        requestRegistration: QuickRegistrationRequestModel,
+        PatientNameRetrofitCallback: RetrofitCallback<QuickRegistrationSaveResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -86,16 +88,18 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.quickRegistrationSave(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.quickRegistrationSave(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
         )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
-
     }
     //updateQuickRegistration
 
-    fun quickRegistrationUpdate(requestRegistration: QuickRegistrationUpdateRequestModel, updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
+    fun quickRegistrationUpdate(
+        requestRegistration: QuickRegistrationUpdateRequestModel,
+        updateQuickRegistrationRetrofitCallback: RetrofitCallback<QuickRegistrationUpdateResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -107,7 +111,8 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.updateQuickRegistration(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.updateQuickRegistration(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
@@ -115,7 +120,10 @@ class QuickRegistrationViewModel(
 
     }
 
-    fun GetPDFf(requestPDF: PDFRequestModel, GetPDFRetrofitCallback: RetrofitCallback<ResponseBody>) {
+    fun GetPDFf(
+        requestPDF: PDFRequestModel,
+        GetPDFRetrofitCallback: RetrofitCallback<ResponseBody>
+    ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -126,7 +134,8 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getPDF(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getPDF(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestPDF
@@ -135,7 +144,10 @@ class QuickRegistrationViewModel(
     }
 
 
-    fun getCovidPeriodList(facilityId: Int, covidPeriodResponseCallback: RetrofitCallback<CovidPeriodResponseModel>) {
+    fun getCovidPeriodList(
+        facilityId: Int,
+        covidPeriodResponseCallback: RetrofitCallback<CovidPeriodResponseModel>
+    ) {
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
@@ -147,14 +159,17 @@ class QuickRegistrationViewModel(
 
         apiService?.getCovidPeriod(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH +userDataStoreBean?.access_token,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
         )?.enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
         return
     }
 
-    fun getCovidGenderList(facilityId: Int, covidGenderResponseCallback: RetrofitCallback<CovidGenderResponseModel>) {
+    fun getCovidGenderList(
+        facilityId: Int,
+        covidGenderResponseCallback: RetrofitCallback<CovidGenderResponseModel>
+    ) {
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
@@ -165,14 +180,17 @@ class QuickRegistrationViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidGender(
-            AppConstants.BEARER_AUTH +userDataStoreBean?.access_token,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
         )?.enqueue(RetrofitMainCallback(covidGenderResponseCallback))
         return
     }
 
-    fun getCovidNationalityList(query: String, covidNationalityResponseCallback: RetrofitCallback<CovidNationalityResponseModel>) {
+    fun getCovidNationalityList(
+        query: String,
+        covidNationalityResponseCallback: RetrofitCallback<CovidNationalityResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -185,7 +203,7 @@ class QuickRegistrationViewModel(
 
         apiService?.getNationality(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH +userDataStoreBean?.access_token,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_id!!,
             query
@@ -193,7 +211,10 @@ class QuickRegistrationViewModel(
         return
     }
 
-    fun getStateList(country_id:Int,stateRetrofitCallback: RetrofitCallback<StateListResponseModel>) {
+    fun getStateList(
+        country_id: Int,
+        stateRetrofitCallback: RetrofitCallback<StateListResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -218,7 +239,7 @@ class QuickRegistrationViewModel(
 
         apiService?.getState(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,
+            userDataStoreBean?.uuid!!, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
@@ -226,7 +247,10 @@ class QuickRegistrationViewModel(
         return
     }
 
-    fun getDistrict(uuid: Int, distictRetrofitCallback: RetrofitCallback<DistrictListResponseModel>) {
+    fun getDistrict(
+        uuid: Int,
+        distictRetrofitCallback: RetrofitCallback<DistrictListResponseModel>
+    ) {
 
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -252,7 +276,7 @@ class QuickRegistrationViewModel(
 
         apiService?.getDistict(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,
+            userDataStoreBean?.uuid!!, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
@@ -286,7 +310,7 @@ class QuickRegistrationViewModel(
 
         apiService?.getBlockZone(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,
+            userDataStoreBean?.uuid!!, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
@@ -294,37 +318,44 @@ class QuickRegistrationViewModel(
 
     }
 
-    fun getPrevilage(facilityId: Int,roleID : Int?,getPrivilageRetrofitCallback: RetrofitCallback<ResponsePrivillageModule>) {
+    fun getPrevilage(
+        facilityId: Int,
+        roleID: Int?,
+        getPrivilageRetrofitCallback: RetrofitCallback<ResponsePrivillageModule>
+    ) {
 
-            val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-            val jsonBody = JSONObject()
-            if (!Utils.isNetworkConnected(getApplication())) {
-                errorText.value = getApplication<Application>().getString(R.string.no_internet)
-                return
-            }
-            try {
-                jsonBody.put("activityCode", AppConstants?.COVIDREGISTERCODE)
-                jsonBody.put("roleId", roleID)
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
+        val jsonBody = JSONObject()
+        if (!Utils.isNetworkConnected(getApplication())) {
+            errorText.value = getApplication<Application>().getString(R.string.no_internet)
+            return
+        }
+        try {
+            jsonBody.put("activityCode", AppConstants.COVIDREGISTERCODE)
+            jsonBody.put("roleId", roleID)
 
-            } catch (e: JSONException) {
-                e.printStackTrace()
-            }
-            val body = RequestBody.create(
-                okhttp3.MediaType.parse("application/json; charset=utf-8"),
-                jsonBody.toString()
-            )
-            progress.value = 0
-            val aiiceApplication = HmisApplication.get(getApplication())
-            val apiService = aiiceApplication.getRetrofitService()
-            apiService?.getPrivilliageModule(
-                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,"en",
-                userDataStoreBean?.uuid!!, facilityId!!,
-                body
-            )?.enqueue(RetrofitMainCallback(getPrivilageRetrofitCallback))
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+        val body = RequestBody.create(
+            okhttp3.MediaType.parse("application/json; charset=utf-8"),
+            jsonBody.toString()
+        )
+        progress.value = 0
+        val aiiceApplication = HmisApplication.get(getApplication())
+        val apiService = aiiceApplication.getRetrofitService()
+        apiService?.getPrivilliageModule(
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, "en",
+            userDataStoreBean?.uuid!!, facilityId,
+            body
+        )?.enqueue(RetrofitMainCallback(getPrivilageRetrofitCallback))
 
     }
 
-    fun getTextMethod(facilityId: Int, ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>) {
+    fun getTextMethod(
+        facilityId: Int,
+        ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -359,13 +390,16 @@ class QuickRegistrationViewModel(
 
         apiService?.getTestMethod(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
-    fun getTextMethod1(facilityId: Int, ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>) {
+    fun getTextMethod1(
+        facilityId: Int,
+        ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -400,13 +434,16 @@ class QuickRegistrationViewModel(
 
         apiService?.getTestMethod(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
-    fun getLabName(search:String, GetPDFRetrofitCallback: RetrofitCallback<LabNameSearchResponseModel>) {
+    fun getLabName(
+        search: String,
+        GetPDFRetrofitCallback: RetrofitCallback<LabNameSearchResponseModel>
+    ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
@@ -420,8 +457,8 @@ class QuickRegistrationViewModel(
             jsonBody.put("searchKey", "search")
             jsonBody.put("search", search)
             jsonBody.put("pageNo", 0)
-            jsonBody.put("is_lab_center",true)
-            jsonBody.put("paginationSize",10 )
+            jsonBody.put("is_lab_center", true)
+            jsonBody.put("paginationSize", 10)
 
 
         } catch (e: JSONException) {
@@ -437,14 +474,18 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabname(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabname(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,body
+            userDataStoreBean?.uuid!!, facility_id!!, body
         )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
-    fun getLocationMaster(facility:Int,stateRetrofitCallback: RetrofitCallback<LocationMasterResponseModel>) {
+    fun getLocationMaster(
+        facility: Int,
+        stateRetrofitCallback: RetrofitCallback<LocationMasterResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -469,14 +510,17 @@ class QuickRegistrationViewModel(
 
         apiService?.getLocationMaster(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,
+            userDataStoreBean?.uuid!!, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
 
-    fun getLabNameInList(id:Int,stateRetrofitCallback: RetrofitCallback<GetLabNameListResponseModel>) {
+    fun getLabNameInList(
+        id: Int,
+        stateRetrofitCallback: RetrofitCallback<GetLabNameListResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -502,7 +546,7 @@ class QuickRegistrationViewModel(
         apiService?.getLabNameinList(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,body
+            userDataStoreBean?.uuid!!, facility_id!!, body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
@@ -523,14 +567,14 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getApplicationRules(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getApplicationRules(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!
+            userDataStoreBean?.uuid!!, facility_id!!
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
-
 
 
     fun getFaciltyLocation(stateRetrofitCallback: RetrofitCallback<FacilityLocationResponseModel>) {
@@ -558,16 +602,21 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getFacilityLocation(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getFacilityLocation(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,body
+            userDataStoreBean?.uuid!!, facility_id!!, body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
 
 
-    fun gettolocationmapid(facility_uuid:Int,testMasterID:Int,stateRetrofitCallback: RetrofitCallback<MapListResponseModel>) {
+    fun gettolocationmapid(
+        facility_uuid: Int,
+        testMasterID: Int,
+        stateRetrofitCallback: RetrofitCallback<MapListResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -585,7 +634,7 @@ class QuickRegistrationViewModel(
 
             jsonBody.put("from_department_uuid", departMentId)
 
-           // jsonBody.put("facility_uuid", facility_uuid)
+            // jsonBody.put("facility_uuid", facility_uuid)
 
 
 /*
@@ -607,9 +656,10 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.gettolocationmapid(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.gettolocationmapid(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,body
+            userDataStoreBean?.uuid!!, facility_id!!, body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
@@ -667,7 +717,12 @@ class QuickRegistrationViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-        apiService?.getTest(AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,facility_id!!,body)?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        apiService?.getTest(
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
+            facility_id!!,
+            body
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -685,7 +740,7 @@ class QuickRegistrationViewModel(
             jsonBody.put("table_name", "order_priority")
             jsonBody.put("sortField", "uuid")
             jsonBody.put("sortOrder", "DESC")
-            jsonBody.put("status",1)
+            jsonBody.put("status", 1)
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -711,8 +766,6 @@ class QuickRegistrationViewModel(
     }
 
 
-
-
     fun searchPatient(
         query: String,
         pin: String,
@@ -728,7 +781,7 @@ class QuickRegistrationViewModel(
 
 
         val req = Gson().toJson(searchPatientRequestModelCovid)
-        Log.e("data",req.toString())
+        Log.e("data", req.toString())
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -740,8 +793,11 @@ class QuickRegistrationViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatientcovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH+userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, searchPatientRequestModelCovid)!!.enqueue(
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
+            appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
+            searchPatientRequestModelCovid
+        )!!.enqueue(
             RetrofitMainCallback(patientSearchRetrofitCallBack)
         )
     }
@@ -771,7 +827,7 @@ class QuickRegistrationViewModel(
 
         apiService?.getCovidPatientSearch(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, AppConstants?.ACCEPT_LANGUAGE_EN, facility_id!!,
+            userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
@@ -779,7 +835,7 @@ class QuickRegistrationViewModel(
 
     @SuppressLint("SimpleDateFormat")
     fun createEncounter(
-        createEncounterCallback: RetrofitCallback<CreateEncounterResponseModel>,patientUUId:Int
+        createEncounterCallback: RetrofitCallback<CreateEncounterResponseModel>, patientUUId: Int
     ) {
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -824,8 +880,8 @@ class QuickRegistrationViewModel(
         encounterDoctor.speciality_uuid = 0
         encounterDoctor.sub_deparment_uuid = 0
         encounterDoctor.visit_type_uuid = 1
-        encounterDoctor.tat_start_time=dateInString
-        encounterDoctor.tat_end_time=dateInString
+        encounterDoctor.tat_start_time = dateInString
+        encounterDoctor.tat_end_time = dateInString
 
         createEncounterRequestModel.encounterDoctor = encounterDoctor
 
@@ -839,7 +895,10 @@ class QuickRegistrationViewModel(
         )
     }
 
-    fun getSaveOrder(request: SaveOrderRequestModel, PatientNameRetrofitCallback: RetrofitCallback<SaveOrderResponseModel>) {
+    fun getSaveOrder(
+        request: SaveOrderRequestModel,
+        PatientNameRetrofitCallback: RetrofitCallback<SaveOrderResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -863,9 +922,9 @@ class QuickRegistrationViewModel(
         query: String,
         pin: String,
         mobile: String,
-        pagesize : Int,
-        curretpage : Int,
-        aatherNo:String,
+        pagesize: Int,
+        curretpage: Int,
+        aatherNo: String,
         patientSearchRetrofitCallBack: RetrofitCallback<QuickSearchResponseModel>
     ) {
 
@@ -879,14 +938,14 @@ class QuickRegistrationViewModel(
         searchPatientRequestModelCovid.mobile = mobile
         searchPatientRequestModelCovid.pin = pin
         searchPatientRequestModelCovid.searchKeyWord = query
-        searchPatientRequestModelCovid.pageNo =curretpage
+        searchPatientRequestModelCovid.pageNo = curretpage
         searchPatientRequestModelCovid.paginationSize = pagesize
         searchPatientRequestModelCovid.sortField = "patient_visits[0].registered_date"
         searchPatientRequestModelCovid.sortOrder = "DESC"
-        searchPatientRequestModelCovid.aadhaar= aatherNo!!
+        searchPatientRequestModelCovid.aadhaar = aatherNo
 
         val req = Gson().toJson(searchPatientRequestModelCovid)
-        Log.e("data",req.toString())
+        Log.e("data", req.toString())
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -898,8 +957,11 @@ class QuickRegistrationViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatientcovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH+userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, searchPatientRequestModelCovid)!!.enqueue(
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
+            appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
+            searchPatientRequestModelCovid
+        )!!.enqueue(
             RetrofitMainCallback(patientSearchRetrofitCallBack)
         )
     }
@@ -908,8 +970,8 @@ class QuickRegistrationViewModel(
         query: String,
         pin: String,
         mobile: String,
-        pagesize : Int,
-        curretpage : Int,
+        pagesize: Int,
+        curretpage: Int,
 
         patientSearchRetrofitCallBack: RetrofitCallback<QuickSearchResponseModel>
     ) {
@@ -924,13 +986,13 @@ class QuickRegistrationViewModel(
         searchPatientRequestModelCovid.mobile = mobile
         searchPatientRequestModelCovid.pin = pin
         searchPatientRequestModelCovid.searchKeyWord = query
-        searchPatientRequestModelCovid.pageNo =curretpage
+        searchPatientRequestModelCovid.pageNo = curretpage
         searchPatientRequestModelCovid.paginationSize = pagesize
         searchPatientRequestModelCovid.sortField = "patient_visits[0].registered_date"
         searchPatientRequestModelCovid.sortOrder = "DESC"
 
         val req = Gson().toJson(searchPatientRequestModelCovid)
-        Log.e("data",req.toString())
+        Log.e("data", req.toString())
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -942,14 +1004,20 @@ class QuickRegistrationViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatientcovid(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH+userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, searchPatientRequestModelCovid)!!.enqueue(
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
+            appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
+            searchPatientRequestModelCovid
+        )!!.enqueue(
             RetrofitMainCallback(patientSearchRetrofitCallBack)
         )
     }
 
 
-    fun getCovidNameTitleList(facilityId: Int, covidSalutationResponseCallback: RetrofitCallback<CovidSalutationTitleResponseModel>) {
+    fun getCovidNameTitleList(
+        facilityId: Int,
+        covidSalutationResponseCallback: RetrofitCallback<CovidSalutationTitleResponseModel>
+    ) {
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
@@ -960,14 +1028,17 @@ class QuickRegistrationViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidNameTitle(
-            AppConstants.BEARER_AUTH +userDataStoreBean?.access_token,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
         )?.enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
         return
     }
 
-    fun searchPDSPatient(pdsNumber: String, patientSearchRetrofitCallBack: RetrofitCallback<PDSResponseModule>) {
+    fun searchPDSPatient(
+        pdsNumber: String,
+        patientSearchRetrofitCallBack: RetrofitCallback<PDSResponseModule>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -992,14 +1063,14 @@ class QuickRegistrationViewModel(
         val apiService = aiiceApplication.getRetrofitService()
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
-        apiService?.searchPDSPatient("en",
+        apiService?.searchPDSPatient(
+            "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-                    facility_id!!,
-                         body
+            facility_id!!,
+            body
         )?.enqueue(RetrofitMainCallback(patientSearchRetrofitCallBack))
         return
-
 
 
     }

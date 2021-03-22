@@ -27,9 +27,13 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragementDetailedRegistrationBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.*
 import com.oasys.digihealth.doctor.ui.detailedRegistration.model.*
+import com.oasys.digihealth.doctor.ui.detailedRegistration.ui.PatientAllReferralsAdapter
+import com.oasys.digihealth.doctor.ui.detailedRegistration.ui.PatientAllVisitsAdapter
 import com.oasys.digihealth.doctor.ui.detailedRegistration.viewModel.DetailedRegistrationViewModel
 import com.oasys.digihealth.doctor.ui.detailedRegistration.viewModel.DetailedRegistrationViewModelFactory
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.immunization.model.ImmunizationInstitutionResponseModel
@@ -37,7 +41,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.history.immunization.model.Im
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.ErrorAPIClass
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.*
 import com.oasys.digihealth.doctor.ui.quick_reg.model.activitysession.ResponseActivitySession
 import com.oasys.digihealth.doctor.ui.quick_reg.model.activitysession.ResponseContentsactivitysession
@@ -49,7 +53,7 @@ import com.oasys.digihealth.doctor.ui.quickregistration.ui.DepartmentSearchAdapt
 import com.oasys.digihealth.doctor.ui.quickregistration.ui.QuickDialogPDFViewerActivity
 import com.oasys.digihealth.doctor.ui.quickregistration.ui.SessionAdapter
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 import java.io.IOException
 import java.text.ParseException
@@ -253,7 +257,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     private var selectdepartmentRefuralUUId: Int? = 0
 
-
     private var sariStatus: Boolean = false
     private var iliStatus: Boolean = false
     private var nosymptomsStatus: Boolean = false
@@ -345,8 +348,8 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             requireActivity().application
         )
             .create(DetailedRegistrationViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         requireActivity().window
@@ -362,8 +365,8 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         //    selectdepartmentUUId = departmentUUId
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
-        roleid = userDataStoreBean.role_uuid
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
+        roleid = userDataStoreBean?.role_uuid
 
         Utils(requireContext()).setCalendarLocale("en", requireContext())
 
@@ -396,7 +399,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         customProgressDialog = CustomProgressDialog(requireContext())
         viewModel!!.errorText.observe(viewLifecycleOwner,
             Observer { toastMessage ->
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, toastMessage)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
             })
 /*
 
@@ -415,13 +418,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         tat_start_time = sdf.format(Date())
 
-        binding.searchDrawerCardView.setOnClickListener {
-            binding.drawerLayout!!.openDrawer(GravityCompat.END)
+        binding?.searchDrawerCardView?.setOnClickListener {
+            binding?.drawerLayout!!.openDrawer(GravityCompat.END)
         }
 
-        binding.drawerLayout.drawerElevation = 0f
+        binding?.drawerLayout?.drawerElevation = 0f
 
-        binding.drawerLayout.setScrimColor(
+        binding?.drawerLayout?.setScrimColor(
             ContextCompat.getColor(
                 requireContext(),
                 android.R.color.transparent
@@ -432,16 +435,41 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         setSeasion()
 
 
-        binding.visitHistoryHeader.setOnClickListener {
+        binding?.visitHistoryHeader?.setOnClickListener {
+            if (binding?.visitHistoryResultlayout?.visibility == View.GONE) {
+                binding?.visitHistoryResultlayout?.visibility = View.VISIBLE
+            } else {
+                binding?.visitHistoryResultlayout?.visibility = View.GONE
+            }
+        }
 
-            if (binding.visitHistoryResultlayout.visibility == View.GONE) {
 
-                binding.visitHistoryResultlayout.visibility = View.VISIBLE
+        binding?.patientInfoHeader?.setOnClickListener {
+
+            if (binding?.patientInfoResultlayout?.visibility == View.GONE) {
+
+                binding?.patientInfoResultlayout?.visibility = View.VISIBLE
 
 
             } else {
 
-                binding.visitHistoryResultlayout.visibility = View.GONE
+                binding?.patientInfoResultlayout?.visibility = View.GONE
+
+            }
+
+
+        }
+
+        binding?.patientDetailsHeader?.setOnClickListener {
+
+            if (binding?.patientDetailsResultlayout?.visibility == View.GONE) {
+
+                binding?.patientDetailsResultlayout?.visibility = View.VISIBLE
+
+
+            } else {
+
+                binding?.patientDetailsResultlayout?.visibility = View.GONE
 
             }
 
@@ -449,93 +477,59 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
 
 
+        binding?.addressheader?.setOnClickListener {
 
-        binding.patientInfoHeader.setOnClickListener {
+            if (binding?.addressresultlayout?.visibility == View.GONE) {
 
-            if (binding.patientInfoResultlayout.visibility == View.GONE) {
-
-                binding.patientInfoResultlayout.visibility = View.VISIBLE
-
-
-            } else {
-
-                binding.patientInfoResultlayout.visibility = View.GONE
-
-            }
-
-
-        }
-
-        binding.patientDetailsHeader.setOnClickListener {
-
-            if (binding.patientDetailsResultlayout.visibility == View.GONE) {
-
-                binding.patientDetailsResultlayout.visibility = View.VISIBLE
+                binding?.addressresultlayout?.visibility = View.VISIBLE
 
 
             } else {
 
-                binding.patientDetailsResultlayout.visibility = View.GONE
-
-            }
-
-
-        }
-
-
-        binding.addressheader.setOnClickListener {
-
-            if (binding.addressresultlayout.visibility == View.GONE) {
-
-                binding.addressresultlayout.visibility = View.VISIBLE
-
-
-            } else {
-
-                binding.addressresultlayout.visibility = View.GONE
+                binding?.addressresultlayout?.visibility = View.GONE
 
             }
 
         }
 
-        binding.referalDetailsHeader.setOnClickListener {
+        binding?.referalDetailsHeader?.setOnClickListener {
 
-            if (binding.referalDetailsResultlayout.visibility == View.GONE) {
+            if (binding?.referalDetailsResultlayout?.visibility == View.GONE) {
 
-                binding.referalDetailsResultlayout.visibility = View.VISIBLE
+                binding?.referalDetailsResultlayout?.visibility = View.VISIBLE
 
 
             } else {
 
-                binding.referalDetailsResultlayout.visibility = View.GONE
+                binding?.referalDetailsResultlayout?.visibility = View.GONE
 
             }
 
         }
 
-        binding.referalHistoryHeader.setOnClickListener {
+        binding?.referalHistoryHeader?.setOnClickListener {
 
-            if (binding.referalHistoryResultlayout.visibility == View.GONE) {
+            if (binding?.referalHistoryResultlayout?.visibility == View.GONE) {
 
-                binding.referalHistoryResultlayout.visibility = View.VISIBLE
+                binding?.referalHistoryResultlayout?.visibility = View.VISIBLE
 
 
             } else {
 
-                binding.referalHistoryResultlayout.visibility = View.GONE
+                binding?.referalHistoryResultlayout?.visibility = View.GONE
 
             }
 
         }
 
 
-        binding.searchButton.setOnClickListener {
+        binding?.searchButton?.setOnClickListener {
 
 
-            MobileNumber = binding.quickMobileNum.text.toString()
-            quicksearch = binding.qucikSearch.text.toString()
-            oldPin = binding.quickExistPin.text.toString()
-            pdsNumber = binding.quickPds.text.toString()
+            MobileNumber = binding?.quickMobileNum?.text?.toString()
+            quicksearch = binding?.qucikSearch?.text?.toString()
+            oldPin = binding?.quickExistPin?.text?.toString()
+            pdsNumber = binding?.quickPds?.text?.toString()
 
 
             if ((quicksearch != "") || (MobileNumber != "") || (oldPin != "" || pdsNumber != "")) {
@@ -547,9 +541,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     val dialog = SearchPatientDialogFragment()
                     val bundle = Bundle()
                     bundle.putString("PDS", pdsNumber)
-                    dialog.setArguments(bundle)
+                    dialog.arguments = bundle
                     dialog.show(ft, "Tag")
-                    binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+                    binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
                     return@setOnClickListener
 
 
@@ -639,12 +633,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 Toast.makeText(context, "Please enter any one felid", Toast.LENGTH_SHORT).show()
 
             }
-            binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+            binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
 
         }
 
 
-        binding.saveCardView!!.setOnClickListener {
+        binding?.saveCardView!!.setOnClickListener {
 
             onNext = 0
 
@@ -658,7 +652,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             }
 
 
-            if (!binding.etRemarkname.text.isNullOrEmpty() && binding.etRemarkname.text.toString().length!! < 3) {
+            if (!binding?.etRemarkname?.text.isNullOrEmpty() && binding?.etRemarkname?.text?.toString()?.length!! < 3) {
 
                 Toast.makeText(context, "Remarks Minimum 3 letter", Toast.LENGTH_SHORT).show()
 
@@ -772,7 +766,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -806,7 +800,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                             selectSalutationUuid
 
                                         quickRegistrationSaveResponseModel.aadhaar_number =
-                                            binding.quickAather.text.toString()
+                                            binding?.quickAather?.text.toString()
 
                                         quickRegistrationSaveResponseModel.is_maternity = Matanity
 
@@ -823,16 +817,16 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                             selectVillageUuid.toString()
 
 
-                                        if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                                             quickRegistrationSaveResponseModel.father_name =
-                                                binding.etFathername.text.trim().toString()
+                                                binding?.etFathername?.text?.trim().toString()
 
                                         }
 
 
-                                        if (!binding.etRemarkname.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etRemarkname?.text?.trim().isNullOrEmpty()) {
                                             quickRegistrationSaveResponseModel.remarks =
-                                                binding.etRemarkname.text.trim().toString()
+                                                binding?.etRemarkname?.text?.trim().toString()
 
                                         }
 
@@ -887,7 +881,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         if (is_dob_auto_calculate == 0) {
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -941,15 +935,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         quickregUseoldpin.village_uuid =
                                             selectVillageUuid.toString()
 
-                                        if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                                             quickregUseoldpin.father_name =
-                                                binding.etFathername.text.trim().toString()
+                                                binding?.etFathername?.text?.trim().toString()
 
                                         }
 
-                                        if (!binding.etRemarkname.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etRemarkname?.text?.trim().isNullOrEmpty()) {
                                             quickregUseoldpin.remarks =
-                                                binding.etRemarkname.text.trim().toString()
+                                                binding?.etRemarkname?.text?.trim().toString()
 
                                         }
 
@@ -987,7 +981,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         if (is_dob_auto_calculate == 0) {
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -1040,7 +1034,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         if (is_dob_auto_calculate == 0) {
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -1080,15 +1074,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
 
-                                        if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                                             quickUpdateRequestModel.father_name =
-                                                binding.etFathername.text.trim().toString()
+                                                binding?.etFathername?.text?.trim().toString()
 
                                         }
 
-                                        if (!binding.etRemarkname.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etRemarkname?.text?.trim().isNullOrEmpty()) {
                                             quickUpdateRequestModel.remarks =
-                                                binding.etRemarkname.text.trim().toString()
+                                                binding?.etRemarkname?.text?.trim().toString()
 
                                         }
 
@@ -1119,7 +1113,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         if (is_dob_auto_calculate == 0) {
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -1174,7 +1168,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         if (is_dob_auto_calculate == 0) {
 
                                             DOB = utils!!.convertDateFormat(
-                                                binding.dob.text.toString(),
+                                                binding?.dob?.text.toString(),
                                                 "dd-MM-yyyy",
                                                 "yyyy-MM-dd'T'HH:mm:ss.SSS"
                                             )
@@ -1217,15 +1211,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                                         quickUpdateRequestModel.village_uuid = selectVillageUuid
 
-                                        if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                                             quickUpdateRequestModel.father_name =
-                                                binding.etFathername.text.trim().toString()
+                                                binding?.etFathername?.text?.trim().toString()
 
                                         }
 
-                                        if (!binding.etRemarkname.text.trim().isNullOrEmpty()) {
+                                        if (!binding?.etRemarkname?.text?.trim().isNullOrEmpty()) {
                                             quickUpdateRequestModel.remarks =
-                                                binding.etRemarkname.text.trim().toString()
+                                                binding?.etRemarkname?.text?.trim().toString()
 
                                         }
 
@@ -1292,8 +1286,8 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
 
-        binding.InstitutionReferal!!.requestFocus()
-        binding.InstitutionReferal!!.addTextChangedListener(object : TextWatcher {
+        binding?.InstitutionReferal!!.requestFocus()
+        binding?.InstitutionReferal!!.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
@@ -1316,7 +1310,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         })
 
 
-        binding.InstitutionReferal!!.onItemClickListener =
+        binding?.InstitutionReferal!!.onItemClickListener =
             object : AdapterView.OnItemClickListener {
                 override fun onItemClick(
                     parent: AdapterView<*>?,
@@ -1477,10 +1471,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        binding.sessionlist!!.layoutManager = linearLayoutManager
+        binding?.sessionlist!!.layoutManager = linearLayoutManager
 
         mAdapter = SessionAdapter(requireContext(), ArrayList())
-        binding.sessionlist!!.adapter = mAdapter
+        binding?.sessionlist!!.adapter = mAdapter
 
 
 
@@ -1502,10 +1496,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     //seassion handling
 
-    val activitySeasionResponseCallback = object {
+    val activitySeasionResponseCallback = object : RetrofitCallback<ResponseActivitySession> {
         override fun onSuccessfulResponse(responseBody: Response<ResponseActivitySession>?) {
 
-            responseactivitysession = responseBody?.body().responseContents
+            responseactivitysession = responseBody?.body()?.responseContents
 
             mAdapter?.addAll(responseactivitysession)
 
@@ -1513,21 +1507,21 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                 if (responseactivitysession!![i]!!.code == "1") {
 
-                    morning_session_uuid = responseactivitysession?.get(i).uuid!!
+                    morning_session_uuid = responseactivitysession?.get(i)?.uuid!!
 
-                    morning_session_name = responseactivitysession?.get(i).name!!
+                    morning_session_name = responseactivitysession?.get(i)?.name!!
 
                 } else if (responseactivitysession!![i]!!.code == "2") {
 
-                    evening_session_uuid = responseactivitysession?.get(i).uuid!!
+                    evening_session_uuid = responseactivitysession?.get(i)?.uuid!!
 
-                    evening_session_name = responseactivitysession?.get(i).name!!
+                    evening_session_name = responseactivitysession?.get(i)?.name!!
 
                 } else if (responseactivitysession!![i]!!.code == "3") {
 
-                    case_session_uuid = responseactivitysession?.get(i).uuid!!
+                    case_session_uuid = responseactivitysession?.get(i)?.uuid!!
 
-                    case_session_name = responseactivitysession?.get(i).name!!
+                    case_session_name = responseactivitysession?.get(i)?.name!!
 
                 }
             }
@@ -1546,13 +1540,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -1563,7 +1557,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -1571,7 +1565,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -1579,13 +1573,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -1593,21 +1587,21 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
     }
 
-    val sessionResponseCallback = object {
+    val sessionResponseCallback = object : RetrofitCallback<ResponseSesionModule> {
         override fun onSuccessfulResponse(responseBody: Response<ResponseSesionModule>?) {
 
-            if (responseBody?.body().responseContents != null) {
+            if (responseBody?.body()?.responseContents != null) {
 
-                mon_op_start_time = responseBody.body().responseContents.mon_op_start_time!!
-                mon_op_end_time = responseBody.body().responseContents.mon_op_end_time!!
-                Evn_op_start_time = responseBody.body().responseContents.Evn_op_start_time!!
-                Evn_op_end_time = responseBody.body().responseContents.Evn_op_end_time!!
+                mon_op_start_time = responseBody.body()?.responseContents?.mon_op_start_time!!
+                mon_op_end_time = responseBody.body()?.responseContents?.mon_op_end_time!!
+                Evn_op_start_time = responseBody.body()?.responseContents?.Evn_op_start_time!!
+                Evn_op_end_time = responseBody.body()?.responseContents?.Evn_op_end_time!!
 
                 val sdf = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
-                if (responseBody.body().responseContents.op_extension_time != null && responseBody.body().responseContents.op_extension_time != "") {
+                if (responseBody.body()?.responseContents?.op_extension_time != null && responseBody.body()?.responseContents?.op_extension_time != "") {
 
-                    opExTime = responseBody.body().responseContents.op_extension_time!!.toInt()
+                    opExTime = responseBody.body()?.responseContents?.op_extension_time!!.toInt()
 
                 } else {
 
@@ -1645,13 +1639,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -1662,7 +1656,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -1670,7 +1664,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -1678,13 +1672,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -1694,7 +1688,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     //salutaion
     val SalutationResponseCallback =
-        object {
+        object : RetrofitCallback<CovidSalutationTitleResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidSalutationTitleResponseModel>?) {
 
                 val res = responseBody?.body()?.responseContents
@@ -1713,13 +1707,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.req!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -1730,7 +1724,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onServerError(response: Response<*>?) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -1738,7 +1732,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -1746,13 +1740,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
             }
 
             override fun onEverytime() {
@@ -1810,11 +1804,11 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.salutation!!.adapter = adapter
+        binding?.salutation!!.adapter = adapter
 
 
 
-        binding.salutation.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        binding?.salutation?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -1838,7 +1832,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                         if (GenderlistData[i]?.code == "1") {
 
-                            binding.qucikGender.setSelection(i)
+                            binding?.qucikGender?.setSelection(i)
 
                             break
                         }
@@ -1850,7 +1844,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                         if (GenderlistData[i]?.code == "2") {
 
-                            binding.qucikGender.setSelection(i)
+                            binding?.qucikGender?.setSelection(i)
 
                             break
                         }
@@ -1875,7 +1869,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                         Toast.LENGTH_SHORT
                                     ).show()
 
-                                    binding.qucikGender.setSelection(0)
+                                    binding?.qucikGender?.setSelection(0)
                                 }
 
 
@@ -1908,10 +1902,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             ProfestioanlList.values.toMutableList()
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.profesitonal!!.adapter = adapter2
+        binding?.profesitonal!!.adapter = adapter2
 
 
-        binding.profesitonal.onItemSelectedListener =
+        binding?.profesitonal?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -1936,7 +1930,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val suffixResponseCallback = object {
+    val suffixResponseCallback = object : RetrofitCallback<GetAllResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<GetAllResponseModel>?) {
 
             var responseDatas = responseBody!!.body()!!.responseContents
@@ -1956,13 +1950,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -1973,7 +1967,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -1981,7 +1975,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -1989,13 +1983,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -2037,10 +2031,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.suffixcode!!.adapter = adapter
+        binding?.suffixcode!!.adapter = adapter
 
 
-        binding.suffixcode.onItemSelectedListener =
+        binding?.suffixcode?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -2078,13 +2072,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
     val getApplicationRulesResponseCallback =
-        object {
+        object : RetrofitCallback<GetApplicationRulesResponseModel> {
             @SuppressLint("NewApi")
             override fun onSuccessfulResponse(responseBody: Response<GetApplicationRulesResponseModel>?) {
 
                 val data = responseBody!!.body()!!.responseContents
 
-                val dateformat = responseBody.body().currentDateTime
+                val dateformat = responseBody.body()?.currentDateTime
 
 //            val date = utils?.convertServerDateToUserTimeZone(responseBody!!.body()!!.currentDateTime)
                 val date = dateformat!!.getDateWithServerTimeStamp()
@@ -2131,13 +2125,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         "Something Went Wrong"
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -2147,7 +2141,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onServerError(response: Response<*>?) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -2155,7 +2149,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -2163,13 +2157,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
             }
 
             override fun onEverytime() {
@@ -2177,7 +2171,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             }
         }
 
-    val PeriodResponseCallback = object {
+    val PeriodResponseCallback = object : RetrofitCallback<CovidPeriodResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidPeriodResponseModel>?) {
 
             selectPeriodUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -2194,13 +2188,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2211,7 +2205,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2219,7 +2213,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2227,13 +2221,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -2275,13 +2269,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.qucikPeriod!!.adapter = adapter
+        binding?.qucikPeriod!!.adapter = adapter
 
         binding!!.qucikPeriod.setSelection(3)
 
 
 
-        binding.qucikPeriod.onItemSelectedListener =
+        binding?.qucikPeriod?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -2344,7 +2338,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     Log.e(
                         "Period",
-                        binding.qucikPeriod.selectedItem.toString() + "-" + selectPeriodUuid
+                        binding?.qucikPeriod?.selectedItem.toString() + "-" + selectPeriodUuid
                     )
                 }
 
@@ -2354,12 +2348,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val DepartmentSearchCallBack = object {
+    val DepartmentSearchCallBack = object : RetrofitCallback<FavAddAllDepatResponseModel> {
         @SuppressLint("NewApi")
         override fun onSuccessfulResponse(responseBody: Response<FavAddAllDepatResponseModel>?) {
-            Log.i("", "" + responseBody?.body().responseContents)
+            Log.i("", "" + responseBody?.body()?.responseContents)
 
-            setDepartmentAdapter(responseBody?.body().responseContents)
+            setDepartmentAdapter(responseBody?.body()?.responseContents)
 
 
         }
@@ -2374,13 +2368,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2390,7 +2384,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2398,7 +2392,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2406,13 +2400,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -2443,16 +2437,16 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
             if (selectedPoi.is_speciality == 1) {
 
-                binding.unittext.visibility = View.VISIBLE
+                binding?.unittext?.visibility = View.VISIBLE
 
-                binding.unit.visibility = View.VISIBLE
+                binding?.unit?.visibility = View.VISIBLE
 
             } else {
 
 
-                binding.unittext.visibility = View.GONE
+                binding?.unittext?.visibility = View.GONE
 
-                binding.unit.visibility = View.GONE
+                binding?.unit?.visibility = View.GONE
 
 
             }
@@ -2462,7 +2456,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     }
 
-    val getCommunityListRetrofitCallBack = object {
+    val getCommunityListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             val responseContents = Gson().toJson(response.body()?.responseContents)
@@ -2479,13 +2473,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2495,7 +2489,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2503,7 +2497,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2511,14 +2505,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -2567,9 +2561,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.community!!.adapter = adapter
+        binding?.community!!.adapter = adapter
 
-        binding.community.onItemSelectedListener =
+        binding?.community?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -2594,7 +2588,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val covidGenderResponseCallback = object {
+    val covidGenderResponseCallback = object : RetrofitCallback<CovidGenderResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidGenderResponseModel>?) {
 
             selectGenderUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -2613,13 +2607,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2630,7 +2624,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2638,7 +2632,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2646,13 +2640,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -2691,10 +2685,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             CovidGenderList.values.toMutableList()
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikGender!!.adapter = adapter
+        binding?.qucikGender!!.adapter = adapter
 
 
-        binding.qucikGender.onItemSelectedListener =
+        binding?.qucikGender?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -2734,7 +2728,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                             Toast.LENGTH_SHORT
                                         ).show()
 
-                                        binding.salutation.setSelection(0)
+                                        binding?.salutation?.setSelection(0)
 
                                     }
 
@@ -2764,7 +2758,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                             Toast.LENGTH_SHORT
                                         ).show()
 
-                                        binding.salutation.setSelection(0)
+                                        binding?.salutation?.setSelection(0)
                                     }
 
 
@@ -2792,7 +2786,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                                             Toast.LENGTH_SHORT
                                         ).show()
 
-                                        binding.salutation.setSelection(0)
+                                        binding?.salutation?.setSelection(0)
                                     }
 
 
@@ -2805,7 +2799,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     Log.e(
                         "Gender",
-                        binding.qucikGender.selectedItem.toString() + "-" + selectGenderUuid
+                        binding?.qucikGender?.selectedItem.toString() + "-" + selectGenderUuid
                     )
                 }
 
@@ -2815,7 +2809,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val unitResponseCallback = object {
+    val unitResponseCallback = object : RetrofitCallback<GetAllResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<GetAllResponseModel>?) {
 
 
@@ -2836,13 +2830,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2853,7 +2847,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2861,7 +2855,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2869,13 +2863,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -2916,9 +2910,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.unit!!.adapter = adapter
+        binding?.unit!!.adapter = adapter
 
-        binding.unit.onItemSelectedListener =
+        binding?.unit?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -2941,7 +2935,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val incomeResponseCallback = object {
+    val incomeResponseCallback = object : RetrofitCallback<GetAllResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<GetAllResponseModel>?) {
 
 
@@ -2962,13 +2956,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -2979,7 +2973,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -2987,7 +2981,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -2995,13 +2989,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -3043,9 +3037,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.IncomeSpinner!!.adapter = adapter
+        binding?.IncomeSpinner!!.adapter = adapter
 
-        binding.IncomeSpinner.onItemSelectedListener =
+        binding?.IncomeSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3068,7 +3062,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val occupationResponseCallback = object {
+    val occupationResponseCallback = object : RetrofitCallback<GetAllResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<GetAllResponseModel>?) {
 
 
@@ -3089,13 +3083,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3106,7 +3100,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3114,7 +3108,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3122,13 +3116,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -3170,9 +3164,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.OccupencySpinner!!.adapter = adapter
+        binding?.OccupencySpinner!!.adapter = adapter
 
-        binding.OccupencySpinner.onItemSelectedListener =
+        binding?.OccupencySpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3195,7 +3189,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     }
 
-    val InstitutionResponseCallback = object {
+    val InstitutionResponseCallback = object : RetrofitCallback<GetAllResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<GetAllResponseModel>?) {
 
             var responseDatas = responseBody!!.body()!!.responseContents
@@ -3215,13 +3209,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.req
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3232,7 +3226,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3240,7 +3234,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3248,13 +3242,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -3296,9 +3290,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.InstitutionTypeSpinner!!.adapter = adapter
+        binding?.InstitutionTypeSpinner!!.adapter = adapter
 
-        binding.InstitutionTypeSpinner.onItemSelectedListener =
+        binding?.InstitutionTypeSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3322,7 +3316,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val getReferralReasonListRetrofitCallBack = object {
+    val getReferralReasonListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             setReferralReason(response.body()?.responseContents)
@@ -3335,13 +3329,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3351,7 +3345,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3359,7 +3353,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3367,14 +3361,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -3419,9 +3413,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.ReferralReasonTypeSpinner!!.adapter = adapter
+        binding?.ReferralReasonTypeSpinner!!.adapter = adapter
 
-        binding.ReferralReasonTypeSpinner.onItemSelectedListener =
+        binding?.ReferralReasonTypeSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3446,7 +3440,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val getReligionListRetrofitCallBack = object {
+    val getReligionListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             setReligion(response.body()?.responseContents)
@@ -3459,13 +3453,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3475,7 +3469,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3483,7 +3477,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3491,14 +3485,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -3542,9 +3536,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.ReligionPlan!!.adapter = adapter
+        binding?.ReligionPlan!!.adapter = adapter
 
-        binding.ReligionPlan.onItemSelectedListener =
+        binding?.ReligionPlan?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3569,7 +3563,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val getTreatmentPlanListRetrofitCallBack = object {
+    val getTreatmentPlanListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             setTreatmentPlan(response.body()?.responseContents)
@@ -3582,13 +3576,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3598,7 +3592,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3606,7 +3600,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3614,14 +3608,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -3665,9 +3659,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.TreatmentPlan!!.adapter = adapter
+        binding?.TreatmentPlan!!.adapter = adapter
 
-        binding.TreatmentPlan.onItemSelectedListener =
+        binding?.TreatmentPlan?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3691,7 +3685,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     }
 
-    val getRefferalTypeListRetrofitCallBack = object {
+    val getRefferalTypeListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             setRefferalType(response.body()?.responseContents)
@@ -3704,13 +3698,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3720,7 +3714,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3728,7 +3722,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3736,14 +3730,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -3787,9 +3781,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.ReferalTypeSpinner!!.adapter = adapter
+        binding?.ReferalTypeSpinner!!.adapter = adapter
 
-        binding.ReferalTypeSpinner.onItemSelectedListener =
+        binding?.ReferalTypeSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3814,7 +3808,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
 
-    val getcomplicationListRetrofitCallBack = object {
+    val getcomplicationListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
 
             setComplication(response.body()?.responseContents)
@@ -3827,13 +3821,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             try {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -3843,7 +3837,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -3851,7 +3845,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -3859,14 +3853,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
 
@@ -3910,9 +3904,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
 
-        binding.ComplicationTypeSpinner!!.adapter = adapter
+        binding?.ComplicationTypeSpinner!!.adapter = adapter
 
-        binding.ComplicationTypeSpinner.onItemSelectedListener =
+        binding?.ComplicationTypeSpinner?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -3934,24 +3928,24 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             }
     }
 
-    val patientSearchRetrofitCallBack = object {
+    val patientSearchRetrofitCallBack = object : RetrofitCallback<QuickSearchResponseModel> {
         override fun onSuccessfulResponse(response: Response<QuickSearchResponseModel>) {
 
-            if (response.body().responseContents.isNotEmpty()!!) {
+            if (response.body()?.responseContents?.isNotEmpty()!!) {
 //                viewModel?.errorTextVisibility?.value = 8
                 updateId = 1
 
-                if (response.body().responseContents.size == 1) {
-                    binding.lastpin.visibility = View.VISIBLE
-                    binding.pinLayout.visibility = View.VISIBLE
-                    binding.lastpinnumber.text = response.body()!!.responseContents!![0]!!.uhid
-                    binding.quickName!!.setText(response.body()!!.responseContents!![0]!!.first_name)
-                    binding.etmiddlename!!.setText(response.body()!!.responseContents!![0]!!.middle_name)
-                    binding.etLastname!!.setText(response.body()!!.responseContents!![0]!!.last_name)
-                    binding.quickAge!!.setText(response.body()!!.responseContents!![0]!!.age!!.toString())
-                    binding.quickMobile!!.setText(response.body()!!.responseContents!![0]!!.patient_detail.mobile!!.toString())
+                if (response.body()?.responseContents?.size == 1) {
+                    binding?.lastpin?.visibility = View.VISIBLE
+                    binding?.pinLayout?.visibility = View.VISIBLE
+                    binding?.lastpinnumber?.text = response.body()!!.responseContents!![0]!!.uhid
+                    binding?.quickName!!.setText(response.body()!!.responseContents!![0]!!.first_name)
+                    binding?.etmiddlename!!.setText(response.body()!!.responseContents!![0]!!.middle_name)
+                    binding?.etLastname!!.setText(response.body()!!.responseContents!![0]!!.last_name)
+                    binding?.quickAge!!.setText(response.body()!!.responseContents!![0]!!.age!!.toString())
+                    binding?.quickMobile!!.setText(response.body()!!.responseContents!![0]!!.patient_detail?.mobile!!.toString())
 
-                    binding.switchCheck.isChecked =
+                    binding?.switchCheck?.isChecked =
                         response.body()!!.responseContents!![0]!!.is_maternity!!
 
                     Matanity = response.body()!!.responseContents!![0]!!.is_maternity
@@ -3959,16 +3953,16 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
 
-                    if (response.body()!!.responseContents!![0]!!.patient_detail.address_line1 != null) {
-                        binding.doorNo!!.setText(response.body()!!.responseContents!![0]!!.patient_detail.address_line1!!.toString())
+                    if (response.body()!!.responseContents!![0]!!.patient_detail?.address_line1 != null) {
+                        binding?.doorNo!!.setText(response.body()!!.responseContents!![0]!!.patient_detail?.address_line1!!.toString())
                     }
 
-                    if (response.body()!!.responseContents!![0]!!.patient_detail.pincode != null) {
-                        binding.quickPincode!!.setText(response.body()!!.responseContents!![0]!!.patient_detail.pincode!!.toString())
+                    if (response.body()!!.responseContents!![0]!!.patient_detail?.pincode != null) {
+                        binding?.quickPincode!!.setText(response.body()!!.responseContents!![0]!!.patient_detail?.pincode!!.toString())
                     }
-                    if (response.body()!!.responseContents!![0]!!.patient_detail.aadhaar_number != null) {
+                    if (response.body()!!.responseContents!![0]!!.patient_detail?.aadhaar_number != null) {
 
-                        binding.quickAather!!.setText(response.body()!!.responseContents!![0]!!.patient_detail.aadhaar_number!!.toString())
+                        binding?.quickAather!!.setText(response.body()!!.responseContents!![0]!!.patient_detail?.aadhaar_number!!.toString())
 
                     }
                     //binding?.qucikLabName!!.setText(response.body()!!.responseContents!![0]!!.last_name!!.toString())
@@ -3978,9 +3972,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val checkgender =
                             hashGenderSpinnerList.any { it.key == response.body()!!.responseContents!![0]!!.gender_uuid }
                         if (checkgender) {
-                            binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(response.body()!!.responseContents!![0]!!.gender_uuid)!!)
+                            binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(response.body()!!.responseContents!![0]!!.gender_uuid)!!)
                         } else {
-                            binding.qucikGender!!.setSelection(0)
+                            binding?.qucikGender!!.setSelection(0)
                         }
                     }
 
@@ -3988,9 +3982,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val checkperiod =
                             hashPeriodSpinnerList.any { it.key == response.body()!!.responseContents!![0]!!.period_uuid }
                         if (checkperiod) {
-                            binding.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(response.body()!!.responseContents!![0]!!.period_uuid)!!)
+                            binding?.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(response.body()!!.responseContents!![0]!!.period_uuid)!!)
                         } else {
-                            binding.qucikPeriod!!.setSelection(0)
+                            binding?.qucikPeriod!!.setSelection(0)
                         }
                     }
 
@@ -4051,15 +4045,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     val searchData = response.body()!!.responseContents!![0]
 
-                    binding.etFathername.setText(searchData!!.patient_detail!!.father_name ?: "")
+                    binding?.etFathername?.setText(searchData!!.patient_detail!!.father_name ?: "")
 
-                    binding.etFathername.error = null
+                    binding?.etFathername?.error = null
 
-                    binding.etRemarkname.setText(searchData!!.patient_detail!!.remarks ?: "")
+                    binding?.etRemarkname?.setText(searchData!!.patient_detail!!.remarks ?: "")
 
                     if (searchData!!.patient_detail!!.address_line2 != null) {
 
-                        binding.quickAddress!!.setText(searchData.patient_detail!!.address_line2!!.toString())
+                        binding?.quickAddress!!.setText(searchData.patient_detail!!.address_line2!!.toString())
 
                     }
 
@@ -4067,13 +4061,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val titleuuid =
                             hashSalutaionSpinnerList.any { it.key == searchData.title_uuid }
                         if (titleuuid) {
-                            binding.salutation!!.setSelection(
+                            binding?.salutation!!.setSelection(
                                 hashSalutaionSpinnerList.get(
                                     searchData.title_uuid
                                 )!!
                             )
                         } else {
-                            binding.salutation!!.setSelection(0)
+                            binding?.salutation!!.setSelection(0)
                         }
                     }
 
@@ -4082,13 +4076,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val titleuuid =
                             hashProfestioanlSpinnerList.any { it.key == searchData.professional_title_uuid }
                         if (titleuuid) {
-                            binding.profesitonal!!.setSelection(
+                            binding?.profesitonal!!.setSelection(
                                 hashProfestioanlSpinnerList.get(
                                     searchData.professional_title_uuid
                                 )!!
                             )
                         } else {
-                            binding.profesitonal!!.setSelection(0)
+                            binding?.profesitonal!!.setSelection(0)
                         }
                     }
 
@@ -4097,23 +4091,23 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val titleuuid =
                             hashSuffixSpinnerList.any { it.key == searchData.suffix_uuid }
                         if (titleuuid) {
-                            binding.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
+                            binding?.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
                         } else {
-                            binding.suffixcode!!.setSelection(0)
+                            binding?.suffixcode!!.setSelection(0)
                         }
                     }
 
                     if (searchData.patient_detail!!.community_uuid != null) {
                         val checkblockuuid =
-                            hashCommunitypinnerList.any { it.key == searchData.patient_detail!!.community_uuid }
+                            hashCommunitypinnerList.any { it.key == searchData.patient_detail.community_uuid }
                         if (checkblockuuid) {
-                            binding.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail!!.community_uuid)!!)
+                            binding?.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail.community_uuid)!!)
                         } else {
-                            binding.community!!.setSelection(0)
+                            binding?.community!!.setSelection(0)
                         }
                     }
 
-                    binding.doorNo.setText(searchData.patient_detail!!.address_line1 ?: "")
+                    binding?.doorNo?.setText(searchData.patient_detail.address_line1 ?: "")
 
 
                 } else {
@@ -4145,13 +4139,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -4161,7 +4155,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -4169,7 +4163,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -4177,13 +4171,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -4191,7 +4185,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
     }
 
-    val oldPinSearchRetrofitCallBack = object {
+    val oldPinSearchRetrofitCallBack = object : RetrofitCallback<QuickSearchResponseModel> {
         override fun onSuccessfulResponse(response: Response<QuickSearchResponseModel>) {
             if (response.body()!!.responseContent != null) {
                 val searchData = response.body()!!.responseContent!!
@@ -4204,38 +4198,38 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     var currentYear = sdf.format(Date())
                     var age =
                         (Integer.parseInt(currentYear) - Integer.parseInt(createdYear)) + response.body()!!.responseContent!!.age!!
-                    binding.quickAge!!.setText("" + age)
+                    binding?.quickAge!!.setText("" + age)
                     created_date = response.body()!!.responseContent!!.crt_dt!!
-                    binding.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(4)!!)
+                    binding?.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(4)!!)
 
                     if (response.body()!!.responseContent!!.gender != null) {
                         when {
                             response.body()!!.responseContent!!.gender.equals("SXML") -> {
-                                binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(1)!!)
+                                binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(1)!!)
                             }
                             response.body()!!.responseContent!!.gender.equals("SXFML") -> {
-                                binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(2)!!)
+                                binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(2)!!)
                             }
                         }
                     } else {
-                        binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(3)!!)
+                        binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(3)!!)
                     }
 
                     when {
                         response.body()!!.responseContent!!.title.equals("TIMRS") -> {
-                            binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(2)!!)
+                            binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(2)!!)
                         }
                         response.body()!!.responseContent!!.title.equals("TIMR") -> {
-                            binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(1)!!)
+                            binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(1)!!)
                         }
                         response.body()!!.responseContent!!.title.equals("TISEL") -> {
-                            binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(3)!!)
+                            binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(3)!!)
                         }
                         response.body()!!.responseContent!!.title.equals("TIMS") -> {
-                            binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(3)!!)
+                            binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(3)!!)
                         }
                         response.body()!!.responseContent!!.title.equals("TIDR") -> {
-                            binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(7)!!)
+                            binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(7)!!)
                         }
                     }
 
@@ -4243,15 +4237,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 } else {
                     updateId = 1
                     uhid = response.body()!!.responseContent!!.uhid!!
-                    binding.quickAge!!.setText(response.body()!!.responseContent!!.age!!.toString())
+                    binding?.quickAge!!.setText(response.body()!!.responseContent!!.age!!.toString())
                     created_date = response.body()!!.responseContent!!.created_date!!
                     if (response.body()!!.responseContent!!.period_uuid != null) {
                         val checkperiod =
                             hashPeriodSpinnerList.any { it.key == response.body()!!.responseContent!!.period_uuid }
                         if (checkperiod) {
-                            binding.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(response.body()!!.responseContent!!.period_uuid)!!)
+                            binding?.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(response.body()!!.responseContent!!.period_uuid)!!)
                         } else {
-                            binding.qucikPeriod!!.setSelection(0)
+                            binding?.qucikPeriod!!.setSelection(0)
                         }
                     }
 
@@ -4259,42 +4253,42 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         val checkgender =
                             hashGenderSpinnerList.any { it.key == response.body()!!.responseContent!!.gender_uuid }
                         if (checkgender) {
-                            binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(response.body()!!.responseContent!!.gender_uuid)!!)
+                            binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(response.body()!!.responseContent!!.gender_uuid)!!)
                         } else {
-                            binding.qucikGender!!.setSelection(0)
+                            binding?.qucikGender!!.setSelection(0)
                         }
                     }
                     if (searchData.title_uuid != null) {
                         val titleuuid =
                             hashSalutaionSpinnerList.any { it.key == searchData.title_uuid }
                         if (titleuuid) {
-                            binding.salutation!!.setSelection(
+                            binding?.salutation!!.setSelection(
                                 hashSalutaionSpinnerList.get(
                                     searchData.title_uuid
                                 )!!
                             )
                         } else {
-                            binding.salutation!!.setSelection(0)
+                            binding?.salutation!!.setSelection(0)
                         }
                     }
                 }
 
-                binding.lastpin.visibility = View.VISIBLE
-                binding.pinLayout.visibility = View.VISIBLE
-                binding.lastpinnumber.text = response.body()!!.responseContent!!.uhid
-                binding.quickName!!.setText(response.body()!!.responseContent!!.first_name)
-                binding.etmiddlename!!.setText(response.body()!!.responseContent!!.middle_name)
-                binding.etLastname!!.setText(response.body()!!.responseContent!!.last_name)
-                binding.quickMobile!!.setText(response.body()!!.responseContent!!.patient_detail.mobile!!.toString())
-                binding.doorNo!!.setText(response.body()!!.responseContent!!.patient_detail.address_line1!!.toString())
-                binding.quickPincode!!.setText(response.body()!!.responseContent!!.patient_detail.pincode!!.toString())
+                binding?.lastpin?.visibility = View.VISIBLE
+                binding?.pinLayout?.visibility = View.VISIBLE
+                binding?.lastpinnumber?.text = response.body()!!.responseContent!!.uhid
+                binding?.quickName!!.setText(response.body()!!.responseContent!!.first_name)
+                binding?.etmiddlename!!.setText(response.body()!!.responseContent!!.middle_name)
+                binding?.etLastname!!.setText(response.body()!!.responseContent!!.last_name)
+                binding?.quickMobile!!.setText(response.body()!!.responseContent!!.patient_detail?.mobile!!.toString())
+                binding?.doorNo!!.setText(response.body()!!.responseContent!!.patient_detail?.address_line1!!.toString())
+                binding?.quickPincode!!.setText(response.body()!!.responseContent!!.patient_detail?.pincode!!.toString())
                 // binding?.qucikLabName!!.setText(response.body()!!.responseContent!!.last_name!!.toString())
 
-                binding.quickAddress!!.setText(searchData.patient_detail!!.address_line2!!.toString())
+                binding?.quickAddress!!.setText(searchData.patient_detail!!.address_line2!!.toString())
 
                 if (searchData.patient_detail.aadhaar_number != null) {
 
-                    binding.quickAather!!.setText(searchData.patient_detail.aadhaar_number!!.toString())
+                    binding?.quickAather!!.setText(searchData.patient_detail.aadhaar_number.toString())
 
                 }
 
@@ -4302,13 +4296,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     val checknationality =
                         hashNationalitySpinnerList.any { it.key == response.body()!!.responseContent!!.patient_detail!!.country_uuid }
                     if (checknationality) {
-                        binding.qucikCountry!!.setSelection(
+                        binding?.qucikCountry!!.setSelection(
                             hashNationalitySpinnerList.get(
                                 response.body()!!.responseContent!!.patient_detail!!.country_uuid
                             )!!
                         )
                     } else {
-                        binding.qucikCountry!!.setSelection(0)
+                        binding?.qucikCountry!!.setSelection(0)
                     }
                 }
 
@@ -4316,22 +4310,22 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     val checkstate =
                         hashStateSpinnerList.any { it.key == response.body()!!.responseContent!!.patient_detail!!.state_uuid }
                     if (checkstate) {
-                        binding.qucikState!!.setSelection(hashStateSpinnerList.get(response.body()!!.responseContent!!.patient_detail!!.state_uuid)!!)
+                        binding?.qucikState!!.setSelection(hashStateSpinnerList.get(response.body()!!.responseContent!!.patient_detail!!.state_uuid)!!)
                     } else {
-                        binding.qucikState!!.setSelection(0)
+                        binding?.qucikState!!.setSelection(0)
                     }
                 }
                 if (response.body()!!.responseContent!!.patient_detail!!.district_uuid != null) {
                     val checkdistrict =
                         hashDistrictSpinnerList.any { it.key == response.body()!!.responseContent!!.patient_detail!!.district_uuid }
                     if (checkdistrict) {
-                        binding.qucikDistrict!!.setSelection(
+                        binding?.qucikDistrict!!.setSelection(
                             hashDistrictSpinnerList.get(
                                 response.body()!!.responseContent!!.patient_detail!!.district_uuid
                             )!!
                         )
                     } else {
-                        binding.qucikDistrict!!.setSelection(0)
+                        binding?.qucikDistrict!!.setSelection(0)
                     }
                 }
                 /*               if (response.body()!!.responseContent!!.patient_detail!!.taluk_uuid != null) {
@@ -4375,13 +4369,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     val titleuuid =
                         hashProfestioanlSpinnerList.any { it.key == searchData.professional_title_uuid }
                     if (titleuuid) {
-                        binding.profesitonal!!.setSelection(
+                        binding?.profesitonal!!.setSelection(
                             hashProfestioanlSpinnerList.get(
                                 searchData.professional_title_uuid
                             )!!
                         )
                     } else {
-                        binding.profesitonal!!.setSelection(0)
+                        binding?.profesitonal!!.setSelection(0)
                     }
                 }
 
@@ -4390,19 +4384,19 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     val titleuuid =
                         hashSuffixSpinnerList.any { it.key == searchData.suffix_uuid }
                     if (titleuuid) {
-                        binding.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
+                        binding?.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
                     } else {
-                        binding.suffixcode!!.setSelection(0)
+                        binding?.suffixcode!!.setSelection(0)
                     }
                 }
 
-                if (searchData.patient_detail!!.community_uuid != null) {
+                if (searchData.patient_detail.community_uuid != null) {
                     val checkblockuuid =
-                        hashCommunitypinnerList.any { it.key == searchData.patient_detail!!.community_uuid }
+                        hashCommunitypinnerList.any { it.key == searchData.patient_detail.community_uuid }
                     if (checkblockuuid) {
-                        binding.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail!!.community_uuid)!!)
+                        binding?.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail.community_uuid)!!)
                     } else {
-                        binding.community!!.setSelection(0)
+                        binding?.community!!.setSelection(0)
                     }
                 }
 
@@ -4422,13 +4416,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -4438,7 +4432,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -4446,7 +4440,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -4454,13 +4448,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -4809,39 +4803,39 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         viewModel?.getVisits(facility_id, request!!, getAllVisitsCallBack)
 
-        binding.lastpin.visibility = View.VISIBLE
-        binding.pinLayout.visibility = View.VISIBLE
-        binding.lastpinnumber.text = searchData.uhid
-        binding.quickName!!.setText(searchData.first_name)
-        binding.etmiddlename!!.setText(searchData.middle_name)
-        binding.etLastname!!.setText(searchData.last_name)
-        binding.quickAge!!.setText(searchData.age!!.toString())
-        binding.quickMobile!!.setText(searchData.patient_detail.mobile!!.toString())
+        binding?.lastpin?.visibility = View.VISIBLE
+        binding?.pinLayout?.visibility = View.VISIBLE
+        binding?.lastpinnumber?.text = searchData.uhid
+        binding?.quickName!!.setText(searchData.first_name)
+        binding?.etmiddlename!!.setText(searchData.middle_name)
+        binding?.etLastname!!.setText(searchData.last_name)
+        binding?.quickAge!!.setText(searchData.age!!.toString())
+        binding?.quickMobile!!.setText(searchData.patient_detail?.mobile!!.toString())
 
 
-        binding.etFathername.setText(searchData.patient_detail!!.father_name ?: "")
-        binding.etFathername.error = null
-        binding.etRemarkname.setText(searchData.patient_detail!!.remarks ?: "")
+        binding?.etFathername?.setText(searchData.patient_detail.father_name ?: "")
+        binding?.etFathername?.error = null
+        binding?.etRemarkname?.setText(searchData.patient_detail.remarks ?: "")
 
         if (searchData.patient_detail.aadhaar_number != null) {
 
-            binding.quickAather!!.setText(searchData.patient_detail.aadhaar_number.toString())
+            binding?.quickAather!!.setText(searchData.patient_detail.aadhaar_number.toString())
 
         }
 
         if (searchData.patient_detail.address_line1 != null) {
-            binding.doorNo!!.setText(searchData.patient_detail.address_line1.toString())
+            binding?.doorNo!!.setText(searchData.patient_detail.address_line1.toString())
         }
         if (searchData.patient_detail.pincode != null) {
-            binding.quickPincode!!.setText(searchData.patient_detail.pincode.toString())
+            binding?.quickPincode!!.setText(searchData.patient_detail.pincode.toString())
         }
         patientUUId = searchData.uuid
         if (searchData.gender_uuid != null) {
             val checkgender = hashGenderSpinnerList.any { it.key == searchData.gender_uuid }
             if (checkgender) {
-                binding.qucikGender!!.setSelection(hashGenderSpinnerList.get(searchData.gender_uuid)!!)
+                binding?.qucikGender!!.setSelection(hashGenderSpinnerList.get(searchData.gender_uuid)!!)
             } else {
-                binding.qucikGender!!.setSelection(0)
+                binding?.qucikGender!!.setSelection(0)
             }
         }
 
@@ -4850,9 +4844,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             val checkperiod = hashPeriodSpinnerList.any { it.key == searchData.period_uuid }
 
             if (checkperiod) {
-                binding.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(searchData.period_uuid)!!)
+                binding?.qucikPeriod!!.setSelection(hashPeriodSpinnerList.get(searchData.period_uuid)!!)
             } else {
-                binding.qucikPeriod!!.setSelection(0)
+                binding?.qucikPeriod!!.setSelection(0)
             }
         }
 
@@ -4902,7 +4896,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         if (searchData.patient_detail.address_line2 != null) {
 
-            binding.quickAddress!!.setText(searchData.patient_detail.address_line2.toString())
+            binding?.quickAddress!!.setText(searchData.patient_detail.address_line2.toString())
 
         }
 
@@ -4910,9 +4904,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             val titleuuid =
                 hashSalutaionSpinnerList.any { it.key == searchData.title_uuid }
             if (titleuuid) {
-                binding.salutation!!.setSelection(hashSalutaionSpinnerList.get(searchData.title_uuid)!!)
+                binding?.salutation!!.setSelection(hashSalutaionSpinnerList.get(searchData.title_uuid)!!)
             } else {
-                binding.salutation!!.setSelection(0)
+                binding?.salutation!!.setSelection(0)
             }
         }
 
@@ -4921,9 +4915,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             val titleuuid =
                 hashProfestioanlSpinnerList.any { it.key == searchData.professional_title_uuid }
             if (titleuuid) {
-                binding.profesitonal!!.setSelection(hashProfestioanlSpinnerList.get(searchData.professional_title_uuid)!!)
+                binding?.profesitonal!!.setSelection(hashProfestioanlSpinnerList.get(searchData.professional_title_uuid)!!)
             } else {
-                binding.profesitonal!!.setSelection(0)
+                binding?.profesitonal!!.setSelection(0)
             }
         }
 
@@ -4932,9 +4926,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             val titleuuid =
                 hashSuffixSpinnerList.any { it.key == searchData.suffix_uuid }
             if (titleuuid) {
-                binding.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
+                binding?.suffixcode!!.setSelection(hashSuffixSpinnerList.get(searchData.suffix_uuid)!!)
             } else {
-                binding.suffixcode!!.setSelection(0)
+                binding?.suffixcode!!.setSelection(0)
             }
         }
 
@@ -4942,9 +4936,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             val checkblockuuid =
                 hashCommunitypinnerList.any { it.key == searchData.patient_detail.community_uuid }
             if (checkblockuuid) {
-                binding.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail.community_uuid)!!)
+                binding?.community!!.setSelection(hashCommunitypinnerList.get(searchData.patient_detail.community_uuid)!!)
             } else {
-                binding.community!!.setSelection(0)
+                binding?.community!!.setSelection(0)
             }
         }
 
@@ -4952,7 +4946,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
     val covidNationalityResponseCallback =
-        object {
+        object : RetrofitCallback<CovidNationalityResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidNationalityResponseModel>?) {
 
 
@@ -5050,26 +5044,26 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             CovidNationalityList.values.toMutableList()
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikCountry!!.adapter = adapter
+        binding?.qucikCountry!!.adapter = adapter
 
         if (selectNationalityUuid != null) {
             val checknationality =
                 hashNationalitySpinnerList.any { it.key == selectNationalityUuid }
             if (checknationality) {
-                binding.qucikCountry!!.setSelection(
+                binding?.qucikCountry!!.setSelection(
                     hashNationalitySpinnerList.get(
                         selectNationalityUuid
                     )!!
                 )
             } else {
-                binding.qucikCountry!!.setSelection(0)
+                binding?.qucikCountry!!.setSelection(0)
             }
         }
 
     }
 
 
-    val getStateRetrofitCallback = object {
+    val getStateRetrofitCallback = object : RetrofitCallback<StateListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<StateListResponseModel>?) {
 
             try {
@@ -5158,22 +5152,22 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             CovidStateList.values.toMutableList()
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikState!!.adapter = adapter
+        binding?.qucikState!!.adapter = adapter
 
 
         if (selectStateUuid != null) {
             val checkstate =
                 hashStateSpinnerList.any { it.key == selectStateUuid }
             if (checkstate) {
-                binding.qucikState!!.setSelection(hashStateSpinnerList.get(selectStateUuid)!!)
+                binding?.qucikState!!.setSelection(hashStateSpinnerList.get(selectStateUuid)!!)
             } else {
-                binding.qucikState!!.setSelection(0)
+                binding?.qucikState!!.setSelection(0)
             }
         }
 
     }
 
-    val getDistictRetrofitCallback = object {
+    val getDistictRetrofitCallback = object : RetrofitCallback<DistrictListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<DistrictListResponseModel>?) {
 
@@ -5249,23 +5243,23 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             CovidDistictList.values.toMutableList()
         )
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikDistrict!!.adapter = adapter
+        binding?.qucikDistrict!!.adapter = adapter
 
 
         if (selectDistictUuid != null) {
             val checkdistrict =
                 hashDistrictSpinnerList.any { it.key == selectDistictUuid }
             if (checkdistrict) {
-                binding.qucikDistrict!!.setSelection(hashDistrictSpinnerList.get(selectDistictUuid)!!)
+                binding?.qucikDistrict!!.setSelection(hashDistrictSpinnerList.get(selectDistictUuid)!!)
             } else {
-                binding.qucikDistrict!!.setSelection(0)
+                binding?.qucikDistrict!!.setSelection(0)
             }
         }
 
     }
 
 
-    val getTalukRetrofitCallback = object {
+    val getTalukRetrofitCallback = object : RetrofitCallback<TalukListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<TalukListResponseModel>?) {
 
@@ -5347,23 +5341,23 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         )
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikBlock!!.adapter = adapter
+        binding?.qucikBlock!!.adapter = adapter
 
 
         if (selectBelongUuid != null) {
             val checkblockuuid =
                 hashBlockSpinnerList.any { it.key == selectBelongUuid }
             if (checkblockuuid) {
-                binding.qucikBlock!!.setSelection(hashBlockSpinnerList.get(selectBelongUuid)!!)
+                binding?.qucikBlock!!.setSelection(hashBlockSpinnerList.get(selectBelongUuid)!!)
             } else {
-                binding.qucikBlock!!.setSelection(0)
+                binding?.qucikBlock!!.setSelection(0)
             }
         }
 
     }
 
 
-    val getVillageRetrofitCallback1 = object {
+    val getVillageRetrofitCallback1 = object : RetrofitCallback<VilliageListResponceModel> {
         override fun onSuccessfulResponse(responseBody: Response<VilliageListResponceModel>?) {
 
             setVillage(responseBody!!.body()!!.responseContents)
@@ -5427,16 +5421,16 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         )
 
         adapter.setDropDownViewResource(R.layout.spinner_item)
-        binding.qucikVillage!!.adapter = adapter
+        binding?.qucikVillage!!.adapter = adapter
 
 
         if (selectVillageUuid != null) {
             val checkvillageuuid =
                 hashVillageSpinnerList.any { it.key == selectVillageUuid }
             if (checkvillageuuid) {
-                binding.qucikVillage!!.setSelection(hashVillageSpinnerList.get(selectVillageUuid)!!)
+                binding?.qucikVillage!!.setSelection(hashVillageSpinnerList.get(selectVillageUuid)!!)
             } else {
-                binding.qucikVillage!!.setSelection(0)
+                binding?.qucikVillage!!.setSelection(0)
             }
         }
 
@@ -5444,7 +5438,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
     val facilityLocationResponseCallback =
-        object {
+        object : RetrofitCallback<FacilityLocationResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<FacilityLocationResponseModel>?) {
 
                 if (responseBody!!.body()!!.responseContents != null) {
@@ -5493,13 +5487,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         "Something Wrong"
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -5510,7 +5504,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onServerError(response: Response<*>?) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -5518,7 +5512,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -5526,13 +5520,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
             }
 
             override fun onEverytime() {
@@ -5540,33 +5534,34 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             }
         }
 
-    var saveQuickRegistrationRetrofitCallback = object {
+    var saveQuickRegistrationRetrofitCallback = object :
+        RetrofitCallback<QuickRegistrationSaveResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationSaveResponseModel>?) {
 
             utils?.showToast(
                 R.color.positiveToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 "Register Success"
             )
 
-            Log.i("", "" + responseBody?.body().responseContent)
+            Log.i("", "" + responseBody?.body()?.responseContent)
 
             appPreferences?.saveString(
                 AppConstants.LASTPIN,
-                responseBody?.body().responseContent.uhid
+                responseBody?.body()?.responseContent?.uhid
             )
 
 
             val pdfRequestModel = PrintQuickRequest()
             pdfRequestModel.componentName = "basic"
-            pdfRequestModel.uuid = responseBody?.body().responseContent.uuid!!
-            pdfRequestModel.uhid = responseBody.body().responseContent.uhid!!
+            pdfRequestModel.uuid = responseBody?.body()?.responseContent?.uuid!!
+            pdfRequestModel.uhid = responseBody.body()?.responseContent?.uhid!!
             pdfRequestModel.facilityName = facility_Name
-            pdfRequestModel.firstName = responseBody.body().responseContent.first_name!!
+            pdfRequestModel.firstName = responseBody.body()?.responseContent?.first_name!!
             pdfRequestModel.period = CovidPeriodList[selectPeriodUuid]!!
-            pdfRequestModel.age = responseBody.body().responseContent.age!!
+            pdfRequestModel.age = responseBody.body()?.responseContent?.age!!
             pdfRequestModel.registered_date =
-                responseBody.body().responseContent.registered_date!!
+                responseBody.body()?.responseContent?.registered_date!!
             pdfRequestModel.sari = sariStatus
             pdfRequestModel.ili = iliStatus
             pdfRequestModel.noSymptom = nosymptomsStatus
@@ -5576,14 +5571,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             pdfRequestModel.mobile = binding!!.quickMobile.text.toString()
 
 
-            if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+            if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                 pdfRequestModel.fatherName =
-                    binding.etFathername.text.trim().toString()
+                    binding?.etFathername?.text?.trim().toString()
 
             }
-            if (!binding.quickAather.text.toString().isNullOrEmpty()) {
+            if (!binding?.quickAather?.text.toString().isNullOrEmpty()) {
 
-                pdfRequestModel.aadhaarNumber = binding.quickAather.text.toString()
+                pdfRequestModel.aadhaarNumber = binding?.quickAather?.text.toString()
             }
 
             if (addressenable!!) {
@@ -5630,10 +5625,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                 }
 
-                if (!binding.quickPincode.text.toString().isNullOrEmpty()) {
+                if (!binding?.quickPincode?.text.toString().isNullOrEmpty()) {
 
 
-                    pdfRequestModel.addressDetails.pincode = binding.quickPincode.text.toString()
+                    pdfRequestModel.addressDetails.pincode = binding?.quickPincode?.text.toString()
 
 
                 }
@@ -5641,10 +5636,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
             }
             pdfRequestModel.visitNum =
-                responseBody.body().responseContent.patient_visits!!.seqNum!!
+                responseBody.body()?.responseContent?.patient_visits!!.seqNum!!
 
 
-            pdfRequestModel.dob = responseBody.body().responseContent.dob!!
+            pdfRequestModel.dob = responseBody.body()?.responseContent?.dob!!
 
             if (selectSalutationUuid != 0) {
 
@@ -5690,9 +5685,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             labtemplatedialog.arguments = bundle
 
             if (onNext == 0) {
-                (activity as MainLandScreenActivity).replaceFragment(labtemplatedialog)
+                (activity as HomeActivity).replaceFragment(labtemplatedialog)
             } else if (onNext == 1) {
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
             }
         }
 
@@ -5722,7 +5717,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 "serverError"
             )
 
@@ -5731,7 +5726,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -5739,7 +5734,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 "Forbidden"
             )
 
@@ -5748,7 +5743,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onFailure(failure: String) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 failure
             )
         }
@@ -5760,22 +5755,22 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
     val updateQuickRegistrationRetrofitCallback =
-        object {
+        object : RetrofitCallback<QuickRegistrationUpdateResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationUpdateResponseModel>?) {
-                Log.e("UpdateMSG", responseBody!!.body().message.toString())
+                Log.e("UpdateMSG", responseBody!!.body()?.message.toString())
                 Toast.makeText(requireContext(), "Successfully Updated", Toast.LENGTH_LONG).show()
                 appPreferences?.saveString(
                     AppConstants.LASTPIN,
-                    responseBody.body().responseContent.uhid
+                    responseBody.body()?.responseContent?.uhid
                 )
                 val pdfRequestModel = PrintQuickRequest()
                 pdfRequestModel.componentName = "basic"
-                pdfRequestModel.uuid = responseBody.body().responseContent.uuid!!
-                pdfRequestModel.uhid = responseBody.body().responseContent.uhid!!
+                pdfRequestModel.uuid = responseBody.body()?.responseContent?.uuid!!
+                pdfRequestModel.uhid = responseBody.body()?.responseContent?.uhid!!
                 pdfRequestModel.facilityName = facility_Name
-                pdfRequestModel.firstName = responseBody.body().responseContent.first_name!!
+                pdfRequestModel.firstName = responseBody.body()?.responseContent?.first_name!!
                 pdfRequestModel.period = CovidPeriodList[selectPeriodUuid]!!
-                pdfRequestModel.age = responseBody.body().responseContent.age!!
+                pdfRequestModel.age = responseBody.body()?.responseContent?.age!!
                 //pdfRequestModel.registered_date = responseBody?.body()?.responseContent?.registered_date!!
                 pdfRequestModel.registered_date = registerDate
                 pdfRequestModel.sari = sariStatus
@@ -5785,15 +5780,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 pdfRequestModel.gender = CovidGenderList[selectGenderUuid]!!
                 pdfRequestModel.mobile = binding!!.quickMobile.text.toString()
 
-                if (!binding.etFathername.text.trim().isNullOrEmpty()) {
+                if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                     pdfRequestModel.fatherName =
-                        binding.etFathername.text.trim().toString()
+                        binding?.etFathername?.text?.trim().toString()
 
                 }
 
-                if (!binding.quickAather.text.toString().isNullOrEmpty()) {
+                if (!binding?.quickAather?.text.toString().isNullOrEmpty()) {
 
-                    pdfRequestModel.aadhaarNumber = binding.quickAather.text.toString()
+                    pdfRequestModel.aadhaarNumber = binding?.quickAather?.text.toString()
 
                 }
 
@@ -5846,11 +5841,11 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     }
 
-                    if (!binding.quickPincode.text.toString().isNullOrEmpty()) {
+                    if (!binding?.quickPincode?.text.toString().isNullOrEmpty()) {
 
 
                         pdfRequestModel.addressDetails.pincode =
-                            binding.quickPincode.text.toString()
+                            binding?.quickPincode?.text.toString()
 
 
                     }
@@ -5858,8 +5853,8 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                 }
                 pdfRequestModel.visitNum =
-                    responseBody.body().responseContent.patient_visits!!.visit_number!!
-                pdfRequestModel.dob = responseBody.body().responseContent.dob!!
+                    responseBody.body()?.responseContent?.patient_visits!!.visit_number!!
+                pdfRequestModel.dob = responseBody.body()?.responseContent?.dob!!
 
                 if (selectSalutationUuid != 0) {
 
@@ -5905,7 +5900,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                 labtemplatedialog.arguments = bundle
 
-                (activity as MainLandScreenActivity).replaceFragment(labtemplatedialog)
+                (activity as HomeActivity).replaceFragment(labtemplatedialog)
 
 
             }
@@ -5921,13 +5916,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -5937,7 +5932,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -5945,7 +5940,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -5953,13 +5948,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -6008,13 +6003,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
     val getInstitutionSearchRetrofitCallBack =
-        object {
+        object : RetrofitCallback<ImmunizationInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<ImmunizationInstitutionResponseModel>) {
 
-                if (response.body().responseContents.isNotEmpty()!!) {
+                if (response.body()?.responseContents?.isNotEmpty()!!) {
 
-                    setInstitutionSeason(response.body().responseContents!!)
+                    setInstitutionSeason(response.body()?.responseContents!!)
 
 
                 }
@@ -6031,13 +6026,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.status!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -6047,7 +6042,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 //          customProgressDialog!!.dismiss()
@@ -6056,7 +6051,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
                 //         customProgressDialog!!.dismiss()
@@ -6065,14 +6060,14 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 //      customProgressDialog!!.dismiss()
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
                 //     customProgressDialog!!.dismiss()
             }
 
@@ -6087,25 +6082,25 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     fun setInstitutionSeason(responseContents: List<ImmunizationInstitutionresponseContent?>) {
 
         institutionNameList =
-            responseContents.map { it.uuid!! to it.name!! }.toMap().toMutableMap()
+            responseContents.map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
         val adapter = ArrayAdapter<String>(
             requireActivity(),
             android.R.layout.simple_spinner_dropdown_item,
             institutionNameList.values.toMutableList()
         )
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.InstitutionReferal!!.threshold = 1
-        binding.InstitutionReferal!!.setAdapter(adapter)
+        binding?.InstitutionReferal!!.threshold = 1
+        binding?.InstitutionReferal!!.setAdapter(adapter)
 
     }
 
 
-    val DepartmentSearchRefuralCallBack = object {
+    val DepartmentSearchRefuralCallBack = object : RetrofitCallback<FavAddAllDepatResponseModel> {
         @SuppressLint("NewApi")
         override fun onSuccessfulResponse(responseBody: Response<FavAddAllDepatResponseModel>?) {
-            Log.i("", "" + responseBody?.body().responseContents)
+            Log.i("", "" + responseBody?.body()?.responseContents)
 
-            setDepartmentRefuralAdapter(responseBody?.body().responseContents)
+            setDepartmentRefuralAdapter(responseBody?.body()?.responseContents)
 
 
         }
@@ -6120,13 +6115,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -6136,7 +6131,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -6144,7 +6139,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -6152,13 +6147,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -6190,7 +6185,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     }
 
-    val getAllReferralCallBack = object {
+    val getAllReferralCallBack = object : RetrofitCallback<GetPatientAllReferralsResponse> {
         @SuppressLint("NewApi")
         override fun onSuccessfulResponse(responseBody: Response<GetPatientAllReferralsResponse>?) {
             Log.i("", "" + responseBody?.body()?.responseContents)
@@ -6210,13 +6205,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -6226,7 +6221,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -6234,7 +6229,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -6242,13 +6237,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -6260,16 +6255,16 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     fun setReferralsAdapter(responseContent: List<GetPatientAllReferral?>?) {
 
         val layoutmanager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
-        binding.refuralHistoryRecyclerView!!.layoutManager = layoutmanager
+        binding?.refuralHistoryRecyclerView!!.layoutManager = layoutmanager
         ReferralsAdapter = PatientAllReferralsAdapter(requireContext(), ArrayList())
-        binding.refuralHistoryRecyclerView!!.adapter = ReferralsAdapter
-        ReferralsAdapter.clearAll()
-        ReferralsAdapter.addAll(responseContent)
+        binding?.refuralHistoryRecyclerView!!.adapter = ReferralsAdapter
+        ReferralsAdapter?.clearAll()
+        ReferralsAdapter?.addAll(responseContent)
 
     }
 
 
-    val getAllVisitsCallBack = object {
+    val getAllVisitsCallBack = object : RetrofitCallback<GetPatientAllVisitsResponse> {
         @SuppressLint("NewApi")
         override fun onSuccessfulResponse(responseBody: Response<GetPatientAllVisitsResponse>?) {
 
@@ -6290,13 +6285,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     ""
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -6306,7 +6301,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -6314,7 +6309,7 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -6322,13 +6317,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -6341,14 +6336,10 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     fun setVisitsAdapter(responseContent: List<GetPatientAllVisit?>?) {
 
         val layoutmanager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
-        binding.visitHistoryRecyclerView!!.layoutManager = layoutmanager
+        binding?.visitHistoryRecyclerView!!.layoutManager = layoutmanager
         VisitsAdapter = PatientAllVisitsAdapter(requireContext(), ArrayList())
-        binding.visitHistoryRecyclerView!!.adapter = VisitsAdapter
-        VisitsAdapter.clearAll()
-        VisitsAdapter.addAll(responseContent)
-
-
+        binding?.visitHistoryRecyclerView!!.adapter = VisitsAdapter
+        VisitsAdapter?.clearAll()
+        VisitsAdapter?.addAll(responseContent)
     }
-
-
 }

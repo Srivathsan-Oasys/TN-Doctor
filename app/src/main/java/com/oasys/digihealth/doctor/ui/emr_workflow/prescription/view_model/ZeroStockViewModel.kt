@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.ZeroStockResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
@@ -74,7 +74,7 @@ class ZeroStockViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -115,7 +115,7 @@ class ZeroStockViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 

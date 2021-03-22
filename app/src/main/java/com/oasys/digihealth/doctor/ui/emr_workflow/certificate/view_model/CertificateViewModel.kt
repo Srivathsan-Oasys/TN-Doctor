@@ -5,10 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.certificate.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
@@ -61,7 +62,7 @@ class CertificateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
         return
     }
 
@@ -93,7 +94,7 @@ class CertificateViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!, body
-        ).enqueue(RetrofitMainCallback(downloadfile))
+        )?.enqueue(RetrofitMainCallback(downloadfile))
 
     }
 
@@ -117,7 +118,7 @@ class CertificateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -248,7 +249,7 @@ class CertificateViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, certificateUUID
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 

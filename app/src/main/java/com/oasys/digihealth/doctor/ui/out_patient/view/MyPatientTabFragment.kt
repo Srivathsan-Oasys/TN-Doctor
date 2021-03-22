@@ -23,14 +23,15 @@ import com.oasys.digihealth.doctor.component.extention.slideDown
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentTabMyPatientBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.EmrWorkFlowActivity
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.MyPatientsResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.MypatientResponseContent
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.OutPatientViewModel
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.OutPatientViewModelFactory
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
@@ -112,20 +113,20 @@ class MyPatientTabFragment : Fragment() {
             requireActivity().application
         )
             .create(OutPatientViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         viewModel!!.errorText.observe(viewLifecycleOwner,
             Observer { toastMessage ->
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, toastMessage)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
             })
     }
 
 
     private fun bindFirst() {
 
-        ufcNUmber = binding.etUfcPin!!.text.trim().toString()
-        exsistingPin = binding.etExsistingPin!!.text.trim().toString()
-        query = binding.etSearch!!.text.trim().toString()
+        ufcNUmber = binding?.etUfcPin!!.text.trim().toString()
+        exsistingPin = binding?.etExsistingPin!!.text.trim().toString()
+        query = binding?.etSearch!!.text.trim().toString()
 
 
         val currentdata = Date()
@@ -133,18 +134,18 @@ class MyPatientTabFragment : Fragment() {
         val formatter =
             SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
 
-        var setdate = formatter.format(currentdata)
+        val setdate = formatter.format(currentdata)
 
         Str_fromdate = setdate
 
         Str_todate = setdate
 
-        binding.FromDateEditText!!.setText(setdate)
+        binding?.FromDateEditText!!.setText(setdate)
 
-        binding.toDateEditText!!.setText(setdate)
+        binding?.toDateEditText!!.setText(setdate)
 
 
-        fromdate = utils!!.getDate(binding.FromDateEditText!!.text.toString())
+        fromdate = utils!!.getDate(binding?.FromDateEditText!!.text.toString())
         fromdate = utils!!.convertDateFormat(
             fromdate!!,
             "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
@@ -152,7 +153,7 @@ class MyPatientTabFragment : Fragment() {
         )
         Log.e("dateee", fromdate.toString())
 
-        todate = utils!!.getDate(binding.toDateEditText!!.text.toString())
+        todate = utils!!.getDate(binding?.toDateEditText!!.text.toString())
 
         todate = utils!!.convertDateFormat(
             todate!!,
@@ -176,9 +177,9 @@ class MyPatientTabFragment : Fragment() {
     }
 
     fun initDropDown() {
-        binding.llDropDownView.hide()
-        binding.rlHeader.setOnClickListener {
-            if (binding.llDropDownView.isvisible()!!) {
+        binding?.llDropDownView?.hide()
+        binding?.rlHeader?.setOnClickListener {
+            if (binding?.llDropDownView?.isvisible()!!) {
                 hideDropDown()
             } else {
                 showDropDown()
@@ -188,20 +189,21 @@ class MyPatientTabFragment : Fragment() {
 
 
     fun showDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.llDropDownView.show()
-        binding.ivArrow.rotation = 270F
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.llDropDownView?.show()
+        binding?.ivArrow?.rotation = 270F
     }
 
     fun hideDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.ivArrow.rotation = 90F
-        binding.llDropDownView.hide()
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.ivArrow?.rotation = 90F
+        binding?.llDropDownView?.hide()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initDateView() {
         Utils(requireContext()).setCalendarLocale("en", requireContext())
-        binding.FromDateEditText.setOnClickListener {
+        binding?.FromDateEditText?.setOnClickListener {
             val c: Calendar = Calendar.getInstance()
             val mYear = c.get(Calendar.YEAR)
             val mMonth = c.get(Calendar.MONTH)
@@ -220,7 +222,7 @@ class MyPatientTabFragment : Fragment() {
                         this.activity,
                         TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
-                            binding.FromDateEditText.setText(
+                            binding?.FromDateEditText?.setText(
                                 String.format(
                                     "%02d",
                                     dayOfMonth
@@ -237,7 +239,7 @@ class MyPatientTabFragment : Fragment() {
                                     "%02d", mSeconds
                                 )
                             )
-                            Str_fromdate = binding.FromDateEditText.text.toString()
+                            Str_fromdate = binding?.FromDateEditText?.text.toString()
 
 
                         },
@@ -252,7 +254,7 @@ class MyPatientTabFragment : Fragment() {
             datePickerDialog.show()
         }
 
-        binding.toDateEditText.setOnClickListener {
+        binding?.toDateEditText?.setOnClickListener {
             val c: Calendar = Calendar.getInstance()
             val mYear = c.get(Calendar.YEAR)
             val mMonth = c.get(Calendar.MONTH)
@@ -270,7 +272,7 @@ class MyPatientTabFragment : Fragment() {
                         this.activity,
                         TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
 
-                            binding.toDateEditText.setText(
+                            binding?.toDateEditText?.setText(
                                 String.format(
                                     "%02d",
                                     dayOfMonth
@@ -287,7 +289,7 @@ class MyPatientTabFragment : Fragment() {
                                     "%02d", mSeconds
                                 )
                             )
-                            Str_todate = binding.toDateEditText.text.toString()
+                            Str_todate = binding?.toDateEditText?.text.toString()
 
 
                         },
@@ -304,14 +306,14 @@ class MyPatientTabFragment : Fragment() {
     }
 
     private fun initClearAndSave() {
-        binding.clearcardview.setOnClickListener {
+        binding?.clearcardview?.setOnClickListener {
             clearFilterData()
         }
-        binding.searchButton!!.setOnClickListener {
+        binding?.searchButton!!.setOnClickListener {
 
             outPatientAdapter.clearAll()
-            if (!binding.FromDateEditText!!.text.trim().toString().isEmpty()) {
-                fromdate = utils!!.getDate(binding.FromDateEditText!!.text.toString())
+            if (binding?.FromDateEditText!!.text?.trim().toString().isNotEmpty()) {
+                fromdate = utils!!.getDate(binding?.FromDateEditText!!.text.toString())
 
                 val formatter =
                     SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
@@ -322,8 +324,8 @@ class MyPatientTabFragment : Fragment() {
                 Log.e("dateee", fromdate.toString())
 
             }
-            if (!binding.toDateEditText!!.text.trim().toString().isEmpty()) {
-                todate = utils!!.getDate(binding.toDateEditText!!.text.toString())
+            if (binding?.toDateEditText!!.text?.trim().toString().isNotEmpty()) {
+                todate = utils!!.getDate(binding?.toDateEditText!!.text.toString())
                 val formatter =
                     SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
                 val dateToDisplay = formatter.parse(Str_todate)
@@ -335,9 +337,9 @@ class MyPatientTabFragment : Fragment() {
             }
 
 
-            ufcNUmber = binding.etUfcPin!!.text.trim().toString()
-            exsistingPin = binding.etExsistingPin!!.text.trim().toString()
-            query = binding.etSearch!!.text.trim().toString()
+            ufcNUmber = binding?.etUfcPin!!.text.trim().toString()
+            exsistingPin = binding?.etExsistingPin!!.text.trim().toString()
+            query = binding?.etSearch!!.text.trim().toString()
 
             viewModel?.searchMyPatient(
                 fromdate!!, todate!!, depatment_id!!.toString(),
@@ -362,8 +364,8 @@ class MyPatientTabFragment : Fragment() {
             gridLayoutManager =
                 GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         }
-        binding.recyclerView.layoutManager = gridLayoutManager
-        binding.recyclerView.adapter = outPatientAdapter
+        binding?.recyclerView?.layoutManager = gridLayoutManager
+        binding?.recyclerView?.adapter = outPatientAdapter
 
         outPatientAdapter.setOnItemClickListener(object :
             MyPatientAdapter.OnItemClickListener {
@@ -376,10 +378,10 @@ class MyPatientTabFragment : Fragment() {
 
                 val emr = EmrWorkFlowActivity.newInstance(AppConstants.OUT_PATIENT)
 
-                (activity as MainLandScreenActivity).replaceFragment(emr)
+                (activity as HomeActivity).replaceFragment(emr)
             }
         })
-        binding.recyclerView.addOnScrollListener(object :
+        binding?.recyclerView?.addOnScrollListener(object :
             PaginationScrollListener(gridLayoutManager) {
 
             override fun loadMoreItems() {
@@ -412,8 +414,8 @@ class MyPatientTabFragment : Fragment() {
     }
 
     val patientSearchRetrofitCallBack = object : RetrofitCallback<MyPatientsResponseModel> {
-        override fun onSuccessfulResponse(response: Response<MyPatientsResponseModel>) {
 
+        override fun onSuccessfulResponse(response: Response<MyPatientsResponseModel>) {
             if (response.body()?.responseContents?.isNotEmpty()!!) {
                 TOTAL_PAGES = Math.ceil(response.body()!!.totalRecords.toDouble() / 10).toInt()
 
@@ -448,13 +450,13 @@ class MyPatientTabFragment : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -464,7 +466,7 @@ class MyPatientTabFragment : Fragment() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -472,7 +474,7 @@ class MyPatientTabFragment : Fragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -480,13 +482,13 @@ class MyPatientTabFragment : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -537,7 +539,7 @@ class MyPatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -546,7 +548,7 @@ class MyPatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -555,13 +557,13 @@ class MyPatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -579,27 +581,23 @@ class MyPatientTabFragment : Fragment() {
         val formatter =
             SimpleDateFormat("dd-MM-yyyy HH:mm:ss")
 
-        var setdate = formatter.format(currentdata)
+        val setdate = formatter.format(currentdata)
 
         Str_fromdate = setdate
 
         Str_todate = setdate
 
-        binding.FromDateEditText!!.setText(setdate)
+        binding?.FromDateEditText!!.setText(setdate)
 
-        binding.toDateEditText!!.setText(setdate)
+        binding?.toDateEditText!!.setText(setdate)
     }
 
     fun showCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.show()
-        }
+        customProgressDialog?.show()
     }
 
     fun dismissCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.dismiss()
-        }
+        customProgressDialog?.dismiss()
     }
 
 

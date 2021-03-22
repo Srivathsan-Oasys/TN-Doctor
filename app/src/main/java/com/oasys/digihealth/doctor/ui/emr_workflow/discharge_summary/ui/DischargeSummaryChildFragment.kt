@@ -28,17 +28,18 @@ import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.discharge_model.*
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.discharge_model.DischargeResult
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.previous_model.DischargeSummaryPreviousResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.ui.adapter.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.view_model.DischargeSummaryViewModel
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.NurseDeskDischargeSummaryResponseContent
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.revertresponse.RevertRequest
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.revertresponse.RevertResponseModel
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.Detail
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.Headers
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.SaveRequestModel
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.SaveResponseModel
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.NurseDeskDischargeSummaryResponseContent
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertRequest
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.Detail
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.Headers
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveRequestModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.view.DialogPDFViewerActivity
 import com.oasys.digihealth.doctor.utils.LogUtils
 import com.oasys.digihealth.doctor.utils.Utils
@@ -906,7 +907,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
 
                 //    alertDialog(responseBody?.body()?.message.toString())
 
-                toast(responseBody?.body().message.toString())
+                toast(responseBody?.body()?.message.toString())
                 initMain()
 
 //                val frag = DischargeSummaryChildFragment()
@@ -1045,7 +1046,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
                     }
 
                     dischargeResult.let { dischargeResult ->
-                        allergy = dischargeResult.allergy!!
+                        allergy = dischargeResult?.allergy!!
                         diagnosis = dischargeResult.diagnosis
                         investigation = dischargeResult.investigation
                         lab = dischargeResult.lab
@@ -1424,7 +1425,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
 
         labtemplatedialog.arguments = bundle
 
-        (activity as MainLandScreenActivity).replaceFragment(labtemplatedialog)
+        (activity as HomeActivity).replaceFragment(labtemplatedialog)
     }
 
     private fun clearData() {
@@ -1579,7 +1580,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-            dischargeResult.let {
+            dischargeResult?.let {
                 admissionRequestUUID = it.admission_request_uuid
                 admissionStatusUUID = it.admission_status_uuid
                 admissionUUID = it.admission_uuid
@@ -1587,31 +1588,31 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
             }
 
 
-            header.facility_uuid = facilityId.toString()
-            header.department_uuid = departmentId.toString()
-            header.patient_uuid = patientId
-            header.doctor_uuid = doctorID.toString()
-            header.encounter_uuid = this.encounterUUID!!
-            header.encounter_type_uuid = encounterTypeUUID
-            header.admission_request_uuid = admissionRequestUUID
-            header.admission_uuid = admissionUUID
+            header?.facility_uuid = facilityId.toString()
+            header?.department_uuid = departmentId.toString()
+            header?.patient_uuid = patientId
+            header?.doctor_uuid = doctorID.toString()
+            header?.encounter_uuid = this.encounterUUID!!
+            header?.encounter_type_uuid = encounterTypeUUID
+            header?.admission_request_uuid = admissionRequestUUID
+            header?.admission_uuid = admissionUUID
             if (isSaveAPI) {
-                header.admission_status_uuid = 13
+                header?.admission_status_uuid = 13
             } else {
-                header.admission_status_uuid = 6
+                header?.admission_status_uuid = 6
             }
-            header.discharge_type_uuid = dischargeTypeUUID.toString()
-            header.death_type_uuid = deathTypeUUID
-            header.death_place = binding?.etDischargeSummaryDeathPlace?.text.toString()
-            header.discharge_date = dischargeAPIDate
-            header.generated_by = doctorID!!
-            header.is_alive = if (isAlive!!) 1 else 0
-            header.generated_date = generateAPIDate
+            header?.discharge_type_uuid = dischargeTypeUUID.toString()
+            header?.death_type_uuid = deathTypeUUID
+            header?.death_place = binding?.etDischargeSummaryDeathPlace?.text.toString()
+            header?.discharge_date = dischargeAPIDate
+            header?.generated_by = doctorID!!
+            header?.is_alive = if (isAlive!!) true else false
+            header?.generated_date = generateAPIDate
             if (noteTemplateUUID != 0)
-                header.note_template_uuid = noteTemplateUUID
-            header.data_template = templateText.toString()
-            header.comments = "say something about"
-            header.note_template_is_default = if (binding?.cbSaveAsDefault?.isChecked!!) 1 else 0
+                header?.note_template_uuid = noteTemplateUUID.toString()
+            header?.data_template = templateText.toString()
+            header?.comments = "say something about"
+            header?.note_template_is_default = if (binding?.cbSaveAsDefault?.isChecked!!) 1 else 0
 
             val saveRequestModel = SaveRequestModel()
             saveRequestModel.headers = this.header!!
@@ -1702,7 +1703,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
                 if (isApproval) {
                     isApproval = false
                 }
-                alertDialog(responseBody.body().message.toString())
+                alertDialog(responseBody.body()?.message.toString())
                 trackDischargeSummarySaveComplete(utils?.getEncounterType(), "success", "")
             }
         }
@@ -1713,7 +1714,7 @@ class DischargeSummaryChildFragment : Fragment(), View.OnClickListener {
             trackDischargeSummarySaveComplete(
                 utils?.getEncounterType(),
                 "failure",
-                response?.body().message
+                response?.body()?.message
             )
         }
 

@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.helpdesk.view
 
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +20,8 @@ import com.oasys.digihealth.doctor.component.extention.isTablet
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityEditTicketBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.EditTicketViewModel
@@ -36,42 +37,42 @@ class EditTicketFragment : DialogFragment() {
     private var viewModel: EditTicketViewModel? = null
     var utils: Utils? = null
     var appPreferences: AppPreferences? = null
-    private var facility_id: Int = 0
-    private var department_id: Int = 0
+    private var facility_id : Int = 0
+    private var department_id : Int = 0
 
-    private var loginType: String? = null
-    private var userUUID: Int? = 0
-    private var userTypeUUID: Int? = 0
-    private var userDetailsRoomRepository: UserDetailsRoomRepository? = null
+    private var loginType:String?=null
+    private var userUUID:Int?=0
+    private var userTypeUUID:Int?=0
+    private var userDetailsRoomRepository : UserDetailsRoomRepository?=null
 
     private var categorylistfilteritem: ArrayList<CategoryResponseContent?>? = ArrayList()
     private var FilterCategoryResponseMap = mutableMapOf<Int, String>()
-    private var selectedCategoryid: Int = 0
+    private var selectedCategoryid :Int=0
 
 
     private var prioritylistfilteritem: ArrayList<CategoryResponseContent?>? = ArrayList()
     private var FilterPriorityResponseMap = mutableMapOf<Int, String>()
-    private var selectedPriorityid: Int = 0
+    private var selectedPriorityid  :Int=0
 
     private var statuslistfilteritem: ArrayList<CategoryResponseContent?>? = ArrayList()
     private var FilterStatusResponseMap = mutableMapOf<Int, String>()
-    private var selectedStatusid: Int = 0
+    private var selectedStatusid  :Int=0
 
-    private var selectdAssetUUID: Int? = 0
-    private var selectdCategoryUUID: Int? = 0
-    private var selectdAssetCode: String? = null
+    private var selectdAssetUUID : Int?=0
+    private var selectdCategoryUUID : Int?=0
+    private var selectdAssetCode : String?=null
     private var autocompleteTestResponse: List<AssetResponseContent?>? = null
 
     var status: Boolean? = false
-    var detailList: TicketListResponseContent? = null
+    var detailList :TicketListResponseContent ?= null
 
     private var subCategorylistfilteritem: ArrayList<CategoryResponseContent?>? = ArrayList()
     private var FilterSubCategoryResponseMap = mutableMapOf<Int, String>()
-    private var selectedSubCategoryid: Int = 0
+    private var selectedSubCategoryid :Int=0
 
-    private var selectedMake: String = ""
-    private var selectedModel: String = ""
-    private var selectedSerial: String = ""
+    private var selectedMake :String=""
+    private var selectedModel :String=""
+    private var selectedSerial :String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -90,8 +91,8 @@ class EditTicketFragment : DialogFragment() {
             requireActivity().application
         )
             .create(EditTicketViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         val args = arguments
@@ -101,7 +102,7 @@ class EditTicketFragment : DialogFragment() {
         } else {
             // get value from bundle..
             status = false
-            var uuid = args.getInt("uuid")
+            var uuid  = args.getInt("uuid")
             Log.e("selected uuid", uuid.toString())
             getDetails(uuid)
         }
@@ -112,16 +113,16 @@ class EditTicketFragment : DialogFragment() {
             AppConstants.SHARE_PREFERENCE_NAME
         )
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
         loginType = appPreferences?.getString(AppConstants.LOGINTYPE)!!
-        userUUID = userDataStoreBean.uuid!!
+        userUUID =  userDataStoreBean?.uuid!!
 
 
-        if (isTablet(requireContext())) {
+        if(isTablet(requireContext())) {
 
-            binding.categorySpinner!!.onItemSelectedListener =
+            binding?.categorySpinner!!.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -153,7 +154,7 @@ class EditTicketFragment : DialogFragment() {
                     }
                 }
 
-            binding.subcategorySpinner!!.onItemSelectedListener =
+            binding?.subcategorySpinner!!.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -181,7 +182,7 @@ class EditTicketFragment : DialogFragment() {
                     }
                 }
 
-            binding.statusSpinner!!.onItemSelectedListener =
+            binding?.statusSpinner!!.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -210,7 +211,7 @@ class EditTicketFragment : DialogFragment() {
                 }
 
 
-            binding.prioritySpinner!!.onItemSelectedListener =
+            binding?.prioritySpinner!!.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener {
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -236,7 +237,7 @@ class EditTicketFragment : DialogFragment() {
                     }
                 }
 
-            binding.autoCompleteTextViewAssetId.addTextChangedListener(object : TextWatcher {
+            binding?.autoCompleteTextViewAssetId?.addTextChangedListener(object : TextWatcher {
 
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
@@ -271,8 +272,8 @@ class EditTicketFragment : DialogFragment() {
                 }
             })
 
-            binding.autoCompleteTextViewAssetId!!.setOnItemClickListener { parent, _, position, id ->
-                binding.autoCompleteTextViewAssetId.setText(autocompleteTestResponse?.get(position)?.asset_name)
+            binding?.autoCompleteTextViewAssetId!!.setOnItemClickListener { parent, _, position, id ->
+                binding?.autoCompleteTextViewAssetId?.setText(autocompleteTestResponse?.get(position)?.asset_name)
 
                 selectdAssetUUID =
                     autocompleteTestResponse?.get(position)?.AssetDetails?.get(0)?.uuid
@@ -280,36 +281,36 @@ class EditTicketFragment : DialogFragment() {
                 selectdCategoryUUID = autocompleteTestResponse?.get(position)?.asset_category_uuid!!
             }
 
-            binding.cancel!!.setOnClickListener {
+            binding?.cancel!!.setOnClickListener {
                 dismiss()
             }
 
-            binding.searchButton!!.setOnClickListener {
+            binding?.searchButton!!.setOnClickListener {
 
                 if (selectdAssetUUID == 0) {
-                    binding.autoCompleteTextViewAssetId!!.error = "Enter Asset Id"
+                    binding?.autoCompleteTextViewAssetId!!.error = "Enter Asset Id"
                     return@setOnClickListener
                 }
 
                 if (selectedCategoryid == 0) {
-                    (binding.categorySpinner.selectedView as TextView).error =
+                    (binding?.categorySpinner?.selectedView as TextView).error =
                         "Select Category"
                     return@setOnClickListener
                 }
                 if (selectedSubCategoryid == 0) {
-                    (binding.subcategorySpinner.selectedView as TextView).error =
+                    (binding?.subcategorySpinner?.selectedView as TextView).error =
                         "Select Sub category"
                     return@setOnClickListener
                 }
 
                 if (selectedPriorityid == 0) {
-                    (binding.prioritySpinner.selectedView as TextView).error =
+                    (binding?.prioritySpinner?.selectedView as TextView).error =
                         "Select Priority"
                     return@setOnClickListener
                 }
 
                 if (selectedStatusid == 0) {
-                    (binding.statusSpinner.selectedView as TextView).error =
+                    (binding?.statusSpinner?.selectedView as TextView).error =
                         "Select Priority"
                     return@setOnClickListener
                 }
@@ -321,8 +322,8 @@ class EditTicketFragment : DialogFragment() {
                 model.created_by = userUUID!!
                 model.user_type_uuid = userTypeUUID!!
                 model.ticketstatus_uuid = selectedStatusid
-                model.subject = binding.edtSubject.text.toString()
-                model.problem_description = binding.edtDescription.text.toString()
+                model.subject = binding?.edtSubject?.text.toString()
+                model.problem_description = binding?.edtDescription?.text.toString()
                 model.make = selectedMake
                 model.model = selectedModel
                 model.serial = selectedSerial
@@ -339,7 +340,10 @@ class EditTicketFragment : DialogFragment() {
 
             }
 
-        } else {
+        }
+        else{
+
+
 
 
         }
@@ -350,14 +354,16 @@ class EditTicketFragment : DialogFragment() {
 
     private fun setCategory() {
 
-        if (status as Boolean) {
-            binding.categorySpinner!!.setSelection(1)
-        } else {
+        if(status as Boolean)
+        {
+            binding?.categorySpinner!!.setSelection(1)
+        }else
+        {
 
-            Log.e("category_uuid", "" + detailList?.category_uuid)
-            for (i in categorylistfilteritem!!.indices)
-                if (categorylistfilteritem?.get(i)?.uuid == detailList?.category_uuid) {
-                    binding.categorySpinner!!.setSelection(i)
+            Log.e("category_uuid", ""+detailList?.category_uuid)
+            for(i in categorylistfilteritem!!.indices)
+                if(categorylistfilteritem?.get(i)?.uuid==detailList?.category_uuid) {
+                    binding?.categorySpinner!!.setSelection(i)
                 }
         }
 
@@ -365,15 +371,17 @@ class EditTicketFragment : DialogFragment() {
 
     private fun setSubCategory() {
 
-        if (status as Boolean) {
-            binding.categorySpinner!!.setSelection(1)
-        } else {
+        if(status as Boolean)
+        {
+            binding?.categorySpinner!!.setSelection(1)
+        }else
+        {
 
-            Log.e("subcategory_uuid", "" + detailList?.subcategory_uuid)
-            for (i in categorylistfilteritem!!.indices)
+            Log.e("subcategory_uuid", ""+detailList?.subcategory_uuid)
+            for(i in categorylistfilteritem!!.indices)
 
-                if (categorylistfilteritem?.get(i)?.uuid == detailList?.subcategory_uuid) {
-                    binding.categorySpinner!!.setSelection(i)
+                if(categorylistfilteritem?.get(i)?.uuid==detailList?.subcategory_uuid) {
+                    binding?.categorySpinner!!.setSelection(i)
                 }
         }
 
@@ -382,25 +390,27 @@ class EditTicketFragment : DialogFragment() {
 
     private fun setPriority() {
 
-        if (status as Boolean) {
-            binding.prioritySpinner!!.setSelection(1)
-        } else {
+        if(status as Boolean)
+        {
+            binding?.prioritySpinner!!.setSelection(1)
+        }else
+        {
 
-            Log.e("priority_uuid", "" + detailList?.priority_uuid)
-            for (i in prioritylistfilteritem!!.indices)
+            Log.e("priority_uuid", ""+detailList?.priority_uuid)
+            for(i in prioritylistfilteritem!!.indices)
 
-                if (prioritylistfilteritem?.get(i)?.uuid == detailList?.priority_uuid) {
-                    binding.prioritySpinner!!.setSelection(i)
+                if(prioritylistfilteritem?.get(i)?.uuid==detailList?.priority_uuid) {
+                    binding?.prioritySpinner!!.setSelection(i)
                 }
         }
 
     }
 
     val updateTicketRetrofitCallback =
-        object {
+        object : RetrofitCallback<TicketInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<TicketInstitutionResponseModel>) {
-                Log.i("", "" + response.body()?.responseContents)
+                Log.i("",""+response.body()?.responseContents)
                 Toast.makeText(context!!, response.body()?.msg, Toast.LENGTH_LONG).show()
                 dismiss()
             }
@@ -417,7 +427,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -427,7 +437,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -435,7 +445,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -443,13 +453,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -458,10 +468,10 @@ class EditTicketFragment : DialogFragment() {
         }
 
     val categorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
-                Log.i("", "" + response.body()?.responseContents)
+                Log.i("",""+response.body()?.responseContents)
 
                 categorylistfilteritem?.add(CategoryResponseContent())
                 categorylistfilteritem?.addAll(response.body()?.responseContents!!)
@@ -470,7 +480,8 @@ class EditTicketFragment : DialogFragment() {
                     categorylistfilteritem!!.filter { it?.uuid != null && it.name != null }
                         .map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
                 FilterCategoryResponseMap.put(0, "Category")
-                try {
+                try
+                {
                     val adapter =
                         ArrayAdapter<String>(
                             context!!,
@@ -478,18 +489,16 @@ class EditTicketFragment : DialogFragment() {
                             FilterCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.categorySpinner!!.adapter = adapter
-                } catch (e: Exception) {
+                    binding?.categorySpinner!!.adapter = adapter
+                }catch (e:Exception)
+                {
 
                 }
 
-                binding.categorySpinner.prompt = categorylistfilteritem?.get(0)?.name
+                binding?.categorySpinner?.prompt =categorylistfilteritem?.get(0)?.name
                 setCategory()
 
-                viewModel?.getSubCategoryList(
-                    selectedCategoryid,
-                    subCategorySpinnerRetrofitCallback
-                )
+                viewModel?.getSubCategoryList(selectedCategoryid,subCategorySpinnerRetrofitCallback)
             }
 
             override fun onBadRequest(response: Response<CategoryListResponseModel>) {
@@ -504,7 +513,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -514,7 +523,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -522,7 +531,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -530,13 +539,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -546,19 +555,19 @@ class EditTicketFragment : DialogFragment() {
 
 
     val assetResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<AssetResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<AssetResponseModel>) {
-                Log.e("assetResponseRetrofit", "" + response.body()?.responseContents)
-                autocompleteTestResponse = null
-                autocompleteTestResponse = response.body()?.responseContents!!
+                Log.e("assetResponseRetrofit",""+response.body()?.responseContents)
+                autocompleteTestResponse  = null
+                autocompleteTestResponse =response.body()?.responseContents!!
                 val responseContentAdapter = AssetSearchResultAdapter(
                     context!!,
                     R.layout.row_chief_complaint_search_result,
                     response.body()?.responseContents!!
                 )
-                binding.autoCompleteTextViewAssetId.threshold = 1
-                binding.autoCompleteTextViewAssetId.setAdapter(responseContentAdapter)
+                binding?.autoCompleteTextViewAssetId?.threshold = 1
+                binding?.autoCompleteTextViewAssetId?.setAdapter(responseContentAdapter)
             }
 
             override fun onBadRequest(response: Response<AssetResponseModel>) {
@@ -573,7 +582,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -583,7 +592,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -591,7 +600,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -599,13 +608,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -613,7 +622,7 @@ class EditTicketFragment : DialogFragment() {
             }
         }
 
-    private fun getDetails(uuid: Int) {
+    private fun getDetails(uuid :Int){
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -626,33 +635,34 @@ class EditTicketFragment : DialogFragment() {
     }
 
 
-    val ticketByIdResponseRetrofitCallback = object {
+    val ticketByIdResponseRetrofitCallback = object  :
+        RetrofitCallback<TicketIdResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<TicketIdResponseModel>?) {
 
             var responsedata = Gson().toJson(responseBody?.body()?.responseContents)
-            if (responseBody?.body()?.responseContents != null) {
+            if(responseBody?.body()?.responseContents!=null){
                 detailList = responseBody.body()?.responseContents
 
-                binding.edtInstitution.setText(detailList?.facility_name)
-                binding.edtDepartment.setText(detailList?.department_name)
-                binding.edtTicketId.setText(detailList?.ticket_id)
-                binding.edtSubject.setText(detailList?.subject)
-                binding.edtDescription.setText(detailList?.problem_description)
-                binding.edtCreatedBy.setText(detailList?.createdby_detail?.first_name)
-                binding.edtCreatedOn.setText(detailList?.created_date)
-                facility_id = detailList?.facility_uuid!!
-                department_id = detailList?.department_uuid!!
-                selectedCategoryid = detailList?.category_uuid!!
-                selectedSubCategoryid = detailList?.subcategory_uuid!!
-                selectedPriorityid = detailList?.ticket_detail_priority_uuid!!
-                userUUID = detailList?.application_user_uuid!!
-                selectedMake = detailList?.make!!
-                selectedModel = detailList?.model!!
-                selectedSerial = detailList?.serial!!
+                binding?.edtInstitution?.setText(detailList?.facility_name)
+                binding?.edtDepartment?.setText(detailList?.department_name)
+                binding?.edtTicketId?.setText(detailList?.ticket_id)
+                binding?.edtSubject?.setText(detailList?.subject)
+                binding?.edtDescription?.setText(detailList?.problem_description)
+                binding?.edtCreatedBy?.setText(detailList?.createdby_detail?.first_name)
+                binding?.edtCreatedOn?.setText(detailList?.created_date)
+                facility_id =detailList?.facility_uuid!!
+                department_id =detailList?.department_uuid!!
+                selectedCategoryid =detailList?.category_uuid!!
+                selectedSubCategoryid =detailList?.subcategory_uuid!!
+                selectedPriorityid =detailList?.ticket_detail_priority_uuid!!
+                userUUID =detailList?.application_user_uuid!!
+                selectedMake=detailList?.make!!
+                selectedModel=detailList?.model!!
+                selectedSerial=detailList?.serial!!
                 userTypeUUID = detailList?.user_type_uuid!!
                 selectdAssetUUID = detailList?.assest_uuid!!
                 selectdAssetCode = detailList?.asset_code!!
-                binding.autoCompleteTextViewAssetId.setText(selectdAssetCode)
+                binding?.autoCompleteTextViewAssetId?.setText(selectdAssetCode)
 
             }
             viewModel?.getCategoryList(categorySpinnerRetrofitCallback)
@@ -669,13 +679,13 @@ class EditTicketFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -685,7 +695,7 @@ class EditTicketFragment : DialogFragment() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -693,7 +703,7 @@ class EditTicketFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -701,13 +711,13 @@ class EditTicketFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -716,10 +726,10 @@ class EditTicketFragment : DialogFragment() {
     }
 
     val prioritySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
-                Log.i("", "" + response.body()?.responseContents)
+                Log.i("",""+response.body()?.responseContents)
 
                 prioritylistfilteritem?.add(CategoryResponseContent())
                 prioritylistfilteritem?.addAll(response.body()?.responseContents!!)
@@ -728,7 +738,8 @@ class EditTicketFragment : DialogFragment() {
                     prioritylistfilteritem!!.filter { it?.uuid != null && it.name != null }
                         .map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
                 FilterPriorityResponseMap.put(0, "Priority")
-                try {
+                try
+                {
                     val adapter =
                         ArrayAdapter<String>(
                             context!!,
@@ -736,13 +747,14 @@ class EditTicketFragment : DialogFragment() {
                             FilterPriorityResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.prioritySpinner!!.adapter = adapter
-                } catch (e: Exception) {
+                    binding?.prioritySpinner!!.adapter = adapter
+                }catch (e:Exception)
+                {
 
                 }
 
-                binding.prioritySpinner.prompt = prioritylistfilteritem?.get(0)?.name
-                binding.prioritySpinner.setSelection(1)
+                binding?.prioritySpinner?.prompt =prioritylistfilteritem?.get(0)?.name
+                binding?.prioritySpinner?.setSelection(1)
                 //setPriority()
 
                 viewModel?.getStatusList(statuspinnerRetrofitCallback)
@@ -761,7 +773,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -771,7 +783,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -779,7 +791,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -787,13 +799,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -802,10 +814,10 @@ class EditTicketFragment : DialogFragment() {
         }
 
     val statuspinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
-                Log.i("", "" + response.body()?.responseContents)
+                Log.i("",""+response.body()?.responseContents)
 
                 statuslistfilteritem?.add(CategoryResponseContent())
                 statuslistfilteritem?.addAll(response.body()?.responseContents!!)
@@ -814,7 +826,8 @@ class EditTicketFragment : DialogFragment() {
                     statuslistfilteritem!!.filter { it?.uuid != null && it.name != null }
                         .map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
                 FilterStatusResponseMap.put(0, "Status")
-                try {
+                try
+                {
                     val adapter =
                         ArrayAdapter<String>(
                             context!!,
@@ -822,13 +835,14 @@ class EditTicketFragment : DialogFragment() {
                             FilterStatusResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.statusSpinner!!.adapter = adapter
-                } catch (e: Exception) {
+                    binding?.statusSpinner!!.adapter = adapter
+                }catch (e:Exception)
+                {
 
                 }
 
-                binding.statusSpinner.prompt = statuslistfilteritem?.get(0)?.name
-                binding.statusSpinner!!.setSelection(1)
+                binding?.statusSpinner?.prompt =statuslistfilteritem?.get(0)?.name
+                binding?.statusSpinner!!.setSelection(1)
 
             }
 
@@ -844,7 +858,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -854,7 +868,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -862,7 +876,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -870,13 +884,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -886,10 +900,10 @@ class EditTicketFragment : DialogFragment() {
 
 
     val subCategorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
-                Log.i("", "" + response.body()?.responseContents)
+                Log.i("",""+response.body()?.responseContents)
 
                 subCategorylistfilteritem?.clear()
                 subCategorylistfilteritem?.add(CategoryResponseContent())
@@ -900,7 +914,8 @@ class EditTicketFragment : DialogFragment() {
                     subCategorylistfilteritem!!.filter { it?.uuid != null && it.name != null }
                         .map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
                 FilterSubCategoryResponseMap.put(0, "Sub Category")
-                try {
+                try
+                {
                     val adapter =
                         ArrayAdapter<String>(
                             context!!,
@@ -908,12 +923,13 @@ class EditTicketFragment : DialogFragment() {
                             FilterSubCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.subcategorySpinner!!.adapter = adapter
-                } catch (e: Exception) {
+                    binding?.subcategorySpinner!!.adapter = adapter
+                }catch (e:Exception)
+                {
 
                 }
 
-                binding.subcategorySpinner.prompt = subCategorylistfilteritem?.get(0)?.name
+                binding?.subcategorySpinner?.prompt =subCategorylistfilteritem?.get(0)?.name
 
                 setSubCategory()
 
@@ -933,7 +949,7 @@ class EditTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -943,7 +959,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -951,7 +967,7 @@ class EditTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -959,13 +975,13 @@ class EditTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {

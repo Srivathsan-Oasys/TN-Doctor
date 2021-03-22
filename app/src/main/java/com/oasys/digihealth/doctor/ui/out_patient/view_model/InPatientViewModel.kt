@@ -5,9 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.out_patient.model.search_request_model.SearchPatientRequestModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.InPatientResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
@@ -84,11 +86,11 @@ class InPatientViewModel(application: Application?) : AndroidViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getAdmittedPAtientList(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, body
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, body
         )!!.enqueue(
             RetrofitMainCallback(admittedPatientRetrofitCallback)
         )
@@ -143,11 +145,11 @@ class InPatientViewModel(application: Application?) : AndroidViewModel(
         progressBar.value = 0
         val hmisApplication = HmisApplication.get(getApplication())
         val apiService = hmisApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getAdmittedPAtientList(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, body
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!, appPreferences?.getInt(AppConstants.FACILITY_UUID)!!, body
         )!!.enqueue(
             RetrofitMainCallback(patientSearchNextRetrofitCallBack)
         )

@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.response.OtNameSpinnerResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.response.OtSchedulToCalendarResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.response.OtSurgeryNameResponseModel
@@ -78,7 +78,7 @@ class OtScheduleViewModel(
         apiService?.getOtSurgery(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(surgeryRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(surgeryRetrofitCallback))
     }
 
 
@@ -111,7 +111,7 @@ class OtScheduleViewModel(
         apiService?.getOtName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
     fun getOtType(facilityid: Int?, otTypeRetrofitCallback: RetrofitCallback<OtTypeResponseModel>) {
@@ -140,7 +140,7 @@ class OtScheduleViewModel(
         apiService?.getOtType(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
 
@@ -182,7 +182,7 @@ class OtScheduleViewModel(
         apiService?.getOtSchedule(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(otTypeRetrofitCallback))
     }
 
 

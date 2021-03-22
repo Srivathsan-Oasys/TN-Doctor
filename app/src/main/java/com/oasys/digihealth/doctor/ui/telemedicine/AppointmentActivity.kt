@@ -9,7 +9,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.DialogFragmentNavigator
 import androidx.navigation.plusAssign
 import com.oasys.digihealth.doctor.R
-import com.oasys.digihealth.doctor.ui.viewmodel.AppointmentViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AppointmentActivity : AppCompatActivity() {

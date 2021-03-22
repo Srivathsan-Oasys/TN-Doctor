@@ -5,11 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.DashBoardResponse
 import com.oasys.digihealth.doctor.ui.dashboard.model.GetGenderReq
 import com.oasys.digihealth.doctor.ui.dashboard.model.GetGenderResp
@@ -48,10 +49,10 @@ class DashboardViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getEmrWorkflowForIpAndOp(
-            BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!, contextId
+            BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!, contextId
         )!!.enqueue(
             RetrofitMainCallback(emrWorkFlowRetrofitCallBack)
         )
@@ -73,10 +74,10 @@ class DashboardViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getDashBoardResponse(
-            BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             departmentId,
             fromDate,
             toDate,
@@ -97,14 +98,14 @@ class DashboardViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getSession(
             "accept",
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid
-        ).enqueue(RetrofitMainCallback(getSessionRespCallback))
+        )?.enqueue(RetrofitMainCallback(getSessionRespCallback))
     }
 
     fun getGender(
@@ -120,7 +121,7 @@ class DashboardViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getGender(
             "accept",
@@ -128,7 +129,7 @@ class DashboardViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getGenderReq
-        ).enqueue(RetrofitMainCallback(getGenderRespCallback))
+        )?.enqueue(RetrofitMainCallback(getGenderRespCallback))
     }
 
 
@@ -141,7 +142,7 @@ class DashboardViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -164,9 +165,9 @@ class DashboardViewModel(
 
         apiService?.getZeroStock(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 

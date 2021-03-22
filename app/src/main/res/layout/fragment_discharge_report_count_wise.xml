@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.discharge_report_count_wise.view_model.DischargeReportCountWiseReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.discharge_report_count_wise.view_model.DischargeReportCountWiseReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

@@ -54,9 +54,9 @@ class InpatientChildFragment : Fragment() {
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         val facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
-        setupViewPager(binding.viewPager!!)
-        binding.viewPager!!.setOffscreenPageLimit(2)
-        binding.tabLayout!!.setupWithViewPager(binding.viewPager!!)
+        setupViewPager(binding?.viewPager!!)
+        binding?.viewPager!!.offscreenPageLimit = 2
+        binding?.tabLayout!!.setupWithViewPager(binding?.viewPager!!)
 
         //trackDashBoardOPMyPatientAnalyticsVisit()
 

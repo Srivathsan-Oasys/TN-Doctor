@@ -7,9 +7,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.ipManagement.ipManagementDashBoard.viewModel.IpManageDashboardViewmodel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.ipManagement.ipManagementDashBoard.viewModel.IpManageDashboardViewmodel" />-->
     </data>
 
 
@@ -47,8 +47,8 @@
                     android:layout_height="25dp"
                     android:layout_alignParentEnd="true"
                     android:layout_marginRight="16dp"
-                    android:tint="@color/colorPrimary"
-                    app:srcCompat="@drawable/ic_filter" />
+                    app:srcCompat="@drawable/ic_filter"
+                    app:tint="@color/colorPrimary" />
             </RelativeLayout>
 
 

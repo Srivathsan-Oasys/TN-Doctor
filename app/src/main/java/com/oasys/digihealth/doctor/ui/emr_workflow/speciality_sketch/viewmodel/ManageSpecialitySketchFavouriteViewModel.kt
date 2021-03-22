@@ -6,11 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.DietFavMangeResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.request.RequestDietFavModel
@@ -71,7 +71,7 @@ class ManageSpecialitySketchFavouriteViewModel(application: Application) :
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -93,7 +93,7 @@ class ManageSpecialitySketchFavouriteViewModel(application: Application) :
         apiService?.AddSpecialitySketchFavrt(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!, "sketch", requestbody
-        ).enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposFavtRetrofitCallback))
         return
 
     }
@@ -118,7 +118,7 @@ class ManageSpecialitySketchFavouriteViewModel(application: Application) :
         apiService?.getSpecialitySketchFavrtList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, favouriteMasterID!!, favouriteTypeID!!
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtRetrofitCallback))
         return
 
     }
@@ -157,7 +157,7 @@ class ManageSpecialitySketchFavouriteViewModel(application: Application) :
         apiService?.dietEditFav(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!, body
-        ).enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrposListDataFavtEditRetrofitCallback))
         return
 
     }
@@ -193,7 +193,7 @@ class ManageSpecialitySketchFavouriteViewModel(application: Application) :
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 }

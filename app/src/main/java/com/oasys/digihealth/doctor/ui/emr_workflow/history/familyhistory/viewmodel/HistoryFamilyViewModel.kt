@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.allergy.model.response.period.PeriodsResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.familyhistory.model.CreateFamilyHistoryResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.familyhistory.model.FamilyHistoryResponseModel
@@ -75,7 +75,7 @@ class HistoryFamilyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             body
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 
@@ -97,7 +97,7 @@ class HistoryFamilyViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, patient_uuid
-        ).enqueue(RetrofitMainCallback(getFamilyTypeRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getFamilyTypeRetrofitCallBack))
         return
     }
 
@@ -131,7 +131,7 @@ class HistoryFamilyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, body
-        ).enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
         return
     }
 
@@ -156,7 +156,7 @@ class HistoryFamilyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, createFamily
-        ).enqueue(RetrofitMainCallback(createFamilyHistoryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(createFamilyHistoryRetrofitCallBack))
         return
     }
 
@@ -182,7 +182,7 @@ class HistoryFamilyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, uuid, allergyRequest
-        ).enqueue(RetrofitMainCallback(updateFamilyRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(updateFamilyRetrofitCallBack))
         return
 
     }

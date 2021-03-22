@@ -25,7 +25,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.view.snomed_dialog.
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.view.snomed_dialog.response.SnomedDataResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.view.snomed_dialog.response.SnomedParentDataResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PrescriptionDurationResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

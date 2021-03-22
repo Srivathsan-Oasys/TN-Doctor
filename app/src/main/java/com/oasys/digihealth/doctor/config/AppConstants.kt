@@ -531,4 +531,6 @@ object AppConstants {
 
     const val SAVE_AND_ORDER = "Save and Order"
     const val SAVE_AS_TEMPLATE = "Save"
+
+    const val PREF_TKT_UUID = "TKT UUID"
 }

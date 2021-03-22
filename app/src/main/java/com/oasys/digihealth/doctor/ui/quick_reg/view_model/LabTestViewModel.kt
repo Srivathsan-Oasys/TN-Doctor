@@ -1,40 +1,25 @@
 package com.oasys.digihealth.doctor.ui.quick_reg.view_model
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-
-import com.oasys.digihealth.doctor.ui.dashboard.model.ResponseSpicemanType
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-import com.oasys.digihealth.doctor.ui.covid.addpatientrequest.*
-import com.oasys.digihealth.doctor.ui.covid.addpatientresponse.AddPatientResponse
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.DistrictListResponseModel
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.StateListResponseModel
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.TalukListResponseModel
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.VilliageListResponceModel
-import com.oasys.digihealth.doctor.ui.dashboard.model.*
-import com.oasys.digihealth.doctor.ui.dashboard.model.registration.*
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.ui.quick_reg.model.*
-import com.oasys.digihealth.doctor.ui.quick_reg.model.request.LabNameSearchResponseModel
-import com.oasys.digihealth.doctor.ui.out_patient.model.search_request_model.SearchPatientRequestModel
-import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.SearchResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.*
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
+import com.oasys.digihealth.doctor.ui.quick_reg.model.LocationMasterResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethod
+import com.oasys.digihealth.doctor.ui.quick_reg.model.SampleAcceptanceResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.SampleAcceptedRequest
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.*
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.OrderProcessDetailsResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.OrderToProcessReqestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.Req
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.*
-import com.oasys.digihealth.doctor.ui.quick_reg.model.request.QuickRegistrationRequestModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.request.QuickRegistrationUpdateRequestModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.request.LabNameSearchResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.template.GetNoteTemplateReq
 import com.oasys.digihealth.doctor.ui.quick_reg.model.template.GetNoteTemplateResp
 import com.oasys.digihealth.doctor.utils.Utils
@@ -50,7 +35,6 @@ class LabTestViewModel(
 ) {
 
 
-
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
     var enterConfirmPasswordEditText = MutableLiveData<String>()
@@ -60,10 +44,9 @@ class LabTestViewModel(
 
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
 
-    var facility_id:Int?=0
+    var facility_id: Int? = 0
 
     var appPreferences: AppPreferences? = null
-
 
 
     init {
@@ -77,8 +60,9 @@ class LabTestViewModel(
     }
 
 
-
-    fun getLabList(requestLabRequest: LabTestRequestModel, GetLabTestListRetrofitCallback: RetrofitCallback<LabTestResponseModel>
+    fun getLabList(
+        requestLabRequest: LabTestRequestModel,
+        GetLabTestListRetrofitCallback: RetrofitCallback<LabTestResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -90,17 +74,19 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabTestList(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabTestList(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,true,
+            userDataStoreBean?.uuid!!, facility_id!!, true,
             requestLabRequest
         )?.enqueue(RetrofitMainCallback(GetLabTestListRetrofitCallback))
 
     }
 
 
-
-    fun getLabSampleAcceptance(requestLabTestSampleRequest: SampleAcceptedRequest, GetLabTestSampleListRetrofitCallback: RetrofitCallback<SampleAcceptanceResponseModel>
+    fun getLabSampleAcceptance(
+        requestLabTestSampleRequest: SampleAcceptedRequest,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<SampleAcceptanceResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -112,15 +98,18 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getSampleAccept(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getSampleAccept(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,true,
+            userDataStoreBean?.uuid!!, facility_id!!, true,
             requestLabTestSampleRequest
         )?.enqueue(RetrofitMainCallback(GetLabTestSampleListRetrofitCallback))
 
     }
 
-    fun orderDetailsGet(req: Req, GetLabTestSampleListRetrofitCallback: RetrofitCallback<OrderProcessDetailsResponseModel>
+    fun orderDetailsGet(
+        req: Req,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<OrderProcessDetailsResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -132,7 +121,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.orderDetailsGet(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.orderDetailsGet(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -140,7 +130,9 @@ class LabTestViewModel(
 
     }
 
-    fun orderProcess(req: OrderToProcessReqestModel, GetLabTestSampleListRetrofitCallback: RetrofitCallback<OrderProcessResponseModel>
+    fun orderProcess(
+        req: OrderToProcessReqestModel,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<OrderProcessResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -152,7 +144,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.orderProcess(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.orderProcess(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -161,7 +154,9 @@ class LabTestViewModel(
     }
 
 
-    fun orderDirectApprovel(req: DirectApprovelReq, GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
+    fun orderDirectApprovel(
+        req: DirectApprovelReq,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -173,7 +168,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.directApprovel(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.directApprovel(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -182,7 +178,8 @@ class LabTestViewModel(
     }
 
 
-    fun orderProcess(GetLabTestSampleListRetrofitCallback: RetrofitCallback<UserProfileResponseModel>
+    fun orderProcess(
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<UserProfileResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -198,8 +195,8 @@ class LabTestViewModel(
             jsonBody.put("facility_uuid", facility_id)
             jsonBody.put("is_result_approve", true)
             jsonBody.put("sortOrder", "ASC")
-            jsonBody.put("is_active",1)
-            jsonBody.put("usertypeId",6)
+            jsonBody.put("is_active", 1)
+            jsonBody.put("usertypeId", 6)
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -214,7 +211,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getUserProfile(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getUserProfile(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
@@ -222,7 +220,9 @@ class LabTestViewModel(
 
     }
 
-    fun rejectLabTest(req: RejectRequestModel, GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
+    fun rejectLabTest(
+        req: RejectRequestModel,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -234,7 +234,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.rejectTestLab(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.rejectTestLab(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -242,7 +243,9 @@ class LabTestViewModel(
 
     }
 
-    fun rapidSave(req: LabrapidSaveRequestModel, GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
+    fun rapidSave(
+        req: LabrapidSaveRequestModel,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -254,7 +257,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.rapidSave(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.rapidSave(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -262,7 +266,9 @@ class LabTestViewModel(
 
     }
 
-    fun assigntoOther(req: AssigntootherRequest, GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
+    fun assigntoOther(
+        req: AssigntootherRequest,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<SimpleResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -274,7 +280,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.orderSendtonext(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.orderSendtonext(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
@@ -282,7 +289,10 @@ class LabTestViewModel(
 
     }
 
-    fun getLocationMaster(facility:Int,stateRetrofitCallback: RetrofitCallback<LocationMasterResponseModel>) {
+    fun getLocationMaster(
+        facility: Int,
+        stateRetrofitCallback: RetrofitCallback<LocationMasterResponseModel>
+    ) {
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -307,15 +317,17 @@ class LabTestViewModel(
 
         apiService?.getLocationMaster(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!,facility_id!!,
+            userDataStoreBean?.uuid!!, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
 
-    fun getLabListSecond(labTestRequestModel: LabTestRequestModel, labTestResponseSecondRetrofitCallback: RetrofitCallback<LabTestResponseModel>)
-    {
+    fun getLabListSecond(
+        labTestRequestModel: LabTestRequestModel,
+        labTestResponseSecondRetrofitCallback: RetrofitCallback<LabTestResponseModel>
+    ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -326,14 +338,19 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabTestList(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabTestList(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,true,
+            userDataStoreBean?.uuid!!, facility_id!!, true,
             labTestRequestModel
         )?.enqueue(RetrofitMainCallback(labTestResponseSecondRetrofitCallback))
 
     }
-    fun getTextMethod1(facilityId: Int, ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>) {
+
+    fun getTextMethod1(
+        facilityId: Int,
+        ResponseTestMethodRetrofitCallback: RetrofitCallback<ResponseTestMethod>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -367,15 +384,17 @@ class LabTestViewModel(
 
         apiService?.getTestMethod(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
 
-
-    fun getLabName(search:String, GetPDFRetrofitCallback: RetrofitCallback<LabNameSearchResponseModel>) {
+    fun getLabName(
+        search: String,
+        GetPDFRetrofitCallback: RetrofitCallback<LabNameSearchResponseModel>
+    ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
@@ -389,8 +408,8 @@ class LabTestViewModel(
             jsonBody.put("searchKey", "search")
             jsonBody.put("search", search)
             jsonBody.put("pageNo", 0)
-            jsonBody.put("is_lab_center",true)
-            jsonBody.put("paginationSize",10 )
+            jsonBody.put("is_lab_center", true)
+            jsonBody.put("paginationSize", 10)
 
 
         } catch (e: JSONException) {
@@ -402,19 +421,19 @@ class LabTestViewModel(
             jsonBody.toString()
         )
 
-       // progress.value = 0
+        // progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabname(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabname(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,body
+            userDataStoreBean?.uuid!!, facility_id!!, body
         )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
-    fun getRejectReference(labTestResponseSecondRetrofitCallback: RetrofitCallback<RejectReferenceResponseModel>)
-    {
+    fun getRejectReference(labTestResponseSecondRetrofitCallback: RetrofitCallback<RejectReferenceResponseModel>) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -441,7 +460,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getRejectReference(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getRejectReference(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
@@ -449,7 +469,10 @@ class LabTestViewModel(
 
     }
 
-    fun getTextAssignedTo(facilityId: Int, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabAssignedToResponseModel>) {
+    fun getTextAssignedTo(
+        facilityId: Int,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabAssignedToResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -469,7 +492,6 @@ class LabTestViewModel(
             jsonBody.put("search", "")
 
 
-
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -483,7 +505,8 @@ class LabTestViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabAssignedToSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabAssignedToSpinner(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId, true,
             body

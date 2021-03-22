@@ -4,12 +4,13 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.MultipartBody
@@ -28,7 +29,8 @@ class EditTicketViewModel(
     var errorText = MutableLiveData<String>()
 
 
-    var userDetailsRoomRepository: UserDetailsRoomRepository? = null
+    var userDetailsRoomRepository: UserDetailsRoomRepository =
+        UserDetailsRoomRepository(application!!)
 
     var facility_id: Int? = 0
 
@@ -37,9 +39,8 @@ class EditTicketViewModel(
 
     init {
 
-        userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
-
-        appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
+        appPreferences =
+            AppPreferences.getInstance(application!!, AppConstants.SHARE_PREFERENCE_NAME)
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
     }
@@ -69,9 +70,9 @@ class EditTicketViewModel(
         apiService?.getAssetCode(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -101,9 +102,9 @@ class EditTicketViewModel(
         apiService?.getTicketById(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -136,9 +137,9 @@ class EditTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -171,9 +172,9 @@ class EditTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -210,9 +211,9 @@ class EditTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -245,9 +246,9 @@ class EditTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -332,13 +333,13 @@ class EditTicketViewModel(
         apiService?.updateTicket(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             multipartMobile, multipartSubject, multipartCreatedBy, multipartUserUUID,
             multipartAssetCode, multipartAssignTo, multipartMake, multipartModel,
             multipartDescription, multipartSerial, multipartVendor, multipartFacility,
             multipartDepartment, multipartUserType, multipartTicketStatus, multipartAssetUUID,
             multipartCategory, multipartSubcategory, multipartPriority, multipartManagementUUID
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback)) // requestModel!!
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback)) // requestModel!!
 
     }
 

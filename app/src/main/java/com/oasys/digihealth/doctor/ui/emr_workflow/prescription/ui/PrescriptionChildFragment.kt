@@ -58,8 +58,8 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragmen
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.PrescriptionViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.PrescriptionViewModelFactory
 import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.ui.NurseDeskDischargeSummaryChildFragment
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.*

@@ -7,6 +7,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMasterResponseModel
 import com.oasys.digihealth.doctor.ui.login.model.institution_response.InstitutionResponseModel
@@ -125,7 +127,7 @@ class InstituteViewModel(
         apiService?.getFaciltyList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, body
-        )?.enqueue(RetrofitMainCallback(facilityCallback))
+        ).enqueue(RetrofitMainCallback(facilityCallback))
     }
 
 
@@ -160,7 +162,8 @@ class InstituteViewModel(
 
         apiService?.getLocationMasterLogin(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility,
+            userDataStoreBean?.uuid!!,
+            facility,
             body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
@@ -201,6 +204,4 @@ class InstituteViewModel(
 
         return
     }
-
-
 }

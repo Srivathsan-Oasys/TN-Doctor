@@ -1,5 +1,6 @@
 package com.oasys.digihealth.doctor.ui.dashboard.view
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.pm.ActivityInfo
 import android.os.Bundle
@@ -27,6 +28,7 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogCovidRegistrationBinding
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.covid.CustomTypeAdapter
 import com.oasys.digihealth.doctor.ui.covid.SpecimanTypeAdapter
 import com.oasys.digihealth.doctor.ui.covid.SymptomsTypeAdapter
@@ -41,7 +43,6 @@ import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class CovidRegistrationActivity : AppCompatActivity(),
     SearchPatientListDialogFragment.DialogListener {
@@ -156,6 +157,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     private var symptomsStatus: Boolean = false
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -486,128 +488,112 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
 
-        binding?.salutationSpinner!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+        binding?.salutationSpinner!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                        viewModel?.getCovidNameTitleList(
-                            facility_id!!,
-                            covidSalutationResponseCallback
-                        )
+                    viewModel?.getCovidNameTitleList(
+                        facility_id!!,
+                        covidSalutationResponseCallback
+                    )
 
 
-                }
-
-                return v?.onTouchEvent(event) ?: true
             }
-        })
 
-        binding?.spinnerGender!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+            v?.onTouchEvent(event) ?: true
+        }
 
-                        viewModel?.getCovidGenderList(facility_id!!, covidGenderResponseCallback)
+        binding?.spinnerGender!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                }
+                    viewModel?.getCovidGenderList(facility_id!!, covidGenderResponseCallback)
 
-                return v?.onTouchEvent(event) ?: true
             }
-        })
 
-        binding?.periodSpinner!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+            v?.onTouchEvent(event) ?: true
+        }
 
-                        viewModel?.getCovidPeriodList(facility_id!!, covidPeriodResponseCallback)
+        binding?.periodSpinner!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                }
+                    viewModel?.getCovidPeriodList(facility_id!!, covidPeriodResponseCallback)
 
-                return v?.onTouchEvent(event) ?: true
             }
-        })
 
-        binding?.spinnerNationality!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+            v?.onTouchEvent(event) ?: true
+        }
 
-                        viewModel?.getCovidNationalityList(
-                            "nationality_type",
-                            facility_id!!,
-                            covidNationalityResponseCallback
-                        )
-                }
+        binding?.spinnerNationality!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                return v?.onTouchEvent(event) ?: true
+                    viewModel?.getCovidNationalityList(
+                        "nationality_type",
+                        facility_id!!,
+                        covidNationalityResponseCallback
+                    )
             }
-        })
+
+            v?.onTouchEvent(event) ?: true
+        }
 
 
 
-        binding?.spinnerMbNoBelongs!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+        binding?.spinnerMbNoBelongs!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                        viewModel?.getCovidMobileBelongsToList(
-                            "contact_type",
-                            facility_id!!,
-                            covidMobileBelongsToResponseCallback
-                        )
+                    viewModel?.getCovidMobileBelongsToList(
+                        "contact_type",
+                        facility_id!!,
+                        covidMobileBelongsToResponseCallback
+                    )
 
-                }
-
-                return v?.onTouchEvent(event) ?: true
             }
-        })
 
-        binding?.spinnerPatientCategory!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+            v?.onTouchEvent(event) ?: true
+        }
 
-                        viewModel?.getCovidPatientCategoryList(
-                            "patient_category",
-                            facility_id!!,
-                            coviPatientCategoryResponseCallback
-                        )
+        binding?.spinnerPatientCategory!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                }
+                    viewModel?.getCovidPatientCategoryList(
+                        "patient_category",
+                        facility_id!!,
+                        coviPatientCategoryResponseCallback
+                    )
 
-                return v?.onTouchEvent(event) ?: true
             }
-        })
 
-        binding?.spinnerA3Result!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+            v?.onTouchEvent(event) ?: true
+        }
 
-                        viewModel?.getRepeatedResult(
-                            facility_id!!,
-                            repeatedResultResponseCallback
-                        )
-                }
-                return v?.onTouchEvent(event) ?: true
+        binding?.spinnerA3Result!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
+
+                    viewModel?.getRepeatedResult(
+                        facility_id!!,
+                        repeatedResultResponseCallback
+                    )
             }
-        })
+            v?.onTouchEvent(event) ?: true
+        }
 
-        binding?.spinnerA3Interval!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+        binding?.spinnerA3Interval!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                        viewModel?.getIntervals(
-                            facility_id!!,
-                            IntervalsResponseCallback
-                        )
-                }
-                return v?.onTouchEvent(event) ?: true
+                    viewModel?.getIntervals(
+                        facility_id!!,
+                        IntervalsResponseCallback
+                    )
             }
-        })
+            v?.onTouchEvent(event) ?: true
+        }
 
         binding?.spinnerA3Result?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -848,20 +834,18 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
             }
 
-        binding?.quarantineTypeSpinner!!.setOnTouchListener(object : View.OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                when (event?.action) {
-                    MotionEvent.ACTION_DOWN ->
+        binding?.quarantineTypeSpinner!!.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN ->
 
-                        viewModel?.getCovidQuarantineTypeList(
-                            facility_id!!,
-                            covidQuarantineResponseCallback
-                        )
+                    viewModel?.getCovidQuarantineTypeList(
+                        facility_id!!,
+                        covidQuarantineResponseCallback
+                    )
 
-                }
-                return v?.onTouchEvent(event) ?: true
             }
-        })
+            v?.onTouchEvent(event) ?: true
+        }
 
 
         binding?.outComeDate!!.setOnClickListener {
@@ -2137,8 +2121,12 @@ class CovidRegistrationActivity : AppCompatActivity(),
     /*
  */
     val getAddPatientDetailsRetrofitCallBack =
-        object {
+        object : RetrofitCallback<AddPatientResponse> {
             override fun onSuccessfulResponse(response: Response<AddPatientResponse>) {
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
                 Log.i("", "" + response.body()?.statusCode)
 
                 utils?.showToast(
@@ -2207,8 +2195,12 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val getUpdateatientDetailsRetrofitCallBack =
-        object {
+        object : RetrofitCallback<AddPatientResponse> {
             override fun onSuccessfulResponse(response: Response<AddPatientResponse>) {
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
+                Log.i("", "" + response.body()?.statusCode)
                 Log.i("", "" + response.body()?.statusCode)
 
                 utils?.showToast(
@@ -2281,7 +2273,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     /*
      */
-    val getSpecimenListRetrofitCallBack = object {
+    val getSpecimenListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -2350,7 +2342,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         binding?.medicalRecyclerview?.adapter = medicalConditionAdapter
     }
 
-    val getcustomTypeListRetrofitCallBack = object {
+    val getcustomTypeListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -2415,7 +2407,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val getSymptomsListRetrofitCallBack =
-        object {
+        object : RetrofitCallback<ResponseSpicemanType> {
             override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
                 val responseContents = Gson().toJson(response.body()?.responseContents)
                 Log.i("", "" + responseContents)
@@ -2492,7 +2484,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }*/
 
 
-    val getStateRetrofitCallback = object {
+    val getStateRetrofitCallback = object : RetrofitCallback<StateListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<StateListResponseModel>?) {
 
             try {
@@ -2583,7 +2575,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getDistictRetrofitCallback = object {
+    val getDistictRetrofitCallback = object : RetrofitCallback<DistrictListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<DistrictListResponseModel>?) {
 
             responseDistictAdapter!!.setData(responseBody!!.body()!!.responseContents)
@@ -2618,7 +2610,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getDistictRetrofitCallback1 = object {
+    val getDistictRetrofitCallback1 = object : RetrofitCallback<DistrictListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<DistrictListResponseModel>?) {
 
             responseDistictAdapter1!!.setData(responseBody!!.body()!!.responseContents)
@@ -2688,7 +2680,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getTalukRetrofitCallback = object {
+    val getTalukRetrofitCallback = object : RetrofitCallback<TalukListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<TalukListResponseModel>?) {
 
@@ -2723,7 +2715,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getsingleStateRetrofitCallback = object {
+    val getsingleStateRetrofitCallback = object : RetrofitCallback<StateListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<StateListResponseModel>?) {
 
             try {
@@ -2779,7 +2771,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getTalukRetrofitCallback1 = object {
+    val getTalukRetrofitCallback1 = object : RetrofitCallback<TalukListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<TalukListResponseModel>?) {
 
@@ -2847,7 +2839,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getVillageRetrofitCallback = object {
+    val getVillageRetrofitCallback = object : RetrofitCallback<VilliageListResponceModel> {
         override fun onSuccessfulResponse(responseBody: Response<VilliageListResponceModel>?) {
 
             responseVilliageAdapter!!.setData(responseBody!!.body()!!.responseContents)
@@ -2880,7 +2872,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getVillageRetrofitCallback1 = object {
+    val getVillageRetrofitCallback1 = object : RetrofitCallback<VilliageListResponceModel> {
         override fun onSuccessfulResponse(responseBody: Response<VilliageListResponceModel>?) {
 
             responseVilliageAdapter1!!.setData(responseBody!!.body()!!.responseContents)
@@ -2956,7 +2948,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
     val covidSalutationResponseCallback =
-        object {
+        object : RetrofitCallback<CovidSalutationTitleResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidSalutationTitleResponseModel>?) {
                 A1selectSalutationUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
                 setSalutation(responseBody.body()?.responseContents)
@@ -3045,7 +3037,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val covidGenderResponseCallback = object {
+    val covidGenderResponseCallback = object : RetrofitCallback<CovidGenderResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidGenderResponseModel>?) {
 
             A1selectGenderUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -3130,7 +3122,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val covidPeriodResponseCallback = object {
+    val covidPeriodResponseCallback = object : RetrofitCallback<CovidPeriodResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidPeriodResponseModel>?) {
 
             A1selectPeriodUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -3217,7 +3209,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
     val covidNationalityResponseCallback =
-        object {
+        object : RetrofitCallback<CovidNationalityResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidNationalityResponseModel>?) {
                 A1selectNationalityUuid = responseBody?.body()?.responseContents?.get(0)!!.uuid!!
                 setNationality(responseBody.body()?.responseContents)
@@ -3302,7 +3294,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
     val covidMobileBelongsToResponseCallback =
-        object {
+        object : RetrofitCallback<CovidMobileBelongsToResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidMobileBelongsToResponseModel>?) {
                 A1selectMobileBelongsTOUuid =
                     responseBody?.body()?.responseContents?.get(0)!!.uuid!!
@@ -3382,7 +3374,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val coviPatientCategoryResponseCallback =
-        object {
+        object : RetrofitCallback<CovidPatientCategoryResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidPatientCategoryResponseModel>?) {
 
                 A4selectPatientCategoryUuid =
@@ -3447,7 +3439,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
             }
         }
 
-    val CovidSearchNameCallBack = object {
+    val CovidSearchNameCallBack = object : RetrofitCallback<CovidRegistrationSearchResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidRegistrationSearchResponseModel>?) {
             autocompleteNameTestResponse = responseBody?.body()?.responseContents
 
@@ -3536,7 +3528,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
     val covidQuarantineResponseCallback =
-        object {
+        object : RetrofitCallback<CovidQuarantineTypeResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidQuarantineTypeResponseModel>?) {
 
                 setQuarantineType(responseBody?.body()?.responseContents)
@@ -3671,8 +3663,8 @@ class CovidRegistrationActivity : AppCompatActivity(),
             binding?.A1AgeEditText!!.setText(responseCovidForm.age.toString())
             binding?.A1MobileEditText!!.setText(responseCovidForm.patient_detail.mobile)
 
-            if (responseCovidForm.patient_detail.alternate_number != null && responseCovidForm.patient_detail.alternate_number.isNotEmpty()) {
-                binding?.A1AlterNumberEditText?.setText(responseCovidForm.patient_detail.alternate_number)
+            if (responseCovidForm.patient_detail.alternate_number != null && responseCovidForm.patient_detail.alternate_number.toString().length > 0) {
+                binding?.A1AlterNumberEditText?.setText(responseCovidForm.patient_detail.alternate_number.toString())
             }
             binding?.addressOne!!.setText(responseCovidForm.patient_detail.address_line1)
             binding?.addressTwo!!.setText(responseCovidForm.patient_detail.address_line2)
@@ -3682,13 +3674,11 @@ class CovidRegistrationActivity : AppCompatActivity(),
             binding?.B1aadharNumberEditText!!.setText(responseCovidForm.patient_detail.aadhaar_number)
 
 
-            if (responseCovidForm.patient_detail.other_proof_number != null && responseCovidForm.patient_detail.other_proof_number.toString()
-                    .isNotEmpty()
-            ) {
+            if (responseCovidForm.patient_detail.other_proof_number != null && responseCovidForm.patient_detail.other_proof_number.toString().length > 0) {
                 binding?.B1passportNumberEditText!!.setText(responseCovidForm.patient_detail.other_proof_number.toString())
             }
 
-            if (responseCovidForm.patient_detail.quarantine_status_date != null && responseCovidForm.patient_detail.quarantine_status_date.length > 0) {
+            if (responseCovidForm.patient_detail.quarantine_status_date != null && responseCovidForm.patient_detail.quarantine_status_date.toString().length > 0) {
                 binding?.quarantineFromDate!!.setText(responseCovidForm.patient_detail.quarantine_status_date.toString())
             }
 
@@ -3782,7 +3772,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val getOutComeListRetrofitCallBack = object {
+    val getOutComeListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -3845,7 +3835,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val getRequestedByListRetrofitCallBack = object {
+    val getRequestedByListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -3941,7 +3931,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val covidSalutationUpdateResponseCallback =
-        object {
+        object : RetrofitCallback<CovidSalutationTitleResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidSalutationTitleResponseModel>?) {
 
                 setUpadteSalutation(responseBody!!.body()?.responseContents)
@@ -4039,7 +4029,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     //Gender
 
-    val covidGenderUpdateResponseCallback = object {
+    val covidGenderUpdateResponseCallback = object : RetrofitCallback<CovidGenderResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidGenderResponseModel>?) {
 
             setUpdateGender(responseBody?.body()?.responseContents)
@@ -4131,7 +4121,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val covidPeriodUpdateResponseCallback = object {
+    val covidPeriodUpdateResponseCallback = object : RetrofitCallback<CovidPeriodResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<CovidPeriodResponseModel>?) {
 
             setUpadtePeriod(responseBody?.body()?.responseContents)
@@ -4227,7 +4217,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
     val covidNationalityUpdateResponseCallback =
-        object {
+        object : RetrofitCallback<CovidNationalityResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<CovidNationalityResponseModel>?) {
 
                 setUpdateNationality(responseBody!!.body()?.responseContents)
@@ -4325,7 +4315,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getUpdateStateRetrofitCallback = object {
+    val getUpdateStateRetrofitCallback = object : RetrofitCallback<StateListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<StateListResponseModel>?) {
 
             try {
@@ -4396,7 +4386,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         binding!!.spinnerstate.setText(responseStateAdapter!!.getName(searchresponseCovidForm.patient_detail.state_uuid))
     }
 
-    val getDistictUpdateRetrofitCallback = object {
+    val getDistictUpdateRetrofitCallback = object : RetrofitCallback<DistrictListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<DistrictListResponseModel>?) {
 
@@ -4448,7 +4438,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getTalukUpdateRetrofitCallback = object {
+    val getTalukUpdateRetrofitCallback = object : RetrofitCallback<TalukListResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<TalukListResponseModel>?) {
 
@@ -4500,7 +4490,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val getVillageUpdateRetrofitCallback = object {
+    val getVillageUpdateRetrofitCallback = object : RetrofitCallback<VilliageListResponceModel> {
         override fun onSuccessfulResponse(responseBody: Response<VilliageListResponceModel>?) {
 
             responseVilliageAdapter!!.setData(responseBody!!.body()!!.responseContents)
@@ -4538,7 +4528,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
     }
 
-    val repeatedResultResponseCallback = object {
+    val repeatedResultResponseCallback = object : RetrofitCallback<RepeatedResultResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<RepeatedResultResponseModel>?) {
 
             A3selectRepeatResultUuid = responseBody?.body()?.responseContents!!.get(0)!!.uuid!!
@@ -4593,7 +4583,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
     }
 
-    val IntervalsResponseCallback = object {
+    val IntervalsResponseCallback = object : RetrofitCallback<RepeatedIntervalReponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<RepeatedIntervalReponseModel>?) {
 
             A3selectIntervalsUuid = responseBody?.body()?.responseContents!!.get(0)!!.uuid!!
@@ -4648,7 +4638,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getspecimenRetrofitCallback = object {
+    val getspecimenRetrofitCallback = object : RetrofitCallback<specimenResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<specimenResponseModel>?) {
 
@@ -4684,7 +4674,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
     }
 
 
-    val getSpecimenListUpdateRetrofitCallBack = object {
+    val getSpecimenListUpdateRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -4778,7 +4768,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val getpataintUpdateRetrofitCallBack =
-        object {
+        object : RetrofitCallback<CovidRegisterPatientResponseModel> {
             override fun onSuccessfulResponse(response: Response<CovidRegisterPatientResponseModel>) {
                 val responseContents = Gson().toJson(response.body()?.responseContents)
                 Log.i("", "" + responseContents)
@@ -4866,7 +4856,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
         }
 
 
-    val getcustomTypeUpdateListRetrofitCallBack = object {
+    val getcustomTypeUpdateListRetrofitCallBack = object : RetrofitCallback<ResponseSpicemanType> {
         override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)
@@ -4937,7 +4927,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val getconditionListUpdateRetrofitCallBack =
-        object {
+        object : RetrofitCallback<ConditionDetailsResponseModel> {
             override fun onSuccessfulResponse(response: Response<ConditionDetailsResponseModel>) {
                 val responseContents = Gson().toJson(response.body()?.responseContents)
                 Log.i("", "" + responseContents)
@@ -5035,7 +5025,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
 
     val getSymptomsTypeUpdateRetrofitCallBack =
-        object {
+        object : RetrofitCallback<ResponseSpicemanType> {
             override fun onSuccessfulResponse(response: Response<ResponseSpicemanType>) {
                 val responseContents = Gson().toJson(response.body()?.responseContents)
                 Log.i("", "" + responseContents)
@@ -5103,7 +5093,7 @@ class CovidRegistrationActivity : AppCompatActivity(),
 
         }
 
-    val getsymptomListUpdateRetrofitCallBack = object {
+    val getsymptomListUpdateRetrofitCallBack = object : RetrofitCallback<symptomResponseModel> {
         override fun onSuccessfulResponse(response: Response<symptomResponseModel>) {
             val responseContents = Gson().toJson(response.body()?.responseContents)
             Log.i("", "" + responseContents)

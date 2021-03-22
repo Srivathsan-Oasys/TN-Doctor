@@ -40,6 +40,7 @@ import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.HomeLayoutBinding
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.configuration.view.ConfigActivity
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.DashboardViewModel
@@ -60,7 +61,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.LinkedHashMap
-
 
 class DashBoardActivity : Fragment() {
     var utils: Utils? = null
@@ -97,15 +97,18 @@ class DashBoardActivity : Fragment() {
     private var endMonthOfYear: Int = 0
     private var endDayOfMonth: Int = 0
 
-    private val sessionArrayList: ArrayList<GetSessionResp.ResponseContent?> = ArrayList()
+    private val sessionArrayList :ArrayList<GetSessionResp.ResponseContent?> = ArrayList()
     private var sessionList = mutableMapOf<Int, String>()
-    private val sessionListUuid: HashMap<Int, Int> = HashMap()
+    private val sessionListUuid:HashMap<Int, Int> = HashMap()
 
-    private val genderArrayList: ArrayList<GetGenderResp.ResponseContent?> = ArrayList()
+
+    private val genderArrayList :ArrayList<GetGenderResp.ResponseContent?> = ArrayList()
     private var genderList = mutableMapOf<Int, String>()
-    private val genderListUuid: HashMap<Int, Int> = HashMap()
+    private val genderListUuid:HashMap<Int, Int> = HashMap()
     private var selectedGenderId = ""
     private var selectedSessionId = ""
+
+
 
     //private var customProgressDialog: CustomProgressDialog? = null
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
@@ -113,10 +116,11 @@ class DashBoardActivity : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        initViewModel(inflater, container)
+        initViewModel(inflater,container)
         initPerfernces()
         initPatientsAdapter()
         initDropDownCliCk()
+
 
         binding?.imgFilter?.setOnClickListener {
             binding?.drawerLayout!!.openDrawer(GravityCompat.END)
@@ -136,24 +140,35 @@ class DashBoardActivity : Fragment() {
 
         trackDashBoardAnalyticsVisit()
 
-        binding!!.outPatientCardView.setOnClickListener {
+        binding!!.outPatientCardView?.setOnClickListener {
+
             patientType = AppConstants.OUT_PATIENT
+
             viewModel?.getEmrWorkFlow(emrWorkFlowRetrofitCallBack, 2)
+
         }
 
-        binding!!.inPatientCardView.setOnClickListener {
+
+        binding!!.inPatientCardView?.setOnClickListener {
+
             patientType = AppConstants.IN_PATIENT
+
             viewModel?.getEmrWorkFlow(emrWorkFlowRetrofitCallBack, 3)
+
         }
 
-        binding!!.confifav.setOnClickListener {
+        binding!!.confifav?.setOnClickListener {
+
             val emr = ConfigActivity.newInstance(AppConstants.CONFRIGURATION, false)
+
             (activity as HomeActivity).replaceFragment(emr)
+
+
         }
         displayFilterDialog()
 
 
-        if (BuildConfig.FLAVOR == "dev" || BuildConfig.FLAVOR == "puneuat")
+        if (BuildConfig.FLAVOR == "dev"|| BuildConfig.FLAVOR == "puneuat")
             binding?.cvTelemedicine?.visibility = View.VISIBLE
         else
             binding?.cvTelemedicine?.visibility = View.VISIBLE
@@ -165,19 +180,11 @@ class DashBoardActivity : Fragment() {
 
         (activity as HomeActivity).emrEndDate = getCurrentDate("dd-MM-yyyy")
 
-        utils?.convertDateFormat(
-            (activity as HomeActivity).emrStartDate,
-            "dd-MM-yyyy",
-            "yyyy-MM-dd"
-        )
+        utils?.convertDateFormat((activity as HomeActivity).emrStartDate,"dd-MM-yyyy","yyyy-MM-dd")
             ?.let {
                 getPatientsInfo(
                     it,
-                    utils?.convertDateFormat(
-                        (activity as HomeActivity).emrEndDate,
-                        "dd-MM-yyyy",
-                        "yyyy-MM-dd"
-                    )!!,
+                    utils?.convertDateFormat((activity as HomeActivity).emrEndDate,"dd-MM-yyyy","yyyy-MM-dd")!!,
                     selectedGenderId,
                     selectedSessionId
                 )
@@ -185,59 +192,57 @@ class DashBoardActivity : Fragment() {
         getSession()
         getGender()
 
-        binding?.spinnerSession?.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
-                    val itemValue = parent?.getItemAtPosition(pos).toString()
-                    if (pos != 0) {
-                        selectedSessionId =
-                            sessionList.filterValues { it == itemValue }.keys.toList()[0].toString()
-                    } else {
-                        selectedSessionId = ""
-                    }
-                }
-
+        binding?.spinnerSession?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
-        binding?.spinnerGender?.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                pos: Int,
+                id: Long
+            ) {
+                val itemValue = parent?.getItemAtPosition(pos).toString()
+                if(pos != 0) {
+                    selectedSessionId =
+                        sessionList.filterValues { it == itemValue }.keys.toList()[0].toString()
+                }else{
+                    selectedSessionId = ""
                 }
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    pos: Int,
-                    id: Long
-                ) {
-                    val itemValue = parent?.getItemAtPosition(pos).toString()
-                    if (pos != 0) {
-                        selectedGenderId =
-                            genderList.filterValues { it == itemValue }.keys.toList()[0].toString()
-                    } else {
-                        selectedGenderId = ""
-                    }
-                }
-
             }
+
+        }
+
+        binding?.spinnerGender?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                pos: Int,
+                id: Long
+            ) {
+                val itemValue = parent?.getItemAtPosition(pos).toString()
+                if(pos != 0) {
+                    selectedGenderId =
+                        genderList.filterValues { it == itemValue }.keys.toList()[0].toString()
+                }else{
+                    selectedGenderId = ""
+                }
+            }
+
+        }
 
         return binding!!.root
     }
 
 
-    fun initPerfernces() {
+
+    fun initPerfernces(){
         Utils(requireContext()).setCalendarLocale("en", requireContext())
         utils = Utils(requireContext())
-        appPreferences =
-            AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
+        appPreferences = AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         name = appPreferences?.getString(AppConstants.INSTITUTION_NAME)
         facilityId = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         departmentUuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
@@ -246,11 +251,12 @@ class DashBoardActivity : Fragment() {
         LmisCheck = appPreferences?.getBoolean(AppConstants.LMISCHECK)
         registercheck = appPreferences?.getBoolean(AppConstants.REGISTRATIONCHECK)
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-        userNameTextView?.text = userDataStoreBean?.first_name
+        userNameTextView?.setText(userDataStoreBean?.first_name)
     }
 
 
-    fun initViewModel(inflater: LayoutInflater, container: ViewGroup?) {
+
+    fun initViewModel( inflater: LayoutInflater, container: ViewGroup?){
         binding =
             DataBindingUtil.inflate(
                 inflater,
@@ -279,9 +285,9 @@ class DashBoardActivity : Fragment() {
         fragmentAdapter =
             PatientsPagerAdapter(childFragmentManager, diagnosisData, chiefComplaintsData)
         viewPager.adapter = fragmentAdapter
-        viewPager.offscreenPageLimit = 2
+        viewPager.setOffscreenPageLimit(2);
         tabLayout.setupWithViewPager(viewPager)
-        if (!isTablet(requireContext())) {
+        if(!isTablet(requireContext())) {
             initChiefComplientAdapter(chiefComplaintsData)
             initDiagnosisAdapter(diagnosisData)
             callZeroStock()
@@ -302,11 +308,11 @@ class DashBoardActivity : Fragment() {
 
 
     private fun initPatientsAdapter() {
-        patientsAdapter = PatientsAdapter(requireContext(), data)
-        if (isTablet(requireContext())) {
+        patientsAdapter = PatientsAdapter(requireContext()!!, data)
+        if(isTablet(requireContext())) {
             binding!!.rvPatientsCount!!.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        } else {
+        }else{
             binding!!.rvPatientsCount!!.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
@@ -351,12 +357,8 @@ class DashBoardActivity : Fragment() {
                     startMonthOfYear = monthOfYear
                     startDayOfMonth = dayOfMonth
                     // set day of month , month and year value in the edit text
-                    binding?.etStartDate!!.setText(
-                        utils?.emrDisplayDate(
-                            dayOfMonth.toString() +
-                                    "-" + (monthOfYear + 1) + "-" + year, "dd-MM-yyyy"
-                        )
-                    )
+                    binding?.etStartDate!!.setText(utils?.emrDisplayDate(dayOfMonth.toString() +
+                            "-" + (monthOfYear + 1) + "-" + year,"dd-MM-yyyy"))
                     startDate[year, monthOfYear] = dayOfMonth
                 },
                 startYear, startMonthOfYear, startDayOfMonth
@@ -373,12 +375,8 @@ class DashBoardActivity : Fragment() {
                     endMonthOfYear = monthOfYear
                     endDayOfMonth = dayOfMonth
                     // set day of month , month and year value in the edit text
-                    binding?.etEndDate!!.setText(
-                        utils?.emrDisplayDate(
-                            dayOfMonth.toString() +
-                                    "-" + (monthOfYear + 1) + "-" + year, "dd-MM-yyyy"
-                        )
-                    )
+                    binding?.etEndDate!!.setText(utils?.emrDisplayDate(dayOfMonth.toString() +
+                            "-" + (monthOfYear + 1) + "-" + year,"dd-MM-yyyy"))
                     endDate[year, monthOfYear] = dayOfMonth
                 },
                 endYear, endMonthOfYear, endDayOfMonth
@@ -408,19 +406,11 @@ class DashBoardActivity : Fragment() {
                 (activity as HomeActivity).emrEndDate = dateFormat.format(endDate.time)
 
 
-                utils?.convertDateFormat(
-                    (activity as HomeActivity).emrStartDate,
-                    "dd-MM-yyyy",
-                    "yyyy-MM-dd"
-                )
+                utils?.convertDateFormat((activity as HomeActivity).emrStartDate,"dd-MM-yyyy","yyyy-MM-dd")
                     ?.let { it1 ->
                         getPatientsInfo(
                             it1,
-                            utils?.convertDateFormat(
-                                (activity as HomeActivity).emrEndDate,
-                                "dd-MM-yyyy",
-                                "yyyy-MM-dd"
-                            )!!,
+                            utils?.convertDateFormat((activity as HomeActivity).emrEndDate,"dd-MM-yyyy","yyyy-MM-dd")!!,
                             selectedGenderId,
                             selectedSessionId
                         )
@@ -465,7 +455,7 @@ class DashBoardActivity : Fragment() {
         viewModel?.getGender(facilityId!!, body, getGenderRespCallback)
     }
 
-    private val getGenderRespCallback = object {
+    private val getGenderRespCallback = object : RetrofitCallback<GetGenderResp> {
         override fun onSuccessfulResponse(responseBody: Response<GetGenderResp>?) {
             if (responseBody?.isSuccessful == true) {
                 responseBody.body()?.let { getGenderResp ->
@@ -474,13 +464,13 @@ class DashBoardActivity : Fragment() {
                         data.name = "Select Gender"
                         data.uuid = 0
                         genderArrayList.add(data)
-                        genderArrayList.addAll(responseBody.body()!!.responseContents!!)
+                        genderArrayList.addAll(responseBody?.body()!!.responseContents!!)
                         genderList =
-                            genderArrayList.map { it?.uuid!! to it.name!! }.toMap()
+                            genderArrayList?.map { it?.uuid!! to it.name!! }!!.toMap()
                                 .toMutableMap()
-                        for (i in genderArrayList.indices) {
+                        for (i in genderArrayList?.indices!!) {
                             genderListUuid[i] =
-                                genderArrayList.get(i)?.uuid!!
+                                genderArrayList?.get(i)?.uuid!!
                         }
                         val adapter =
                             ArrayAdapter<String>(
@@ -545,20 +535,20 @@ class DashBoardActivity : Fragment() {
     }
 
 
-    private val getSessionRespCallback = object {
+    private val getSessionRespCallback = object : RetrofitCallback<GetSessionResp> {
         override fun onSuccessfulResponse(responseBody: Response<GetSessionResp>?) {
             if (responseBody?.isSuccessful == true) {
                 responseBody.body()?.let { getSessionResp ->
-                    val data = GetSessionResp.ResponseContent()
+                    val data =  GetSessionResp.ResponseContent()
                     data.name = "Select Session"
                     data.uuid = 0
                     sessionArrayList.add(data)
-                    sessionArrayList.addAll(responseBody.body()!!.responseContents!!)
+                    sessionArrayList.addAll(responseBody?.body()!!.responseContents!!)
                     sessionList =
-                        sessionArrayList.map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
-                    for (i in sessionArrayList.indices) {
-                        sessionListUuid[i] =
-                            sessionArrayList.get(i)?.uuid!!
+                        sessionArrayList?.map { it?.uuid!! to it.name!! }!!.toMap().toMutableMap()
+                    for (i in sessionArrayList?.indices!!) {
+                        sessionListUuid[i]=
+                            sessionArrayList?.get(i)?.uuid!!
                     }
                     val adapter =
                         ArrayAdapter<String>(
@@ -567,11 +557,12 @@ class DashBoardActivity : Fragment() {
                             sessionList.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(R.layout.spinner_item)
-                    spinnerSession?.adapter = adapter
+                    spinnerSession?.adapter= adapter
                     spinnerSession?.setSelection(0)
                 }
             }
         }
+
 
 
         override fun onBadRequest(errorBody: Response<GetSessionResp>?) {
@@ -623,15 +614,15 @@ class DashBoardActivity : Fragment() {
     }
 
 
-    private val dashBoardDetailRetrofitCallBack = object {
+    private val dashBoardDetailRetrofitCallBack = object : RetrofitCallback<DashBoardResponse> {
         override fun onSuccessfulResponse(responseBody: Response<DashBoardResponse>?) {
             prepareDataForPatientsAdapter(responseBody?.body()?.responseContents)
             chiefComplaintsData = responseBody?.body()?.responseContents?.cieif_complaints!!
-            diagnosisData = responseBody.body()?.responseContents?.diagnosis!!
+            diagnosisData = responseBody?.body()?.responseContents?.diagnosis!!
             try {
                 setUpViewPager()
                 setupTabIcons()
-                prepareDataForGraphLines(responseBody.body()?.responseContents!!)
+                prepareDataForGraphLines(responseBody?.body()?.responseContents!!)
             } catch (e: Exception) {
 
             }
@@ -687,18 +678,14 @@ class DashBoardActivity : Fragment() {
         }
     }
 
-    private val emrWorkFlowRetrofitCallBack = object {
+    private val emrWorkFlowRetrofitCallBack = object : RetrofitCallback<EmrWorkFlowResponseModel> {
         override fun onSuccessfulResponse(response: Response<EmrWorkFlowResponseModel>) {
             if (response.body()?.responseContents?.isNotEmpty()!!) {
 
                 if (patientType.equals(AppConstants.OUT_PATIENT)) {
-
                     (activity as HomeActivity).replaceFragment(OutPatientFragment())
                 } else {
-
                     (activity as HomeActivity).replaceFragment(InpatientFragment())
-
-
                 }
             } else {
 
@@ -763,7 +750,7 @@ class DashBoardActivity : Fragment() {
     fun prepareDataForPatientsAdapter(responseContents: DashBoardContent?) {
         data.clear()
         if (responseContents?.consulted!!.isNotEmpty()) {
-            val consultendData = responseContents.consulted[0]
+            val consultendData = responseContents?.consulted!![0]
             val groupDataOne = CommonCount(
                 "F-" + consultendData.F_Count!!.toString(),
                 "M-" + consultendData.M_Count!!.toString(),
@@ -775,7 +762,7 @@ class DashBoardActivity : Fragment() {
             data.add(groupDataOne)
         }
 
-        val orderData = responseContents.orders
+        val orderData = responseContents?.orders
         val groupDataTwo = CommonCount(
             "RAD-" + orderData?.rad_count!!.toString(),
             "LAB-" + orderData.lab_count!!.toString(),
@@ -787,8 +774,8 @@ class DashBoardActivity : Fragment() {
 
         data.add(groupDataTwo)
         patientsAdapter?.updateAdapter(data)
-        if (responseContents.prescription!!.isNotEmpty()) {
-            val prescriptionData = responseContents.prescription[0]
+        if (responseContents?.prescription!!.isNotEmpty()) {
+            val prescriptionData = responseContents?.prescription!![0]
             val groupDataTwo = CommonCount(
                 "F-" + prescriptionData.F_Count!!.toString(),
                 "M-" + prescriptionData.M_Count!!.toString(),
@@ -805,48 +792,48 @@ class DashBoardActivity : Fragment() {
 
     fun prepareDataForGraphLines(responseContents: DashBoardContent) {
         var consMap: LinkedHashMap<String?, Int?>? = LinkedHashMap<String?, Int?>()
-        consMap = responseContents.cons_graph!!
+        consMap = responseContents?.cons_graph!!
 
         val graphValue1: MutableCollection<Int?> = consMap.values
-        val listGraphValues1: ArrayList<Int> = ArrayList<Int>(graphValue1)
+        val listGraphValues1: ArrayList<Int> = ArrayList<Int>(graphValue1)!!
         val graphKey1: MutableCollection<String?> = consMap.keys
-        val listKey1: ArrayList<String> = ArrayList<String>(graphKey1)
+        val listKey1: ArrayList<String> = ArrayList<String>(graphKey1)!!
 
         var orderMap: LinkedHashMap<String?, Int?>? = LinkedHashMap<String?, Int?>()
         orderMap = responseContents.orders_graph!!
 
         val graphValue2: MutableCollection<Int?> = orderMap.values
-        val listGraphValues2: ArrayList<Int> = ArrayList<Int>(graphValue2)
+        val listGraphValues2: ArrayList<Int> = ArrayList<Int>(graphValue2)!!
         val graphKey2: MutableCollection<String?> = orderMap.keys
-        val listKey2: ArrayList<String> = ArrayList<String>(graphKey2)
+        val listKey2: ArrayList<String> = ArrayList<String>(graphKey2)!!
 
         val xAxisLabel1 = ArrayList<String>()
         for (i in listKey1.indices) {
             xAxisLabel1.add(listKey1[i])
         }
 
-        graphview.layoutParams.height = 250
+        graphview.getLayoutParams().height = 250
         graphview.invalidate()
 
-        val xAxis: XAxis = graphview.xAxis
-        xAxis.valueFormatter = IndexAxisValueFormatter(getDate(xAxisLabel1))
+        val xAxis: XAxis = graphview.getXAxis()
+        xAxis.setValueFormatter(IndexAxisValueFormatter(getDate(xAxisLabel1)));
         xAxis.textSize = 12f
         xAxis.position = XAxis.XAxisPosition.BOTTOM
         xAxis.textColor = ColorTemplate.getHoloBlue()
         xAxis.isEnabled = true
         xAxis.enableGridDashedLine(10f, 10f, 0f)
 
-        val leftAxis: YAxis = graphview.axisLeft
+        val leftAxis: YAxis = graphview.getAxisLeft()
         leftAxis.removeAllLimitLines()
         leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART)
         leftAxis.textColor = ColorTemplate.getHoloBlue()
         leftAxis.axisMinimum = 0f
-        leftAxis.textSize = 12f
+        leftAxis.textSize= 12f
         leftAxis.enableGridDashedLine(10f, 10f, 0f)
         leftAxis.setDrawLimitLinesBehindData(true)
         leftAxis.setDrawGridLines(true)
 
-        graphview.axisRight.isEnabled = false
+        graphview.getAxisRight().setEnabled(false)
 
         /*  val entries1 = ArrayList<Entry>()
           val  entries2 = ArrayList<Entry>()*/
@@ -878,7 +865,7 @@ class DashBoardActivity : Fragment() {
         set1.fillAlpha = 100
         set1.setDrawHorizontalHighlightIndicator(false)
         set1.fillFormatter =
-            IFillFormatter { dataSet, dataProvider -> graphview.axisLeft.axisMinimum }
+            IFillFormatter { dataSet, dataProvider -> graphview.getAxisLeft().getAxisMinimum() }
 
         lines.add(set1)
 
@@ -897,14 +884,14 @@ class DashBoardActivity : Fragment() {
         set2.fillAlpha = 100
         set2.setDrawHorizontalHighlightIndicator(false)
         set2.fillFormatter =
-            IFillFormatter { dataSet, dataProvider -> graphview.axisLeft.axisMinimum }
+            IFillFormatter { dataSet, dataProvider -> graphview.getAxisLeft().getAxisMinimum() }
         lines.add(set2)
         val data = LineData(lines)
         data.setValueTextSize(9f)
         data.setDrawValues(false)
         graphview.axisLeft.textSize = 12f
         graphview.axisRight.textSize = 12f
-        graphview.data = data
+        graphview.setData(data)
 
     }
 
@@ -924,29 +911,29 @@ class DashBoardActivity : Fragment() {
         AnalyticsManager.getAnalyticsManager().trackDashBoardVisit()
     }
 
-    fun initDiagnosisAdapter(data: ArrayList<Diagnosis>?) {
-        var diagnosisAdapter: DiagnosisAdapter? = DiagnosisAdapter(requireContext(), data)
+    fun initDiagnosisAdapter(data: ArrayList<Diagnosis>?){
+        var diagnosisAdapter: DiagnosisAdapter? =DiagnosisAdapter(requireContext(),data)
         binding?.rvTopD?.layoutManager = LinearLayoutManager(requireActivity())
         binding?.rvTopD?.adapter = diagnosisAdapter
     }
 
-    fun initChiefComplientAdapter(data: ArrayList<ChiefComplients>?) {
-        var diagnosisAdapter: CheifComplaintsApater? = CheifComplaintsApater(requireContext(), data)
+    fun initChiefComplientAdapter(data: ArrayList<ChiefComplients>?){
+        var diagnosisAdapter: CheifComplaintsApater? =CheifComplaintsApater(requireContext(),data)
         binding?.rvTopC?.layoutManager = LinearLayoutManager(requireActivity())
         binding?.rvTopC?.adapter = diagnosisAdapter
     }
 
-    fun initZeroStockAdapter(data: List<ZeroStockResponseContent>?) {
-        var diagnosisAdapter: ZeroStockAdapter? = ZeroStockAdapter(requireContext(), data!!)
+    fun initZeroStockAdapter(data: List<ZeroStockResponseContent>?){
+        var diagnosisAdapter: ZeroStockAdapter? =ZeroStockAdapter(requireContext(),data!!)
         binding?.rvZeroS?.layoutManager = LinearLayoutManager(requireActivity())
         binding?.rvZeroS?.adapter = diagnosisAdapter
     }
 
-    fun callZeroStock() {
-        viewModel?.getZeroStock(facilityId!!, zeroStockCallBack)
+    fun callZeroStock(){
+        viewModel?.getZeroStock( facilityId!!,zeroStockCallBack)
     }
 
-    fun initDropDownCliCk() {
+    fun initDropDownCliCk(){
         binding?.rlTopDiagonis?.setOnClickListener {
             if (binding?.cvTopD?.isvisible()!!) {
                 hideDiaDropDown()
@@ -972,50 +959,52 @@ class DashBoardActivity : Fragment() {
         }
     }
 
-    fun showDiaDropDown() {
+    fun showDiaDropDown(){
         // slide_down(requireContext(), binding?.cvTopD!!)
         binding?.cvTopD?.show()
         binding?.ivArrowTd?.rotation = 270F
     }
 
-    fun hideDiaDropDown() {
+    fun hideDiaDropDown(){
         //  slide_down(requireContext(), binding?.cvTopD!!)
         binding?.ivArrowTd?.rotation = 90F
         binding?.cvTopD?.hide()
     }
 
-    fun showChieDropDown() {
+    fun showChieDropDown(){
         // slide_down(requireContext(), binding?.cvTopC!!)
         binding?.cvTopC?.show()
         binding?.ivArrowTc?.rotation = 270F
     }
 
-    fun hideChieDropDown() {
+    fun hideChieDropDown(){
         //  slide_down(requireContext(), binding?.cvTopC!!)
         binding?.ivArrowTc?.rotation = 90F
         binding?.cvTopC?.hide()
     }
 
-    fun showZeroStockDropDown() {
+    fun showZeroStockDropDown(){
         // slide_down(requireContext(), binding?.cvZeroS!!)
         binding?.cvZeroS?.show()
         binding?.ivArrowZc?.rotation = 270F
     }
 
-    fun hideZeroStockDropDown() {
+    fun hideZeroStockDropDown(){
         //slide_down(requireContext(), binding?.cvZeroS!!)
         binding?.ivArrowZc?.rotation = 90F
         binding?.cvZeroS?.hide()
     }
 
 
-    val zeroStockCallBack = object {
+
+
+    val zeroStockCallBack = object : RetrofitCallback<ZeroStockResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<ZeroStockResponseModel>?) {
-            if (responseBody?.body()?.responseContents?.isNotEmpty()!!) {
+            if(responseBody?.body()?.responseContents?.isNotEmpty()!!) {
                 view?.rvPatientsComplients?.visibility = View.VISIBLE
                 view?.tv_no_data_avaliable?.visibility = View.GONE
-                Log.e("zerStock", responseBody.body()?.responseContents.toString())
-                initZeroStockAdapter(responseBody.body()?.responseContents)
+                Log.e("zerStock", responseBody?.body()?.responseContents.toString())
+                initZeroStockAdapter(responseBody?.body()?.responseContents)
             }
         }
 
@@ -1028,7 +1017,7 @@ class DashBoardActivity : Fragment() {
                     ZeroStockResponseModel::class.java
                 )
 
-                Log.e("zerStock", "BadRequest" + responseModel.message)
+                Log.e("zerStock", "BadRequest" + responseModel.message!!)
 
             } catch (e: Exception) {
                 Log.e("zerStock", "BadRequest")
@@ -1061,6 +1050,4 @@ class DashBoardActivity : Fragment() {
         }
 
     }
-
-
 }

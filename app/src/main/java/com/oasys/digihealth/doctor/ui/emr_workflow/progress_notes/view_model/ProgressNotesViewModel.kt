@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.EncounterDoctor
@@ -51,7 +51,7 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             userDataStoreBean?.uuid!!,
             facility_uuid,
             patientId
-        ).enqueue(RetrofitMainCallback(getProgressNotesRespCallback))
+        )?.enqueue(RetrofitMainCallback(getProgressNotesRespCallback))
     }
 
     fun getEncounter(
@@ -81,7 +81,7 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(
@@ -161,7 +161,7 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             userDataStoreBean?.uuid!!,
             facility_uuid,
             createProgressNotesReq
-        ).enqueue(RetrofitMainCallback(createProgressNotesRespCallback))
+        )?.enqueue(RetrofitMainCallback(createProgressNotesRespCallback))
     }
 
     fun editProgressNotes(
@@ -185,7 +185,7 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             userDataStoreBean?.uuid!!,
             facility_uuid,
             pUuid
-        ).enqueue(RetrofitMainCallback(editProgressNotesRespRespCallback))
+        )?.enqueue(RetrofitMainCallback(editProgressNotesRespRespCallback))
     }
 
     fun updateProgressNotes(
@@ -211,7 +211,7 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             facility_uuid,
             pUuid,
             updateProgressNotesReq
-        ).enqueue(RetrofitMainCallback(updateProgressNotesRespCallback))
+        )?.enqueue(RetrofitMainCallback(updateProgressNotesRespCallback))
     }
 
     fun deleteProgressNotes(
@@ -235,6 +235,6 @@ class ProgressNotesViewModel(application: Application) : AndroidViewModel(applic
             userDataStoreBean?.uuid!!,
             facility_uuid,
             pUuid
-        ).enqueue(RetrofitMainCallback(deleteProgressNotesRespCallback))
+        )?.enqueue(RetrofitMainCallback(deleteProgressNotesRespCallback))
     }
 }

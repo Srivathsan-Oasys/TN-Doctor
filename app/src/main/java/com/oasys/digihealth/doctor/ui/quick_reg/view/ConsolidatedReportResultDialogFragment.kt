@@ -31,7 +31,7 @@ import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.Row
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.response.OrderApprovedResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.Req
 import com.oasys.digihealth.doctor.ui.quick_reg.view_model.*
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*

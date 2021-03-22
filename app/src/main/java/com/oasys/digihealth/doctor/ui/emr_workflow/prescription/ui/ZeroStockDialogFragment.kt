@@ -25,7 +25,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.ZeroStockResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.ZeroStockViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.ZeroStockViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

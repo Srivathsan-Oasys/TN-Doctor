@@ -2,12 +2,7 @@ package com.oasys.digihealth.doctor.api_service
 
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.oasys.digihealth.doctor.BuildConfig.BASE_DOMAIN
-import com.oasys.digihealth.doctor.BuildConfig.BASE_DOMAIN
 import com.oasys.digihealth.doctor.BuildConfig.BASE_URL
-import com.oasys.digihealth.doctor.api_service.ApiUrl.Login
-import com.oasys.digihealth.doctor.api_service.ApiUrl.Register
-import com.oasys.digihealth.doctor.api_service.ApiUrl.departmentAutocomplete
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigResponseModel
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigUpdateRequestModel
@@ -22,6 +17,7 @@ import com.oasys.digihealth.doctor.ui.detailedRegistration.model.GetPatientAllRe
 import com.oasys.digihealth.doctor.ui.detailedRegistration.model.GetPatientAllVisitsRequest
 import com.oasys.digihealth.doctor.ui.detailedRegistration.model.GetPatientAllVisitsResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.*
+import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.nurse_desk.BedDetailsResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.request.AdmissionPatientUpdateRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.request.AdmissionSaveRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.request.AdmissionUpdateRequestModel
@@ -51,6 +47,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.con
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.headings.GetCriticalCareChartHeadingsReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.headings.GetCriticalCareChartHeadingsResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisListResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisRequest
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.PreDiagnosisResponseModel
@@ -69,7 +66,11 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.template_departmen
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.template_department.GetAllDepartmentResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.discharge_model.DischargeSummaryListResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertRequest
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.previous_model.DischargeSummaryPreviousResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveRequestModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.model.AddDocumentDetailsResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.model.DeleteDocumentResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.model.DocumentTypeResponseModel
@@ -154,6 +155,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.ot_notes.model.prev_records.G
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_notes.model.prev_records.observed_values.GetOtNotesObservedValuesResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_notes.model.set_default.SetOtNotesDefaultReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_notes.model.set_default.SetOtNotesDefaultResp
+import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.PharmacyDispenseResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.delete.DeleteOtScheduleReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.delete.DeleteOtScheduleResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.modify.ModifyOtScheduleReq
@@ -219,7 +221,6 @@ import com.oasys.digihealth.doctor.ui.institute.model.InstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.Phermisiun.StoreListResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.wardList.WardListResponseModel
-import com.oasys.digihealth.doctor.ui.login.model.LoginSeesionRequest
 import com.oasys.digihealth.doctor.ui.login.model.SimpleResponseModel
 import com.oasys.digihealth.doctor.ui.login.model.login_response_model.LoginResponseModel
 import com.oasys.digihealth.doctor.ui.myprofile.model.MyProfileResponseModel
@@ -235,12 +236,46 @@ import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.MyPatien
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.OldPatientResponseModule
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.SearchResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.*
+import com.oasys.digihealth.doctor.ui.quick_reg.model.activitysession.ResponseActivitySession
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.block_dropdown.GetBlockDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.block_dropdown.GetBlockDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.department_dropdown.GetDepartmentDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.department_dropdown.GetDepartmentDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.district_dropdown_filter.GetDistrictDropdownFilterReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.district_dropdown_filter.GetDistrictDropdownFilterResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.gender_dropdown.GetGenderDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.gender_dropdown.GetGenderDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.health_office_dropdown.GetHealthOfficeDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.health_office_dropdown.GetHealthOfficeDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.hud_dropdown.GetHudDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.hud_dropdown.GetHudDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_category.GetInstitutionCategoryReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_category.GetInstitutionCategoryResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_dropdown.GetInstitutionDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_dropdown.GetInstitutionDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_type_dropdown.GetInstitutionTypeDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.institution_type_dropdown.GetInstitutionTypeDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.lab_name_dropdown.GetLabNameDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.lab_name_dropdown.GetLabNameDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.order_status_dropdown.GetOrderStatusDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.order_status_dropdown.GetOrderStatusDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.server_time.GetServerTimeResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.test_name_dropdown.GetTestNameDropdownReq
+import com.oasys.digihealth.doctor.ui.quick_reg.model.lab_consolidated_test_wise_report.test_name_dropdown.GetTestNameDropdownResp
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.ApprovalRequestModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalResultResponse
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalSpinnerResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.response.OrderApprovedResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.SampleAcceptedRequest
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabAssignedToResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabTestSpinnerResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.RejectReferenceResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.UserProfileResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabFilterResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.*
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.OrderProcessDetailsResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.orderRequest.OrderToProcessReqestModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.*
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.Req
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.testprocess.TestProcessResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.requset.LabConsolidatedReportRequestModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.requset.LabWiseReportRequestModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.*
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.LabNameSearchResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.QuickRegistrationRequestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.QuickRegistrationUpdateRequestModel
@@ -362,16 +397,16 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<DashBoardResponse?>?
 
-    //Blue Print
-    @GET(ApiUrl.getBluePrintData)
-    fun getBluePrintData(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("facility_uuid") facilityuuid: String?,
-        @Query("department_uuid") department_uuid: String?,
-        @Query("ward_uuid") ward_uuid: String?
-    ): Call<BluePrintResponseModel?>?
+//    //Blue Print
+//    @GET(ApiUrl.getBluePrintData)
+//    fun getBluePrintData(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("facility_uuid") facilityuuid: String?,
+//        @Query("department_uuid") department_uuid: String?,
+//        @Query("ward_uuid") ward_uuid: String?
+//    ): Call<BluePrintResponseModel?>?
 
 
     //GetEMRWorkFlow
@@ -416,24 +451,24 @@ interface APIService {
         @Body configRequestData: ArrayList<ConfigUpdateRequestModel?>?
     ): Call<ConfigUpdateResponseModel?>?
 
-    //Config Update
-    @PUT(ApiUrl.GetNurseconfigUpdate)
-    fun getNurseConfigUpdate(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body configRequestData: ArrayList<NurseUpdateRequestModule?>?
-    ): Call<ConfigUpdateResponseModel?>?
-
-    @POST(ApiUrl.GetNurseconfigCreate)
-    fun getNurseConfigCreate(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body configRequestData: ArrayList<NurseUpdateRequestModule?>?
-    ): Call<ConfigUpdateResponseModel?>?
+//    //Config Update
+//    @PUT(ApiUrl.GetNurseconfigUpdate)
+//    fun getNurseConfigUpdate(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body configRequestData: ArrayList<NurseUpdateRequestModule?>?
+//    ): Call<ConfigUpdateResponseModel?>?
+//
+//    @POST(ApiUrl.GetNurseconfigCreate)
+//    fun getNurseConfigCreate(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body configRequestData: ArrayList<NurseUpdateRequestModule?>?
+//    ): Call<ConfigUpdateResponseModel?>?
 
     @GET(ApiUrl.GetFavorites)
     fun getFavourites(
@@ -647,7 +682,7 @@ interface APIService {
         @Header("user_uuid") user_uuid: Int, @Body body: RequestBody?
     ): Call<DepartmentResponseModel?>?
 
-    @GET(GetEncounters)
+    @GET(ApiUrl.GetEncounters)
     fun getEncounters(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -703,14 +738,14 @@ interface APIService {
     ): Call<RadiologyTypeResponseModel?>?
 
     /*Get */
-    @POST(ApiUrl.getNurseDeskNotesPatientList)
-    fun getNurseDeskNotesPatientList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getNurseDeskNotesPatientListReq: GetNurseDeskNotesPatientListReq?
-    ): Call<GetNurseDeskNotesPatientListResp>
+//    @POST(ApiUrl.getNurseDeskNotesPatientList)
+//    fun getNurseDeskNotesPatientList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getNurseDeskNotesPatientListReq: GetNurseDeskNotesPatientListReq?
+//    ): Call<GetNurseDeskNotesPatientListResp>
 
     /*GET to Location*/
     @POST(ApiUrl.GetToLocation)
@@ -853,7 +888,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<FavAddTestNameResponse?>?
 
-    @GET(GetVitalsTemplatet)
+    @GET(ApiUrl.GetVitalsTemplatet)
     fun getVitalsTemplatet(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -871,14 +906,14 @@ interface APIService {
         @Body configRequestData: ArrayList<ChiefComplaintRequestModel>
     ): Call<ChiefComplaintResponse?>?
 
-    @GET(GetHistoryAll)
+    @GET(ApiUrl.GetHistoryAll)
     fun getHistoryAll(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
         @Header("facility_uuid") facility_uuid: Int
     ): Call<HistoryResponce?>?
 
-    @GET(GetEncounterAllergyType)
+    @GET(ApiUrl.GetEncounterAllergyType)
     fun getEncounterAllergyType(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -960,7 +995,7 @@ interface APIService {
         @Body configRequestData: ArrayList<DiagnosisRequest>
     ): Call<DiagnosisResponseModel?>?
 
-    @GET(SearchDiagnosis)
+    @GET(ApiUrl.SearchDiagnosis)
     fun searchDiagnosis(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1060,7 +1095,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<PrescriptionRoutResponseModel?>?
 
-    @GET(GetAllergyAll)
+    @GET(ApiUrl.GetAllergyAll)
     fun getAllergyAll(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1068,7 +1103,7 @@ interface APIService {
         @Query("patient_uuid") patient_uuid: Int
     ): Call<AllergyAllGetResponseModel?>?
 
-    @PUT(DeleteRows)
+    @PUT(ApiUrl.DeleteRows)
     fun deleteRows(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1076,7 +1111,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<DeleteResponseModel?>?
 
-    @PUT(DeleteTemplate)
+    @PUT(ApiUrl.DeleteTemplate)
     fun deleteTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1128,7 +1163,7 @@ interface APIService {
         @Body body: ChiefCompliantAddRequestModel?
     ): Call<LabFavManageResponseModel?>?
 
-    @GET(GetFavddAllList)
+    @GET(ApiUrl.GetFavddAllList)
     fun getFavddAllList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1137,7 +1172,7 @@ interface APIService {
         @Query("favourite_type_id") favourite_type_id: Int
     ): Call<FavAddListResponse?>?
 
-    @GET(GetFavddAllList)
+    @GET(ApiUrl.GetFavddAllList)
     fun getFavddAllInvestList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1146,7 +1181,7 @@ interface APIService {
         @Query("favourite_type_id") favourite_type_id: Int
     ): Call<ManageFavAddResponse?>?
 
-    @GET(GetFavddAllList)
+    @GET(ApiUrl.GetFavddAllList)
     fun getFavddAllRadiologyList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1177,7 +1212,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<PrescriptionHistoryResponseModel?>?
 
-    @GET(GetFamilyAllType)
+    @GET(ApiUrl.GetFamilyAllType)
     fun getFamilyAllType(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1202,7 +1237,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<AllergyCreateResponseModel?>?
 
-    @GET(getHistoryVitals)
+    @GET(ApiUrl.getHistoryVitals)
     fun getHistoryVitals(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1211,7 +1246,7 @@ interface APIService {
         @Query("department_uuid") department_uuid: Int
     ): Call<HistoryVitalsResponseModel?>?
 
-    @GET(VitalSearch)
+    @GET(ApiUrl.VitalSearch)
     fun getVitalsName(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1227,7 +1262,7 @@ interface APIService {
     ): Call<ZeroStockResponseModel?>?
 
     //Config Update
-    @PUT(GetHistoryconfigUpdate)
+    @PUT(ApiUrl.GetHistoryconfigUpdate)
     fun getHistoryConfigUpdate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1277,7 +1312,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<SurgeryInstitutionResponseModel?>?
 
-    @GET(GetSurgeryDetails)
+    @GET(ApiUrl.GetSurgeryDetails)
     fun getSurgery(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1301,7 +1336,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<CreateSurgeryResponseModel?>?
 
-    @GET(getDiagnosisHistory)
+    @GET(ApiUrl.getDiagnosisHistory)
     fun getDiagnosisList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1328,7 +1363,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<PresDrugInfoResponse?>?
 
-    @PUT(FavouriteUpdate)
+    @PUT(ApiUrl.FavouriteUpdate)
     fun labEditFav(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1336,7 +1371,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<FavEditResponse?>?
 
-    @PUT(FavouriteUpdate)
+    @PUT(ApiUrl.FavouriteUpdate)
     fun PresEditFav(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1367,7 +1402,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<ImmunizationNameResponseModel?>?
 
-    @GET(GetImmunizationList)
+    @GET(ApiUrl.GetImmunizationList)
     fun getImmunizationAll(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1391,7 +1426,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<ImmunizationInstitutionResponseModel?>?
 
-    @GET(LabGetTemplate)
+    @GET(ApiUrl.LabGetTemplate)
     fun getLastTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1401,7 +1436,7 @@ interface APIService {
         @Query("dept_id") dept_id: Int
     ): Call<ResponseLabGetTemplateDetails?>?
 
-    @GET(LabGetTemplate)
+    @GET(ApiUrl.LabGetTemplate)
     fun InvestigationGetTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1411,7 +1446,7 @@ interface APIService {
         @Query("dept_id") dept_id: Int
     ): Call<InvestigationGetTemplateDetailsResponse?>?
 
-    @GET(LabGetTemplate)
+    @GET(ApiUrl.LabGetTemplate)
     fun getDietTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1421,7 +1456,7 @@ interface APIService {
         @Query("dept_id") dept_id: Int
     ): Call<ResponseDietGetTemplateDetails?>?
 
-    @GET(VitualGetTemplate)
+    @GET(ApiUrl.VitualGetTemplate)
     fun getLastVitualTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1431,7 +1466,7 @@ interface APIService {
         @Query("dept_id") dept_id: Int
     ): Call<ResponseEditTemplate?>?
 
-    /* @GET(VitualGetTemplate)
+    /* @GET(ApiUrl.VitualGetTemplate)
      fun getVitualTemplate(
          @Header("Authorization") authorization: String?,
          @Header("user_uuid") user_uuid: Int,
@@ -1441,7 +1476,7 @@ interface APIService {
          @Query("dept_id") dept_id: Int
      ): Call<TempEditResponseModel?>?*/
 
-    @PUT(LabUpdateTemplate)
+    @PUT(ApiUrl.LabUpdateTemplate)
     fun getTemplateUpdate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1449,17 +1484,17 @@ interface APIService {
         @Body body: UpdateRequestModule?
     ): Call<UpdateResponse?>?
 
-    @POST(ApiUrl.GetAllergySource)
-    fun gatUomVitalList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<UOMNewReferernceResponseModel?>?
+//    @POST(ApiUrl.GetAllergySource)
+//    fun gatUomVitalList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<UOMNewReferernceResponseModel?>?
 
 
-    @GET(DiagonosisSearcbValue)
+    @GET(ApiUrl.DiagonosisSearcbValue)
     fun getDiagonosisName(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1484,7 +1519,7 @@ interface APIService {
         @Body body: SaveTemplateRequestModel?
     ): Call<SaveTemplateResponseModel?>?
 
-    @PUT(LabUpdateTemplate)
+    @PUT(ApiUrl.LabUpdateTemplate)
     fun updatePrescriptionTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1559,7 +1594,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<MapListResponseModel?>?
 
-    @PUT(UpdateAllergy)
+    @PUT(ApiUrl.UpdateAllergy)
     fun updateAllergy(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1568,7 +1603,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<AllergyUpdateResponseModel?>?
 
-    @PUT(UpdateFamilyHistory)
+    @PUT(ApiUrl.UpdateFamilyHistory)
     fun updateFamilyHistory(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1577,7 +1612,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<FamilyUpdateResponseModel?>?
 
-    @PUT(UpdateSurgery)
+    @PUT(ApiUrl.UpdateSurgery)
     fun updateSurgery(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1586,7 +1621,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<SurgeryUpdateResponseModel?>?
 
-    @GET(GetVitalSearchName)
+    @GET(ApiUrl.GetVitalSearchName)
     fun getAllVital(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1601,7 +1636,7 @@ interface APIService {
         @Body configRequestData: ArrayList<VitalSaveRequestModel>
     ): Call<VitalSaveResponseModel?>?
 
-    @GET(VitalSearch)
+    @GET(ApiUrl.VitalSearch)
     fun getVitals(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1648,7 +1683,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<HistoryDiagnosisCreateResponseModel?>?
 
-    @GET(GetSnommed)
+    @GET(ApiUrl.GetSnommed)
     fun getSnommed(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1656,7 +1691,7 @@ interface APIService {
         @Query("key") key: String?
     ): Call<SnomedDataResponseModel?>?
 
-    @GET(GetParentSnommed)
+    @GET(ApiUrl.GetParentSnommed)
     fun getParentSnommed(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1664,7 +1699,7 @@ interface APIService {
         @Query("key") key: String?
     ): Call<SnomedParentDataResponseModel?>?
 
-    @GET(GetChildSnommed)
+    @GET(ApiUrl.GetChildSnommed)
     fun getChildSnommed(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1718,7 +1753,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<CovidGenderResponseModel?>?
 
-    @GET(GetPeriod)
+    @GET(ApiUrl.GetPeriod)
     fun getCovidPeriod(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1726,7 +1761,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<CovidPeriodResponseModel?>?
 
-    @GET(GetNationalityAndMobileAndPatientCateType)
+    @GET(ApiUrl.GetNationalityAndMobileAndPatientCateType)
     fun getNationality(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1743,7 +1778,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<CovidNationalityResponseModel?>?
 
-    @GET(GetNationalityAndMobileAndPatientCateType)
+    @GET(ApiUrl.GetNationalityAndMobileAndPatientCateType)
     fun getMobileBelongsTo(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1752,7 +1787,7 @@ interface APIService {
         @Query("table_name") tableName: String?
     ): Call<CovidMobileBelongsToResponseModel?>?
 
-    @GET(GetNationalityAndMobileAndPatientCateType)
+    @GET(ApiUrl.GetNationalityAndMobileAndPatientCateType)
     fun getPatientCategory(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1789,7 +1824,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<GetAllResponseModel?>?
 
-    @GET(getConsolidatedTestWiseServerTime)
+    @GET(ApiUrl.getConsolidatedTestWiseServerTime)
     fun getConsolidatedTestWiseServerTime(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1905,7 +1940,7 @@ interface APIService {
         @Body getGenderDropdownReq: GetGenderDropdownReq
     ): Call<GetGenderDropdownResp>
 
-    @GET(GetSpecimen_Type)
+    @GET(ApiUrl.GetSpecimen_Type)
     fun getSpecimen_Type(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1914,7 +1949,7 @@ interface APIService {
         @Query("table_name") table_name: String?
     ): Call<ResponseSpicemanType?>?
 
-    @GET(GetQuarantineType)
+    @GET(ApiUrl.GetQuarantineType)
     fun getQuarantineType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1931,7 +1966,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<CovidRegistrationSearchResponseModel?>?
 
-    @PUT(CovidUpdate)
+    @PUT(ApiUrl.CovidUpdate)
     fun getUpdatePatientDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1948,7 +1983,7 @@ interface APIService {
         @Body body: CreateTreatmentkitRequestModel?
     ): Call<TreatmentKitCreateResponseModel?>?
 
-    @GET(PrevChiefComplaint)
+    @GET(ApiUrl.PrevChiefComplaint)
     fun getPrevChiefComplaint(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1974,7 +2009,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<PrescriptionFrequencyResponseModel?>?
 
-    @GET(PrevDiagnosis)
+    @GET(ApiUrl.PrevDiagnosis)
     fun getPrevDiagnosis(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -1983,7 +2018,7 @@ interface APIService {
         @Query("patientId") patientId: String?
     ): Call<PreDiagnosisResponseModel?>?
 
-    @GET(GetRepeatedResult)
+    @GET(ApiUrl.GetRepeatedResult)
     fun getRepeatedResult(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1991,7 +2026,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<RepeatedResultResponseModel?>?
 
-    @GET(GetIntervals)
+    @GET(ApiUrl.GetIntervals)
     fun getIntervals(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -1999,7 +2034,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<RepeatedIntervalReponseModel?>?
 
-    @GET(GetDetailsbyTablename)
+    @GET(ApiUrl.GetDetailsbyTablename)
     fun getspecimenDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2009,7 +2044,7 @@ interface APIService {
         @Query("patientId") patientId: String?
     ): Call<specimenResponseModel?>?
 
-    @GET(GetDetailsbyTablename)
+    @GET(ApiUrl.GetDetailsbyTablename)
     fun getsymptomsDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2019,7 +2054,7 @@ interface APIService {
         @Query("patientId") patientId: String?
     ): Call<symptomResponseModel?>?
 
-    @GET(GetDetailsbyTablename)
+    @GET(ApiUrl.GetDetailsbyTablename)
     fun getpatientDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2029,7 +2064,7 @@ interface APIService {
         @Query("patientId") patientId: String?
     ): Call<CovidRegisterPatientResponseModel?>?
 
-    @GET(GetDetailsbyTablename)
+    @GET(ApiUrl.GetDetailsbyTablename)
     fun getconditionDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2132,7 +2167,7 @@ interface APIService {
     ): Call<ResponseBody?>?
 
     @Streaming
-    @GET(certificateDownload)
+    @GET(ApiUrl.certificateDownload)
     fun getCertificatePDF(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2272,7 +2307,7 @@ interface APIService {
         @Body saveOrderRequestModel: SaveOrderRequestModel?
     ): Call<SaveOrderResponseModel?>?
 
-    @PUT(updateQuickRegistration)
+    @PUT(ApiUrl.updateQuickRegistration)
     fun updateQuickRegistration(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2281,7 +2316,7 @@ interface APIService {
         @Body body: QuickRegistrationUpdateRequestModel?
     ): Call<QuickRegistrationUpdateResponseModel?>?
 
-    @PUT(updateQuickRegistration)
+    @PUT(ApiUrl.updateQuickRegistration)
     fun updateQuickRegistrationFromQuick(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2290,16 +2325,16 @@ interface APIService {
         @Body body: QuickRegistrationUpdateRequest?
     ): Call<QuickRegistrationUpdateResponseModel?>?
 
-    @PUT(updateOPCorrecttion)
-    fun updateQuickRegistrationFromOpCorrection(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: OpCorrectionRequest?
-    ): Call<QuickRegistrationUpdateResponseModel?>?
+//    @PUT(ApiUrl.updateOPCorrecttion)
+//    fun updateQuickRegistrationFromOpCorrection(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: OpCorrectionRequest?
+//    ): Call<QuickRegistrationUpdateResponseModel?>?
 
-    @PUT(updateQuickRegistration)
+    @PUT(ApiUrl.updateQuickRegistration)
     fun updateQuickRegistrationFromQuick(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2317,7 +2352,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<GetLabNameListResponseModel?>?
 
-    @GET(getApplicationRules)
+    @GET(ApiUrl.getApplicationRules)
     fun getApplicationRules(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -2382,14 +2417,14 @@ interface APIService {
         @Body body: AssigntootherRequest?
     ): Call<SimpleResponseModel?>?
 
-    @POST(ApiUrl.RmisorderSendtonext)
-    fun RmisorderSendtonext(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RmisAssigntoOtherReq?
-    ): Call<SimpleResponseModel?>?
+//    @POST(ApiUrl.RmisorderSendtonext)
+//    fun RmisorderSendtonext(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RmisAssigntoOtherReq?
+//    ): Call<SimpleResponseModel?>?
 
 
     @POST(ApiUrl.getLabTestApproval)
@@ -2433,43 +2468,43 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<TicketListResponseModel?>?
 
-    @POST(ApiUrl.getAdmissionList)
-    fun getIPAdmissionList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: AdmissionListRequestModel?
-    ): Call<AdmissionListResponse?>?
+//    @POST(ApiUrl.getAdmissionList)
+//    fun getIPAdmissionList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: AdmissionListRequestModel?
+//    ): Call<AdmissionListResponse?>?
 
-    @POST(ApiUrl.deleteAdmissionList)
-    fun deleteAdmissionList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<AdmissionListResponseModel?>?
+//    @POST(ApiUrl.deleteAdmissionList)
+//    fun deleteAdmissionList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<AdmissionListResponseModel?>?
 
-    @POST(ApiUrl.getAllActiveCountry)
-    fun getAllActiveCountry(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: GetAllCountryReq?
-    ): Call<GetAllCountryResp>?
+//    @POST(ApiUrl.getAllActiveCountry)
+//    fun getAllActiveCountry(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: GetAllCountryReq?
+//    ): Call<GetAllCountryResp>?
 
-    @POST(ApiUrl.getByCountryId)
-    fun getByCountryId(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: GetByCountryIdReq?
-    ): Call<GetByCountryIdResp>?
+//    @POST(ApiUrl.getByCountryId)
+//    fun getByCountryId(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: GetByCountryIdReq?
+//    ): Call<GetByCountryIdResp>?
 
     @Streaming
     @POST(ApiUrl.printadmission)
@@ -2619,158 +2654,157 @@ interface APIService {
     ): Call<CategoryListResponseModel?>?
 
 
-    @POST(ApiUrl.getAdmissionDepartment)
-    fun getAdmissionDepartment(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?
-    ): Call<DropDownResponseModel?>?
+//    @POST(ApiUrl.getAdmissionDepartment)
+//    fun getAdmissionDepartment(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?
+//    ): Call<DropDownResponseModel?>?
 
-    @GET(getAdmissionWardById)
-    fun getAdmissionWardById(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Query("ward_uuid") ward_uuid: Int,
-        @Query("room_uuid") room_uuid: Int,
-        @Query("admission_status") admission_status: Int
-    ): Call<DropDownResponseModel?>?
+//    @GET(ApiUrl.getAdmissionWardById)
+//    fun getAdmissionWardById(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Query("ward_uuid") ward_uuid: Int,
+//        @Query("room_uuid") room_uuid: Int,
+//        @Query("admission_status") admission_status: Int
+//    ): Call<DropDownResponseModel?>?
 
     /*
       wardroom id
      */
-    @GET(getAdmissionWardById)
-    fun getRoomByWardIDfetch(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int,
-        @Query("room_uuid") room_uuid: Int
+//    @GET(ApiUrl.getAdmissionWardById)
+//    fun getRoomByWardIDfetch(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int,
+//        @Query("room_uuid") room_uuid: Int
+//    ): Call<ResponseRoomSetupFetchData?>?
 
-    ): Call<ResponseRoomSetupFetchData?>?
-
-    @POST(ApiUrl.getAdmissionGender)
-    fun getAdmissionGender(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?
-    ): Call<DropDownResponseModel?>?
+//    @POST(ApiUrl.getAdmissionGender)
+//    fun getAdmissionGender(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?
+//    ): Call<DropDownResponseModel?>?
 
 
-    @POST(ApiUrl.GetSalutationTitiles)
-    fun getAdmissionTitle(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionDistrict)
-    fun getAdmissionDistrict(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionReference)
-    fun getReference(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionWard)
-    fun getAdmissionWard(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionDoctor)
-    fun getAdmissionDoctor(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DoctorListResponseModel?>?
-
-    @POST(ApiUrl.searchPinOrMobile)
-    fun searchPinOrMobile(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<SearchPinResponseModel?>?
-
-    @POST(ApiUrl.addAdmission)
-    fun addAdmission(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: AddAdmissionRequestModel?
-    ): Call<AddAdmissionResponse?>?
-
-    @POST(ApiUrl.updateAdmission)
-    fun updateAdmission(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: UpdateAdmissionRequestModel?
-    ): Call<AddAdmissionResponse?>?
-
-    @POST(ApiUrl.searchPatient)
-    fun searchIpPatient(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<SearchPatientResponse?>?
-
-    @POST(ApiUrl.IpCorrection)
-    fun IpCorrectionUpdate(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: IpCorrectionUpdateRequest?
-    ): Call<SimpleResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionByid)
-    fun getAdmissionById(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<AdmissionByIdResponseModel?>?
+//    @POST(ApiUrl.GetSalutationTitiles)
+//    fun getAdmissionTitle(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?
+//    ): Call<DropDownResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionDistrict)
+//    fun getAdmissionDistrict(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?
+//    ): Call<DropDownResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionReference)
+//    fun getReference(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionWard)
+//    fun getAdmissionWard(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionDoctor)
+//    fun getAdmissionDoctor(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DoctorListResponseModel?>?
+//
+//    @POST(ApiUrl.searchPinOrMobile)
+//    fun searchPinOrMobile(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<SearchPinResponseModel?>?
+//
+//    @POST(ApiUrl.addAdmission)
+//    fun addAdmission(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: AddAdmissionRequestModel?
+//    ): Call<AddAdmissionResponse?>?
+//
+//    @POST(ApiUrl.updateAdmission)
+//    fun updateAdmission(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: UpdateAdmissionRequestModel?
+//    ): Call<AddAdmissionResponse?>?
+//
+//    @POST(ApiUrl.searchPatient)
+//    fun searchIpPatient(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<SearchPatientResponse?>?
+//
+//    @POST(ApiUrl.IpCorrection)
+//    fun IpCorrectionUpdate(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: IpCorrectionUpdateRequest?
+//    ): Call<SimpleResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionByid)
+//    fun getAdmissionById(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<AdmissionByIdResponseModel?>?
 
     @POST(ApiUrl.getAttenderPass)
     fun getAttenderPass(
@@ -2781,45 +2815,45 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<ResponseBody?>?
 
-    @POST(ApiUrl.getFacilityLocationByFacilityId)
-    fun getFacilityLocationByFacilityId(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body facilityLocationReq: FacilityLocationReq
-    ): Call<FacilityLocationResp>
+//    @POST(ApiUrl.getFacilityLocationByFacilityId)
+//    fun getFacilityLocationByFacilityId(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body facilityLocationReq: FacilityLocationReq
+//    ): Call<FacilityLocationResp>
+//
+//    @POST(ApiUrl.getAdmissionDistrictById)
+//    fun getAdmissionTaluk(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
 
-    @POST(ApiUrl.getAdmissionDistrictById)
-    fun getAdmissionTaluk(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionTalukById)
-    fun getAdmissionVillage(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
+//    @POST(ApiUrl.getAdmissionTalukById)
+//    fun getAdmissionVillage(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
 
 
-    @POST(ApiUrl.getAdmissionCommonReference)
-    fun getCommonReference(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
+//    @POST(ApiUrl.getAdmissionCommonReference)
+//    fun getCommonReference(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
 
     @POST(ApiUrl.getAdmissionDiagnosis)
     fun getAdmissionDiagnosis(
@@ -2964,7 +2998,7 @@ interface APIService {
         @Body autoSearchReq: AutoSearchReq
     ): Call<AutoSearchResp>
 
-    @GET(treatmentKitFavouriteById)
+    @GET(ApiUrl.treatmentKitFavouriteById)
     fun treatmentKitFavouriteById(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -3001,160 +3035,160 @@ interface APIService {
         @Body directApprovelReq: DirectApprovelReq?
     ): Call<SimpleResponseModel?>?
 
-    //Bed Management Report Dashboard
-    @POST(ApiUrl.getBedStatusWiseLable)
-    fun getBedManagementReportLable(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: BedStatusHospitalWiseLabelRequest?
-    ): Call<BedStatusHospitalWiseLabelModel?>?
-
-    @POST(ApiUrl.getBedStatusOccupiedDetails)
-    fun getBedStatusOccupiedReport(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: bedStatusOccupiedDetailRequest?
-    ): Call<BedStatusOccupiedDetailResponse?>?
-
-    @POST(ApiUrl.getBedStatusWiseTable)
-    fun getBedManagementReportTable(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: BedStatusHospitalWiseLabelRequest?
-    ): Call<BedStatusHospitalWiseTabelResponse?>?
-
-    @POST(ApiUrl.getBedStatusHospitalDistrict)
-    fun getBedStatusHospitalDistrict(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DistrictResponse?>?
-
-    @POST(ApiUrl.getBedStatusHospitalInstitution)
-    fun getBedStatusHospitalInstitution(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<InstitutionResponse?>?
+//    //Bed Management Report Dashboard
+//    @POST(ApiUrl.getBedStatusWiseLable)
+//    fun getBedManagementReportLable(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: BedStatusHospitalWiseLabelRequest?
+//    ): Call<BedStatusHospitalWiseLabelModel?>?
+//
+//    @POST(ApiUrl.getBedStatusOccupiedDetails)
+//    fun getBedStatusOccupiedReport(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: bedStatusOccupiedDetailRequest?
+//    ): Call<BedStatusOccupiedDetailResponse?>?
+//
+//    @POST(ApiUrl.getBedStatusWiseTable)
+//    fun getBedManagementReportTable(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: BedStatusHospitalWiseLabelRequest?
+//    ): Call<BedStatusHospitalWiseTabelResponse?>?
+//
+//    @POST(ApiUrl.getBedStatusHospitalDistrict)
+//    fun getBedStatusHospitalDistrict(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DistrictResponse?>?
+//
+//    @POST(ApiUrl.getBedStatusHospitalInstitution)
+//    fun getBedStatusHospitalInstitution(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<InstitutionResponse?>?
 
 
     //RMIS Dashboard
-    @POST(ApiUrl.getRMISDashboard)
-    fun getRMISDashboard(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<RMISDashboardResponse?>?
-
-    @POST(ApiUrl.getRMISDashboardChart)
-    fun getRMISDashboardChart(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<RMISDashboardChartResponse?>?
-
-
-    @GET(getRMISPatients)
-    fun getRMISPatients(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?
-    ): Call<DropDownResponseModel?>?
-
-
-    @POST(ApiUrl.getRMISGender)
-    fun getRMISGender(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
-
-    @POST(ApiUrl.getRMISDashboardList)
-    fun getRMISDashboardList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DashboardListResponseModel?>?
-
-
-    @POST(ApiUrl.getRMISDepartment)
-    fun getRMISDepartment(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<DropDownResponseModel?>?
+//    @POST(ApiUrl.getRMISDashboard)
+//    fun getRMISDashboard(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<RMISDashboardResponse?>?
+//
+//    @POST(ApiUrl.getRMISDashboardChart)
+//    fun getRMISDashboardChart(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<RMISDashboardChartResponse?>?
+//
+//
+//    @GET(ApiUrl.getRMISPatients)
+//    fun getRMISPatients(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?
+//    ): Call<DropDownResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getRMISGender)
+//    fun getRMISGender(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
+//
+//    @POST(ApiUrl.getRMISDashboardList)
+//    fun getRMISDashboardList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DashboardListResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getRMISDepartment)
+//    fun getRMISDepartment(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<DropDownResponseModel?>?
 
 
     //Pharmacy Dashboard
-    @POST(ApiUrl.getPharmacyDashboard)
-    fun getPharmacyDashboard(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyDashboardResponse?>?
-
-    @POST(ApiUrl.getPharmacyChartValues)
-    fun getPharmacyChartValues(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyChartResponse?>?
-
-    @POST(ApiUrl.getTopMovedDrugs)
-    fun getTopMovedDrugs(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyDrugListResponse?>?
-
-    @POST(ApiUrl.getZeroStockDrugs)
-    fun getZeroStockDrug(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyDrugListResponse?>?
-
-    @POST(ApiUrl.getNonMovedDrugs)
-    fun getNonMovedDrug(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyDrugListResponse?>?
-
-    @POST(ApiUrl.getLowStockDrugs)
-    fun getLowStockDrug(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyDrugListResponse?>?
+//    @POST(ApiUrl.getPharmacyDashboard)
+//    fun getPharmacyDashboard(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyDashboardResponse?>?
+//
+//    @POST(ApiUrl.getPharmacyChartValues)
+//    fun getPharmacyChartValues(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyChartResponse?>?
+//
+//    @POST(ApiUrl.getTopMovedDrugs)
+//    fun getTopMovedDrugs(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyDrugListResponse?>?
+//
+//    @POST(ApiUrl.getZeroStockDrugs)
+//    fun getZeroStockDrug(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyDrugListResponse?>?
+//
+//    @POST(ApiUrl.getNonMovedDrugs)
+//    fun getNonMovedDrug(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyDrugListResponse?>?
+//
+//    @POST(ApiUrl.getLowStockDrugs)
+//    fun getLowStockDrug(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyDrugListResponse?>?
 
     //TestProcessResponseModel
     @POST(ApiUrl.getLabTestApproval)
@@ -3623,367 +3657,367 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<LabFilterResponseModel?>?
 
-    @POST(ApiUrl.getSessionReportLable)
-    fun getSessionReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportLableResponse?>?
-
-    @POST(ApiUrl.getSessionReportChart)
-    fun getSessionReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-    @POST(ApiUrl.getSessionReportChartWithTime)
-    fun getSessionReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-    //DayWisePatientsList
-    @POST(ApiUrl.getDayWisePatientsListReportLable)
-    fun getDayWisePatientsListReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportLableResponse?>?
-
-    @POST(ApiUrl.getDayWisePatientsListReportChart)
-    fun getDayWisePatientsListReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-
-    @POST(ApiUrl.getDayWisePatientsListReportChartWithTime)
-    fun getDayWisePatientsListReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-
-    @POST(ApiUrl.getDayWisePatientsListReportSummary)
-    fun getDayWisePatientsListReportSummary(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DayWisePatientListResponseModel?>?
-
-
-    @POST(ApiUrl.getDayWisePatientsListReportDetail)
-    fun getDayWisePatientsListReportDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DayWisePatientListResponseModel?>?
-
-    //DateWiseSessionReport
-    @POST(ApiUrl.getDateWiseSessionLabel)
-    fun getDateWiseSessionReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseSessionReportLableResponse?>?
-
-    @POST(ApiUrl.getCensusDateWiseSessionChart)
-    fun getDateWiseSessionReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseSessionReportChartResponse?>?
-
-    @POST(ApiUrl.getCensusDateWiseSessionChartWithTime)
-    fun getDateWiseSessionReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseSessionReportChartResponse?>?
-
-    @POST(ApiUrl.getCensusDateWiseSessionList)
-    fun getDateWiseSessionReportList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseSessionListResponseModel?>?
-
-    @POST(ApiUrl.getSessionReportSummary)
-    fun getSessionReportSummaryList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionSummaryListResponse?>?
-
-    @POST(ApiUrl.getSessionReportDetail)
-    fun getSessionReportDetailList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionSummaryListResponse?>?
-
-    //Admission Wise Report
-    @POST(ApiUrl.getAdmissionWardLabel)
-    fun getAdmissionWardReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<WardWiseLabelResponseModel?>?
-
-
-    @POST(ApiUrl.getSessionReportLable)
-    fun getDischargeReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportLableResponse?>?
-
-    @POST(ApiUrl.getAdmissionWardChart)
-    fun getAdmissionWardReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<WardWiseChartResponseModel?>?
-
-    @POST(ApiUrl.getAdmissionWardChartWithTime)
-    fun getAdmissionWardReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<WardWiseChartResponseModel?>?
-
-
-    @POST(ApiUrl.getAdmissionWardList)
-    fun getAdmissionWardList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<WardListReportResponse?>?
-
-    @POST(ApiUrl.getAdmissionWardListDetail)
-    fun getAdmissionWardListDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<WardListReportResponse?>?
-
-
-    //Admission DoctorWise
-    @POST(ApiUrl.getAdmissionDoctorLabel)
-    fun getAdmissionDoctorReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseLabelResponse?>?
-
-    @POST(ApiUrl.getAdmissionDoctorChart)
-    fun getAdmissionDoctorReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionDoctorChartWithTime)
-    fun getAdmissionDoctorReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionDoctorList)
-    fun getAdmissionDoctorReportList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseListResponse?>?
-
-    @POST(ApiUrl.getAdmissionDoctorListDetail)
-    fun getAdmissionDoctorReportListDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseListResponse?>?
-
-    //Admission State Level
-    @POST(ApiUrl.getAdmissionStateLabel)
-    fun getAdmissionStateReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<StateLevelLabelResponse?>?
-
-    @POST(ApiUrl.getAdmissionStateChart)
-    fun getAdmissionStateReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<StateLevelChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionStateChartWithTime)
-    fun getAdmissionStateReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<StateLevelChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionStateList)
-    fun getAdmissionStateReportList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<StateLevelListResponse?>?
-
-    @POST(ApiUrl.getAdmissionStateListDetail)
-    fun getAdmissionStateReportListDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<StateLevelListResponse?>?
-
-    //Admission District Label
-    @POST(ApiUrl.getAdmissionDistrictLabel)
-    fun getAdmissionDistrictLabel(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DistrictLevelLabelResponse?>?
-
-    @POST(ApiUrl.getAdmissionDistrictChart)
-    fun getAdmissionDistrictChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionDistrictChartWithTime)
-    fun getAdmissionDistrictChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DoctorWiseChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionDistrictList)
-    fun getAdmissionDistrictList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DistrictLevelListResponse?>?
-
-    @POST(ApiUrl.getAdmissionDistrictListDetail)
-    fun getAdmissionDistrictListDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DistrictLevelListResponse?>?
+//    @POST(ApiUrl.getSessionReportLable)
+//    fun getSessionReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getSessionReportChart)
+//    fun getSessionReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//    @POST(ApiUrl.getSessionReportChartWithTime)
+//    fun getSessionReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//    //DayWisePatientsList
+//    @POST(ApiUrl.getDayWisePatientsListReportLable)
+//    fun getDayWisePatientsListReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getDayWisePatientsListReportChart)
+//    fun getDayWisePatientsListReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//
+//    @POST(ApiUrl.getDayWisePatientsListReportChartWithTime)
+//    fun getDayWisePatientsListReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//
+//    @POST(ApiUrl.getDayWisePatientsListReportSummary)
+//    fun getDayWisePatientsListReportSummary(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DayWisePatientListResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getDayWisePatientsListReportDetail)
+//    fun getDayWisePatientsListReportDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DayWisePatientListResponseModel?>?
+//
+//    //DateWiseSessionReport
+//    @POST(ApiUrl.getDateWiseSessionLabel)
+//    fun getDateWiseSessionReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseSessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getCensusDateWiseSessionChart)
+//    fun getDateWiseSessionReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseSessionReportChartResponse?>?
+//
+//    @POST(ApiUrl.getCensusDateWiseSessionChartWithTime)
+//    fun getDateWiseSessionReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseSessionReportChartResponse?>?
+//
+//    @POST(ApiUrl.getCensusDateWiseSessionList)
+//    fun getDateWiseSessionReportList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseSessionListResponseModel?>?
+//
+//    @POST(ApiUrl.getSessionReportSummary)
+//    fun getSessionReportSummaryList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionSummaryListResponse?>?
+//
+//    @POST(ApiUrl.getSessionReportDetail)
+//    fun getSessionReportDetailList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionSummaryListResponse?>?
+//
+//    //Admission Wise Report
+//    @POST(ApiUrl.getAdmissionWardLabel)
+//    fun getAdmissionWardReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<WardWiseLabelResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getSessionReportLable)
+//    fun getDischargeReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionWardChart)
+//    fun getAdmissionWardReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<WardWiseChartResponseModel?>?
+//
+//    @POST(ApiUrl.getAdmissionWardChartWithTime)
+//    fun getAdmissionWardReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<WardWiseChartResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getAdmissionWardList)
+//    fun getAdmissionWardList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<WardListReportResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionWardListDetail)
+//    fun getAdmissionWardListDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<WardListReportResponse?>?
+//
+//
+//    //Admission DoctorWise
+//    @POST(ApiUrl.getAdmissionDoctorLabel)
+//    fun getAdmissionDoctorReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseLabelResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDoctorChart)
+//    fun getAdmissionDoctorReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDoctorChartWithTime)
+//    fun getAdmissionDoctorReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDoctorList)
+//    fun getAdmissionDoctorReportList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseListResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDoctorListDetail)
+//    fun getAdmissionDoctorReportListDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseListResponse?>?
+//
+//    //Admission State Level
+//    @POST(ApiUrl.getAdmissionStateLabel)
+//    fun getAdmissionStateReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<StateLevelLabelResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionStateChart)
+//    fun getAdmissionStateReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<StateLevelChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionStateChartWithTime)
+//    fun getAdmissionStateReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<StateLevelChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionStateList)
+//    fun getAdmissionStateReportList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<StateLevelListResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionStateListDetail)
+//    fun getAdmissionStateReportListDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<StateLevelListResponse?>?
+//
+//    //Admission District Label
+//    @POST(ApiUrl.getAdmissionDistrictLabel)
+//    fun getAdmissionDistrictLabel(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DistrictLevelLabelResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDistrictChart)
+//    fun getAdmissionDistrictChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDistrictChartWithTime)
+//    fun getAdmissionDistrictChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DoctorWiseChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDistrictList)
+//    fun getAdmissionDistrictList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DistrictLevelListResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDistrictListDetail)
+//    fun getAdmissionDistrictListDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DistrictLevelListResponse?>?
 
 
     //Date Wise Report
@@ -4067,56 +4101,56 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<LabFilterResponseModel?>?
 
-    @POST(ApiUrl.getDatenReportLable)
-    fun getDateReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportLableResponse?>?
-
-    @POST(ApiUrl.getDateReportChart)
-    fun getDateReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-    @POST(ApiUrl.getDateReportChartWithTime)
-    fun getDateReportChartWithTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportChartResponse?>?
-
-
-    @POST(ApiUrl.getOpCensusDate)
-    fun getOpCensusDate(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseDetailResponseModel?>?
-
-    @POST(ApiUrl.getOpCensusDateWiseDetails)
-    fun getOpCensusDateWiseDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DateWiseDetailResponseModel?>?
+//    @POST(ApiUrl.getDatenReportLable)
+//    fun getDateReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getDateReportChart)
+//    fun getDateReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//    @POST(ApiUrl.getDateReportChartWithTime)
+//    fun getDateReportChartWithTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportChartResponse?>?
+//
+//
+//    @POST(ApiUrl.getOpCensusDate)
+//    fun getOpCensusDate(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseDetailResponseModel?>?
+//
+//    @POST(ApiUrl.getOpCensusDateWiseDetails)
+//    fun getOpCensusDateWiseDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DateWiseDetailResponseModel?>?
 
 
     //Discharge Summary Count Wise Report
@@ -4201,27 +4235,27 @@ interface APIService {
     ): Call<LabFilterResponseModel?>?
 
 
-    @POST(ApiUrl.getDischargeSummaryTable)
-    fun getDischargeSummaryTable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DischargeSummaryReportCountWiseResponse?>?
-
-
-    //DayWisePatientList
-    @POST(ApiUrl.getDayWisePatientList)
-    fun getDayWisePatientList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<DayWisePatientListResponseModel?>?
+//    @POST(ApiUrl.getDischargeSummaryTable)
+//    fun getDischargeSummaryTable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DischargeSummaryReportCountWiseResponse?>?
+//
+//
+//    //DayWisePatientList
+//    @POST(ApiUrl.getDayWisePatientList)
+//    fun getDayWisePatientList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<DayWisePatientListResponseModel?>?
 
     @POST(ApiUrl.getDayDistrictSpinner)
     fun getDayDistrictSpinner(
@@ -4318,61 +4352,59 @@ interface APIService {
     ): Call<LabFilterResponseModel?>?
 
 
-    @POST(ApiUrl.getAdmissionDaynReportLable)
-    fun getAdmissionDaynReportLable(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<AdmissionDayPatientLabelRespone?>?
-
-    @POST(ApiUrl.getAdmissionDayReportChart)
-    fun getAdmissionDayReportChart(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<AdmissionDayPatientChartResponse?>?
-
-    @POST(ApiUrl.getAdmissionDayReportChartWithTime)
-    fun getAdmissionDayReportChartTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<AdmissionDayPatientChartResponse?>?
-
-
-    @POST(ApiUrl.getIPDayWisePatients)
-    fun getIPDayWisePatients(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<AdmissionDayPatientResponse?>?
-
-    @POST(ApiUrl.getIPDayWisePatientsDetail)
-    fun getIPDayWisePatientsDetail(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<AdmissionDayPatientResponse?>?
+//    @POST(ApiUrl.getAdmissionDaynReportLable)
+//    fun getAdmissionDaynReportLable(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<AdmissionDayPatientLabelRespone?>?
+//
+//    @POST(ApiUrl.getAdmissionDayReportChart)
+//    fun getAdmissionDayReportChart(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<AdmissionDayPatientChartResponse?>?
+//
+//    @POST(ApiUrl.getAdmissionDayReportChartWithTime)
+//    fun getAdmissionDayReportChartTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<AdmissionDayPatientChartResponse?>?
+//
+//
+//    @POST(ApiUrl.getIPDayWisePatients)
+//    fun getIPDayWisePatients(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<AdmissionDayPatientResponse?>?
+//
+//    @POST(ApiUrl.getIPDayWisePatientsDetail)
+//    fun getIPDayWisePatientsDetail(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<AdmissionDayPatientResponse?>?
 
 
     //DistrictWisePatient OP
-
-
     @POST(ApiUrl.getDistPatientCountReportLabel)
     fun getDistPatientCountLabel(
         @Header("Accept-Language") acceptLanguage: String?,
@@ -5364,7 +5396,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<LabApprovalSpinnerResponseModel?>?
 
-    @GET(GetDocumentType)
+    @GET(ApiUrl.GetDocumentType)
     fun getDocumentType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5372,7 +5404,7 @@ interface APIService {
         @Header("facility_uuid") facility_uuid: Int
     ): Call<DocumentTypeResponseModel?>?
 
-    @GET(GetAddDocumentType)
+    @GET(ApiUrl.GetAddDocumentType)
     fun getAddDocumentDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5407,7 +5439,7 @@ interface APIService {
         @Part file: MultipartBody.Part?
     ): Call<ResponseBody?>?
 
-    @PUT(DeleteAttachmentsRows)
+    @PUT(ApiUrl.DeleteAttachmentsRows)
     fun deleteAttachmentsRows(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5416,7 +5448,7 @@ interface APIService {
         @Query("attachment_uuid") attachementid: Int
     ): Call<DeleteDocumentResponseModel?>?
 
-    @PUT(updateHistoryDiagnosis)
+    @PUT(ApiUrl.updateHistoryDiagnosis)
     fun updateDiagnosis(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5436,7 +5468,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<AdmissionWardResponseModel?>?
 
-    @GET(GetReason)
+    @GET(ApiUrl.GetReason)
     fun getReason(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5445,7 +5477,7 @@ interface APIService {
     ): Call<ReasonResponseModel?>?
 
 
-    @GET(GetTransmissionReason)
+    @GET(ApiUrl.GetTransmissionReason)
     fun getTransmissionReason(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5532,7 +5564,7 @@ interface APIService {
         @Body certificateRequestModel: CertificateRequestModel?
     ): Call<CertificateResponseModel?>?
 
-    @GET(GetCertificateAll)
+    @GET(ApiUrl.GetCertificateAll)
     fun getCertificateAll(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5549,7 +5581,7 @@ interface APIService {
         @Body emrRequestModelr: InvestigationRequset?
     ): Call<InvestigationPostResponseModel?>?
 
-    @GET(getTreatmentFavourites)
+    @GET(ApiUrl.getTreatmentFavourites)
     fun getTKFavourite(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5565,7 +5597,7 @@ interface APIService {
         @Body body: AdmissionSaveRequestModel?
     ): Call<AdmissionSaveResponseModel?>?
 
-    @GET(GetDietFavorites)
+    @GET(ApiUrl.GetDietFavorites)
     fun getDietFavourites(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5573,7 +5605,7 @@ interface APIService {
         @Query("departmentId") dept_id: Int
     ): Call<FavouritesResponseModel?>?
 
-    @PUT(DeleteDietRows)
+    @PUT(ApiUrl.DeleteDietRows)
     fun deletedietRows(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5590,21 +5622,21 @@ interface APIService {
         @Body getAllDepartmentReq: GetAllDepartmentReq
     ): Call<GetAllDepartmentResp>
 
-    @GET(GetDietMasterCategory)
+    @GET(ApiUrl.GetDietMasterCategory)
     fun getDietMasterCategoryList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
         @Header("facility_uuid") facility_uuid: Int
     ): Call<FavAddAllDepatResponseModel?>?
 
-    @GET(GetDietMasterFrequency)
+    @GET(ApiUrl.GetDietMasterFrequency)
     fun getDietMasterFrequency(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
         @Header("facility_uuid") facility_uuid: Int
     ): Call<FavAddAllDepatResponseModel?>?
 
-    @GET(GetSpecialitySketchFavorites)
+    @GET(ApiUrl.GetSpecialitySketchFavorites)
     fun getSpecialitySketchFavourites(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5613,7 +5645,7 @@ interface APIService {
         @Query("fav_type_id") fav_type_id: Int
     ): Call<FavouritesResponseModel?>?
 
-    @PUT(DeleteSpecialitySketchFavorites)
+    @PUT(ApiUrl.DeleteSpecialitySketchFavorites)
     fun deleteSpecialitySketchFavourite(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5621,7 +5653,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<DeleteResponseModel?>?
 
-    @GET(GetPreviousSpecialitySketch)
+    @GET(ApiUrl.GetPreviousSpecialitySketch)
     fun getPreviousSpecialitySketch(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5656,7 +5688,7 @@ interface APIService {
         @Body body: RequestDietFavModel?
     ): Call<DietFavMangeResponseModel?>?
 
-    @GET(GetSpecialitySketchFavrtList)
+    @GET(ApiUrl.GetSpecialitySketchFavrtList)
     fun getSpecialitySketchFavrtList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5735,7 +5767,7 @@ interface APIService {
         @Body bloodRequestSaveReq: BloodRequestSaveReq?
     ): Call<BloodRequestSaveResp?>?
 
-    @GET(getProgressNotes)
+    @GET(ApiUrl.getProgressNotes)
     fun getProgressNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5744,7 +5776,7 @@ interface APIService {
         @Query("patient_uuid") patient_uuid: Int
     ): Call<GetProgressNotesResp?>?
 
-    @GET(getEncounterByDocAndPatientId)
+    @GET(ApiUrl.getEncounterByDocAndPatientId)
     fun getEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5756,7 +5788,7 @@ interface APIService {
         @Query("encounterType") encounterType: Int
     ): Call<GetEncounterByDocAndPatientIdResp?>?
 
-    @GET(getEncounterByDocAndPatientId)
+    @GET(ApiUrl.getEncounterByDocAndPatientId)
     fun getRadiologyEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5777,7 +5809,7 @@ interface APIService {
         @Body createProgressNotesReq: CreateProgressNotesReq?
     ): Call<CreateProgressNotesResp?>?
 
-    @GET(editProgressNote)
+    @GET(ApiUrl.editProgressNote)
     fun editProgressNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5786,7 +5818,7 @@ interface APIService {
         @Query("progressNotes_uuid") pUuid: Int
     ): Call<EditProgressNotesResp?>?
 
-    @PUT(updateProgressNotes)
+    @PUT(ApiUrl.updateProgressNotes)
     fun updateProgressNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5796,7 +5828,7 @@ interface APIService {
         @Body updateProgressNotesReq: UpdateProgressNotesReq?
     ): Call<UpdateProgressNotesResp?>?
 
-    @PUT(deleteProgressNotes)
+    @PUT(ApiUrl.deleteProgressNotes)
     fun deleteProgressNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5814,7 +5846,7 @@ interface APIService {
         @Body searchPatientRequestModel: SearchPatientRequestModel?
     ): Call<NewLmisOrderModule?>?
 
-    @GET(getSession)
+    @GET(ApiUrl.getSession)
     fun getSession(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5831,7 +5863,7 @@ interface APIService {
         @Body getGenderReq: GetGenderReq?
     ): Call<GetGenderResp?>?
 
-    @GET(GetFavddAllList)
+    @GET(ApiUrl.GetFavddAllList)
     fun getFavddAllListDiet(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5840,7 +5872,7 @@ interface APIService {
         @Query("favourite_type_id") favourite_type_id: Int
     ): Call<FavAddListResponse?>?
 
-    @PUT(updateInv)
+    @PUT(ApiUrl.updateInv)
     fun UpdateInv(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5848,7 +5880,7 @@ interface APIService {
         @Body invupdateData: InvUpdateRequest?
     ): Call<SimpleResponseModel?>?
 
-    @PUT(FavouriteUpdate)
+    @PUT(ApiUrl.FavouriteUpdate)
     fun dietEditFav(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5881,7 +5913,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<ResponseLmisListview?>?
 
-    @GET(GetEncounters)
+    @GET(ApiUrl.GetEncounters)
     fun getLmisEncounters(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5916,7 +5948,7 @@ interface APIService {
         @Body body: TreatAddFavRequestModel?
     ): Call<TreaFavAddedResponseModel?>?
 
-    @GET(AddFavtoList)
+    @GET(ApiUrl.AddFavtoList)
     fun getFavList(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5925,7 +5957,7 @@ interface APIService {
         @Query("favouriteId") favouriteId: Int
     ): Call<FavouriteAddToListResponseModel?>?
 
-    @PUT(upfsteTreatmentKitOnModify)
+    @PUT(ApiUrl.upfsteTreatmentKitOnModify)
     fun modifyTreatmentKit(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -5959,14 +5991,14 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<OrderStatusResponseModel?>?
 
-    @POST(ApiUrl.getRMISOrderStatus)
-    fun getRMISOrderStatus(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<RmisOrderStatusModules?>?
+//    @POST(ApiUrl.getRMISOrderStatus)
+//    fun getRMISOrderStatus(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<RmisOrderStatusModules?>?
 
     @POST(ApiUrl.getOrderStatus)
     fun getSearchOrderStatus(
@@ -5985,7 +6017,7 @@ interface APIService {
                                                               @Header("facility_uuid") int facility_uuid,
                                                               @Body SearchPatientRequestModelCovid searchPatientRequestModelCovid);
 */
-    @GET(ipCaseSheetGetAllProfileTypes)
+    @GET(ApiUrl.ipCaseSheetGetAllProfileTypes)
     fun getIpCaseSheetAllProfileTypes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -5995,7 +6027,7 @@ interface APIService {
         @Query("department_uuid") departmentUuid: Int
     ): Call<GetIpCaseSheetAllProfileTypesResp?>?
 
-    @GET(ipCaseSheetGetById)
+    @GET(ApiUrl.ipCaseSheetGetById)
     fun getCaseSheet(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6004,7 +6036,7 @@ interface APIService {
         @Query("profile_uuid") profile_uuid: Int
     ): Call<GetCaseSheetDetailResp?>?
 
-    @GET(ipCaseSheetGetEncounter)
+    @GET(ApiUrl.ipCaseSheetGetEncounter)
     fun getIpCaseSheetEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6025,7 +6057,7 @@ interface APIService {
         @Body saveCaseSheetDetailsReq: SaveCaseSheetDetailsReq?
     ): Call<SaveCaseSheetDetailsResp?>?
 
-    @GET(ipCaseSheetGetDefault)
+    @GET(ApiUrl.ipCaseSheetGetDefault)
     fun getIpCaseSheetDefault(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6043,7 +6075,7 @@ interface APIService {
         @Body setIpCaseSheetDefaultReq: SetIpCaseSheetDefaultReq
     ): Call<SetIpCaseSheetDefaultResp>
 
-    @GET(ipCaseSheetGetPrevRecords)
+    @GET(ApiUrl.ipCaseSheetGetPrevRecords)
     fun getIpCaseSheetPreviousRecords(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6053,7 +6085,7 @@ interface APIService {
         @Query("profile_type_uuid") profile_type_uuid: Int
     ): Call<GetIpCaseSheetPreviousRecordsResp>
 
-    @GET(ipCaseSheetGetObservedValues)
+    @GET(ApiUrl.ipCaseSheetGetObservedValues)
     fun getIpCaseSheetObservedValues(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6071,7 +6103,7 @@ interface APIService {
         @Body ipCaseSheetAddConsultationsReq: IpCaseSheetAddConsultationsReq
     ): Call<IpCaseSheetAddConsultationsResp>
 
-    @GET(opNotesGetAllProfileTypes)
+    @GET(ApiUrl.opNotesGetAllProfileTypes)
     fun getOpNotesAllProfileTypes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6081,7 +6113,7 @@ interface APIService {
         @Query("department_uuid") departmentUuid: Int
     ): Call<GetOpNotesAllProfileTypesResp?>?
 
-    @GET(opNotesGetById)
+    @GET(ApiUrl.opNotesGetById)
     fun getOpNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6090,7 +6122,7 @@ interface APIService {
         @Query("profile_uuid") profile_uuid: Int
     ): Call<GetOpNotesDetailResp?>?
 
-    @GET(opNotesGetEncounter)
+    @GET(ApiUrl.opNotesGetEncounter)
     fun getOpNotesEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6111,7 +6143,7 @@ interface APIService {
         @Body saveOpNotesDetailsReq: SaveOpNotesDetailsReq?
     ): Call<SaveOpNotesDetailsResp?>?
 
-    @GET(opNotesGetDefault)
+    @GET(ApiUrl.opNotesGetDefault)
     fun getOpNotesDefault(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6129,7 +6161,7 @@ interface APIService {
         @Body setOpNotesDefaultReq: SetOpNotesDefaultReq
     ): Call<SetOpNotesDefaultResp>
 
-    @GET(opNotesGetPrevRecords)
+    @GET(ApiUrl.opNotesGetPrevRecords)
     fun getOpNotesPreviousRecords(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6139,7 +6171,7 @@ interface APIService {
         @Query("profile_type_uuid") profile_type_uuid: Int
     ): Call<GetOpNotesPreviousRecordsResp>
 
-    @GET(opNotesGetObservedValues)
+    @GET(ApiUrl.opNotesGetObservedValues)
     fun getOpNotesObservedValues(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6157,7 +6189,7 @@ interface APIService {
         @Body opNotesAddConsultationsReq: OpNotesAddConsultationsReq
     ): Call<OpNotesAddConsultationsResp>
 
-    @GET(otNotesGetAllProfileTypes)
+    @GET(ApiUrl.otNotesGetAllProfileTypes)
     fun getOtNotesAllProfileTypes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6167,7 +6199,7 @@ interface APIService {
         @Query("department_uuid") departmentUuid: Int
     ): Call<GetOtNotesAllProfileTypesResp?>?
 
-    @GET(otNotesGetById)
+    @GET(ApiUrl.otNotesGetById)
     fun getOtNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6176,7 +6208,7 @@ interface APIService {
         @Query("profile_uuid") profile_uuid: Int
     ): Call<GetOtNotesDetailResp?>?
 
-    @GET(otNotesGetEncounter)
+    @GET(ApiUrl.otNotesGetEncounter)
     fun getOtNotesEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6197,7 +6229,7 @@ interface APIService {
         @Body saveOtNotesDetailsReq: SaveOtNotesDetailsReq?
     ): Call<SaveOtNotesDetailsResp?>?
 
-    @GET(otNotesGetDefault)
+    @GET(ApiUrl.otNotesGetDefault)
     fun getOtNotesDefault(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6215,7 +6247,7 @@ interface APIService {
         @Body setOtNotesDefaultReq: SetOtNotesDefaultReq
     ): Call<SetOtNotesDefaultResp>
 
-    @GET(otNotesGetPrevRecords)
+    @GET(ApiUrl.otNotesGetPrevRecords)
     fun getOtNotesPreviousRecords(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6225,7 +6257,7 @@ interface APIService {
         @Query("profile_type_uuid") profile_type_uuid: Int
     ): Call<GetOtNotesPreviousRecordsResp>
 
-    @GET(otNotesGetObservedValues)
+    @GET(ApiUrl.otNotesGetObservedValues)
     fun getOtNotesObservedValues(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6243,7 +6275,7 @@ interface APIService {
         @Body otNotesAddConsultationsReq: OtNotesAddConsultationsReq
     ): Call<OtNotesAddConsultationsResp>
 
-    @GET(anesthesiaNotesGetAllProfileTypes)
+    @GET(ApiUrl.anesthesiaNotesGetAllProfileTypes)
     fun getAnesthesiaNotesAllProfileTypes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6253,7 +6285,7 @@ interface APIService {
         @Query("department_uuid") departmentUuid: Int
     ): Call<GetAnesthesiaNotesAllProfileTypesResp?>?
 
-    @GET(anesthesiaNotesGetById)
+    @GET(ApiUrl.anesthesiaNotesGetById)
     fun getAnesthesiaNotes(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6262,7 +6294,7 @@ interface APIService {
         @Query("profile_uuid") profile_uuid: Int
     ): Call<GetAnesthesiaNotesDetailResp?>?
 
-    @GET(anesthesiaNotesGetEncounter)
+    @GET(ApiUrl.anesthesiaNotesGetEncounter)
     fun getAnesthesiaNotesEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6283,7 +6315,7 @@ interface APIService {
         @Body saveAnesthesiaNotesDetailsReq: SaveAnesthesiaNotesDetailsReq?
     ): Call<SaveAnesthesiaNotesDetailsResp?>?
 
-    @GET(anesthesiaNotesGetDefault)
+    @GET(ApiUrl.anesthesiaNotesGetDefault)
     fun getAnesthesiaNotesDefault(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6301,7 +6333,7 @@ interface APIService {
         @Body setAnesthesiaNotesDefaultReq: SetAnesthesiaNotesDefaultReq
     ): Call<SetAnesthesiaNotesDefaultResp>
 
-    @GET(anesthesiaNotesGetPrevRecords)
+    @GET(ApiUrl.anesthesiaNotesGetPrevRecords)
     fun getAnesthesiaNotesPreviousRecords(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6311,7 +6343,7 @@ interface APIService {
         @Query("profile_type_uuid") profile_type_uuid: Int
     ): Call<GetAnesthesiaNotesPreviousRecordsResp>
 
-    @GET(anesthesiaNotesGetObservedValues)
+    @GET(ApiUrl.anesthesiaNotesGetObservedValues)
     fun getAnesthesiaNotesObservedValues(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6329,7 +6361,7 @@ interface APIService {
         @Body anaesthesiaNotesAddConsultationsReq: AnaesthesiaNotesAddConsultationsReq
     ): Call<AnaesthesiaNotesAddConsultationsResp>
 
-    @GET(getCriticalCareChartFilterHeadings)
+    @GET(ApiUrl.getCriticalCareChartFilterHeadings)
     fun getCriticalCareChartFilterHeadings(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6338,7 +6370,7 @@ interface APIService {
         @Query("patient_uuid") patient_uuid: Int
     ): Call<CriticalCareChartFilterHeadingsResponse>
 
-    @PUT(updateCriticalCareChartConfig)
+    @PUT(ApiUrl.updateCriticalCareChartConfig)
     fun UpdateCriticalCareChartConfig(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6366,7 +6398,7 @@ interface APIService {
         @Body getCriticaCareChartMasterReq: GetCriticalCareChartMasterReq?
     ): Call<GetCriticalCareChartMasterResp?>?
 
-    @GET(getCriticalCareChartByPatientId)
+    @GET(ApiUrl.getCriticalCareChartByPatientId)
     fun getCriticalCareChartByPatientIdResp(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6376,7 +6408,7 @@ interface APIService {
         @Query("critical_care_type") critical_care_type: Int
     ): Call<GetCriticalCareChartByPatientIdResp?>?
 
-    @GET(getCriticalCareChartEncounter)
+    @GET(ApiUrl.getCriticalCareChartEncounter)
     fun getCriticalCareChartEncounter(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6406,7 +6438,7 @@ interface APIService {
         @Body postCriticalCareChartUpdateReq: PostCriticalCareChartUpdateReq?
     ): Call<PostCriticalCareChartUpdateResp?>?
 
-    @GET(getCriticalCareChartCompareData)
+    @GET(ApiUrl.getCriticalCareChartCompareData)
     fun getCriticalCareChartCompareData(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6419,7 +6451,7 @@ interface APIService {
     ): Call<GetCriticalCareChartCompareDataResp?>?
 
     //Discharge Summary dashboard API
-    @GET(GetDischargeSummaryList)
+    @GET(ApiUrl.GetDischargeSummaryList)
     fun getDischargeSummaryList(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6429,7 +6461,7 @@ interface APIService {
         @Query("encounter_uuid") encounter_uuid: Int
     ): Call<DischargeSummaryListResponseModel?>?
 
-    @GET(GetDischargeSummaryList)
+    @GET(ApiUrl.GetDischargeSummaryList)
     fun getNurseDischargeSummaryList(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6457,14 +6489,14 @@ interface APIService {
         @Body requestResultdiapatch: RequestDispatchSearch?
     ): Call<ResponseResultDispatch?>?
 
-    @POST(ApiUrl.getRmisResultDispatch)
-    fun getRmisresultdispatchlist(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Body requestResultdiapatch: RequestDispatchSearch?
-    ): Call<RmisResultDispatchResponseModule?>?
+//    @POST(ApiUrl.getRmisResultDispatch)
+//    fun getRmisresultdispatchlist(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Body requestResultdiapatch: RequestDispatchSearch?
+//    ): Call<RmisResultDispatchResponseModule?>?
 
     @Streaming
     @POST(ApiUrl.resultPDF)
@@ -6477,7 +6509,7 @@ interface APIService {
     ): Call<ResponseBody?>?
 
     //Discharge Summary Previous DATA
-    @GET(GetDischargePreviousData)
+    @GET(ApiUrl.GetDischargePreviousData)
     fun getDischargeSummaryPreviousData(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6487,7 +6519,7 @@ interface APIService {
         @Query("encounter_uuid") encounter_uuid: Int?
     ): Call<DischargeSummaryPreviousResponseModel?>?
 
-    @GET(GetDischargePreviousData)
+    @GET(ApiUrl.GetDischargePreviousData)
     fun getNurseDischargeSummaryPreviousData(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6498,14 +6530,14 @@ interface APIService {
 
 
     //Discharge Type API
-    @GET(GetDischargeType)
+    @GET(ApiUrl.GetDischargeType)
     fun getDischargeSummaryType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int
     ): Call<ResDischargeType?>?
 
-    @GET(GetDischargeType)
+    @GET(ApiUrl.GetDischargeType)
     fun getNurseDischargeSummaryType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6515,14 +6547,14 @@ interface APIService {
 
 
     //Discharge Death Type
-    @GET(GetDischargeDeathType)
+    @GET(ApiUrl.GetDischargeDeathType)
     fun getDischargeSummaryDeathType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int
     ): Call<ResDischargeDeathType?>?
 
-    @GET(GetDischargeDeathType)
+    @GET(ApiUrl.GetDischargeDeathType)
     fun getNurseDischargeSummaryDeathType(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6531,14 +6563,14 @@ interface APIService {
     ): Call<ResDischargeDeathType?>?
 
     //Discharge Default Template
-    @GET(GetDefaultTemplate)
+    @GET(ApiUrl.GetDefaultTemplate)
     fun getDischargeSummaryDefaultTemplate(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int
     ): Call<ResDischargeSummaryDefaultTemplate?>?
 
-    @GET(GetDefaultTemplate)
+    @GET(ApiUrl.GetDefaultTemplate)
     fun getNurseDischargeSummaryDefaultTemplate(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6573,7 +6605,7 @@ interface APIService {
         @Body reqDefaultTemplate: ReqDefaultTemplate?
     ): Call<ResponseBody?>?
 
-    @GET(GetEncounters)
+    @GET(ApiUrl.GetEncounters)
     fun getDischargeEncounters(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6585,7 +6617,7 @@ interface APIService {
         @Query("encounterType") encounterType: Int
     ): Call<EncounterResponseModel?>?
 
-    @GET(GetEncounters)
+    @GET(ApiUrl.GetEncounters)
     fun getNurseDischargeEncounters(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6597,7 +6629,7 @@ interface APIService {
         @Query("encounterType") encounterType: Int
     ): Call<EncounterResponseModel?>?
 
-    @GET(GetMrdList)
+    @GET(ApiUrl.GetMrdList)
     fun getMrdList(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6661,7 +6693,7 @@ interface APIService {
 
 
     //Discharge Summary dashboard API
-    @GET(ActivitySession)
+    @GET(ApiUrl.ActivitySession)
     fun getActivitySession(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6679,7 +6711,7 @@ interface APIService {
         @Body body: RequestBody
     ): Call<InPatientResponseModel?>?
 
-    @GET(GetFavorites)
+    @GET(ApiUrl.GetFavorites)
     fun getLmisFavourites(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -6688,7 +6720,7 @@ interface APIService {
         @Query("fav_type_id") fav_type_id: Int
     ): Call<FavouritesResponseModel?>?
 
-    @GET(GetFavorites)
+    @GET(ApiUrl.GetFavorites)
     fun getLmisFavouritesDept(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -6706,7 +6738,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<VitalSearchNameResponseModel?>?
 
-    @GET(getPrevPatientVital)
+    @GET(ApiUrl.getPrevPatientVital)
     fun getPrevPatientVital(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6716,7 +6748,7 @@ interface APIService {
         @Query("department_uuid") departmentUuid: Int
     ): Call<GetPrevPatientVitalResp?>?
 
-    @PUT(LabUpdateTemplate)
+    @PUT(ApiUrl.LabUpdateTemplate)
     fun getVitalTemplateUpdate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -6724,7 +6756,7 @@ interface APIService {
         @Body body: VitalFavUpdateRequestModel?
     ): Call<UpdateResponse?>?
 
-    @GET(LabGetTemplate)
+    @GET(ApiUrl.LabGetTemplate)
     fun getLmisLastTemplate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -6742,7 +6774,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<FavSearchResponce?>?
 
-    @GET(getHistoryAdmission)
+    @GET(ApiUrl.getHistoryAdmission)
     fun getAdmissionType(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -6818,7 +6850,7 @@ interface APIService {
                                                                     @Header("facility_uuid") int facility_uuid,
                                                                     @Body GetCriticalCareChartMasterReq getCriticaCareChartMasterReq);
 
-    @GET(getCriticalCareChartByPatientId)
+    @GET(ApiUrl.getCriticalCareChartByPatientId)
     Call<GetCriticalCareChartByPatientIdResp> getCriticalCareChartByPatientIdResp(@Header("Accept-Language") String acceptLanguage,
                                                                                   @Header("Authorization") String authorization,
                                                                                   @Header("user_uuid") int user_uuid,
@@ -6826,7 +6858,7 @@ interface APIService {
                                                                                   @Query("patient_uuid") int patient_uuid,
                                                                                   @Query("critical_care_type") int critical_care_type);*/
     @Streaming
-    @GET(getDischagePDF)
+    @GET(ApiUrl.getDischagePDF)
     fun getDischargePDF(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -6864,23 +6896,23 @@ interface APIService {
         @Body body: SaveRequestModel?
     ): Call<SaveResponseModel?>?
 
-    @GET(getDischargeRequestApproval)
-    fun getDischargeRequests(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("admission_uuid") admission_uuid: Int
-    ): Call<DischargeRequestedResponse?>?
-
-    @POST(ApiUrl.getDataTemplateInfo)
-    fun getDataTemplateInfo(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<ResDischargeSummaryTemplateData?>?
+//    @GET(ApiUrl.getDischargeRequestApproval)
+//    fun getDischargeRequests(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("admission_uuid") admission_uuid: Int
+//    ): Call<DischargeRequestedResponse?>?
+//
+//    @POST(ApiUrl.getDataTemplateInfo)
+//    fun getDataTemplateInfo(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<ResDischargeSummaryTemplateData?>?
 
     @Streaming
     @POST(ApiUrl.GetDownload)
@@ -7105,7 +7137,7 @@ interface APIService {
 
     //history
 
-    @PUT(immunicationUpdate)
+    @PUT(ApiUrl.immunicationUpdate)
     fun immunicationUpdate(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7115,7 +7147,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<ImmuUpdateResponse?>?
 
-    @GET(getLatestRecord)
+    @GET(ApiUrl.getLatestRecord)
     fun getLatestRecordById(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7174,7 +7206,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<GetToLocationTestResponse?>?
 
-    @GET(getAlleryEdit)
+    @GET(ApiUrl.getAlleryEdit)
     fun getAlleryEdit(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -7182,7 +7214,7 @@ interface APIService {
         @Query("uuid") uuid: String
     ): Call<EditAllergyBindResponseModel?>?
 
-    @GET(getImmunizationEdit)
+    @GET(ApiUrl.getImmunizationEdit)
     fun getImmunizationEdit(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -7190,7 +7222,7 @@ interface APIService {
         @Query("uuid") uuid: String
     ): Call<EditImmunizationResponseModel?>?
 
-    @GET(getSurgeryEdit)
+    @GET(ApiUrl.getSurgeryEdit)
     fun getSurgeryEdit(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -7213,7 +7245,7 @@ interface APIService {
     ): Call<StoreListResponseModel?>?
 
     // Nurse Workflow details
-    @GET(GetNurseworkflow)
+    @GET(ApiUrl.GetNurseworkflow)
     fun getWorkFlowNurseGetList(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7222,18 +7254,18 @@ interface APIService {
     ): Call<EmrWorkFlowResponseModel?>?
 
     //patient Details
-    @POST(ApiUrl.getBedmanagemt)
-    fun getBedmanagemt(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: GetPatientListRequestModel
-    ): Call<BedManagementPatientListResponseMosel?>?
+//    @POST(ApiUrl.getBedmanagemt)
+//    fun getBedmanagemt(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: GetPatientListRequestModel
+//    ): Call<BedManagementPatientListResponseMosel?>?
 
 
     //Bed Details
-    @GET(getBedDetails)
+    @GET(ApiUrl.getBedDetails)
     fun getBedDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7244,51 +7276,51 @@ interface APIService {
 
     //Get All Bed List
 
-    @POST(ApiUrl.getAllwardList)
-    fun getAllBedList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body allward: AllWardListreq
-    ): Call<AllWardListDropDownResponse?>?
+//    @POST(ApiUrl.getAllwardList)
+//    fun getAllBedList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body allward: AllWardListreq
+//    ): Call<AllWardListDropDownResponse?>?
 
     //bad Allocation
 
-    @POST(ApiUrl.bedAllocation)
-    fun bedAllocation(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body bedallocation: BedAllocationRequest
-    ): Call<SimpleWardResponse?>?
+//    @POST(ApiUrl.bedAllocation)
+//    fun bedAllocation(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body bedallocation: BedAllocationRequest
+//    ): Call<SimpleWardResponse?>?
 
     // Bed Transfer
 
-    @POST(ApiUrl.bedTransfer)
-    fun bedTransfer(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body bedTransfer: BedTransferRequest
-    ): Call<SimpleWardResponse?>?
+//    @POST(ApiUrl.bedTransfer)
+//    fun bedTransfer(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body bedTransfer: BedTransferRequest
+//    ): Call<SimpleWardResponse?>?
 
 
     //ward transfer
 
-    @POST(ApiUrl.wardTransfer)
-    fun wardTransfer(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body wardTransfer: WardTransferRequest
-    ): Call<SimpleWardResponse?>?
+//    @POST(ApiUrl.wardTransfer)
+//    fun wardTransfer(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body wardTransfer: WardTransferRequest
+//    ): Call<SimpleWardResponse?>?
 
     //Labview
-    @GET(LabView)
+    @GET(ApiUrl.LabView)
     fun getLabViewDetails(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7299,145 +7331,145 @@ interface APIService {
     ): Call<LabViewResponseModule?>?
 
     //Labview
-    @GET(nursePatientLabDetails)
-    fun getnurseLabViewDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int
-    ): Call<NurseLabResponseModule?>?
+//    @GET(ApiUrl.nursePatientLabDetails)
+//    fun getnurseLabViewDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int
+//    ): Call<NurseLabResponseModule?>?
 
 
     //nurseDeSkInvestigationview
-    @GET(getNurseDeskInvestigation)
-    fun getNurseDeskInvestigationDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int
+//    @GET(ApiUrl.getNurseDeskInvestigation)
+//    fun getNurseDeskInvestigationDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int
+//
+//    ): Call<NurseDeskInvestigationResponseModel?>?
 
-    ): Call<NurseDeskInvestigationResponseModel?>?
-
-    @POST(ApiUrl.getNurseDeskResultInvestigation)
-    fun getNurseDeskResultInvestigationDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-
-    ): Call<NurseDeskInvestigationResultResponseModel?>?
-
-    //IpManagement
-    @POST(ApiUrl.getIpDashBoardList)
-    fun getIpDashBoardList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int?,
-        @Header("facility_uuid") facility_uuid: Int?,
-        @Body body: IpManageDashBoardRequest?
-    ): Call<IpDashBoardResponse?>
-
-    @POST(ApiUrl.getIpLineGraph)
-    fun getIpLineGraphData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int?,
-        @Header("facility_uuid") facility_uuid: Int?,
-        @Body body: IpManageLineGraphRequest?
-    ): Call<IpLineGraphResponse?>
-
-
-    @POST(ApiUrl.getIpWardByFacilityID)
-    fun getWardByDepartmentId(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int?,
-        @Header("facility_uuid") facility_uuid: Int?,
-        @Body body: WardByRequest?
-    ): Call<WardByDepartmentModelResponse?>
-
-    @POST(ApiUrl.getNurseDeskResultLab)
-    fun getNurseDeskLabDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: requestlabresult?
-
-    ): Call<NurseDeskLabResultResponseModel?>?
-
-
-    @POST(ApiUrl.getNurseDeskResultRadiology)
-    fun getNurseDeskRadiologyResultDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-
-    ): Call<NurseDeskRadiologyResulyResponseModel?>?
-
-    @POST(ApiUrl.getNurseDeskCCCPatientList)
-    fun getNurseDeskCCCPatientList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getNurseDeskCCCPatientListReq: GetNurseDeskCriticalCareChartPatientListReq?
-    ): Call<GetNurseDeskCriticalCareChartPatientListResp>
-
-
-    @GET(getNurseDeskDiet)
-    fun getNurseDeskDiet(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int
-    ): Call<NurseDeskDietResponse?>?
-
-    @GET(getNurseDeskDiet)
-    fun getNurseDeskDietList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int,
-        @Query("search_uhid") search_uhid: String,
-        @Query("search_patient_name") search_patient_name: String,
-        @Query("search_diet_name") search_diet_name: String
-    ): Call<NurseDeskDietResponse?>?
-
-    @POST(ApiUrl.updateDietStatus)
-    fun updateDietStatus(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<NurseDeskDietResponse?>?
+//    @POST(ApiUrl.getNurseDeskResultInvestigation)
+//    fun getNurseDeskResultInvestigationDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NurseDeskInvestigationResultResponseModel?>?
+//
+//    //IpManagement
+//    @POST(ApiUrl.getIpDashBoardList)
+//    fun getIpDashBoardList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int?,
+//        @Header("facility_uuid") facility_uuid: Int?,
+//        @Body body: IpManageDashBoardRequest?
+//    ): Call<IpDashBoardResponse?>
+//
+//    @POST(ApiUrl.getIpLineGraph)
+//    fun getIpLineGraphData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int?,
+//        @Header("facility_uuid") facility_uuid: Int?,
+//        @Body body: IpManageLineGraphRequest?
+//    ): Call<IpLineGraphResponse?>
+//
+//
+//    @POST(ApiUrl.getIpWardByFacilityID)
+//    fun getWardByDepartmentId(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int?,
+//        @Header("facility_uuid") facility_uuid: Int?,
+//        @Body body: WardByRequest?
+//    ): Call<WardByDepartmentModelResponse?>
+//
+//    @POST(ApiUrl.getNurseDeskResultLab)
+//    fun getNurseDeskLabDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: requestlabresult?
+//
+//    ): Call<NurseDeskLabResultResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getNurseDeskResultRadiology)
+//    fun getNurseDeskRadiologyResultDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NurseDeskRadiologyResulyResponseModel?>?
+//
+//    @POST(ApiUrl.getNurseDeskCCCPatientList)
+//    fun getNurseDeskCCCPatientList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getNurseDeskCCCPatientListReq: GetNurseDeskCriticalCareChartPatientListReq?
+//    ): Call<GetNurseDeskCriticalCareChartPatientListResp>
+//
+//
+//    @GET(ApiUrl.getNurseDeskDiet)
+//    fun getNurseDeskDiet(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int
+//    ): Call<NurseDeskDietResponse?>?
+//
+//    @GET(ApiUrl.getNurseDeskDiet)
+//    fun getNurseDeskDietList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int,
+//        @Query("search_uhid") search_uhid: String,
+//        @Query("search_patient_name") search_patient_name: String,
+//        @Query("search_diet_name") search_diet_name: String
+//    ): Call<NurseDeskDietResponse?>?
+//
+//    @POST(ApiUrl.updateDietStatus)
+//    fun updateDietStatus(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<NurseDeskDietResponse?>?
 
     //Prescription
-    @POST(ApiUrl.getNurseDeskPrescription)
-    fun getNurseDeskPrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<NurseDeskPrescriptionResponse?>?
-
-    @POST(ApiUrl.saveNurseDeskPrescription)
-    fun saveNurseDeskPrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: SavePrescriptionRequest?
-    ): Call<NurseDeskPrescriptionResponse?>?
+//    @POST(ApiUrl.getNurseDeskPrescription)
+//    fun getNurseDeskPrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<NurseDeskPrescriptionResponse?>?
+//
+//    @POST(ApiUrl.saveNurseDeskPrescription)
+//    fun saveNurseDeskPrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: SavePrescriptionRequest?
+//    ): Call<NurseDeskPrescriptionResponse?>?
 
     //Dispense
     @POST(ApiUrl.getPatientById)
@@ -7449,168 +7481,168 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<PharmacyDispenseResponse?>?
 
-    @POST(ApiUrl.getPatientPrescriptionById)
-    fun getPatientPrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<DrugsListResponse?>?
+//    @POST(ApiUrl.getPatientPrescriptionById)
+//    fun getPatientPrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<DrugsListResponse?>?
+//
+//    @POST(ApiUrl.saveDispence)
+//    fun saveDispence(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body dispanceRequest: DispanceRequest?
+//    ): Call<DispenseResponce?>?
+//
+//    @POST(ApiUrl.getPharmacyDispanceList)
+//    fun getPharmacyDispanceList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<GetpharmacyListResponse?>?
+//
+//    @POST(ApiUrl.getDispensePrescription)
+//    fun getDispensePrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PreviousDispenseListResponse?>?
+//
+//
+//    @POST(ApiUrl.getPreviousDispense)
+//    fun getPreviousDispense(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PreviousDispenseResponse?>?
+//
+//    @POST(ApiUrl.getPatientSearch)
+//    fun getPatientSearch(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PatientResponse?>?
+//
+//    //Pharmacy management Return
+//    @POST(ApiUrl.getPatientById)
+//    fun getReturnPatientById(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PharmacyReturnResponse?>?
+//
+//    @POST(ApiUrl.getReturnPrescription)
+//    fun getReturnPrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<FindReturnListResponse?>?
+//
+//    @POST(ApiUrl.getPatientPrescription)
+//    fun getReturnPatientPrescription(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<ReturnDrugsListResponse?>?
+//
+//    @POST(ApiUrl.getPatientSearch)
+//    fun getReturnPatientSearch(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PatientsResponse?>?
+//
+//    @POST(ApiUrl.getPreviousDispense)
+//    fun getPreviousReturn(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<FindReturnResponse?>?
+//
+//    @POST(ApiUrl.getPreviousReturn)
+//    fun getPreviousReturns(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<PreviousReturnsResponse?>?
+//
+//    @POST(ApiUrl.getSaveReturn)
+//    fun getSaveReturn(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: SaveReturnRequest?
+//    ): Call<FindReturnListResponse?>?
+//
+//
+//    //nurseDesk DischargeSummary
+//    @POST(ApiUrl.getNurseDeskDiscahrgeSummaryPatientList)
+//    fun getnurseDeskDischargeSummaryPatientList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: GetDischargeSummaryListRequestModel
+//
+//    ): Call<GetDischargeSummaryResponseModel?>?
+//
+//    //NurseVitals
+//    @POST(ApiUrl.getBedmanagemt)
+//    fun getNurseDeskVitalsList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NurseDeskVitalsResponseModel?>?
+//
+//    @GET(ApiUrl.getVitalsList)
+//    fun getVitalsList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<MainVItalsListResponseModel?>?
+//
+//    @GET(ApiUrl.getNursePrevVitals)
+//    fun getPrevNurseVitalsList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("patient_uuid") patient_uuid: Int,
+//        @Query("department_uuid") department_uuid: Int
+//    ): Call<PreviousVitalsResponseModel?>?
 
-    @POST(ApiUrl.saveDispence)
-    fun saveDispence(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body dispanceRequest: DispanceRequest?
-    ): Call<DispenseResponce?>?
 
-    @POST(ApiUrl.getPharmacyDispanceList)
-    fun getPharmacyDispanceList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<GetpharmacyListResponse?>?
-
-    @POST(ApiUrl.getDispensePrescription)
-    fun getDispensePrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PreviousDispenseListResponse?>?
-
-
-    @POST(ApiUrl.getPreviousDispense)
-    fun getPreviousDispense(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PreviousDispenseResponse?>?
-
-    @POST(ApiUrl.getPatientSearch)
-    fun getPatientSearch(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PatientResponse?>?
-
-    //Pharmacy management Return
-    @POST(ApiUrl.getPatientById)
-    fun getReturnPatientById(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PharmacyReturnResponse?>?
-
-    @POST(ApiUrl.getReturnPrescription)
-    fun getReturnPrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<FindReturnListResponse?>?
-
-    @POST(ApiUrl.getPatientPrescription)
-    fun getReturnPatientPrescription(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<ReturnDrugsListResponse?>?
-
-    @POST(ApiUrl.getPatientSearch)
-    fun getReturnPatientSearch(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PatientsResponse?>?
-
-    @POST(ApiUrl.getPreviousDispense)
-    fun getPreviousReturn(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<FindReturnResponse?>?
-
-    @POST(ApiUrl.getPreviousReturn)
-    fun getPreviousReturns(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<PreviousReturnsResponse?>?
-
-    @POST(ApiUrl.getSaveReturn)
-    fun getSaveReturn(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: SaveReturnRequest?
-    ): Call<FindReturnListResponse?>?
-
-
-    //nurseDesk DischargeSummary
-    @POST(ApiUrl.getNurseDeskDiscahrgeSummaryPatientList)
-    fun getnurseDeskDischargeSummaryPatientList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: GetDischargeSummaryListRequestModel
-
-    ): Call<GetDischargeSummaryResponseModel?>?
-
-    //NurseVitals
-    @POST(ApiUrl.getBedmanagemt)
-    fun getNurseDeskVitalsList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-
-    ): Call<NurseDeskVitalsResponseModel?>?
-
-    @GET(getVitalsList)
-    fun getVitalsList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<MainVItalsListResponseModel?>?
-
-    @GET(getNursePrevVitals)
-    fun getPrevNurseVitalsList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("patient_uuid") patient_uuid: Int,
-        @Query("department_uuid") department_uuid: Int
-    ): Call<PreviousVitalsResponseModel?>?
-
-
-    @GET(getWardId)
+    @GET(ApiUrl.getWardId)
     fun getWardIdByPatientId(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7619,118 +7651,117 @@ interface APIService {
         @Query("patient_uuid") patient_uuid: Int
     ): Call<GetWardIdResponseModel?>?
 
-    @POST(ApiUrl.getWardSpinner)
-    fun getWardSpinner(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardSpinnerReq: GetWardSpinnerReq
-    ): Call<GetWardSpinnerResp>?
+//    @POST(ApiUrl.getWardSpinner)
+//    fun getWardSpinner(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardSpinnerReq: GetWardSpinnerReq
+//    ): Call<GetWardSpinnerResp>?
 
     //Radiology
-    @GET(getNurseRadilogyData)
-    fun getNurseRadilogyData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int
+//    @GET(ApiUrl.getNurseRadilogyData)
+//    fun getNurseRadilogyData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int
+//    ): Call<NurseRadiologyResponse?>?
 
-    ): Call<NurseRadiologyResponse?>?
 
+//    @GET(ApiUrl.getNurseDeskInvestigation)
+//    fun getNurseInvestigationData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") ward_uuid: Int
+//
+//    ): Call<NurseDeskInvestigationResponseModel?>?
 
-    @GET(getNurseDeskInvestigation)
-    fun getNurseInvestigationData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") ward_uuid: Int
+//    @POST(ApiUrl.postInvestigationnurse)
+//    fun getInvestigationpostipsamplecollection(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NurseInvestigationPostResponse?>?
 
-    ): Call<NurseDeskInvestigationResponseModel?>?
+//    @POST(ApiUrl.postsamplecollectionlabnurse)
+//    fun getlabpostipsamplecollection(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NurseLabSampleCollection?>?
 
-    @POST(ApiUrl.postInvestigationnurse)
-    fun getInvestigationpostipsamplecollection(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
+//    @POST(ApiUrl.getEmergenyCasualty)
+//    fun getEmergencyCasualty(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencyCasualtyDetailsReq: GetEmergencyCasualtyDetailsReq
+//    ): Call<GetEmergencyCasualtyDetailsResp>
 
-    ): Call<NurseInvestigationPostResponse?>?
-
-    @POST(ApiUrl.postsamplecollectionlabnurse)
-    fun getlabpostipsamplecollection(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-
-    ): Call<NurseLabSampleCollection?>?
-
-    @POST(ApiUrl.getEmergenyCasualty)
-    fun getEmergencyCasualty(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencyCasualtyDetailsReq: GetEmergencyCasualtyDetailsReq
-    ): Call<GetEmergencyCasualtyDetailsResp>
-
-    @POST(ApiUrl.getEmergenyCasualtyCaseTypeList)
-    fun getEmergencyCasualtyCaseType(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencyCaseTypeListReq: GetEmergencyCaseTypeListReq
-    ): Call<GetEmergencyCaseTypeListResp>
-
-    @POST(ApiUrl.getEmergencySpinnerValuesCommon)
-    fun getEmergencySpinnerValuesCommon(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencySpinnerValuesCommonReq: GetEmergencySpinnerValuesCommonReq
-    ): Call<GetEmergencySpinnerValuesCommonResp>
-
-    @POST(ApiUrl.getEmergencySpinnerValuesRelationType)
-    fun getEmergencySpinnerValuesRelationType(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencySpinnerValuesRelationTypeReq: GetEmergencySpinnerValuesRelationTypeReq
-    ): Call<GetEmergencySpinnerValuesRelationTypeResp>
-
-    @POST(ApiUrl.getEmergencySpinnerValuesGender)
-    fun getEmergencySpinnerValuesGender(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<GetEmergencySpinnerValuesGenderResp>
-
-    @POST(ApiUrl.getEmergencySpinnerValuesWard)
-    fun getEmergencySpinnerValuesWard(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencySpinnerValuesWardReq: GetEmergencySpinnerValuesWardReq
-    ): Call<GetEmergencySpinnerValuesWardResp>
-
-    @POST(ApiUrl.getEmergencySearch)
-    fun getEmergencySearch(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getEmergencySearch: GetEmergencySearchReq
-    ): Call<GetEmergencySearchResp>
+//    @POST(ApiUrl.getEmergenyCasualtyCaseTypeList)
+//    fun getEmergencyCasualtyCaseType(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencyCaseTypeListReq: GetEmergencyCaseTypeListReq
+//    ): Call<GetEmergencyCaseTypeListResp>
+//
+//    @POST(ApiUrl.getEmergencySpinnerValuesCommon)
+//    fun getEmergencySpinnerValuesCommon(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencySpinnerValuesCommonReq: GetEmergencySpinnerValuesCommonReq
+//    ): Call<GetEmergencySpinnerValuesCommonResp>
+//
+//    @POST(ApiUrl.getEmergencySpinnerValuesRelationType)
+//    fun getEmergencySpinnerValuesRelationType(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencySpinnerValuesRelationTypeReq: GetEmergencySpinnerValuesRelationTypeReq
+//    ): Call<GetEmergencySpinnerValuesRelationTypeResp>
+//
+//    @POST(ApiUrl.getEmergencySpinnerValuesGender)
+//    fun getEmergencySpinnerValuesGender(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<GetEmergencySpinnerValuesGenderResp>
+//
+//    @POST(ApiUrl.getEmergencySpinnerValuesWard)
+//    fun getEmergencySpinnerValuesWard(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencySpinnerValuesWardReq: GetEmergencySpinnerValuesWardReq
+//    ): Call<GetEmergencySpinnerValuesWardResp>
+//
+//    @POST(ApiUrl.getEmergencySearch)
+//    fun getEmergencySearch(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getEmergencySearch: GetEmergencySearchReq
+//    ): Call<GetEmergencySearchResp>
 
     @Streaming
     @POST(ApiUrl.printCasualtyPaySlip)
@@ -7742,92 +7773,92 @@ interface APIService {
         @Body printCasualtyPaySlipReq: PrintCasualtyPaySlipReq
     ): Call<ResponseBody>
 
-    @POST(ApiUrl.getDepartmentById)
-    fun getDepartmentById(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getDepartmentByIdReq: GetDepartmentByIdReq
-    ): Call<GetDepartmentByIdResp>
-
-    @POST(ApiUrl.postSaveEmergencyCasualty)
-    fun saveEmergencyCasualty(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body saveEmergencyCasualtyReq: SaveEmergencyCasualtyReq
-    ): Call<SaveEmergencyCasualtyResp>
-
-    @POST(ApiUrl.postUpdateEmergencyCasualty)
-    fun updateEmergencyCasualty(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body updateEmergencyCasualtyReq: UpdateEmergencyCasualtyReq
-    ): Call<UpdateEmergencyCasualtyResp>
+//    @POST(ApiUrl.getDepartmentById)
+//    fun getDepartmentById(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getDepartmentByIdReq: GetDepartmentByIdReq
+//    ): Call<GetDepartmentByIdResp>
+//
+//    @POST(ApiUrl.postSaveEmergencyCasualty)
+//    fun saveEmergencyCasualty(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body saveEmergencyCasualtyReq: SaveEmergencyCasualtyReq
+//    ): Call<SaveEmergencyCasualtyResp>
+//
+//    @POST(ApiUrl.postUpdateEmergencyCasualty)
+//    fun updateEmergencyCasualty(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body updateEmergencyCasualtyReq: UpdateEmergencyCasualtyReq
+//    ): Call<UpdateEmergencyCasualtyResp>
 
     //Pharmacy
-    @POST(ApiUrl.GetFrequency)
-    fun getInjectionStatus(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<StatusSpinnerResponseModel?>?
-
-    @POST(ApiUrl.Register)
-    fun getSearchPatientList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<SearchMobileresponseModel?>?
-
-    @POST(ApiUrl.InjectionWorkiList)
-    fun getInjectionWorkiList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<InjectionListResponseModel?>?
-
-    @POST(ApiUrl.viewInjection)
-    fun getViewInjection(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<ViewDialogResponseModel?>?
-
-    @POST(ApiUrl.doAdministration)
-    fun postDoAdministration(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: AdministrationRequestModel?
-    ): Call<AdministrationPostResponseModel?>?
+//    @POST(ApiUrl.GetFrequency)
+//    fun getInjectionStatus(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<StatusSpinnerResponseModel?>?
+//
+//    @POST(ApiUrl.Register)
+//    fun getSearchPatientList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<SearchMobileresponseModel?>?
+//
+//    @POST(ApiUrl.InjectionWorkiList)
+//    fun getInjectionWorkiList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<InjectionListResponseModel?>?
+//
+//    @POST(ApiUrl.viewInjection)
+//    fun getViewInjection(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<ViewDialogResponseModel?>?
+//
+//    @POST(ApiUrl.doAdministration)
+//    fun postDoAdministration(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: AdministrationRequestModel?
+//    ): Call<AdministrationPostResponseModel?>?
 
     //getBedmanagemt
-    @POST(ApiUrl.postipsamplecollection)
-    fun getpostipsamplecollection(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
+//    @POST(ApiUrl.postipsamplecollection)
+//    fun getpostipsamplecollection(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//
+//    ): Call<NursedeskPostsampleResponse?>?
 
-    ): Call<NursedeskPostsampleResponse?>?
 
-
-    @GET(getRoleControlQuick)
+    @GET(ApiUrl.getRoleControlQuick)
     fun getRoleControlQuick(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -7837,191 +7868,191 @@ interface APIService {
     ): Call<QuickelementRoleResponseModel?>?
 
     //GetWardMaster
-    @POST(ApiUrl.getWardMasterListData)
-    fun getWardMasterList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: AdmissionListRequestModel
-    ): Call<ResponseWardViewModules?>?
-
-    @POST(ApiUrl.getWardSequenceNo)
-    fun getWardSequenceNo(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<GetSequenceNoResp?>?
-
-    @POST(ApiUrl.getWardGender)
-    fun getWardGender(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardGenderReq: GetWardGenderReq
-    ): Call<GetWardGenderResp?>?
-
-    @POST(ApiUrl.getWardReferenceType)
-    fun getWardReferenceType(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardReferenceReq: GetWardReferenceTypeReq
-    ): Call<GetWardReferenceTypeResp?>?
-
-    @POST(ApiUrl.getWardInstitution)
-    fun getWardInstitution(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardInstitutionReq: GetWardInstitutionReq
-    ): Call<GetWardInstitutionResp?>?
-
-    @POST(ApiUrl.getWardLocationDetails)
-    fun getWardLocationDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardLocationDetailsReq: GetWardLocationDetailsReq
-    ): Call<GetWardLocationDetailsResp?>?
-
-    @POST(ApiUrl.getWardFloorRoom)
-    fun getWardFloorRoom(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardFloorRoomReq: GetWardFloorRoomReq
-    ): Call<GetWardFloorRoomResp?>?
-
-    @POST(ApiUrl.getWardDepartment)
-    fun getWardDepartment(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardDepartmentReq: GetWardDepartmentReq
-    ): Call<GetWardDepartmentResp?>?
-
-    @POST(ApiUrl.getWardRoomClassification)
-    fun getWardRoomClassification(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardRoomClassificationReq: GetWardRoomClassificationReq
-    ): Call<GetWardRoomClassificationResp?>?
-
-    @POST(ApiUrl.createWard)
-    fun createWard(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body createWardReq: CreateWardReq
-    ): Call<CreateWardResp?>?
-
-    @GET(getWardRoomInfo)
-    fun getWardRoomInfo(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Query("ward_uuid") wardUuid: Int
-    ): Call<GetWardRoomInfoResp?>?
-
-    @POST(ApiUrl.updateWardDetails)
-    fun updateWardDetails(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body updateWardReq: UpdateWardReq
-    ): Call<UpdateWardResp?>?
-
-    @POST(ApiUrl.getWardStoresByType)
-    fun getWardStoreByType(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardStoreByTypeReq: GetWardStoreByTypeReq
-    ): Call<GetWardStoreByTypeResp?>?
-
-    @POST(ApiUrl.getWardById)
-    fun getWardById(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardByIdReq: GetWardByIdReq
-    ): Call<GetWardByIdResp?>?
+//    @POST(ApiUrl.getWardMasterListData)
+//    fun getWardMasterList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: AdmissionListRequestModel
+//    ): Call<ResponseWardViewModules?>?
+//
+//    @POST(ApiUrl.getWardSequenceNo)
+//    fun getWardSequenceNo(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<GetSequenceNoResp?>?
+//
+//    @POST(ApiUrl.getWardGender)
+//    fun getWardGender(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardGenderReq: GetWardGenderReq
+//    ): Call<GetWardGenderResp?>?
+//
+//    @POST(ApiUrl.getWardReferenceType)
+//    fun getWardReferenceType(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardReferenceReq: GetWardReferenceTypeReq
+//    ): Call<GetWardReferenceTypeResp?>?
+//
+//    @POST(ApiUrl.getWardInstitution)
+//    fun getWardInstitution(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardInstitutionReq: GetWardInstitutionReq
+//    ): Call<GetWardInstitutionResp?>?
+//
+//    @POST(ApiUrl.getWardLocationDetails)
+//    fun getWardLocationDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardLocationDetailsReq: GetWardLocationDetailsReq
+//    ): Call<GetWardLocationDetailsResp?>?
+//
+//    @POST(ApiUrl.getWardFloorRoom)
+//    fun getWardFloorRoom(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardFloorRoomReq: GetWardFloorRoomReq
+//    ): Call<GetWardFloorRoomResp?>?
+//
+//    @POST(ApiUrl.getWardDepartment)
+//    fun getWardDepartment(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardDepartmentReq: GetWardDepartmentReq
+//    ): Call<GetWardDepartmentResp?>?
+//
+//    @POST(ApiUrl.getWardRoomClassification)
+//    fun getWardRoomClassification(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardRoomClassificationReq: GetWardRoomClassificationReq
+//    ): Call<GetWardRoomClassificationResp?>?
+//
+//    @POST(ApiUrl.createWard)
+//    fun createWard(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body createWardReq: CreateWardReq
+//    ): Call<CreateWardResp?>?
+//
+//    @GET(ApiUrl.getWardRoomInfo)
+//    fun getWardRoomInfo(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Query("ward_uuid") wardUuid: Int
+//    ): Call<GetWardRoomInfoResp?>?
+//
+//    @POST(ApiUrl.updateWardDetails)
+//    fun updateWardDetails(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body updateWardReq: UpdateWardReq
+//    ): Call<UpdateWardResp?>?
+//
+//    @POST(ApiUrl.getWardStoresByType)
+//    fun getWardStoreByType(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardStoreByTypeReq: GetWardStoreByTypeReq
+//    ): Call<GetWardStoreByTypeResp?>?
+//
+//    @POST(ApiUrl.getWardById)
+//    fun getWardById(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardByIdReq: GetWardByIdReq
+//    ): Call<GetWardByIdResp?>?
 
 
     ///WardMaster update bed
-    @POST(ApiUrl.getUpdateBedInfo)
-    fun getUpdateBedInformation(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body requestBedUpdateModule: java.util.ArrayList<RequestBedUpdateModules>
-    ): Call<ReponseBedUpdate?>?
-
-
-    @Multipart
-    @POST(ApiUrl.getWardMasterRoomImageUpload)
-    fun getUploadFileWardRoom(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Part file: MultipartBody.Part?
-    ): Call<UploadimageResponse?>?
+//    @POST(ApiUrl.getUpdateBedInfo)
+//    fun getUpdateBedInformation(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body requestBedUpdateModule: java.util.ArrayList<RequestBedUpdateModules>
+//    ): Call<ReponseBedUpdate?>?
+//
+//
+//    @Multipart
+//    @POST(ApiUrl.getWardMasterRoomImageUpload)
+//    fun getUploadFileWardRoom(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Part file: MultipartBody.Part?
+//    ): Call<UploadimageResponse?>?
 
     /*
     Wardstore mapping
      */
-    @POST(ApiUrl.getWardStoreMapping)
-    fun getWardStoreMAppingData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int?,
-        @Header("facility_uuid") facility_uuid: Int?,
-        @Body body: RequestWardRoomMapping?
-    ): Call<ResponseWardStoreMapping?>
+//    @POST(ApiUrl.getWardStoreMapping)
+//    fun getWardStoreMAppingData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int?,
+//        @Header("facility_uuid") facility_uuid: Int?,
+//        @Body body: RequestWardRoomMapping?
+//    ): Call<ResponseWardStoreMapping?>
 
     /*
     Wardmaster getlist
      */
 
     //FetchWardmasterdetails
-    @POST(ApiUrl.getWardMasterFetchData)
-    fun getWardMasterFetchData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody
-    ): Call<ResponseFetchDataWardMaster?>?
+//    @POST(ApiUrl.getWardMasterFetchData)
+//    fun getWardMasterFetchData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody
+//    ): Call<ResponseFetchDataWardMaster?>?
 
     /*
     WardMaster Data List
      */
     //getBedmanagemt
-    @POST(ApiUrl.deletewardmastelistdata)
-    fun getDeleteWardMasterData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: RequestBody?
-    ): Call<ResponsemasterlistDelete?>?
+//    @POST(ApiUrl.deletewardmastelistdata)
+//    fun getDeleteWardMasterData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: RequestBody?
+//    ): Call<ResponsemasterlistDelete?>?
 
 
     //TreatmentKit Prescription Route Spinner
@@ -8037,188 +8068,188 @@ interface APIService {
     /*
    Wardstore mapping
     */
-    @POST(ApiUrl.roomsetup)
-    fun getRoomsetupData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int?,
-        @Header("facility_uuid") facility_uuid: Int?,
-        @Body body: RequestBedRoomselected?
-    ): Call<RoomSetupResponse?>
-
-
-    //Health office
-
-
-    @POST(ApiUrl.getHealthOfficeList)
-    fun getHealthOfficeList(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: GetHealthOfficeListRequest?
-    ): Call<HealthOfficeListResponseModel?>?
+//    @POST(ApiUrl.roomsetup)
+//    fun getRoomsetupData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int?,
+//        @Header("facility_uuid") facility_uuid: Int?,
+//        @Body body: RequestBedRoomselected?
+//    ): Call<RoomSetupResponse?>
+//
+//
+//    //Health office
+//
+//
+//    @POST(ApiUrl.getHealthOfficeList)
+//    fun getHealthOfficeList(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: GetHealthOfficeListRequest?
+//    ): Call<HealthOfficeListResponseModel?>?
 
 
     //IP Admission PeriodSpinner
-    @GET(GetPeriod)
-    fun getPeriodSpinner(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<DropDownResponseModel?>?
-
-    @GET(getNurseDeskServerTime)
-    fun getNurseDeskServerTime(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<GetNurseDeskServerTimeResp?>?
-
-
-    @POST(ApiUrl.getTranferListData)
-    fun getTranferListData(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: TransferListRequestModel?
-    ): Call<TranferListDataResponseModel?>?
-
-
-    @POST(ApiUrl.getTransferStatus)
-    fun getTransferStatus(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: ArrayList<TranferStatusRequestModelItem>?
-    ): Call<SimpleResponseModel?>?
-
-
-    @POST(ApiUrl.ReciveTranfer)
-    fun getReciveTranfer(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body body: ArrayList<TranferStatusRequestModelItem>?
-    ): Call<SimpleResponseModel?>?
-
-    @POST(ApiUrl.getDistrictDropdown)
-    fun getDistrictDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body districtReq: DistrictReq
-    ): Call<DistrictResp>
-
-    @POST(ApiUrl.getInstitutionTypeDropdown)
-    fun getInstitutionTypeDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body institutionTypeReq: InstitutionTypeReq
-    ): Call<InstitutionTypeResp>
-
-    @POST(ApiUrl.getInstitutionCategoryDropdown)
-    fun getInstitutionCategoryDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body institutionCategoryReq: InstitutionCategoryReq
-    ): Call<InstitutionCategoryResp>
-
-    @POST(ApiUrl.getInstitutionDropdown)
-    fun getInstitutionDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body institutionReq: InstitutionReq
-    ): Call<InstitutionResp>
-
-    @POST(ApiUrl.getDepartmentDropdown)
-    fun getDepartmentDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body departmentReq: DepartmentReq
-    ): Call<DepartmentResp>
-
-    @POST(ApiUrl.getWardTypeDropdown)
-    fun getWardTypeDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getWardTypeReq: GetWardTypeReq
-    ): Call<GetWardTypeResp>
-
-    @POST(ApiUrl.getWardGenderDropdown)
-    fun getWardGenderDropdown(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<com.oasys.digihealth.doctor.ui.ip_management.wardmaster.model.advanced_search.GetGenderResp>
-
-    @POST(ApiUrl.getDepartmentByFacilityId)
-    fun getDepartmentByFacilityId(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getDepartmentReq: GetDepartmentReq
-    ): Call<GetDepartmentResp>
-
-
-    @GET(getApplicationRuleSettings)
-    fun getApplicationRuleSettings(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<GetApplicationRuleSettingsResp>
-
-
-    @GET(getAllActiveConfigs)
-    fun getAllActiveConfigs(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int
-    ): Call<GetAllActiveConfigsResp>
-
-
-    @POST(ApiUrl.Login_session)
-    fun LoginSeasion(
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: String,
-        @Header("session_id") session_id: String?,
-        @Body req: LoginSeesionRequest
-    ): Call<SimpleResponseModel>
+//    @GET(ApiUrl.GetPeriod)
+//    fun getPeriodSpinner(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<DropDownResponseModel?>?
+//
+//    @GET(ApiUrl.getNurseDeskServerTime)
+//    fun getNurseDeskServerTime(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<GetNurseDeskServerTimeResp?>?
+//
+//
+//    @POST(ApiUrl.getTranferListData)
+//    fun getTranferListData(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: TransferListRequestModel?
+//    ): Call<TranferListDataResponseModel?>?
+//
+//
+//    @POST(ApiUrl.getTransferStatus)
+//    fun getTransferStatus(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: ArrayList<TranferStatusRequestModelItem>?
+//    ): Call<SimpleResponseModel?>?
+//
+//
+//    @POST(ApiUrl.ReciveTranfer)
+//    fun getReciveTranfer(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body body: ArrayList<TranferStatusRequestModelItem>?
+//    ): Call<SimpleResponseModel?>?
+//
+//    @POST(ApiUrl.getDistrictDropdown)
+//    fun getDistrictDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body districtReq: DistrictReq
+//    ): Call<DistrictResp>
+//
+//    @POST(ApiUrl.getInstitutionTypeDropdown)
+//    fun getInstitutionTypeDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body institutionTypeReq: InstitutionTypeReq
+//    ): Call<InstitutionTypeResp>
+//
+//    @POST(ApiUrl.getInstitutionCategoryDropdown)
+//    fun getInstitutionCategoryDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body institutionCategoryReq: InstitutionCategoryReq
+//    ): Call<InstitutionCategoryResp>
+//
+//    @POST(ApiUrl.getInstitutionDropdown)
+//    fun getInstitutionDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body institutionReq: InstitutionReq
+//    ): Call<InstitutionResp>
+//
+//    @POST(ApiUrl.getDepartmentDropdown)
+//    fun getDepartmentDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body departmentReq: DepartmentReq
+//    ): Call<DepartmentResp>
+//
+//    @POST(ApiUrl.getWardTypeDropdown)
+//    fun getWardTypeDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getWardTypeReq: GetWardTypeReq
+//    ): Call<GetWardTypeResp>
+//
+//    @POST(ApiUrl.getWardGenderDropdown)
+//    fun getWardGenderDropdown(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<com.oasys.digihealth.doctor.ui.ip_management.wardmaster.model.advanced_search.GetGenderResp>
+//
+//    @POST(ApiUrl.getDepartmentByFacilityId)
+//    fun getDepartmentByFacilityId(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getDepartmentReq: GetDepartmentReq
+//    ): Call<GetDepartmentResp>
+//
+//
+//    @GET(ApiUrl.getApplicationRuleSettings)
+//    fun getApplicationRuleSettings(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<GetApplicationRuleSettingsResp>
+//
+//
+//    @GET(ApiUrl.getAllActiveConfigs)
+//    fun getAllActiveConfigs(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int
+//    ): Call<GetAllActiveConfigsResp>
+//
+//
+//    @POST(ApiUrl.Login_session)
+//    fun LoginSeasion(
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: String,
+//        @Header("session_id") session_id: String?,
+//        @Body req: LoginSeesionRequest
+//    ): Call<SimpleResponseModel>
 
 
     //DepartmentWise reports
 
     //Session Wise Report
-    @POST(ApiUrl.getInstitutionCategoryRegDepReports)
-    fun getInstitutionCategoryApi(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: RequestBody?
-    ): Call<InstitutionCategoryResponse?>?
+//    @POST(ApiUrl.getInstitutionCategoryRegDepReports)
+//    fun getInstitutionCategoryApi(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: RequestBody?
+//    ): Call<InstitutionCategoryResponse?>?
 
 
     @POST(ApiUrl.getDepartmentDropdownRegDepReports)
@@ -8281,7 +8312,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<LabFilterResponseModel?>?
 
-    @PUT(LmisLabUpdate)
+    @PUT(ApiUrl.LmisLabUpdate)
     fun lmisLabUpdate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -8289,7 +8320,7 @@ interface APIService {
         @Body requestLmisNewOrder: LabModifiyRequest?
     ): Call<LabModifiyResponse?>?
 
-    @PUT(RadiologyUpdate)
+    @PUT(ApiUrl.RadiologyUpdate)
     fun rmisUpdate(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -8309,25 +8340,25 @@ interface APIService {
     ): Call<LabFilterResponseModel?>?
 
 
-    @POST(ApiUrl.getSpecialityCensusChartLabelRegDepReports)
-    fun getSpecialityCensusChartLabelRegDepReports(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<SessionReportLableResponse?>?
-
-    @POST(ApiUrl.getSpecialityCensus)
-    fun getSpecialityCensus(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Header("user_name") user_name: String?,
-        @Body body: SessionReportRequestModel?
-    ): Call<getSpecialityCensusResponse?>?
+//    @POST(ApiUrl.getSpecialityCensusChartLabelRegDepReports)
+//    fun getSpecialityCensusChartLabelRegDepReports(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<SessionReportLableResponse?>?
+//
+//    @POST(ApiUrl.getSpecialityCensus)
+//    fun getSpecialityCensus(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Header("user_name") user_name: String?,
+//        @Body body: SessionReportRequestModel?
+//    ): Call<getSpecialityCensusResponse?>?
 
 
     @POST(ApiUrl.getDistrictDropdownFilterRegDepReports)
@@ -8350,7 +8381,7 @@ interface APIService {
     ): Call<SimpleResponseModel>
 
 
-    @GET(getPatientAllReferrals)
+    @GET(ApiUrl.getPatientAllReferrals)
     fun getPatientAllReferrals(
         @Header("Accept-Language") acceptLanguage: String?,
         @Header("Authorization") authorization: String?,
@@ -8368,42 +8399,42 @@ interface APIService {
         @Body req: GetPatientAllVisitsRequest
     ): Call<GetPatientAllVisitsResponse?>?
 
-    @POST(ApiUrl.getusersbyusertypeids)
-    fun getusersbyusertypeids(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getDoctorsReq: GetDoctorsReq
-    ): Call<GetDoctorsResp>
+//    @POST(ApiUrl.getusersbyusertypeids)
+//    fun getusersbyusertypeids(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getDoctorsReq: GetDoctorsReq
+//    ): Call<GetDoctorsResp>
+//
+//    @POST(ApiUrl.getActiveWardByIsCasuality)
+//    fun getActiveWardByIsCasuality(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body getToWardReq: GetToWardReq
+//    ): Call<GetToWardResp>
 
-    @POST(ApiUrl.getActiveWardByIsCasuality)
-    fun getActiveWardByIsCasuality(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body getToWardReq: GetToWardReq
-    ): Call<GetToWardResp>
-
-    @Multipart
-    @POST(ApiUrl.postWorkOrderAttachments)
-    fun postWorkOrderAttachments(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Part body: MultipartBody.Part
-    ): Call<PostImageUploadResp>
-
-    @POST(ApiUrl.readUploadImage)
-    fun readUploadImage(
-        @Header("Accept-Language") acceptLanguage: String?,
-        @Header("Authorization") authorization: String?,
-        @Header("user_uuid") user_uuid: Int,
-        @Header("facility_uuid") facility_uuid: Int,
-        @Body readUploadImageReq: ReadUploadImageReq
-    ): Call<ResponseBody>
+//    @Multipart
+//    @POST(ApiUrl.postWorkOrderAttachments)
+//    fun postWorkOrderAttachments(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Part body: MultipartBody.Part
+//    ): Call<PostImageUploadResp>
+//
+//    @POST(ApiUrl.readUploadImage)
+//    fun readUploadImage(
+//        @Header("Accept-Language") acceptLanguage: String?,
+//        @Header("Authorization") authorization: String?,
+//        @Header("user_uuid") user_uuid: Int,
+//        @Header("facility_uuid") facility_uuid: Int,
+//        @Body readUploadImageReq: ReadUploadImageReq
+//    ): Call<ResponseBody>
 
     //Admission autocomplete
     @POST(ApiUrl.GetFavaddDepartmentList)
@@ -8417,7 +8448,7 @@ interface APIService {
 
     //CurrentDateTime
 
-    @GET(getCurrentDateTime)
+    @GET(ApiUrl.getCurrentDateTime)
     fun CurrentDateTime(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,
@@ -8442,7 +8473,7 @@ interface APIService {
         @Body body: RequestBody?
     ): Call<com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.response.DepartmentResponseModel>
 
-    @GET(getPatientAdmission)
+    @GET(ApiUrl.getPatientAdmission)
     fun getPatientAdmissionRef(
         @Header("Authorization") authorization: String?,
         @Header("user_uuid") user_uuid: Int,

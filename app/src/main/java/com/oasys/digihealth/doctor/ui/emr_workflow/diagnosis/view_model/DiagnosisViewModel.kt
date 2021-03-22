@@ -5,11 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisListResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisRequest
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.DiagnosisResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.model.PreDiagnosisResponseModel
@@ -21,7 +23,6 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_reques
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.fetch_encounters_response.FectchEncounterResponseModel
-import com.oasys.digihealth.doctor.ui.ip_management.admission.model.DiagnosisListResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -84,7 +85,7 @@ class DiagnosisViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilty_UUID!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -107,7 +108,7 @@ class DiagnosisViewModel(
             facilty_UUID!!,
             DEPT_ID!!,
             AppConstants.FAV_TYPE_ID_DIAGNOSIS
-        ).enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(favouritesRetrofitCallBack))
         return
     }
 
@@ -131,7 +132,7 @@ class DiagnosisViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid!!,
             "filterbythree", query
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
 
@@ -153,7 +154,7 @@ class DiagnosisViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!,
             "filterbythree", query
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
     fun getdiagnosisSearchResult(
@@ -173,7 +174,7 @@ class DiagnosisViewModel(
         apiService?.getDiagonosisName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!, "filterbythree", query
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(complaintSearchRetrofitCallBack)
         )
         return
@@ -197,7 +198,7 @@ class DiagnosisViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId,
             diagnosisRequestArrayList
-        ).enqueue(RetrofitMainCallback(insertDiagnoisisRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(insertDiagnoisisRetrofitCallback))
     }
 
     fun deleteFavourite(
@@ -230,7 +231,7 @@ class DiagnosisViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -250,7 +251,7 @@ class DiagnosisViewModel(
         apiService?.getDiagonosisName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facilityUuid!!, "filterbythree", query
-        ).enqueue(
+        )?.enqueue(
             RetrofitMainCallback(complaintSearchRetrofitCallBack)
         )
         return
@@ -276,7 +277,7 @@ class DiagnosisViewModel(
             userDataStoreBean?.uuid!!,
             facilityid!!,
             encounterId!!.toString(), patientId!!.toString()
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
     fun getEncounter(
@@ -396,7 +397,7 @@ class DiagnosisViewModel(
         apiService?.getDiagnosisSearch(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(diagRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(diagRetrofitCallback))
     }
 
 

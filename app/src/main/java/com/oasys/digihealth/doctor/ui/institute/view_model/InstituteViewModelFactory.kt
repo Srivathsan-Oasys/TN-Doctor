@@ -3,6 +3,7 @@ package com.oasys.digihealth.doctor.ui.institute.view_model
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseModel
 
 class InstituteViewModelFactory(

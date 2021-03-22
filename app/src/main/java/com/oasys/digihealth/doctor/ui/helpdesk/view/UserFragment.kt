@@ -17,6 +17,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityUserTicketBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.UserTicketViewModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.UserTicketViewModelFactory
@@ -85,8 +87,8 @@ class UserFragment : Fragment() {
             requireActivity().application
         )
             .create(UserTicketViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
 
         appPreferences = AppPreferences.getInstance(
             requireActivity().application,
@@ -106,13 +108,13 @@ class UserFragment : Fragment() {
         utils = Utils(requireContext())
 
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
     }
 
     private fun listeners() {
-        binding.categorySpinner!!.onItemSelectedListener =
+        binding?.categorySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -142,7 +144,7 @@ class UserFragment : Fragment() {
                 }
             }
 
-        binding.prioritySpinner!!.onItemSelectedListener =
+        binding?.prioritySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -167,7 +169,7 @@ class UserFragment : Fragment() {
                 }
             }
 
-        binding.subcategorySpinner!!.onItemSelectedListener =
+        binding?.subcategorySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -192,7 +194,7 @@ class UserFragment : Fragment() {
                 }
             }
 
-        binding.autoCompleteTextViewAssignTo.addTextChangedListener(object : TextWatcher {
+        binding?.autoCompleteTextViewAssignTo?.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -207,59 +209,59 @@ class UserFragment : Fragment() {
             }
         })
 
-        binding.autoCompleteTextViewAssignTo!!.setOnItemClickListener { parent, _, position, id ->
-            binding.autoCompleteTextViewAssignTo.setText(autocompleteVendorResponse?.get(position)?.vendor_name)
+        binding?.autoCompleteTextViewAssignTo!!.setOnItemClickListener { parent, _, position, id ->
+            binding?.autoCompleteTextViewAssignTo?.setText(autocompleteVendorResponse?.get(position)?.vendor_name)
             selectedAssignTo = autocompleteVendorResponse?.get(position)?.uuid!!
-            binding.autoCompleteTextViewAssignTo.dismissDropDown()
+            binding?.autoCompleteTextViewAssignTo?.dismissDropDown()
         }
 
-        binding.clear.setOnClickListener { clearSearch() }
+        binding?.clear?.setOnClickListener { clearSearch() }
 
-        binding.save.setOnClickListener {
-            if (binding.edtMobileNumber!!.text.trim().toString().isEmpty()) {
-                binding.edtMobileNumber!!.error = "Enter User Number"
+        binding?.save?.setOnClickListener {
+            if (binding?.edtMobileNumber!!.text.trim().toString().isEmpty()) {
+                binding?.edtMobileNumber!!.error = "Enter User Number"
                 return@setOnClickListener
             }
 
             if (!assetSelected) {
-                binding.autoCompleteTextViewAssetId!!.error = "Enter Asset Id"
+                binding?.autoCompleteTextViewAssetId!!.error = "Enter Asset Id"
                 return@setOnClickListener
             }
 
-            if (binding.edtSubject!!.text.trim().toString().isEmpty()) {
-                binding.edtSubject!!.error = "Enter Subject"
+            if (binding?.edtSubject!!.text.trim().toString().isEmpty()) {
+                binding?.edtSubject!!.error = "Enter Subject"
                 return@setOnClickListener
             }
 
-            if (binding.edtDescription!!.text.trim().toString().isEmpty()) {
-                binding.edtDescription!!.error = "Enter Problem description"
+            if (binding?.edtDescription!!.text.trim().toString().isEmpty()) {
+                binding?.edtDescription!!.error = "Enter Problem description"
                 return@setOnClickListener
             }
 
             if (selectedAssignTo == 0) {
-                binding.autoCompleteTextViewAssignTo!!.error = "Enter Assign To"
+                binding?.autoCompleteTextViewAssignTo!!.error = "Enter Assign To"
                 return@setOnClickListener
             }
 
             if (selectedCategoryId == 0) {
-                (binding.categorySpinner.selectedView as TextView).error = "Select Category"
+                (binding?.categorySpinner?.selectedView as TextView).error = "Select Category"
                 return@setOnClickListener
             }
             if (selectedSubCategoryId == 0) {
-                (binding.subcategorySpinner.selectedView as TextView).error =
+                (binding?.subcategorySpinner?.selectedView as TextView).error =
                     "Select Sub Category"
                 return@setOnClickListener
             }
             if (selectedPriorityId == 0) {
-                (binding.prioritySpinner.selectedView as TextView).error = "Select Priority"
+                (binding?.prioritySpinner?.selectedView as TextView).error = "Select Priority"
                 return@setOnClickListener
             }
 
             val model = AddTicketRequestModel()
-            model.subject = binding.edtSubject.text.toString()
-            model.problem_description = binding.edtDescription.text.toString()
+            model.subject = binding?.edtSubject?.text.toString()
+            model.problem_description = binding?.edtDescription?.text.toString()
             model.user_type_uuid = 2
-            model.mobile = binding.edtMobileNumber.text.toString()
+            model.mobile = binding?.edtMobileNumber?.text.toString()
             model.assignto = selectedAssignTo
             model.category_uuid = selectedCategoryId
             model.subcategory_uuid = selectedSubCategoryId
@@ -268,13 +270,13 @@ class UserFragment : Fragment() {
             model.vendorMail = selectedVendorEmail
             model.ticketstatus_uuid = 1
             model.assest_uuid = selectedAssetUUID
-            model.make = binding.edtMake.text.toString()
-            model.model = binding.edtModel.text.toString()
-            model.serial = binding.edtSerialNumber.text.toString()
-            model.application_user_uuid = userDetailsRoomRepository.getUserDetails().uuid!!
+            model.make = binding?.edtMake?.text.toString()
+            model.model = binding?.edtModel?.text.toString()
+            model.serial = binding?.edtSerialNumber?.text.toString()
+            model.application_user_uuid = userDetailsRoomRepository?.getUserDetails()?.uuid!!
             model.facility_uuid = selectedFacilityUUID
             model.department_uuid = selectedDepartmentUUID
-            model.created_by = userDetailsRoomRepository.getUserDetails().uuid!!
+            model.created_by = userDetailsRoomRepository?.getUserDetails()?.uuid!!
 
 
             val requestModel = Gson().toJson(model)
@@ -284,7 +286,7 @@ class UserFragment : Fragment() {
         }
 
 
-        binding.edtMobileNumber.addTextChangedListener(object : TextWatcher {
+        binding?.edtMobileNumber?.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -299,12 +301,12 @@ class UserFragment : Fragment() {
                         vendorByMobileResponseRetrofitCallback
                     )
                 } else {
-                    binding.vendorDetails.text = "Vendor Name / Mobile Number"
+                    binding?.vendorDetails?.text = "Vendor Name / Mobile Number"
                 }
             }
         })
 
-        binding.autoCompleteTextViewAssetId.addTextChangedListener(object : TextWatcher {
+        binding?.autoCompleteTextViewAssetId?.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 
             }
@@ -331,18 +333,18 @@ class UserFragment : Fragment() {
             }
         })
 
-        binding.autoCompleteTextViewAssetId!!.setOnItemClickListener { parent, _, position, id ->
+        binding?.autoCompleteTextViewAssetId!!.setOnItemClickListener { parent, _, position, id ->
             assetSelected = true
             autocompleteTestResponse?.let { list ->
                 if (list.size > position) {
                     list[position]?.let { assetResponseContent ->
-                        binding.autoCompleteTextViewAssetId.setText(assetResponseContent.asset_name)
+                        binding?.autoCompleteTextViewAssetId?.setText(assetResponseContent.asset_name)
                         assetResponseContent.AssetDetails?.let { list ->
                             if (list.isNotEmpty()) {
                                 list[0]?.let { assetDetailResponseContent ->
-                                    binding.edtModel.setText(assetDetailResponseContent.model_no)
-                                    binding.edtMake.setText(assetDetailResponseContent.model_name)
-                                    binding.edtSerialNumber.setText(assetDetailResponseContent.serial_no)
+                                    binding?.edtModel?.setText(assetDetailResponseContent.model_no)
+                                    binding?.edtMake?.setText(assetDetailResponseContent.model_name)
+                                    binding?.edtSerialNumber?.setText(assetDetailResponseContent.serial_no)
 
                                     selectedAssetUUID = assetDetailResponseContent.uuid
                                 }
@@ -351,13 +353,13 @@ class UserFragment : Fragment() {
                         selectedAssetCode = assetResponseContent.asset_code
                         selectedFacilityUUID = assetResponseContent.facility_uuid
                         selectedDepartmentUUID = assetResponseContent.department_uuid
-                        binding.autoCompleteTextViewAssetId.dismissDropDown()
+                        binding?.autoCompleteTextViewAssetId?.dismissDropDown()
                     }
                 }
             }
         }
 
-        binding.institutionSpinner!!.onItemSelectedListener =
+        binding?.institutionSpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -382,7 +384,7 @@ class UserFragment : Fragment() {
                 }
             }
 
-        binding.departmentSpinner!!.onItemSelectedListener =
+        binding?.departmentSpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -408,20 +410,20 @@ class UserFragment : Fragment() {
     }
 
     private fun clearSearch() {
-        binding.categorySpinner.setSelection(0)
-        binding.subcategorySpinner.setSelection(0)
-        binding.prioritySpinner.setSelection(0)
-        binding.institutionSpinner.setSelection(0)
-        binding.departmentSpinner.setSelection(0)
+        binding?.categorySpinner?.setSelection(0)
+        binding?.subcategorySpinner?.setSelection(0)
+        binding?.prioritySpinner?.setSelection(0)
+        binding?.institutionSpinner?.setSelection(0)
+        binding?.departmentSpinner?.setSelection(0)
 
-        binding.edtDescription.setText("")
-        binding.edtSubject.setText("")
-        binding.edtMobileNumber.setText("")
-        binding.edtMake.setText("")
-        binding.edtSerialNumber.setText("")
-        binding.edtModel.setText("")
-        binding.autoCompleteTextViewAssignTo.setText("")
-        binding.autoCompleteTextViewAssetId.setText("")
+        binding?.edtDescription?.setText("")
+        binding?.edtSubject?.setText("")
+        binding?.edtMobileNumber?.setText("")
+        binding?.edtMake?.setText("")
+        binding?.edtSerialNumber?.setText("")
+        binding?.edtModel?.setText("")
+        binding?.autoCompleteTextViewAssignTo?.setText("")
+        binding?.autoCompleteTextViewAssetId?.setText("")
     }
 
     val categorySpinnerRetrofitCallback =
@@ -445,13 +447,13 @@ class UserFragment : Fragment() {
                             filterCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.categorySpinner!!.adapter = adapter
+                    binding?.categorySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.categorySpinner.prompt = categorylistfilteritem?.get(0)?.name
-                binding.categorySpinner!!.setSelection(0)
+                binding?.categorySpinner?.prompt = categorylistfilteritem?.get(0)?.name
+                binding?.categorySpinner!!.setSelection(0)
 
                 viewModel?.getSubCategoryList(
                     selectedCategoryId,
@@ -472,7 +474,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -482,7 +484,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -490,7 +492,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -498,13 +500,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -534,13 +536,13 @@ class UserFragment : Fragment() {
                             filterPriorityResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.prioritySpinner!!.adapter = adapter
+                    binding?.prioritySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.prioritySpinner.prompt = prioritylistfilteritem?.get(0)?.name
-                binding.prioritySpinner!!.setSelection(0)
+                binding?.prioritySpinner?.prompt = prioritylistfilteritem?.get(0)?.name
+                binding?.prioritySpinner!!.setSelection(0)
 
             }
 
@@ -556,7 +558,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -566,7 +568,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -574,7 +576,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -582,13 +584,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -619,13 +621,13 @@ class UserFragment : Fragment() {
                             filterSubCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.subcategorySpinner!!.adapter = adapter
+                    binding?.subcategorySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.subcategorySpinner.prompt = subCategoryListFilterItem?.get(0)?.name
-                binding.subcategorySpinner!!.setSelection(0)
+                binding?.subcategorySpinner?.prompt = subCategoryListFilterItem?.get(0)?.name
+                binding?.subcategorySpinner!!.setSelection(0)
 
                 viewModel?.getPriorityList(prioritySpinnerRetrofitCallback)
 
@@ -643,7 +645,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -653,7 +655,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -661,7 +663,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -669,13 +671,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -697,9 +699,9 @@ class UserFragment : Fragment() {
                     R.layout.row_chief_complaint_search_result,
                     response.body()?.responseContents!!
                 )
-                binding.autoCompleteTextViewAssignTo.threshold = 1
-                binding.autoCompleteTextViewAssignTo.setAdapter(adapter)
-                binding.autoCompleteTextViewAssignTo.showDropDown()
+                binding?.autoCompleteTextViewAssignTo?.threshold = 1
+                binding?.autoCompleteTextViewAssignTo?.setAdapter(adapter)
+                binding?.autoCompleteTextViewAssignTo?.showDropDown()
             }
 
             override fun onBadRequest(response: Response<VendorListResponseModel>) {
@@ -714,7 +716,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -724,7 +726,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -732,7 +734,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -740,13 +742,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -779,7 +781,7 @@ class UserFragment : Fragment() {
                     }
                 }
 
-                binding.vendorDetails.text =
+                binding?.vendorDetails?.text =
                     "$firstName / $age (Years) - $gender / $institution / $department"
             }
 
@@ -795,7 +797,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -805,7 +807,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -813,7 +815,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -821,13 +823,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -847,8 +849,8 @@ class UserFragment : Fragment() {
                     R.layout.row_chief_complaint_search_result,
                     response.body()?.responseContents!!
                 )
-                binding.autoCompleteTextViewAssetId.threshold = 1
-                binding.autoCompleteTextViewAssetId.setAdapter(responseContentAdapter)
+                binding?.autoCompleteTextViewAssetId?.threshold = 1
+                binding?.autoCompleteTextViewAssetId?.setAdapter(responseContentAdapter)
             }
 
             override fun onBadRequest(response: Response<AssetResponseModel>) {
@@ -862,7 +864,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -872,7 +874,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -880,7 +882,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -888,13 +890,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -923,13 +925,13 @@ class UserFragment : Fragment() {
                             filterInstitutionResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.institutionSpinner!!.adapter = adapter
+                    binding?.institutionSpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.institutionSpinner.prompt = listfilteritem?.get(0)?.name
-                binding.institutionSpinner!!.setSelection(1)
+                binding?.institutionSpinner?.prompt = listfilteritem?.get(0)?.name
+                binding?.institutionSpinner!!.setSelection(1)
 
                 viewModel?.getDepartment(facility_id!!, labDepartmentSpinnerRetrofitCallback)
 
@@ -947,7 +949,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -957,7 +959,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -965,7 +967,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -973,13 +975,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -1008,8 +1010,8 @@ class UserFragment : Fragment() {
                             filterDepartmentResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.departmentSpinner!!.adapter = adapter
-                    binding.departmentSpinner.setSelection(1)
+                    binding?.departmentSpinner!!.adapter = adapter
+                    binding?.departmentSpinner?.setSelection(1)
 
                 } catch (e: Exception) {
                 }
@@ -1039,7 +1041,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -1049,7 +1051,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -1057,7 +1059,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -1065,13 +1067,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -1104,7 +1106,7 @@ class UserFragment : Fragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -1114,7 +1116,7 @@ class UserFragment : Fragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -1122,7 +1124,7 @@ class UserFragment : Fragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -1130,13 +1132,13 @@ class UserFragment : Fragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {

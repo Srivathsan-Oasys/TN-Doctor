@@ -10,7 +10,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab_result.model.LabResultResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab_result.model.compare.LabCompareResp
 import com.oasys.digihealth.doctor.utils.Utils
@@ -70,7 +70,7 @@ class LabResultViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
     }
 
     fun getLabCompare(
@@ -110,7 +110,7 @@ class LabResultViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(LabResultCompareRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(LabResultCompareRetrofitCallback))
     }
 
     fun getLab_ResultByDate(
@@ -146,6 +146,6 @@ class LabResultViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
     }
 }

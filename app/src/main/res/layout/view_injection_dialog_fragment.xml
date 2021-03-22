@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_Injection_worklist.viewmodel.ViewDialogViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_Injection_worklist.viewmodel.ViewDialogViewModel" />-->
     </data>
 
     <LinearLayout
@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.cardview.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <androidx.cardview.widget.CardView
             android:id="@+id/manage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -329,10 +328,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"
-                        android:inputType="number"
                         android:backgroundTint="@color/hmis_background"
                         android:fontFamily="@font/poppins"
-                        android:hint="@string/administering_qty" />
+                        android:hint="@string/administering_qty"
+                        android:inputType="number" />
 
                 </LinearLayout>
 
@@ -348,14 +347,14 @@
                         android:id="@+id/insufficientQtyTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-                        android:layout_gravity="center"
-                        android:textColor="#FF0000"
-                        android:visibility="gone"
-                        android:text=" Batch Quantity is not Sufficient"
                         android:backgroundTint="@color/hmis_background"
-                        android:fontFamily="@font/poppins" />
+                        android:fontFamily="@font/poppins"
+                        android:text=" Batch Quantity is not Sufficient"
+                        android:textColor="#FF0000"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 

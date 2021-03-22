@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.resultdispatch.ui
 
-
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -24,7 +23,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.PdfviewBinding
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.PDFRequestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.SampleErrorResponse
@@ -35,7 +35,6 @@ import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.*
-
 
 class ResultPDFViewerActivity : Fragment() {
     private var PDFID: Int? = 0
@@ -75,45 +74,38 @@ class ResultPDFViewerActivity : Fragment() {
         viewModel = PDFViewModelFactory(
             requireActivity().application
         ).create(PDFViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
-        binding.headertext.text = "Result view"
-
+        binding?.headertext?.text = "Result view"
         val args = arguments
         if (args == null) {
-
             //  Toast.makeText(activity, "arguments is null ", Toast.LENGTH_LONG).show()
         } else {
-
             val bundle = this.arguments
             if (bundle != null) {
                 PDFID = bundle.getInt("pdfid")
-
             }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 runTimePermission()
-
             } else {
-
                 if (PDFID != 0) {
                     val requestpdf: Requestpdf = Requestpdf()
                     requestpdf.Id = listOf(PDFID)
-                    viewModel.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
+                    viewModel?.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
                 }
             }
         }
 
         binding!!.closeImageView.setOnClickListener {
-
             val labtemplatedialog = ResultDispatchActivity()
-
-            (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+            (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
         }
 
         return binding!!.root
@@ -135,7 +127,7 @@ class ResultPDFViewerActivity : Fragment() {
         } else {
             val requestpdf: Requestpdf = Requestpdf()
             requestpdf.Id = listOf(PDFID)
-            viewModel.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
+            viewModel?.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
             return
         }
     }
@@ -153,7 +145,7 @@ class ResultPDFViewerActivity : Fragment() {
                 // now, you have permission go ahead
                 val requestpdf: Requestpdf = Requestpdf()
                 requestpdf.Id = listOf(PDFID)
-                viewModel.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
+                viewModel?.GetPDFdownload(requestpdf, GetPDFRetrofitCallback)
 
             } else {
 
@@ -187,7 +179,7 @@ class ResultPDFViewerActivity : Fragment() {
         alert.show()
     }
 
-    val GetPDFRetrofitCallback = object {
+    val GetPDFRetrofitCallback = object : RetrofitCallback<ResponseBody> {
         override fun onSuccessfulResponse(responseBody: Response<ResponseBody>?) {
             //you can now get your file in the InputStream
             downloadZipFileTask = DownloadZipFileTask()
@@ -232,7 +224,6 @@ class ResultPDFViewerActivity : Fragment() {
         override fun onEverytime() {
             viewModel!!.progress.value = 8
         }
-
     }
 
     inner class DownloadZipFileTask :
@@ -243,9 +234,9 @@ class ResultPDFViewerActivity : Fragment() {
         }
 
         override fun onPostExecute(result: String?) {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
 
-            binding.pdfView!!.fromFile(destinationFile)
+            binding?.pdfView!!.fromFile(destinationFile)
                 .password(null)
                 .defaultPage(0)
                 .enableSwipe(true)
@@ -262,8 +253,6 @@ class ResultPDFViewerActivity : Fragment() {
                 context,
                 "Storage path: $destinationFile", Toast.LENGTH_LONG
             ).show()
-
-
         }
 
         override fun doInBackground(vararg params: ResponseBody?): String? {
@@ -271,7 +260,6 @@ class ResultPDFViewerActivity : Fragment() {
             return null
         }
     }
-
 
     private fun saveToDisk(body: ResponseBody, filename: String) {
         try {
@@ -295,5 +283,4 @@ class ResultPDFViewerActivity : Fragment() {
             e.printStackTrace()
         }
     }
-
 }

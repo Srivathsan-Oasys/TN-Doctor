@@ -10,14 +10,14 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.discharge_model.DischargeSummaryListResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.previous_model.DischargeSummaryPreviousResponseModel
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.revertresponse.RevertRequest
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.revertresponse.RevertResponseModel
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.SaveRequestModel
-import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_discharge_summary.model.save_model.SaveResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertRequest
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.nurse_desk.revertresponse.RevertResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveRequestModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.discharge_summary.model.save_model.SaveResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
@@ -37,15 +37,12 @@ class DischargeSummaryViewModel(
     private var department_UUID: Int? = 0
     var facility_id: Int? = 0
 
-
     init {
         userDetailsRoomRepository = UserDetailsRoomRepository(application)
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
         department_UUID = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         progress.value = 8
-
-
     }
 
     fun getDischargeSummaryDashBoardList(
@@ -69,7 +66,7 @@ class DischargeSummaryViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id, patientUuid, encounterUuid
 
-        ).enqueue(RetrofitMainCallback(dischargeAPICallBack))
+        )?.enqueue(RetrofitMainCallback(dischargeAPICallBack))
     }
 
     fun getDischargeSummaryTypeList(
@@ -86,7 +83,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(dischargeTypeAPICallBack))
+        )?.enqueue(RetrofitMainCallback(dischargeTypeAPICallBack))
     }
 
     fun getDischargeSummaryDeathType(dischargeDeathTypeAPICallBack: RetrofitCallback<ResDischargeDeathType>) {
@@ -101,7 +98,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(dischargeDeathTypeAPICallBack))
+        )?.enqueue(RetrofitMainCallback(dischargeDeathTypeAPICallBack))
     }
 
     fun getDischargeSummaryPreviousData(
@@ -120,7 +117,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, patientUuid!!, encounterUUID
-        ).enqueue(RetrofitMainCallback(dischargePrevDataAPICallBack))
+        )?.enqueue(RetrofitMainCallback(dischargePrevDataAPICallBack))
     }
 
     fun getDischargeSummaryDefaultTemplate(
@@ -137,7 +134,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(dischargeTemplateAPICallBack))
+        )?.enqueue(RetrofitMainCallback(dischargeTemplateAPICallBack))
     }
 
     fun getDischargeNoteTemplate(
@@ -156,7 +153,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
         return
     }
 
@@ -177,7 +174,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, reqDefaultTemplate
-        ).enqueue(RetrofitMainCallback(callbackSetDefaultTemplate))
+        )?.enqueue(RetrofitMainCallback(callbackSetDefaultTemplate))
     }
 
     fun getEncounter(
@@ -229,7 +226,7 @@ class DischargeSummaryViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId, revert
 
-        ).enqueue(RetrofitMainCallback(callbackRevert))
+        )?.enqueue(RetrofitMainCallback(callbackRevert))
 
 
     }
@@ -251,7 +248,7 @@ class DischargeSummaryViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, 427
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
@@ -273,7 +270,7 @@ class DischargeSummaryViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             saveRequest
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -297,7 +294,7 @@ class DischargeSummaryViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             saveRequest
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -331,6 +328,6 @@ class DischargeSummaryViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, AppConstants?.ACCEPT_LANGUAGE_EN,
             body
-        ).enqueue(RetrofitMainCallback(doctornameResponseCallback))
+        )?.enqueue(RetrofitMainCallback(doctornameResponseCallback))
     }
 }

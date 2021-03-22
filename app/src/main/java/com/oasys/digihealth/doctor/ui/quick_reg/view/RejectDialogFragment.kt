@@ -29,7 +29,7 @@ import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.SimpleRes
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.UserProfileResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.view_model.LabTestViewModel
 import com.oasys.digihealth.doctor.ui.quick_reg.view_model.LabTestViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.util.*

@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.FAV_TYPE_ID_LAB
 import com.oasys.digihealth.doctor.config.AppPreferences
@@ -80,7 +80,7 @@ class LabViewModel(
             facility_id!!,
             departmentID!!,
             FAV_TYPE_ID_LAB
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -102,7 +102,7 @@ class LabViewModel(
             facility_UUID!!,
             department_UUID!!,
             FAV_TYPE_ID_LAB
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -119,7 +119,7 @@ class LabViewModel(
         apiService?.getDuration(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 
@@ -166,7 +166,7 @@ class LabViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -199,7 +199,7 @@ class LabViewModel(
         apiService?.getLAbSearchResult(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(CodeSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(CodeSearchRetrofitCallBack))
         return
     }
 
@@ -234,7 +234,7 @@ class LabViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -270,7 +270,7 @@ class LabViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -294,7 +294,7 @@ class LabViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!
-        ).enqueue(RetrofitMainCallback(labToRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labToRetrofitCallback))
         return
 
     }
@@ -316,7 +316,7 @@ class LabViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             EmrRequestData
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -350,7 +350,7 @@ class LabViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -382,7 +382,7 @@ class LabViewModel(
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -408,7 +408,7 @@ class LabViewModel(
             templateId!!,
             AppConstants.FAV_TYPE_ID_LAB,
             department_UUID!!
-        ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         return
     }
 
@@ -451,7 +451,7 @@ class LabViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_UUID!!,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -502,7 +502,7 @@ class LabViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             labModifiyRequest
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }

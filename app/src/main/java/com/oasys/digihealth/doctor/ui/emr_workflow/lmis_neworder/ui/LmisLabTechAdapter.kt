@@ -254,7 +254,7 @@ class LmisLabTechAdapter(private val context: Activity) :
             ) {
                 val itemValue = parent?.getItemAtPosition(pos).toString()
                 if (responseContent!![position]!!.status) {
-                    val testcode = listfilterTestMethoditem?.get(pos).code!!
+                    val testcode = listfilterTestMethoditem?.get(pos)?.code!!
                     if (testcode == "Rapid Di") {
                         if (responseContent!![position]!!.code == "COVID") {
                             responseContent!![position]!!.TestMethodId =
@@ -366,7 +366,7 @@ class LmisLabTechAdapter(private val context: Activity) :
     }
 
     fun setadapterTypeValue(responseContents: List<GetReference?>?) {
-        typeNamesList = responseContents?.map { it.uuid!! to it.name!! }!!.toMap().toMutableMap()
+        typeNamesList = responseContents?.map { it?.uuid!! to it.name }!!.toMap().toMutableMap()
         for (i in responseContents.indices) {
             hashMapType[responseContents[i]!!.uuid] = i
         }
@@ -375,7 +375,7 @@ class LmisLabTechAdapter(private val context: Activity) :
 
     fun setadapterLocationValue(responseContents: List<LocationMasterX?>?) {
         toLocationMap =
-            responseContents?.map { it.uuid!! to it.location_name }!!.toMap().toMutableMap()
+            responseContents?.map { it?.uuid!! to it.location_name }!!.toMap().toMutableMap()
         for (i in responseContents.indices) {
             hashMapOrderToLocation[responseContents[i]!!.uuid] = i
         }
@@ -386,11 +386,11 @@ class LmisLabTechAdapter(private val context: Activity) :
         Log.i("", "" + responseContents)
         listfilterspecimanitem?.add(ResponseTestMethodContent())
         listfilterspecimanitem?.addAll((responseContents)!!)
-        listfilterspecimanitem?.get(0).name = "Select Specimen"
+        listfilterspecimanitem?.get(0)?.name = "Select Specimen"
         spectiumMap =
-            listfilterspecimanitem!!.map { it.uuid!! to it.name!! }.toMap().toMutableMap()
+            listfilterspecimanitem!!.map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
         for (i in listfilterspecimanitem!!.indices) {
-            hashMapSpeciumMap[listfilterspecimanitem!![i].uuid!!] = i
+            hashMapSpeciumMap[listfilterspecimanitem!![i]?.uuid!!] = i
         }
         notifyDataSetChanged()
     }
@@ -398,12 +398,12 @@ class LmisLabTechAdapter(private val context: Activity) :
     fun setadapterTestMethodValue(responseContents: List<ResponseTestMethodContent?>?) {
         listfilterTestMethoditem?.add(ResponseTestMethodContent())
         listfilterTestMethoditem?.addAll((responseContents)!!)
-        listfilterTestMethoditem?.get(0).name = "Select TestMethod"
+        listfilterTestMethoditem?.get(0)?.name = "Select TestMethod"
         testMethodMap =
-            listfilterTestMethoditem!!.map { it.uuid!! to it.name!! }.toMap().toMutableMap()
+            listfilterTestMethoditem!!.map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
 
         for (i in listfilterTestMethoditem!!.indices) {
-            hashMaptestMethodMap[listfilterTestMethoditem!![i].uuid!!] = i
+            hashMaptestMethodMap[listfilterTestMethoditem!![i]?.uuid!!] = i
         }
         notifyDataSetChanged()
     }
@@ -435,12 +435,13 @@ class LmisLabTechAdapter(private val context: Activity) :
         dropdownReferenceView.showDropDown()
         dropdownReferenceView.setOnItemClickListener { parent, _, pos, id ->
             val selectedPoi = parent.adapter.getItem(pos) as LabTestSpinnerresponseContent?
-            val check = responseContent!!.any { it!!.id == selectedPoi.uuid }
+            val check = responseContent!!.any { it!!.id == selectedPoi?.uuid }
             if (!check) {
-                dropdownReferenceView.setText(selectedPoi.name)
-                responseContent!![searchposition]!!.id = selectedPoi.uuid!!
+                dropdownReferenceView.setText(selectedPoi?.name)
+                responseContent!![searchposition]!!.id = selectedPoi?.uuid!!
                 responseContent!![searchposition]!!.labId = selectedPoi.uuid
-                responseContent!![searchposition]!!.to_department_id = selectedPoi.department_uuid!!
+                responseContent!![searchposition]!!.to_department_id =
+                    selectedPoi.department_uuid!!
                 responseContent!![searchposition]!!.labName = selectedPoi.name!!
                 responseContent!![searchposition]!!.code = selectedPoi.code!!
                 responseContent!![searchposition]!!.typeofmaster = selectedPoi.type!!

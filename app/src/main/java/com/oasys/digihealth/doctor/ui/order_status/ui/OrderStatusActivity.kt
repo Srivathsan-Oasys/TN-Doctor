@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.order_status.ui
 
-
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -22,6 +21,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityOrderStatusBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.order_status.model.*
 import com.oasys.digihealth.doctor.ui.order_status.view_model.OrderStatusViewModel
 import com.oasys.digihealth.doctor.ui.order_status.view_model.OrderStatusViewModelFactory
@@ -86,16 +86,16 @@ class OrderStatusActivity : Fragment() {
             requireActivity().application
         )
             .create(OrderStatusViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
-        binding.searchDrawerCardView.setOnClickListener {
-            binding.drawerLayout!!.openDrawer(GravityCompat.END)
+        binding?.searchDrawerCardView?.setOnClickListener {
+            binding?.drawerLayout!!.openDrawer(GravityCompat.END)
 
         }
-        binding.drawerLayout.drawerElevation = 0f
-        binding.drawerLayout.setScrimColor(
+        binding?.drawerLayout?.drawerElevation = 0f
+        binding?.drawerLayout?.setScrimColor(
             ContextCompat.getColor(
                 requireContext(),
                 android.R.color.transparent
@@ -109,36 +109,36 @@ class OrderStatusActivity : Fragment() {
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
         Log.i("", "" + facility_id)
         utils = Utils(requireContext())
-        binding.advanceSearchText.setOnClickListener {
+        binding?.advanceSearchText?.setOnClickListener {
 
-            if (binding.advanceSearchLayout.visibility == View.VISIBLE) {
-                binding.advanceSearchLayout.visibility = View.GONE
+            if (binding?.advanceSearchLayout?.visibility == View.VISIBLE) {
+                binding?.advanceSearchLayout?.visibility = View.GONE
             } else {
-                binding.advanceSearchLayout.visibility = View.VISIBLE
+                binding?.advanceSearchLayout?.visibility = View.VISIBLE
             }
         }
         linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.orderStatusRecyclerView!!.layoutManager = linearLayoutManager
+        binding?.orderStatusRecyclerView!!.layoutManager = linearLayoutManager
         mAdapter = OrderStatusAdapter(requireContext())
-        binding.orderStatusRecyclerView!!.adapter = mAdapter
+        binding?.orderStatusRecyclerView!!.adapter = mAdapter
         viewModel?.getOrderStatus(
             facility_id, currentPage,
             pageSize, true, quicksearch!!, pin!!, patientName!!, "", "", "", "",
             OrderStatusRetrofitCallBack
 
         )
-        binding.searchButton.setOnClickListener {
+        binding?.searchButton?.setOnClickListener {
 
-            if (!binding.calendarEditText!!.text.trim().toString().isEmpty()) {
+            if (!binding?.calendarEditText!!.text.trim().toString().isEmpty()) {
 
                 startDate = fromDateRev + "T00:01:00.000Z"
                 endDate = toDateRev + "T23:59:59.000Z"
             }
 
-            quicksearch = binding.qucikSearch.text.toString()
-            pin = binding.quickPin.text.toString()
-            patientName = binding.patientName.text.toString()
+            quicksearch = binding?.qucikSearch?.text?.toString()
+            pin = binding?.quickPin?.text?.toString()
+            patientName = binding?.patientName?.text?.toString()
             mAdapter!!.clearAll()
             pageSize = 10
             currentPage = 0
@@ -149,11 +149,11 @@ class OrderStatusActivity : Fragment() {
                 orderStatusUuid.toString(),
                 OrderStatusRetrofitCallBack
             )
-            binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+            binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
 
         }
 
-        binding.clear.setOnClickListener {
+        binding?.clear?.setOnClickListener {
             clearAllFields()
 
             initViews()
@@ -161,7 +161,7 @@ class OrderStatusActivity : Fragment() {
 
         initViews()
 
-        binding.orderStatusRecyclerView.addOnScrollListener(object :
+        binding?.orderStatusRecyclerView?.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -184,7 +184,7 @@ class OrderStatusActivity : Fragment() {
 
 
         //Mani Work
-        binding.calendarEditText!!.setOnClickListener {
+        binding?.calendarEditText!!.setOnClickListener {
 
             Toast.makeText(context, "Select Start Date", Toast.LENGTH_LONG).show()
             val c: Calendar = Calendar.getInstance()
@@ -232,7 +232,7 @@ class OrderStatusActivity : Fragment() {
                                 dayOfMonth1
                             )
 
-                            binding.calendarEditText!!.setText(fromDate + "-" + toDate)
+                            binding?.calendarEditText!!.setText(fromDate + "-" + toDate)
 
                         },
                         mYear!!,
@@ -266,30 +266,25 @@ class OrderStatusActivity : Fragment() {
     }
 
     private fun clearAllFields() {
-        binding.qucikSearch.setText("")
-        binding.quickPin.setText("")
-        binding.patientName.setText("")
-        binding.testName.setSelection(0)
-        binding.orderNumber.setText("")
-        binding.orderStatus.setSelection(0)
+        binding?.qucikSearch?.setText("")
+        binding?.quickPin?.setText("")
+        binding?.patientName?.setText("")
+        binding?.testName?.setSelection(0)
+        binding?.orderNumber?.setText("")
+        binding?.orderStatus?.setSelection(0)
     }
 
     private fun initViews() {
         val sdf = SimpleDateFormat("yyyy-MM-dd")
-
         val formatter = SimpleDateFormat("dd-MM-yyyy")
-
-        binding.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
-
+        binding?.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
         //startDate = utils!!.getAgedayDifferent(1)+ "T23:59:59.000Z"
-
         //endDate = sdf.format(Date())+"T23:59:59.000Z"
     }
 
 
     fun spinnerSelection() {
-
-        binding.testName!!.onItemSelectedListener =
+        binding?.testName!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -311,7 +306,7 @@ class OrderStatusActivity : Fragment() {
                 }
             }
 
-        binding.orderStatus!!.onItemSelectedListener =
+        binding?.orderStatus!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     val itemValue = parent!!.getItemAtPosition(0).toString()
@@ -332,28 +327,27 @@ class OrderStatusActivity : Fragment() {
                     //Log.e("sev",""+selectseverityUuid)
                 }
             }
-
     }
 
 
-    val OrderStatusRetrofitCallBack = object {
+    val OrderStatusRetrofitCallBack = object : RetrofitCallback<OrderStatusResponseModel> {
         override fun onSuccessfulResponse(response: Response<OrderStatusResponseModel>) {
-            binding.completedCount.setText("Completed Count " + response.body()?.completedCount!!)
-            binding.pendingCount.setText("Pending Count " + response.body()?.pendingCount!!)
+            binding?.completedCount?.text = "Completed Count " + response.body()?.completedCount!!
+            binding?.pendingCount?.text = "Pending Count " + response.body()?.pendingCount!!
             if (response.body()?.responseContents?.isNotEmpty()!!) {
                 TOTAL_PAGES =
                     Math.ceil(response.body()!!.totalRecords.toDouble() / 10).toInt()
                 if (response.body()!!.responseContents.isNotEmpty()) {
-                    binding.progressbar!!.setVisibility(View.GONE)
+                    binding?.progressbar!!.visibility = View.GONE
                     mAdapter!!.addAll(response.body()!!.responseContents)
                     if (currentPage < TOTAL_PAGES) {
                         isLoadingPaginationAdapterCallback = false
-                        binding.progressbar!!.setVisibility(View.VISIBLE)
+                        binding?.progressbar!!.visibility = View.VISIBLE
                         mAdapter!!.addLoadingFooter()
                         isLoading = true
                         isLastPage = false
                     } else {
-                        binding.progressbar!!.setVisibility(View.GONE)
+                        binding?.progressbar!!.visibility = View.GONE
                         mAdapter!!.removeLoadingFooter()
                         isLoading = false
                         isLastPage = true
@@ -361,14 +355,14 @@ class OrderStatusActivity : Fragment() {
 
 
                 } else {
-                    binding.progressbar!!.setVisibility(View.GONE)
+                    binding?.progressbar!!.visibility = View.GONE
                     mAdapter!!.removeLoadingFooter()
                     isLoading = false
                     isLastPage = true
                 }
 
                 if (response.body()!!.totalRecords < 11) {
-                    binding.progressbar!!.setVisibility(View.GONE)
+                    binding?.progressbar!!.visibility = View.GONE
                 }
 
 
@@ -381,7 +375,7 @@ class OrderStatusActivity : Fragment() {
 
 
         override fun onBadRequest(response: Response<OrderStatusResponseModel>) {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
             isLoadingPaginationAdapterCallback = false
             val gson = GsonBuilder().create()
             val responseModel: OrderStatusResponseModel
@@ -392,13 +386,13 @@ class OrderStatusActivity : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -409,7 +403,7 @@ class OrderStatusActivity : Fragment() {
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -418,7 +412,7 @@ class OrderStatusActivity : Fragment() {
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -426,24 +420,24 @@ class OrderStatusActivity : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
             isLoadingPaginationAdapterCallback = false
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
             isLoadingPaginationAdapterCallback = false
             viewModel!!.progress.value = 8
         }
     }
 
-    val patientSearchNextRetrofitCallBack = object {
+    val patientSearchNextRetrofitCallBack = object : RetrofitCallback<OrderStatusResponseModel> {
         override fun onSuccessfulResponse(response: Response<OrderStatusResponseModel>) {
             if (response.body()?.responseContents!!.isNotEmpty()) {
 
@@ -455,7 +449,7 @@ class OrderStatusActivity : Fragment() {
                 println("testing for two  = $currentPage--$TOTAL_PAGES")
 
                 if (currentPage < TOTAL_PAGES) {
-                    binding.progressbar!!.setVisibility(View.VISIBLE)
+                    binding?.progressbar!!.visibility = View.VISIBLE
                     mAdapter?.addLoadingFooter()
                     isLoading = true
                     isLastPage = false
@@ -469,7 +463,7 @@ class OrderStatusActivity : Fragment() {
                 }
             } else {
                 println("testing for six  = $currentPage--$TOTAL_PAGES")
-                binding.progressbar!!.setVisibility(View.GONE)
+                binding?.progressbar!!.visibility = View.GONE
                 mAdapter?.removeLoadingFooter()
                 isLoading = false
                 isLastPage = true
@@ -477,7 +471,7 @@ class OrderStatusActivity : Fragment() {
         }
 
         override fun onBadRequest(response: Response<OrderStatusResponseModel>?) {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
             isLoadingPaginationAdapterCallback = false
             mAdapter?.removeLoadingFooter()
             isLoading = false
@@ -489,7 +483,7 @@ class OrderStatusActivity : Fragment() {
             viewModel!!.progress.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -498,7 +492,7 @@ class OrderStatusActivity : Fragment() {
             viewModel!!.progress.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -507,22 +501,22 @@ class OrderStatusActivity : Fragment() {
             viewModel!!.progress.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
         }
     }
 
 
-    val testNameRetrofitCallback = object {
+    val testNameRetrofitCallback = object : RetrofitCallback<TestNameResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<TestNameResponseModel>?) {
 
             testNAmeAllData.add(TestNameResponseContent())
@@ -536,7 +530,7 @@ class OrderStatusActivity : Fragment() {
                     testNameSpinnerMap.values.toMutableList()
                 )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.testName!!.adapter = adapter
+            binding?.testName!!.adapter = adapter
 
             viewModel?.getOrderStatusSpinner(facility_id, orderStatusRetrofitCallback)
 
@@ -552,24 +546,23 @@ class OrderStatusActivity : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
             }
-
         }
 
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -577,7 +570,7 @@ class OrderStatusActivity : Fragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -585,13 +578,13 @@ class OrderStatusActivity : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -601,7 +594,7 @@ class OrderStatusActivity : Fragment() {
     }
 
 
-    val orderStatusRetrofitCallback = object {
+    val orderStatusRetrofitCallback = object : RetrofitCallback<OrderStatusSpinnerResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<OrderStatusSpinnerResponseModel>?) {
 
             ordStatusAllData.add(OrderStatusSpinnerresponseContent())
@@ -615,7 +608,7 @@ class OrderStatusActivity : Fragment() {
                     orderStatusSpinnerMap.values.toMutableList()
                 )
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.orderStatus!!.adapter = adapter
+            binding?.orderStatus!!.adapter = adapter
 
         }
 
@@ -629,13 +622,13 @@ class OrderStatusActivity : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -646,7 +639,7 @@ class OrderStatusActivity : Fragment() {
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -654,7 +647,7 @@ class OrderStatusActivity : Fragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -662,13 +655,13 @@ class OrderStatusActivity : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -676,25 +669,4 @@ class OrderStatusActivity : Fragment() {
         }
 
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView
 import androidx.core.content.ContextCompat
@@ -21,7 +24,10 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.callbacks.FragmentBackClick
-import com.oasys.digihealth.doctor.component.extention.*
+import com.oasys.digihealth.doctor.component.extention.hide
+import com.oasys.digihealth.doctor.component.extention.isvisible
+import com.oasys.digihealth.doctor.component.extention.show
+import com.oasys.digihealth.doctor.component.extention.slideDown
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentLabChildBinding
@@ -51,8 +57,8 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.GetToLocation
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.lab.ui.PrevLabFragment
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethod
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethodContent
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import kotlinx.android.synthetic.main.fragment_lab_child_new.*
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -806,20 +812,20 @@ class LabChildFragmentNew : Fragment(), LabFavouriteFragment.FavClickedListener,
     }
     val getTestethdCallBack = object : RetrofitCallback<ResponseTestMethod> {
         override fun onSuccessfulResponse(response: Response<ResponseTestMethod>) {
-            var data = ResponseTestMethodContent()
+            val data = ResponseTestMethodContent()
             data.name = "SelectMethod"
             data.uuid = 0
             testMethodListFilter?.add(data)
-            response.body().responseContents.let { testMethodListFilter?.addAll(it) }
+            response.body()?.responseContents?.let { testMethodListFilter?.addAll(it) }
             testMethodList =
-                testMethodListFilter?.map { it.uuid!! to it.name!! }!!.toMap()
+                testMethodListFilter?.map { it?.uuid!! to it.name!! }!!.toMap()
                     .toMutableMap()
             testMethodHashMap.clear()
             testMethodNameHashMap.clear()
             for (i in testMethodListFilter?.indices!!) {
                 testMethodHashMap[testMethodListFilter?.get(i)!!.uuid!!] = i
                 testMethodNameHashMap[testMethodListFilter?.get(i)!!.uuid!!] =
-                    testMethodListFilter?.get(i).name!!
+                    testMethodListFilter?.get(i)?.name!!
             }
             labAdapter!!.setadapterTestMethodValue(testMethodListFilter)
             viewModel?.getMasterLocation(getMasterLoctionRetrofitCallback, facility_id)

@@ -7,11 +7,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
@@ -67,8 +67,8 @@ class VitalsViewModel(
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.getVitalsTemplatet(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
-            faciltyID!!, departmentId!!, AppConstants.TEM_TYPE_ID_VITALS, userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(vitalsTemplateRetrofitCallBack))
+            faciltyID!!, departmentId!!, AppConstants.TEM_TYPE_ID_VITALS, userDataStoreBean.uuid
+        )?.enqueue(RetrofitMainCallback(vitalsTemplateRetrofitCallBack))
         return
     }
 
@@ -104,7 +104,7 @@ class VitalsViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             faciltyID!!, body
-        ).enqueue(RetrofitMainCallback(umoListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(umoListRetrofitCallback))
         return
 
     }
@@ -181,7 +181,7 @@ class VitalsViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -203,7 +203,7 @@ class VitalsViewModel(
         apiService?.saveVitals(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, faciltyID!!, saveData
-        ).enqueue(RetrofitMainCallback(vitalsSaveRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(vitalsSaveRetrofitCallback))
         return
 
     }
@@ -226,7 +226,7 @@ class VitalsViewModel(
         apiService?.getVitals(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, faciltyID!!
-        ).enqueue(RetrofitMainCallback(vitalSearchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(vitalSearchRetrofitCallback))
         return
 
     }
@@ -253,7 +253,7 @@ class VitalsViewModel(
             templateId!!,
             AppConstants.FAV_TYPE_ID_Vitual,
             departmentUuid!!
-        ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         return
     }
 
@@ -285,7 +285,7 @@ class VitalsViewModel(
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -306,7 +306,7 @@ class VitalsViewModel(
             department_UUID!!,
             facility_UUID!!,
             AppConstants.FAV_TYPE_ID_Vitual
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -419,7 +419,7 @@ class VitalsViewModel(
             facility_uuid,
             patientUuid,
             departmentUuid
-        ).enqueue(RetrofitMainCallback(getPrevPatientVitalRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getPrevPatientVitalRespRetrofitCallback))
     }
 }
 

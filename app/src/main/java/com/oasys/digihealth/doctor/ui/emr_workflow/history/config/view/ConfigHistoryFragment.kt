@@ -33,7 +33,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.history.config.view_model.His
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.config.view_model.HistoryConfigViewModelFactory
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.model.response.HistoryResponce
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.EmrWorkFlowResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

@@ -77,7 +77,7 @@
                             android:focusableInTouchMode="true"
                             android:orientation="vertical">
 
-                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                                 style="@style/MobileTitleCommonTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                                 style="@style/MobileTitleCommonTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"

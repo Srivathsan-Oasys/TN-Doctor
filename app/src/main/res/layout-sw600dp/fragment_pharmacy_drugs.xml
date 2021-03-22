@@ -6,113 +6,115 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDrugsViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDrugsViewModel" />-->
     </data>
 
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+
             <LinearLayout
-                android:id="@+id/mainLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                            <androidx.core.widget.NestedScrollView
-                                android:id="@+id/nestedScrollView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:fillViewport="true">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/view" />
 
+                    <LinearLayout
+                        android:id="@+id/listLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="2dp"
-                                        android:background="@color/view" />
-
-                                    <LinearLayout
-                                        android:id="@+id/listLayout"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="45dp"
-                                        android:gravity="center"
-                                        android:orientation="horizontal"
-                                        android:weightSum="3">
-
-                                        <TextView
-                                            android:id="@+id/txtDrugCode"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="0.8"
-                                            android:fontFamily="@font/poppins_bold"
-                                            android:gravity="center"
-                                            android:text="Drug Code"
-                                            android:textColor="@color/black"
-                                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/txtDrugCode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.8"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text="Drug Code"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
 
-                                        <View
-                                            android:layout_width="2dp"
-                                            android:layout_height="match_parent"
-                                            android:background="@color/view" />
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/view" />
 
-                                        <TextView
-                                            android:id="@+id/tvDrugName"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1.5"
-                                            android:fontFamily="@font/poppins_bold"
-                                            android:gravity="center"
-                                            android:text="Drug Name"
-                                            android:textColor="@color/black"
-                                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tvDrugName"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.5"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text="Drug Name"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                                        <View
-                                            android:layout_width="2dp"
-                                            android:layout_height="match_parent"
-                                            android:background="@color/view" />
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/view" />
 
-                                        <TextView
-                                            android:id="@+id/tvCount"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="0.7"
-                                            android:fontFamily="@font/poppins_bold"
-                                            android:gravity="center"
-                                            android:text="Count"
-                                            android:textColor="@color/black"
-                                            android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/tvCount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:fontFamily="@font/poppins_bold"
+                            android:gravity="center"
+                            android:text="Count"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-                                        <View
-                                            android:layout_width="2dp"
-                                            android:layout_height="match_parent"
-                                            android:background="@color/view" />
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/view" />
 
-                                    </LinearLayout>
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="2dp"
-                                        android:background="@color/view" />
+                    </LinearLayout>
 
-                                    <androidx.recyclerview.widget.RecyclerView
-                                        android:id="@+id/drugRecyclerView"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:scrollbars="horizontal"
-                                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/view" />
 
-                                </LinearLayout>
-
-                            </LinearLayout>
-                            </androidx.core.widget.NestedScrollView>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/drugRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 </LinearLayout>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
 </layout>

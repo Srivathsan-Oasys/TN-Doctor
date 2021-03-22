@@ -5,13 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.resultdispatch.model.ResponseResultDispatch
 import com.oasys.digihealth.doctor.ui.resultdispatch.request.RequestDispatchSearch
 import com.oasys.digihealth.doctor.utils.Utils
-
 
 class ResultDispatchViewModel(
     application: Application?
@@ -23,7 +24,7 @@ class ResultDispatchViewModel(
         requestResultdiapatch: RequestDispatchSearch,
         resultdispatchResponseRetrofitCallback: RetrofitCallback<ResponseResultDispatch>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -39,14 +40,14 @@ class ResultDispatchViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
 
             requestResultdiapatch
-        ).enqueue(RetrofitMainCallback(resultdispatchResponseRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(resultdispatchResponseRetrofitCallback))
     }
 
     fun getresultdispatchsecond(
         requestResultdiapatch: RequestDispatchSearch,
         secondresultdispatchResponseRetrofitCallback: RetrofitCallback<ResponseResultDispatch>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -60,11 +61,9 @@ class ResultDispatchViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             AppConstants.ACCEPT_LANGUAGE_EN,
-
             requestResultdiapatch
-        ).enqueue(RetrofitMainCallback(secondresultdispatchResponseRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(secondresultdispatchResponseRetrofitCallback))
     }
-
 
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
@@ -72,20 +71,13 @@ class ResultDispatchViewModel(
     var progress = MutableLiveData<Int>()
     var errorText = MutableLiveData<String>()
 
-
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
-
     var facility_id: Int? = 0
-
     var appPreferences: AppPreferences? = null
 
-
     init {
-
         userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
-
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
-
         //progress.value = 8
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
     }

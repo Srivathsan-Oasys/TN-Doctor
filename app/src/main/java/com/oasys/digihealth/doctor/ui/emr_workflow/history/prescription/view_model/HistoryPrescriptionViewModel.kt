@@ -7,11 +7,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.model.duration.DurationResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.prescription.model.PrescriptionHistoryResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
@@ -73,7 +73,7 @@ class HistoryPrescriptionViewModel(
         apiService?.getHistoryPrescription(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(prevPrescriptionrecordsRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(prevPrescriptionrecordsRetrofitCallback))
     }
 
     fun getDuration(getDurationRetrofitCallBack: RetrofitCallback<DurationResponseModel>) {
@@ -89,7 +89,7 @@ class HistoryPrescriptionViewModel(
         apiService?.getDuration(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 

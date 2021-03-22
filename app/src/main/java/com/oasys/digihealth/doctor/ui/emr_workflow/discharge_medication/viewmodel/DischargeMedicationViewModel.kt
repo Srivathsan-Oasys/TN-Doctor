@@ -6,11 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.*
@@ -55,7 +55,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             facility_UUID!!,
             departmentID!!,
             AppConstants.FAV_TYPE_ID_PRESCRIPTION
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -76,7 +76,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             facility_UUID!!,
             department_UUID!!,
             AppConstants.FAV_TYPE_ID_PRESCRIPTION
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -113,7 +113,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -151,7 +151,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(instructionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(instructionRetrofitCallback))
         return
 
     }
@@ -187,7 +187,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -224,7 +224,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -258,7 +258,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
         return
 
     }
@@ -284,7 +284,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             emrPrescriptionRequestModel
-        ).enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
         return
 
 
@@ -320,7 +320,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -354,7 +354,7 @@ class DischargeMedicationViewModel(application: Application) : AndroidViewModel(
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 

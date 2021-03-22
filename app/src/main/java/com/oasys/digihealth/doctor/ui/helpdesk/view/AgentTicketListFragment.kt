@@ -31,11 +31,13 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityTicketsBinding
-import com.oasys.digihealth.doctor.ui.helpdesk.model.*
-import com.oasys.digihealth.doctor.ui.helpdesk.view.*
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.helpdesk.model.TicketCountResponseModel
+import com.oasys.digihealth.doctor.ui.helpdesk.model.TicketListResponseContent
+import com.oasys.digihealth.doctor.ui.helpdesk.model.TicketListResponseModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.TicketsViewModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.TicketsViewModelFactory
-import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.utils.Utils
 import org.json.JSONException
 import org.json.JSONObject
@@ -98,20 +100,20 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
             requireActivity().application
         )
             .create(TicketsViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         val searchText =
-            binding.searchView.findViewById(R.id.search_src_text) as TextView
+            binding?.searchView?.findViewById(R.id.search_src_text) as TextView
         val tf = ResourcesCompat.getFont(requireContext(), R.font.poppins)
         searchText.typeface = tf
 
-        binding.searchDrawerCardView.setOnClickListener {
-            binding.drawerLayout!!.openDrawer(GravityCompat.END)
+        binding?.searchDrawerCardView?.setOnClickListener {
+            binding?.drawerLayout!!.openDrawer(GravityCompat.END)
         }
-        binding.drawerLayout.drawerElevation = 0f
-        binding.drawerLayout.setScrimColor(
+        binding?.drawerLayout?.drawerElevation = 0f
+        binding?.drawerLayout?.setScrimColor(
             ContextCompat.getColor(
                 requireContext(),
                 android.R.color.transparent
@@ -122,62 +124,62 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
             AppConstants.SHARE_PREFERENCE_NAME
         )
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
         loginType = appPreferences?.getString(AppConstants.LOGINTYPE)!!
-        userUUID = userDataStoreBean.uuid.toString()!!
+        userUUID = userDataStoreBean?.uuid.toString()
 
         callBack = this
 
         gridLayoutManager =
             GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
-        binding.ticketsRecyclerView!!.layoutManager = gridLayoutManager
+        binding?.ticketsRecyclerView!!.layoutManager = gridLayoutManager
         ticketListAdpater = TicketsListAdapter(requireContext(), ArrayList(), callBack!!)
-        binding.ticketsRecyclerView!!.adapter = ticketListAdpater
+        binding?.ticketsRecyclerView!!.adapter = ticketListAdpater
 
         gridLayoutManager =
             GridLayoutManager(requireContext(), 1, GridLayoutManager.VERTICAL, false)
-        binding.countRecyclerView!!.layoutManager = gridLayoutManager
+        binding?.countRecyclerView!!.layoutManager = gridLayoutManager
         countListAdapter = CountListAdapter(requireContext(), ArrayList())
-        binding.countRecyclerView!!.adapter = countListAdapter
+        binding?.countRecyclerView!!.adapter = countListAdapter
 
-        binding.clear!!.setOnClickListener {
+        binding?.clear!!.setOnClickListener {
 
         }
-        binding.countLayout.setOnClickListener {
-            if (binding.imgCountListArrow.tag.equals("close")!!) {
-                binding.countRecyclerView!!.visibility = View.VISIBLE
-                binding.imgCountListArrow.tag = "open"
-                binding.imgCountListArrow.setImageResource(R.drawable.ic_up_arrow_black)
+        binding?.countLayout?.setOnClickListener {
+            if (binding?.imgCountListArrow?.tag?.equals("close")!!) {
+                binding?.countRecyclerView?.visibility = View.VISIBLE
+                binding?.imgCountListArrow?.tag = "open"
+                binding?.imgCountListArrow?.setImageResource(R.drawable.ic_up_arrow_black)
             } else {
-                binding.countRecyclerView!!.visibility = View.GONE
-                binding.imgCountListArrow.tag = "close"
-                binding.imgCountListArrow.setImageResource(R.drawable.ic_down_arrow_black)
+                binding?.countRecyclerView!!.visibility = View.GONE
+                binding?.imgCountListArrow?.tag = "close"
+                binding?.imgCountListArrow?.setImageResource(R.drawable.ic_down_arrow_black)
             }
         }
 
-        binding.addNew!!.setOnClickListener {
+        binding?.addNew!!.setOnClickListener {
             val op = AgentNewTicketFragment()
             val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
             fragmentTransaction?.replace(R.id.landfragment, op)
             fragmentTransaction?.commit()
         }
 
-        binding.search!!.setOnClickListener {
-            binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+        binding?.search!!.setOnClickListener {
+            binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
             ticketListAdpater!!.clearAll()
             countListAdapter!!.clearAll()
             getTicketList()
         }
 
-        binding.searchView.setOnQueryTextListener(object :
+        binding?.searchView?.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             @SuppressLint("RestrictedApi")
             override fun onQueryTextSubmit(query: String): Boolean {
                 Log.e("onQueryTextSubmit", query)
                 callSearch(query)
-                binding.searchView.clearFocus()
+                binding?.searchView?.clearFocus()
                 return true
             }
 
@@ -194,7 +196,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
 
         })
 
-        binding.download!!.setOnClickListener {
+        binding?.download!!.setOnClickListener {
             Log.e("download button", "inside")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 runTimePermissionWriteExternalStorage()
@@ -265,7 +267,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
     }
 
     private fun createBitmap() {
-        var viewLayout = binding.nestedScrollView
+        var viewLayout = binding?.nestedScrollView
         viewLayout!!.isDrawingCacheEnabled = true
         viewLayout.buildDrawingCache()
         var height: Int = 2000
@@ -353,11 +355,8 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         } catch (e: JSONException) {
             e.printStackTrace()
         }
-
         viewModel?.getTicketCount(jsonBody, ticketCountResponseRetrofitCallback)
-
     }
-
 
     private fun getTicketList() {
         val jsonBody = JSONObject()
@@ -378,7 +377,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
 
     }
 
-    val ticketCountResponseRetrofitCallback = object {
+    val ticketCountResponseRetrofitCallback = object : RetrofitCallback<TicketCountResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<TicketCountResponseModel>?) {
             countListAdapter!!.clearAll()
             var responsedata = Gson().toJson(responseBody?.body()?.responseContents)
@@ -396,13 +395,13 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -412,7 +411,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -420,7 +419,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -428,13 +427,13 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -444,23 +443,23 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
     }
 
 
-    val ticketListResponseRetrofitCallback = object {
+    val ticketListResponseRetrofitCallback = object : RetrofitCallback<TicketListResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<TicketListResponseModel>?) {
 
             var responsedata = Gson().toJson(responseBody?.body()?.responseContents)
             Log.e("ticketList", "" + responsedata)
             listData = null
             listData = responseBody?.body()?.responseContents!!
-            binding.txtTotalCount.text = responseBody.body()?.totalRecords.toString()
+            binding?.txtTotalCount?.text = responseBody.body()?.totalRecords.toString()
             if (responseBody.body()?.responseContents?.isNotEmpty()!!) {
                 Log.e("list size", "" + responseBody.body()?.responseContents?.size)
                 ticketListAdpater!!.clearAll()
                 ticketListAdpater!!.addAll(responseBody.body()!!.responseContents!!)
-                binding.progressbar!!.visibility = View.GONE
+                binding?.progressbar!!.visibility = View.GONE
 
             } else {
                 Toast.makeText(requireContext(), "No records found", Toast.LENGTH_LONG).show()
-                binding.progressbar!!.visibility = View.GONE
+                binding?.progressbar!!.visibility = View.GONE
                 ticketListAdpater!!.clearAll()
 
             }
@@ -479,13 +478,13 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -495,7 +494,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -503,7 +502,7 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -511,13 +510,13 @@ class AgentTicketListFragment : Fragment(), HelpDeskCallback {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {

@@ -5,8 +5,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.SurgeryInstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.GetLocationRequest
@@ -41,10 +43,10 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
-            jsonBody.put("user_uuid", userDataStoreBean.uuid!!)
+            jsonBody.put("user_uuid", userDataStoreBean?.uuid!!)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -58,11 +60,11 @@ class InstituteViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        println("AppConstantsBEARER_AUTqewfregtry5= ${AppConstants.BEARER_AUTH + userDataStoreBean.access_token}")
+        println("AppConstantsBEARER_AUTqewfregtry5= ${AppConstants.BEARER_AUTH + userDataStoreBean?.access_token}")
 
         apiService?.getOfficeList(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             body
         )?.enqueue(RetrofitMainCallback(officeRetrofitCallBack))
         return
@@ -78,11 +80,11 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("health_office_uuid", selectedItemID)
-            jsonBody.put("Id", userDataStoreBean.uuid!!)
+            jsonBody.put("Id", userDataStoreBean?.uuid!!)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -96,8 +98,8 @@ class InstituteViewModel(
         val apiService = aiiceApplication.getRetrofitService()
 
         apiService?.getInstitutionList(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             body
         )?.enqueue(RetrofitMainCallback(instituteRetrofitCallBack))
         return
@@ -113,11 +115,11 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facility_uuid", facilitylevelID)
-            jsonBody.put("Id", userDataStoreBean.uuid!!)
+            jsonBody.put("Id", userDataStoreBean?.uuid!!)
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -131,8 +133,8 @@ class InstituteViewModel(
         val apiService = aiiceApplication.getRetrofitService()
 
         apiService?.getDepartmentList(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             body
         )?.enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
         return
@@ -149,7 +151,7 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facility_uuid", facilitylevelID)
@@ -169,7 +171,7 @@ class InstituteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             body
-        ).enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
         return
     }
 
@@ -178,11 +180,11 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
         try {
-            jsonBody.put("userId", userDataStoreBean.uuid!!.toString())
+            jsonBody.put("userId", userDataStoreBean?.uuid!!.toString())
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -196,7 +198,7 @@ class InstituteViewModel(
         apiService?.getFaciltyCheck(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, body
-        ).enqueue(RetrofitMainCallback(facilityCallback))
+        )?.enqueue(RetrofitMainCallback(facilityCallback))
     }
 
 
@@ -210,7 +212,7 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facility_uuid", facility)
@@ -235,8 +237,8 @@ class InstituteViewModel(
         val apiService = aiiceApplication.getRetrofitService()
 
         apiService?.getLocationMasterLogin(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!, facility,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!, facility,
             request
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
@@ -251,7 +253,7 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         val jsonBody = JSONObject()
@@ -279,7 +281,7 @@ class InstituteViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             body
-        ).enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(departmentRetrofitCallBack))
         return
 
     }
@@ -293,7 +295,7 @@ class InstituteViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("facility_uuid", facility)
@@ -311,8 +313,8 @@ class InstituteViewModel(
         val apiService = aiiceApplication.getRetrofitService()
 
         apiService?.getRmisLocationMaster(
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!, facility,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!, facility,
             body
         )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 

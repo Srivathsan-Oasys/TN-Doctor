@@ -74,7 +74,7 @@
                         android:layout_marginTop="5dp"
                         android:orientation="vertical">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/labelName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                             android:textColor="@color/navColor"
                             android:textSize="@dimen/dr_medium_text" />
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/labelVitals"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -118,7 +118,7 @@
                             android:textColor="@color/navColor"
                             android:textSize="@dimen/dr_medium_text" />
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/labelOrder"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

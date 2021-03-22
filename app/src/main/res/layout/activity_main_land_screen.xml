@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.landingscreen.MainLandViewModel" />
+            type="com.oasys.digihealth.doctor.ui.home.HomeViewModel" />
     </data>
 
 

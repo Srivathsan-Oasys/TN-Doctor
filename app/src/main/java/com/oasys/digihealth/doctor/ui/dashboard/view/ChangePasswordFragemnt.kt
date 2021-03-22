@@ -13,17 +13,13 @@ import androidx.lifecycle.Observer
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.R
-import com.oasys.digihealth.doctor.config.AppConstants
-import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogChangePasswordBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.ChangePasswordOTPResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.model.PasswordChangeResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.ChangePasswordViewModel
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.ChangePasswordViewModelFactory
-import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 
@@ -69,7 +65,7 @@ class ChangePasswordFragemnt : DialogFragment() {
         val facility_uuid = appPreferences?.getInt(AppConstants.FACILITY_UUID)
 
         viewModel!!.errorText.observe(
-            this.activity!!,
+            this.requireActivity(),
             Observer { toastMessage ->
                 //utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
                 Toast.makeText(activity, toastMessage, Toast.LENGTH_LONG).show()
@@ -82,10 +78,11 @@ class ChangePasswordFragemnt : DialogFragment() {
         binding?.sendOTPButton?.setOnClickListener {
             viewModel?.getOtp(
                 userDataStoreBean?.user_name.toString(),
-                facility_uuid!!,otpRetrofitCallBack)
+                facility_uuid!!, otpRetrofitCallBack
+            )
         }
 
-        binding!!.newPassword!!.addTextChangedListener(object : TextWatcher {
+        binding!!.newPassword.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
@@ -95,19 +92,19 @@ class ChangePasswordFragemnt : DialogFragment() {
 
             override fun afterTextChanged(s: Editable) {
 
-                val datasize=s.trim().length
+                val datasize = s.trim().length
 
 
-                if(datasize >= 6){
-                    binding!!.newPassword!!.error=null
-                }
-                else{
-                    binding!!.newPassword!!.error="Please enter minimum 6 chracters at least 1 number and 1 Alphectics"
+                if (datasize >= 6) {
+                    binding!!.newPassword.error = null
+                } else {
+                    binding!!.newPassword.error =
+                        "Please enter minimum 6 chracters at least 1 number and 1 Alphectics"
                 }
             }
         })
 
-        binding!!.confirmPassword!!.addTextChangedListener(object : TextWatcher {
+        binding!!.confirmPassword.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
@@ -116,13 +113,13 @@ class ChangePasswordFragemnt : DialogFragment() {
 
             override fun afterTextChanged(s: Editable) {
 
-                val datasize=s.trim().length
+                val datasize = s.trim().length
 
-                if(datasize >= 6){
-                    binding!!.confirmPassword!!.error=null
-                }
-                else{
-                    binding!!.confirmPassword!!.error="Please enter minimum 6 chracters at least 1 number and 1 Alphectics"
+                if (datasize >= 6) {
+                    binding!!.confirmPassword.error = null
+                } else {
+                    binding!!.confirmPassword.error =
+                        "Please enter minimum 6 chracters at least 1 number and 1 Alphectics"
                 }
             }
         })
@@ -130,10 +127,12 @@ class ChangePasswordFragemnt : DialogFragment() {
         binding?.changePasswordButton?.setOnClickListener {
 
 
-
-            viewModel?.onChangePassword(userDataStoreBean?.user_name.toString(),
-                viewModel?.enterOTPEditText?.value!!,Utils.encrypt(viewModel?.enterNewPasswordEditText?.value.toString()).toString(),
-                changePasswordRetrofitCallBack)
+            viewModel?.onChangePassword(
+                userDataStoreBean?.user_name.toString(),
+                viewModel?.enterOTPEditText?.value!!,
+                Utils.encrypt(viewModel?.enterNewPasswordEditText?.value.toString()).toString(),
+                changePasswordRetrofitCallBack
+            )
 
 
         }
@@ -141,20 +140,20 @@ class ChangePasswordFragemnt : DialogFragment() {
     }
 
 
-
-    val otpRetrofitCallBack = object {
+    val otpRetrofitCallBack = object:RetrofitCallback<ChangePasswordOTPResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<ChangePasswordOTPResponseModel>?) {
 
-            if(responseBody?.body()?.status == "success"){
+            if (responseBody?.body()?.status == "success") {
                 viewModel?.enterOTPEditText!!.value = responseBody.body()?.responseContents?.otp
 
-                Toast.makeText(activity,responseBody?.body()?.msg,Toast.LENGTH_LONG).show()
-        //        viewModel?.enterOTPEditText!!.value = responseBody.body()?.responseContents?.otp
+                Toast.makeText(activity, responseBody.body()?.msg, Toast.LENGTH_LONG).show()
+                //        viewModel?.enterOTPEditText!!.value = responseBody.body()?.responseContents?.otp
                 binding?.otpLayout!!.visibility = View.GONE
             }
 
         }
+
         override fun onBadRequest(response: Response<ChangePasswordOTPResponseModel>?) {
             utils?.showToast(
                 R.color.negativeToast,
@@ -203,19 +202,20 @@ class ChangePasswordFragemnt : DialogFragment() {
     }
 
 
-
-    val changePasswordRetrofitCallBack = object {
+    val changePasswordRetrofitCallBack = object:RetrofitCallback<PasswordChangeResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<PasswordChangeResponseModel>?) {
             utils?.showToast(
                 R.color.positiveToast,
                 binding?.mainLayout!!,
-                responseBody?.body()?.msg!!)
+                responseBody?.body()?.msg!!
+            )
 
-            Toast.makeText(activity,responseBody?.body()?.msg!!,Toast.LENGTH_LONG).show()
+            Toast.makeText(activity, responseBody?.body()?.msg!!, Toast.LENGTH_LONG).show()
 
 
         }
+
         override fun onBadRequest(response: Response<PasswordChangeResponseModel>?) {
             utils?.showToast(
                 R.color.negativeToast,

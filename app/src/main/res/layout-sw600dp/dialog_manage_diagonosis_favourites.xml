@@ -76,7 +76,7 @@
                         android:orientation="horizontal"
                         android:weightSum="4">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -85,7 +85,7 @@
                             android:textColor="@color/navColor"
                             android:textSize="@dimen/dr_medium_text"/>
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

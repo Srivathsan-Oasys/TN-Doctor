@@ -22,8 +22,9 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivitySampleDispatchBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.RecyclerDto
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethod
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethodContent
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.LabrapidSaveRequestModel
@@ -115,18 +116,18 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         viewModel = SampleDispatchViewModelFactory(
             requireActivity().application
         ).create(SampleDispatchViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         viewModel?.getTextMethod1(facility_id, getTestMethdCallBack1)
 
-        binding.searchDrawerCardView.setOnClickListener {
-            binding.drawerLayout!!.openDrawer(GravityCompat.END)
+        binding?.searchDrawerCardView?.setOnClickListener {
+            binding?.drawerLayout!!.openDrawer(GravityCompat.END)
 
         }
-        binding.drawerLayout.drawerElevation = 0f
-        binding.drawerLayout.setScrimColor(
+        binding?.drawerLayout?.drawerElevation = 0f
+        binding?.drawerLayout?.setScrimColor(
             ContextCompat.getColor(
                 requireContext(),
                 android.R.color.transparent
@@ -135,10 +136,10 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         // prepareMovieData()
         linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.sampleDispatchrecycleview!!.layoutManager = linearLayoutManager
+        binding?.sampleDispatchrecycleview!!.layoutManager = linearLayoutManager
 
         mAdapter = SampleDispatchAdapter(requireContext(), ArrayList())
-        binding.sampleDispatchrecycleview!!.adapter = mAdapter
+        binding?.sampleDispatchrecycleview!!.adapter = mAdapter
         appPreferences = AppPreferences.getInstance(
             requireActivity().application,
             AppConstants.SHARE_PREFERENCE_NAME
@@ -172,7 +173,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
                 labtemplatedialog.arguments = bundle
 
-                (activity as MainLandScreenActivity).replaceFragment(labtemplatedialog)
+                (activity as HomeActivity).replaceFragment(labtemplatedialog)
 
 /*                for (i in datas.indices) {
 
@@ -211,22 +212,22 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
         }
 
-        binding.clearCardView.setOnClickListener {
-            binding.testSpinner.prompt = listfilteritem?.get(0).name
-            binding.testSpinner.setSelection(0)
+        binding?.clearCardView?.setOnClickListener {
+            binding?.testSpinner?.prompt = listfilteritem?.get(0)?.name
+            binding?.testSpinner?.setSelection(0)
 
-            binding.assignedToSpinner.prompt = listfilteritem?.get(0).name
-            binding.assignedToSpinner.setSelection(0)
+            binding?.assignedToSpinner?.prompt = listfilteritem?.get(0)?.name
+            binding?.assignedToSpinner?.setSelection(0)
 
-            binding.searchUsingMobileNo.setText("")
-            binding.searchOrderNumber.setText("")
+            binding?.searchUsingMobileNo?.setText("")
+            binding?.searchOrderNumber?.setText("")
 
         }
 
 
 
 
-        binding.testSpinner!!.onItemSelectedListener =
+        binding?.testSpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -257,7 +258,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 }
             }
 
-        binding.assignedToSpinner!!.onItemSelectedListener =
+        binding?.assignedToSpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -289,7 +290,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             }
 
 
-        binding.calendarEditText!!.setOnClickListener {
+        binding?.calendarEditText!!.setOnClickListener {
 
             Toast.makeText(context, "Select Start Date", Toast.LENGTH_LONG).show()
             val c: Calendar = Calendar.getInstance()
@@ -337,7 +338,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                                 dayOfMonth1
                             )
 
-                            binding.calendarEditText!!.setText(fromDate + "-" + toDate)
+                            binding?.calendarEditText!!.setText(fromDate + "-" + toDate)
 
                         },
                         mYear!!,
@@ -375,7 +376,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
 
         }*/
-        binding.rejected.setOnClickListener {
+        binding?.rejected?.setOnClickListener {
 
             val datas = mAdapter!!.getSelectedCheckData()
 
@@ -430,7 +431,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             }
 
         }
-        binding.disaptch.setOnClickListener {
+        binding?.disaptch?.setOnClickListener {
 
             val datas = mAdapter!!.getSelectedCheckData()
 
@@ -463,7 +464,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
                 if (status) {
 
-    //                    val datas:IntArray=detailsArray as IntArray
+//                    val datas:IntArray=detailsArray as IntArray
 
                     val ft = childFragmentManager.beginTransaction()
                     val dialog = DispatchDialogFragment()
@@ -502,13 +503,13 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
 
-        binding.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
+        binding?.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
         startDate = utils!!.getAgedayDifferent(1) + "T18:30:00.000Z"
         endDate = sdf.format(Date()) + "T18:29:59.000Z"
         SampleDispathListAPI(pageSize, currentPage)
 
 
-        binding.sampleDispatchrecycleview.addOnScrollListener(object :
+        binding?.sampleDispatchrecycleview?.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -527,18 +528,18 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         })
 
 
-        binding.searchButton!!.setOnClickListener {
+        binding?.searchButton!!.setOnClickListener {
 
-            if (!binding.calendarEditText!!.text.trim().toString().isEmpty()) {
+            if (!binding?.calendarEditText!!.text.trim().toString().isEmpty()) {
 
                 startDate = fromDateRev + "T00:01:00.000Z"
                 endDate = toDateRev + "T23:59:59.000Z"
             }
 
-            pinOrMobile = binding.searchUsingMobileNo!!.text.trim().toString()
-            orderNumber = binding.searchOrderNumber!!.text.trim().toString()
+            pinOrMobile = binding?.searchUsingMobileNo!!.text.trim().toString()
+            orderNumber = binding?.searchOrderNumber!!.text.trim().toString()
 
-            binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+            binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
 
             mAdapter!!.clearAll()
 
@@ -633,11 +634,11 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
     }
 
     val labTestApprovalResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<LabTestApprovalResponseModel> {
             override fun onSuccessfulResponse(responseBody: Response<LabTestApprovalResponseModel>?) {
-                Log.e("labTestResponse", responseBody?.body().responseContents.toString())
+                Log.e("labTestResponse", responseBody?.body()?.responseContents.toString())
 
-                val responsedata = Gson().toJson(responseBody?.body().responseContents)
+                val responsedata = Gson().toJson(responseBody?.body()?.responseContents)
 
                 Log.i("", "" + responsedata)
                 Log.i("", "" + responsedata)
@@ -646,20 +647,20 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
 
 
-                binding.positiveTxt!!.text = "0"
+                binding?.positiveTxt!!.text = "0"
 
-                binding.negativeTxt!!.text = "0"
+                binding?.negativeTxt!!.text = "0"
 
-                binding.equivocalTxt!!.text = "0"
+                binding?.equivocalTxt!!.text = "0"
 
-                binding.rejectedTxt!!.text = "0"
+                binding?.rejectedTxt!!.text = "0"
 
-                if (responseBody!!.body().responseContents.isNotEmpty()!!) {
+                if (responseBody!!.body()?.responseContents?.isNotEmpty()!!) {
 
 
                     Log.i(
                         "page",
-                        "" + currentPage + " " + responseBody.body().responseContents!!.size
+                        "" + currentPage + " " + responseBody.body()?.responseContents!!.size
                     )
                     TOTAL_PAGES =
                         Math.ceil(responseBody.body()!!.totalRecords!!.toDouble() / 10).toInt()
@@ -668,7 +669,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                         isLoadingPaginationAdapterCallback = false
                         mAdapter!!.addAll(responseBody.body()!!.responseContents)
                         if (currentPage < TOTAL_PAGES) {
-                            binding.progressbar!!.visibility = View.VISIBLE
+                            binding?.progressbar!!.visibility = View.VISIBLE
                             mAdapter!!.addLoadingFooter()
                             isLoading = true
                             isLastPage = false
@@ -680,40 +681,40 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
                     } else {
 
-                        binding.progressbar!!.visibility = View.GONE
+                        binding?.progressbar!!.visibility = View.GONE
                         mAdapter!!.removeLoadingFooter()
                         isLoading = false
                         isLastPage = true
                     }
                     if (responseBody.body()!!.totalRecords!! < 11) {
-                        binding.progressbar!!.visibility = View.GONE
+                        binding?.progressbar!!.visibility = View.GONE
                     }
 
-                    val diseaseList = responseBody.body().order_status_count
+                    val diseaseList = responseBody.body()?.order_status_count
                     for (i in diseaseList!!.indices) {
 
-                        if (diseaseList.size != 0 && diseaseList[i].order_status_uuid == SAMPLE_TRANSPORTUUId) {
-                            binding.positiveTxt!!.text = diseaseList[i].order_count.toString()
-                        } else if (diseaseList.size != 0 && diseaseList[i].order_status_uuid == SAMPLE_RECEIVE) {
-                            binding.negativeTxt!!.text = diseaseList[i].order_count.toString()
-                        } else if (diseaseList.size != 0 && diseaseList[i].order_status_uuid == SAMPLE_IN_TRANSPORTUUId) {
-                            binding.equivocalTxt!!.text = diseaseList[i].order_count.toString()
-                        } else if (diseaseList.size != 0 && diseaseList[i].order_status_uuid == REJECTEDUUId) {
+                        if (diseaseList.size != 0 && diseaseList[i]?.order_status_uuid == SAMPLE_TRANSPORTUUId) {
+                            binding?.positiveTxt!!.text = diseaseList[i]?.order_count.toString()
+                        } else if (diseaseList.size != 0 && diseaseList[i]?.order_status_uuid == SAMPLE_RECEIVE) {
+                            binding?.negativeTxt!!.text = diseaseList[i]?.order_count.toString()
+                        } else if (diseaseList.size != 0 && diseaseList[i]?.order_status_uuid == SAMPLE_IN_TRANSPORTUUId) {
+                            binding?.equivocalTxt!!.text = diseaseList[i]?.order_count.toString()
+                        } else if (diseaseList.size != 0 && diseaseList[i]?.order_status_uuid == REJECTEDUUId) {
 
-                            binding.rejectedTxt!!.text = diseaseList[i].order_count.toString()
+                            binding?.rejectedTxt!!.text = diseaseList[i]?.order_count.toString()
 
                         }
                     }
 
-                    val orderList = responseBody.body().order_status_count
+                    val orderList = responseBody.body()?.order_status_count
 
-                    if (orderList.size != 0) {
+                    if (orderList?.size != 0) {
 
                         for (i in orderList!!.indices) {
 
-                            if (orderList[i].order_status_uuid == 2) {
+                            if (orderList[i]?.order_status_uuid == 2) {
 
-                                binding.rejectedTxt!!.text = orderList[i].order_count.toString()
+                                binding?.rejectedTxt!!.text = orderList[i]?.order_count.toString()
 
                             }
 
@@ -723,15 +724,15 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
                 } else {
                     Toast.makeText(requireContext(), "No records found", Toast.LENGTH_LONG).show()
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
 
-                    binding.positiveTxt!!.text = "0"
+                    binding?.positiveTxt!!.text = "0"
 
-                    binding.negativeTxt!!.text = "0"
+                    binding?.negativeTxt!!.text = "0"
 
-                    binding.equivocalTxt!!.text = "0"
+                    binding?.equivocalTxt!!.text = "0"
 
-                    binding.rejectedTxt!!.text = "0"
+                    binding?.rejectedTxt!!.text = "0"
 
                     mAdapter!!.clearAll()
                 }
@@ -749,13 +750,13 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -766,7 +767,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 isLoadingPaginationAdapterCallback = false
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -775,7 +776,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 isLoadingPaginationAdapterCallback = false
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -783,14 +784,14 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
                 isLoadingPaginationAdapterCallback = false
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -801,10 +802,10 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
 
 
     val labTestApprovalSecondResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<LabTestApprovalResponseModel> {
             override fun onSuccessfulResponse(response: Response<LabTestApprovalResponseModel>) {
-                if (response.body().responseContents!!.isNotEmpty()) {
-                    binding.progressbar!!.visibility = View.GONE
+                if (response.body()?.responseContents!!.isNotEmpty()) {
+                    binding?.progressbar!!.visibility = View.GONE
                     mAdapter!!.removeLoadingFooter()
                     isLoading = false
                     isLoadingPaginationAdapterCallback = false
@@ -814,14 +815,14 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                     println("testing for two  = $currentPage--$TOTAL_PAGES")
 
                     if (currentPage < TOTAL_PAGES) {
-                        binding.progressbar!!.visibility = View.VISIBLE
+                        binding?.progressbar!!.visibility = View.VISIBLE
                         mAdapter?.addLoadingFooter()
                         isLoading = true
                         isLastPage = false
                         println("testing for four  = $currentPage--$TOTAL_PAGES")
                     } else {
                         isLastPage = true
-                        binding.progressbar!!.visibility = View.GONE
+                        binding?.progressbar!!.visibility = View.GONE
 //                    visitHistoryAdapter.removeLoadingFooter()
                         isLoading = false
                         isLastPage = true
@@ -829,7 +830,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                     }
 
                 } else {
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
                     println("testing for six  = $currentPage--$TOTAL_PAGES")
                     mAdapter?.removeLoadingFooter()
                     isLoading = false
@@ -849,7 +850,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -858,7 +859,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -867,17 +868,17 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
-                binding.progressbar!!.visibility = View.GONE
+                binding?.progressbar!!.visibility = View.GONE
             }
         }
 
@@ -902,15 +903,15 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
     }
 
     val getTestMethdCallBack1 =
-        object {
+        object : RetrofitCallback<ResponseTestMethod> {
             @SuppressLint("SetTextI18n")
             override fun onSuccessfulResponse(response: Response<ResponseTestMethod>) {
-                Log.i("", "" + response.body().responseContents)
-                Log.i("", "" + response.body().req)
+                Log.i("", "" + response.body()?.responseContents)
+                Log.i("", "" + response.body()?.req)
                 listfilteritem?.add(ResponseTestMethodContent())
-                listfilteritem?.addAll((response.body().responseContents)!!)
+                listfilteritem?.addAll((response.body()?.responseContents)!!)
                 FilterTestNameResponseMap =
-                    listfilteritem!!.map { it.uuid!! to it.name!! }.toMap().toMutableMap()
+                    listfilteritem!!.map { it?.uuid!! to it.name!! }.toMap().toMutableMap()
                 try {
                     val adapter =
                         ArrayAdapter<String>(
@@ -919,12 +920,12 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                             FilterTestNameResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.testSpinner!!.adapter = adapter
+                    binding?.testSpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
-                binding.testSpinner.prompt = listfilteritem?.get(0).name
-                binding.testSpinner.setSelection(0)
+                binding?.testSpinner?.prompt = listfilteritem?.get(0)?.name
+                binding?.testSpinner?.setSelection(0)
 
                 viewModel?.getTextAssignedTo(facility_id, LabAssignedSpinnerRetrofitCallback)
             }
@@ -941,7 +942,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -951,7 +952,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -959,7 +960,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -967,13 +968,13 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -981,16 +982,16 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             }
         }
 
-    val LabAssignedSpinnerRetrofitCallback = object {
+    val LabAssignedSpinnerRetrofitCallback = object : RetrofitCallback<LabAssignedToResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<LabAssignedToResponseModel>?) {
 
-            Log.e("AssignedToSpinner", responseBody?.body().responseContents.toString())
+            Log.e("AssignedToSpinner", responseBody?.body()?.responseContents.toString())
 
             listfilteritemAssignSpinner?.add(LabAssignedToresponseContent())
-            listfilteritemAssignSpinner?.addAll(responseBody!!.body().responseContents!!)
+            listfilteritemAssignSpinner?.addAll(responseBody!!.body()?.responseContents!!)
 
             FilterAssignSpinnereResponseMap =
-                listfilteritemAssignSpinner!!.map { it.uuid!! to it.name!! }.toMap()
+                listfilteritemAssignSpinner!!.map { it?.uuid!! to it.name!! }.toMap()
                     .toMutableMap()
 
             try {
@@ -1001,12 +1002,12 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
                         FilterAssignSpinnereResponseMap.values.toMutableList()
                     )
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                binding.assignedToSpinner!!.adapter = adapter
+                binding?.assignedToSpinner!!.adapter = adapter
             } catch (e: Exception) {
 
             }
-            binding.assignedToSpinner.prompt = listfilteritem?.get(0).name
-            binding.assignedToSpinner.setSelection(0)
+            binding?.assignedToSpinner?.prompt = listfilteritem?.get(0)?.name
+            binding?.assignedToSpinner?.setSelection(0)
 
         }
 
@@ -1022,7 +1023,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -1032,7 +1033,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -1040,7 +1041,7 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -1048,21 +1049,17 @@ class SampleDispatchActivity : Fragment(), RejectDialogFragment.OnLabTestRefresh
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
             viewModel!!.progress.value = 8
         }
-
-
     }
-
-
 }

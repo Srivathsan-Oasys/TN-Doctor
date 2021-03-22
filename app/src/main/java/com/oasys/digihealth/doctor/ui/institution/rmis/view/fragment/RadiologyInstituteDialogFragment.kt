@@ -19,7 +19,8 @@ import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteBinding
+import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteRadiologyBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMaster
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMasterResponseModel
 import com.oasys.digihealth.doctor.ui.institution.lmis.view.adapter.SelectInstituteDropDownAdapter
@@ -40,7 +41,7 @@ class RadiologyInstituteDialogFragment : DialogFragment() {
     private var institution_NAME: String? = null
     private var content: String? = null
     private var viewModel: InstituteViewModel? = null
-    var binding: DialogSelectInstituteBinding? = null
+    var binding: DialogSelectInstituteRadiologyBinding? = null
     private var utils: Utils? = null
 
     private var institutionDropDownAdapter: SelectInstituteDropDownAdapter? = null

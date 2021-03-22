@@ -55,7 +55,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.radiology_result.ui.Radiology
 import com.oasys.digihealth.doctor.ui.emr_workflow.speciality_sketch.ui.SpecialitySketchFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.ui.TreatmentKitFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.vitals.ui.VitalsFragment
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

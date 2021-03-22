@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_Injection_worklist.viewmodel.NurseDeskInjectionViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_Injection_worklist.viewmodel.NurseDeskInjectionViewModel" />-->
     </data>
 
     <LinearLayout

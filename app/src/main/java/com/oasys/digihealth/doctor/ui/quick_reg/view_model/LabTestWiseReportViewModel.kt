@@ -4,20 +4,17 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalResultResponse
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalSpinnerResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabAssignedToResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.requset.LabConsolidatedReportRequestModel
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.requset.LabWiseReportRequestModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.*
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabFilterResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabTestWiseReportResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.reports.response.LabWiseReportLabelResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -37,10 +34,9 @@ class LabTestWiseReportViewModel(
 
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
 
-    var facility_id:Int?=0
+    var facility_id: Int? = 0
 
     var appPreferences: AppPreferences? = null
-
 
 
     init {
@@ -54,11 +50,13 @@ class LabTestWiseReportViewModel(
     }
 
 
-
-    fun getTestLabWiseReportList(toggle: String,requestLabWiseReportListRequest: LabWiseReportRequestModel, GetLabWiseListRetrofitCallback: RetrofitCallback<LabTestWiseReportResponseModel>
+    fun getTestLabWiseReportList(
+        toggle: String,
+        requestLabWiseReportListRequest: LabWiseReportRequestModel,
+        GetLabWiseListRetrofitCallback: RetrofitCallback<LabTestWiseReportResponseModel>
     ) {
 
-        Log.e("getList fun","inside")
+        Log.e("getList fun", "inside")
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -69,27 +67,67 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseOPReportTable(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseOPReportTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 requestLabWiseReportListRequest
             )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
-        }else{
-            apiService?.getLabTestWiseIPReportTable(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseIPReportTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 requestLabWiseReportListRequest
             )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
         }
+    }
 
+    fun getLabTestWiseReportLabel(
+        toggle: String,
+        requestLabWiseReportListRequest: LabWiseReportRequestModel,
+        GetLabWiseListRetrofitCallback: RetrofitCallback<LabWiseReportLabelResponseModel>
+    ) {
+
+        Log.e("getList fun", "inside")
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
+
+        if (!Utils.isNetworkConnected(getApplication())) {
+            errorText.value = getApplication<Application>().getString(R.string.no_internet)
+            return
+        }
+        progress.value = 0
+        val aiiceApplication = HmisApplication.get(getApplication())
+        val apiService = aiiceApplication.getRetrofitService()
+
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseOPReportLabel(
+                AppConstants.ACCEPT_LANGUAGE_EN,
+                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
+                requestLabWiseReportListRequest
+            )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
+
+        } else {
+            apiService?.getLabTestWiseIPReportLabel(
+                AppConstants.ACCEPT_LANGUAGE_EN,
+                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
+                requestLabWiseReportListRequest
+            )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
+
+        }
 
     }
 
-    fun getLabTestWiseReportLabel(toggle: String,requestLabWiseReportListRequest: LabWiseReportRequestModel, GetLabWiseListRetrofitCallback: RetrofitCallback<LabWiseReportLabelResponseModel>
+
+    fun getLabTestWiseReportListSecond(
+        toggle: String,
+        labWiseReportRequestModel: LabWiseReportRequestModel,
+        labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabTestWiseReportResponseModel>
     ) {
 
-        Log.e("getList fun","inside")
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -100,48 +138,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseOPReportLabel(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseOPReportTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
-                requestLabWiseReportListRequest
-            )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
-
-        }else{
-            apiService?.getLabTestWiseIPReportLabel(AppConstants.ACCEPT_LANGUAGE_EN,
-                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
-                requestLabWiseReportListRequest
-            )?.enqueue(RetrofitMainCallback(GetLabWiseListRetrofitCallback))
-
-        }
-
-    }
-
-
-    fun getLabTestWiseReportListSecond(toggle: String,labWiseReportRequestModel: LabWiseReportRequestModel, labWiseResponseSecondRetrofitCallback: RetrofitCallback<LabTestWiseReportResponseModel>) {
-
-        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
-
-        if (!Utils.isNetworkConnected(getApplication())) {
-            errorText.value = getApplication<Application>().getString(R.string.no_internet)
-            return
-        }
-        progress.value = 0
-        val aiiceApplication = HmisApplication.get(getApplication())
-        val apiService = aiiceApplication.getRetrofitService()
-
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseOPReportTable(AppConstants.ACCEPT_LANGUAGE_EN,
-                AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 labWiseReportRequestModel
             )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseIPReportTable(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseIPReportTable(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 labWiseReportRequestModel
             )?.enqueue(RetrofitMainCallback(labWiseResponseSecondRetrofitCallback))
 
@@ -150,7 +159,10 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getDistrict(toggle: String, ResponseDistrictRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getDistrict(
+        toggle: String,
+        ResponseDistrictRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -177,17 +189,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseDistrictOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseDistrictOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseDistrictIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseDistrictIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
@@ -196,10 +210,14 @@ class LabTestWiseReportViewModel(
     }
 
 
-    fun getHUD(toggle: String,district_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getHUD(
+        toggle: String,
+        district_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
 
@@ -215,7 +233,7 @@ class LabTestWiseReportViewModel(
         try {
 
             jsonBody.put("user_Id", userDataStoreBean?.uuid!!)
-            jsonBody.putOpt("district_Id",districtID)
+            jsonBody.putOpt("district_Id", districtID)
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -230,17 +248,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseHUDOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseHUDOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseHUDIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseHUDIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -248,14 +268,19 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getBlock(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getBlock(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
 
@@ -285,17 +310,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseBlockOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseBlockOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseBlockIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseBlockIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -303,18 +330,24 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getOffice(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getOffice(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
 
@@ -345,17 +378,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseOfficeOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseOfficeOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseOfficeIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseOfficeIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -363,22 +398,29 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getInstitutionType(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>,office_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getInstitutionType(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        office_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
         val officeID = JSONArray()
-        for(item in office_id){
+        for (item in office_id) {
             officeID.put(item)
         }
 
@@ -410,17 +452,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseInstitutionTypeOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseInstitutionTypeOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseInstitutionTypeIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseInstitutionTypeIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -429,26 +473,34 @@ class LabTestWiseReportViewModel(
     }
 
 
-    fun getInstitution(toggle: String,district_id: MutableList<Int>,hud_id: MutableList<Int>,block_id: MutableList<Int>,office_id: MutableList<Int>,institutionType_id: MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getInstitution(
+        toggle: String,
+        district_id: MutableList<Int>,
+        hud_id: MutableList<Int>,
+        block_id: MutableList<Int>,
+        office_id: MutableList<Int>,
+        institutionType_id: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val districtID = JSONArray()
-        for(item in district_id){
+        for (item in district_id) {
             districtID.put(item)
         }
         val hudID = JSONArray()
-        for(item in hud_id){
+        for (item in hud_id) {
             hudID.put(item)
         }
         val blockID = JSONArray()
-        for(item in block_id){
+        for (item in block_id) {
             blockID.put(item)
         }
         val officeID = JSONArray()
-        for(item in office_id){
+        for (item in office_id) {
             officeID.put(item)
         }
         val institutionTypeID = JSONArray()
-        for(item in institutionType_id){
+        for (item in institutionType_id) {
             institutionTypeID.put(item)
         }
 
@@ -482,17 +534,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseInstitutionOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseInstitutionOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseInstitutionIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseInstitutionIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -500,7 +554,11 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getTestName(toggle: String,institutionId : MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getTestName(
+        toggle: String,
+        institutionId: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -512,7 +570,7 @@ class LabTestWiseReportViewModel(
 
         try {
             val institution = JSONArray()
-            for(item in institutionId){
+            for (item in institutionId) {
                 institution.put(item)
             }
 
@@ -532,17 +590,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseTestNameOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseTestNameOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseTestNameIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseTestNameIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -550,7 +610,11 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getLabName(toggle: String,institutionId : MutableList<Int>, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getLabName(
+        toggle: String,
+        institutionId: MutableList<Int>,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -563,7 +627,7 @@ class LabTestWiseReportViewModel(
         try {
 
             val institution = JSONArray()
-            for(item in institutionId){
+            for (item in institutionId) {
                 institution.put(item)
             }
 
@@ -583,17 +647,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseLabNameOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseLabNameOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseLabNameIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseLabNameIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
@@ -601,7 +667,10 @@ class LabTestWiseReportViewModel(
 
     }
 
-    fun getGender(toggle: String, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+    fun getGender(
+        toggle: String,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -628,24 +697,30 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseGenderOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseGenderOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseGenderIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseGenderIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
         }
 
     }
-    fun getStatus(toggle: String, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>) {
+
+    fun getStatus(
+        toggle: String,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabFilterResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -671,17 +746,19 @@ class LabTestWiseReportViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        if(toggle.equals("OP")){
-            apiService?.getLabTestWiseStatusOPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        if (toggle.equals("OP")) {
+            apiService?.getLabTestWiseStatusOPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 
-        }else{
-            apiService?.getLabTestWiseStatusIPSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        } else {
+            apiService?.getLabTestWiseStatusIPSpinner(
+                AppConstants.ACCEPT_LANGUAGE_EN,
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-                userDataStoreBean?.uuid!!,facility_id!!, userDataStoreBean?.user_name,
+                userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
                 body
             )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
 

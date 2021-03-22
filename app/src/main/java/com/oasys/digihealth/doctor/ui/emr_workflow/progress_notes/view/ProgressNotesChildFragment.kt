@@ -22,7 +22,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.progress_notes.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.progress_notes.view_model.ProgressNotesViewModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

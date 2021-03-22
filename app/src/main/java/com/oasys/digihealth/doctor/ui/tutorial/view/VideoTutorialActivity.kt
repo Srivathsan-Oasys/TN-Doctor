@@ -32,7 +32,7 @@ import com.oasys.digihealth.doctor.ui.tutorial.model.UserManualResponseModel
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserModuleResponseContent
 import com.oasys.digihealth.doctor.ui.tutorial.viewmodel.VideoTutorialViewModel
 import com.oasys.digihealth.doctor.ui.tutorial.viewmodel.VideoTutorialViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.ResponseBody
 import org.json.JSONException

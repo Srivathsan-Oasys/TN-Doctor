@@ -5,12 +5,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.*
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddTestNameResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.template.request.RequestTemplateAddDetails
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.template.response.ReponseTemplateadd
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.updaterequest.UpdateRequestModule
@@ -74,7 +76,7 @@ class ManageLmisLabTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -107,7 +109,7 @@ class ManageLmisLabTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -143,7 +145,7 @@ class ManageLmisLabTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -165,7 +167,7 @@ class ManageLmisLabTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateAddDetails
-        ).enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
         return
 
 
@@ -189,7 +191,7 @@ class ManageLmisLabTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateUpdateDetails
-        ).enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
         return
 
 
@@ -212,15 +214,15 @@ class ManageLmisLabTemplateViewModel(
                 department_UUID!!,
                 facility_UUID!!,
                 AppConstants.FAV_TYPE_ID_LAB
-            ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+            )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         } else {
             apiService?.getLmisTemplete(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!,
                 facilityID!!,
-                Labuuid!!,
+                Labuuid,
                 AppConstants.FAV_TYPE_ID_LAB
-            ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+            )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         }
 
 

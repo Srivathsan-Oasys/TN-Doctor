@@ -29,6 +29,7 @@ import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.op_notes.model.GetOpNotesEncounterByDocAndPatientIdResp
+import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.PharmacyDispenseResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.modify.ModifyOtScheduleReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.modify.ModifyOtScheduleResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.response.*
@@ -38,7 +39,6 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.model.responseadd
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.ui.adapter.addsurgery.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.viewmodel.AddSurgeryViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.viewmodel.AddSurgeryViewModelFactory
-import com.oasys.digihealth.doctor.ui.pharmacy_management.dispense.model.PharmacyDispenseResponse
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -2698,21 +2698,21 @@ class AddSurgeryDialogFragment(
                 if (responseBody?.isSuccessful == true) {
 
 
-                    Log.e("AddOTSch", responseBody.body().responseContent.toString())
+                    Log.e("AddOTSch", responseBody.body()?.responseContent.toString())
 
                     var title = ""
-                    if (responseBody.body().responseContent!!.title_uuid!!.equals("1")) {
+                    if (responseBody.body()?.responseContent!!.title_uuid!!.equals("1")) {
                         title = "Mr."
-                    } else if (responseBody.body().responseContent!!.title_uuid!!.equals("2")) {
+                    } else if (responseBody.body()?.responseContent!!.title_uuid!!.equals("2")) {
                         title = "Mrs."
                     }
 
                     binding?.detailsTextView?.text =
-                        title + responseBody.body().responseContent!!.first_name + " / " +
-                                responseBody.body().responseContent!!.age + " Year(s) / " +
-                                responseBody.body().responseContent!!.gender_details.name + " / " +
-                                responseBody.body().responseContent!!.uhid + " / " +
-                                responseBody.body().responseContent!!.para_2
+                        title + responseBody.body()?.responseContent!!.first_name + " / " +
+                                responseBody.body()?.responseContent!!.age + " Year(s) / " +
+                                responseBody.body()?.responseContent!!.gender_details?.name + " / " +
+                                responseBody.body()?.responseContent!!.uhid + " / " +
+                                responseBody.body()?.responseContent!!.para_2
 
 
                 }

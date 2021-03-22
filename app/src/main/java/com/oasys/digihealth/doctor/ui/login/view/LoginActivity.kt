@@ -34,6 +34,7 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityLoginBinding
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.view.fragment.DepartmentInstituteDialogFragment
 import com.oasys.digihealth.doctor.ui.institution.lmis.model.LocationMasterResponseModel
@@ -47,13 +48,12 @@ import com.oasys.digihealth.doctor.ui.login.model.login_response_model.ModuleDet
 import com.oasys.digihealth.doctor.ui.login.model.office_response.OfficeResponseModel
 import com.oasys.digihealth.doctor.ui.login.setpassword.view.SetPasswordFragment
 import com.oasys.digihealth.doctor.ui.login.view_model.LoginViewModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 import java.math.BigInteger
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class LoginActivity : AppCompatActivity() {
     private var facilityUserID: Int? = 0
@@ -81,7 +81,6 @@ class LoginActivity : AppCompatActivity() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         requestedOrientation = if (Utils(this).isTablet(this)) {
             this.setTheme(R.style.Hmis_LoginTablet)
             ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -93,11 +92,9 @@ class LoginActivity : AppCompatActivity() {
         languageView()
         viewModelObserve()
         btnView()
-
     }
 
     private fun languageView() {
-
         val language = appPreferences?.getString(AppConstants.LANGUAGE)
         val pInfo = this.packageManager.getPackageInfo(packageName, 0)
         version = pInfo.versionName
@@ -108,9 +105,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-
         utils = Utils(this)
-
         customProgressDialog = CustomProgressDialog(this)
         appPreferences = AppPreferences.getInstance(this, AppConstants.SHARE_PREFERENCE_NAME)
         appPreferences?.saveInt(AppConstants.WARDUUID, 0)
@@ -139,29 +134,27 @@ class LoginActivity : AppCompatActivity() {
         //terms And Cndition
         binding?.termsAndCndition?.setOnClickListener {
             loadTermsAndCondtions()
-
         }
+
         binding?.termsAndCndition1?.setOnClickListener {
             loadTermsAndCondtions()
-
         }
+
         binding?.termsAndCndition2?.setOnClickListener {
             loadTermsAndCondtions()
-
         }
+
         binding?.tvPrivacyPolicy?.setOnClickListener {
             loadPrivacyPolicy()
-
         }
+
         binding?.tvPrivacyPolicy1?.setOnClickListener {
             loadPrivacyPolicy()
-
         }
+
         binding?.tvPrivacyPolicy2?.setOnClickListener {
             loadPrivacyPolicy()
-
         }
-
 
         //validations
         binding!!.userName.addTextChangedListener(object : TextWatcher {
@@ -172,9 +165,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 val datasize = s.trim().length
-
                 if (datasize >= 3) {
                     binding!!.userName.error = null
                 } else {
@@ -191,9 +182,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 val datasize = s.trim().length
-
                 if (datasize >= 6) {
                     binding!!.passwordEdittext.error = null
                 } else {
@@ -210,9 +199,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 val datasize = s.trim().length
-
                 if (datasize >= 6) {
                     binding!!.newPasswordEditText.error = null
                 } else {
@@ -229,9 +216,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 val datasize = s.trim().length
-
                 if (datasize >= 6) {
                     binding!!.confirmNewPasswordEditText.error = null
                 } else {
@@ -255,7 +240,6 @@ class LoginActivity : AppCompatActivity() {
                 if (event.rawX >= binding?.passwordEdittext?.right!! - binding?.passwordEdittext?.compoundDrawables
                         ?.get(DRAWABLE_RIGHT)?.bounds?.width()!!
                 ) {
-
                     if (this.enableeye!!) {
                         binding?.passwordEdittext?.setCompoundDrawablesWithIntrinsicBounds(
                             0,
@@ -266,7 +250,6 @@ class LoginActivity : AppCompatActivity() {
                         enableeye = false
                         binding?.passwordEdittext?.inputType =
                             InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-
                     } else {
                         binding?.passwordEdittext?.setCompoundDrawablesWithIntrinsicBounds(
                             0,
@@ -278,7 +261,6 @@ class LoginActivity : AppCompatActivity() {
                         binding?.passwordEdittext?.inputType = InputType.TYPE_CLASS_TEXT or
                                 InputType.TYPE_TEXT_VARIATION_PASSWORD
                     }
-
                     return@OnTouchListener true
                 }
             }
@@ -299,7 +281,6 @@ class LoginActivity : AppCompatActivity() {
                 if (event.rawX >= binding?.newPasswordEditText?.right!! - binding?.newPasswordEditText?.compoundDrawables
                         ?.get(DRAWABLE_RIGHT)?.bounds?.width()!!
                 ) {
-
                     if (this.enableeye!!) {
                         binding?.newPasswordEditText?.setCompoundDrawablesWithIntrinsicBounds(
                             0,
@@ -310,7 +291,6 @@ class LoginActivity : AppCompatActivity() {
                         enableeye = false
                         binding?.newPasswordEditText?.inputType =
                             InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-
                     } else {
                         binding?.newPasswordEditText?.setCompoundDrawablesWithIntrinsicBounds(
                             0,
@@ -322,7 +302,6 @@ class LoginActivity : AppCompatActivity() {
                         binding?.newPasswordEditText?.inputType = InputType.TYPE_CLASS_TEXT or
                                 InputType.TYPE_TEXT_VARIATION_PASSWORD
                     }
-
                     return@OnTouchListener true
                 }
             }
@@ -353,7 +332,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun viewModelObserve() {
-
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.application).create(
             LoginViewModel::class.java
         )
@@ -362,31 +340,24 @@ class LoginActivity : AppCompatActivity() {
         viewModel!!.changePasswordRetrofitCallBack = changePasswordRetrofitCallBack
         binding!!.lifecycleOwner = this
         binding?.viewModel = viewModel
-
         viewModel!!.errorText.observe(this,
             androidx.lifecycle.Observer { toastMessage ->
                 utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
             })
 
-
         viewModel!!.progress.observe(this, androidx.lifecycle.Observer {
-
             if (it == View.VISIBLE) {
                 customProgressDialog!!.show()
             } else if (it == View.GONE) {
                 customProgressDialog!!.dismiss()
             }
-
         })
-
     }
-
 
     private fun dpToPx(context: Context, valueInDp: Float): Float {
         val metrics: DisplayMetrics = context.resources.displayMetrics
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, valueInDp, metrics)
     }
-
 
     private fun navigateToPlayStore() {
         val uri = Uri.parse("market://details?id=$packageName")
@@ -421,251 +392,165 @@ class LoginActivity : AppCompatActivity() {
     val loginRetrofitCallBack = object : RetrofitCallback<LoginResponseModel?> {
 
         override fun onSuccessfulResponse(response: Response<LoginResponseModel?>) {
-
             if (response.body()!!.statusCode == 200) {
-
                 loginSeassion(response.body()!!.responseContents!!)
-
                 if (response.body()!!.responseContents!!.userDetails!!.first_time_login != null &&
                     response.body()!!.responseContents!!.userDetails!!.first_time_login != false
                 ) {
-
                     //user Detials saved localy
-
                     val userDetailsRoomRepository = UserDetailsRoomRepository(application)
                     userDetailsRoomRepository.insertData(response.body()!!.responseContents?.userDetails!!)
-
                     appPreferences?.saveInt(AppConstants.LAB_UUID, 0)
-
                     appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, 0)
-
                     appPreferences?.saveString(AppConstants.OTHER_DEPARTMENT_UUID, "")
-
-
                     module_details = response.body()?.responseContents?.moduleDetails
 
                     // Land Screen control
                     val landString =
                         response.body()?.responseContents?.activityDetails?.get(0)!!.activity!!.code
-
                     appPreferences?.saveString(AppConstants.LANDSCREEN, landString)
-
 
                     // check emr role
                     val checkEMR =
                         response.body()?.responseContents?.moduleDetails!!.any { it!!.code == AppConstants.ROLE_EMR }
-
                     appPreferences?.saveBoolean(AppConstants.EMRCHECK, checkEMR)
-
 
                     // check registration
                     val checkREGISTER =
                         response.body()?.responseContents?.moduleDetails!!.any { it!!.code == AppConstants.ROLE_Registration }
-
                     appPreferences?.saveBoolean(AppConstants.REGISTRATIONCHECK, checkREGISTER)
 
-
                     //Lmis
-
                     val checkLIMS =
                         response.body()?.responseContents?.moduleDetails!!.any { it!!.code == AppConstants.ROLE_LMIS }
-
                     appPreferences?.saveBoolean(AppConstants.LMISCHECK, checkLIMS)
 
-
                     //RMIS
-
                     val CheckRMIS =
                         response.body()?.responseContents?.moduleDetails!!.any { it!!.code == AppConstants.ROLE_RMIS }
-
                     appPreferences?.saveBoolean(AppConstants.CHECK_RMIS, CheckRMIS)
 
-
                     // Modules List
-
                     for (i in module_details!!.indices) {
-
                         //Lmis
                         if (module_details!![i]?.code == AppConstants.ROLE_LMIS) {
-
                             val details = module_details!![i]!!.role_activities
-
-
                             val checkLabTest =
                                 details!!.any { it!!.activity.code == AppConstants.LABTESTCODE }
-
                             appPreferences?.saveBoolean(AppConstants.LABTEST, checkLabTest)
-
                             val checkLabApprovel =
                                 details.any { it!!.activity.code == AppConstants.LABAPPROVELCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABAPPROVEL,
                                 checkLabApprovel
                             )
-
                             val checkLabProcess =
                                 details.any { it!!.activity.code == AppConstants.LABTESTCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABPROCESS,
                                 checkLabProcess
                             )
-
                             val checkLabneworder =
                                 details.any { it!!.activity.code == AppConstants.LABNEWORDERCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABNEWORDER,
                                 checkLabneworder
                             )
-
-
                             val checkLabsampledispatch =
                                 details.any { it!!.activity.code == AppConstants.LABSAMPLEDISPATCHCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABSAMPLEDISPATCH,
                                 checkLabsampledispatch
                             )
-
                             val checkLabresultdispatch =
                                 details.any { it!!.activity.code == AppConstants.LABRESULTDISPATCHCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABRESULTDISPATCH,
                                 checkLabresultdispatch
                             )
-
-
                             val checkOrderStatus =
                                 details.any { it!!.activity.code == AppConstants.LABORDERSTATUSCODE }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.LABORDERSTATUS,
                                 checkOrderStatus
                             )
-
-
                         }
 
                         //RMIS
                         if (module_details!![i]?.code == AppConstants.ROLE_RMIS) {
-
                             val details = module_details!![i]!!.role_activities
-
-
                             val checkLabTest =
                                 details!!.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_TEST }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_TEST,
                                 checkLabTest
                             )
-
                             val checkLabApprovel =
                                 details.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_TESTAPPROVAL }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_TESTAPPROVAL,
                                 checkLabApprovel
                             )
-
                             val checkLabProcess =
                                 details.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_TESTPROCESS }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_TESTPROCESS,
                                 checkLabProcess
                             )
-
                             val checkLabneworder =
                                 details.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_TECH }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_TECH,
                                 checkLabneworder
                             )
-
                             val checkLabsampledispatch =
                                 details.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_DISPATCH }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_DISPATCH,
                                 checkLabsampledispatch
                             )
-
                             val checkOrderStatus =
                                 details.any { it!!.activity.code == AppConstants.ACTIVITY_RMIS_ORDER }
-
                             appPreferences?.saveBoolean(
                                 AppConstants.ACTIVITY_CHECK_RMIS_ORDER,
                                 checkOrderStatus
                             )
-
-
                         }
                     }
 
-
                     // Check valid Login If only lMIS or RMIS is there
                     if ((checkLIMS || CheckRMIS) || (checkEMR || checkREGISTER)) {
-
-
                         if (module_details?.size!! > 0) {
-
                             val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
-
                             Log.i("", "" + userDataStoreBean?.user_type?.revision)
-
                             if (response.body()!!.responseContents?.userDetails!!.user_type!!.code != null
                                 && response.body()!!.responseContents?.userDetails!!.user_type!!.code != ""
                             ) {
-
                                 type =
                                     response.body()!!.responseContents?.userDetails!!.user_type!!.code!!
-
                                 appPreferences?.saveString(AppConstants.LOGINTYPE, type)
-
                             } else {
-
                                 type =
                                     response.body()!!.responseContents?.userDetails!!.user_type!!.name!!
-
                                 appPreferences?.saveString(AppConstants.LOGINTYPE, type)
-
                             }
 //                            type= "Lab Incharge"
-
-
                             if (response.body()!!.responseContents?.userDetails?.office_user == null ||
                                 response.body()!!.responseContents?.userDetails?.office_user == false
                             ) {
-
                                 viewModel!!.getfacilityCallback(
                                     response.body()!!.responseContents?.userDetails?.uuid,
                                     facilitycallbackRetrofitCallback
                                 )
                             } else {
-
                                 viewModel!!.getOfficeList(officeRetrofitCallBack)
-
-
                             }
                         }
-
-
                     } else {
-
                         toast("Invalid User Please contect Admin to check your Controller")
                     }
-
-
                     //   Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
-
-
                 } else {
-
                     viewModel!!.username.value = ""
                     viewModel!!.password.value = ""
                     val userDetailsRoomRepository = UserDetailsRoomRepository(application)
@@ -674,19 +559,14 @@ class LoginActivity : AppCompatActivity() {
                     val ft = supportFragmentManager.beginTransaction()
                     val dialog = SetPasswordFragment()
                     dialog.show(ft, "Tag")
-
                 }
             } else {
-
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
                     response.body()!!.msg.toString()
                 )
-
             }
-
         }
 
         override fun onBadRequest(response: Response<LoginResponseModel?>) {
@@ -754,41 +634,27 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun toast(s: String) {
-
         Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
-
     }
 
     private fun loginSeassion(responseContents: LoginResponseContents) {
-
-        var sessionRequest: LoginSessionRequest = LoginSessionRequest()
-
+        val sessionRequest = LoginSessionRequest()
         sessionRequest.ApplicationId = 10
-
         sessionRequest.Password = responseContents.userDetails?.SessionId
-
         sessionRequest.LoginId = responseContents.userDetails?.uuid.toString()
-
         sessionRequest.Logininfo = responseContents.userDetails?.first_name
-
         sessionRequest.RoleInfo = responseContents.userDetails?.role?.role_name
         sessionRequest.UserName = responseContents.userDetails?.first_name
         sessionRequest.UserTypeId = responseContents.userDetails?.user_type_uuid.toString()
-
-
         if (Utils.isNetworkConnected(application)) {
             // Internet available
             if (Utils.isConnectedWifi(application)) {
                 // WIFI
-
-
                 val wm =
                     applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
                 val ipAddress: String =
                     BigInteger.valueOf(wm.dhcpInfo.netmask.toLong()).toString()
-
                 sessionRequest.IPAddress = ipAddress
-
             }
             // Internet available
             if (Utils.isConnectedInternet(application)) {
@@ -796,22 +662,13 @@ class LoginActivity : AppCompatActivity() {
                 sessionRequest.IPAddress = utils?.getIPAddress(true)
             }
         }
-
-
         viewModel?.Loginseassion(responseContents, sessionRequest, LoginSeasionRetrofitCallBack)
-
-
     }
 
 
     val LoginSeasionRetrofitCallBack = object : RetrofitCallback<SimpleResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<SimpleResponseModel?>) {
-
-            if (responseBody.body()?.statusCode == 200) {
-
-
-            }
 
         }
 
@@ -924,17 +781,12 @@ class LoginActivity : AppCompatActivity() {
     val otpRetrofitCallBack = object : RetrofitCallback<ChangePasswordOTPResponseModel?> {
 
         override fun onSuccessfulResponse(responseBody: Response<ChangePasswordOTPResponseModel?>) {
-
             if (responseBody.body()?.status == "success") {
-
                 Log.e("SendOTP", responseBody.body()?.toString()!!)
                 viewModel!!.forgetUsernemeLayout.value = 8
                 viewModel!!.changePasswordLayout.value = 0
-
                 viewModel!!.otp.value = responseBody.body()?.responseContents?.otp
-
                 viewModel!!.otp.value = responseBody.body()?.responseContents?.otp
-
                 Toast.makeText(this@LoginActivity, responseBody.body()?.msg, Toast.LENGTH_LONG)
                     .show()
                 //binding?.otpLayout!!.visibility = View.GONE
@@ -992,13 +844,9 @@ class LoginActivity : AppCompatActivity() {
     val changePasswordRetrofitCallBack = object : RetrofitCallback<PasswordChangeResponseModel?> {
 
         override fun onSuccessfulResponse(responseBody: Response<PasswordChangeResponseModel?>) {
-
             viewModel!!.visisbleLogin()
-
             Toast.makeText(this@LoginActivity, responseBody.body()?.msg!!, Toast.LENGTH_LONG)
                 .show()
-
-
         }
 
         override fun onBadRequest(response: Response<PasswordChangeResponseModel?>) {
@@ -1053,19 +901,13 @@ class LoginActivity : AppCompatActivity() {
         object : RetrofitCallback<InstitutionResponseModel> {
 
             override fun onSuccessfulResponse(responseBody: Response<InstitutionResponseModel?>) {
-
                 Log.i("", "" + responseBody.body()?.responseContents)
-
                 if (responseBody.body()?.responseContents?.size!! > 1) {
-
                     // CHeck  RMIS INstutuion Dialog
                     when (type) {
                         AppConstants.LABINCHARGE -> {
-
                             val ft = supportFragmentManager.beginTransaction()
-
                             val dialog = LabInstituteDialogFragment()
-
                             dialog.show(ft, "Tag")
                         }
                         //Check  RMIS INstutuion Dialog
@@ -1077,7 +919,6 @@ class LoginActivity : AppCompatActivity() {
                         // common INstutuion Dialog
                         else -> {
                             val ft = supportFragmentManager.beginTransaction()
-
                             val dialog = DepartmentInstituteDialogFragment()
                             dialog.show(ft, "Tag")
                         }
@@ -1089,11 +930,8 @@ class LoginActivity : AppCompatActivity() {
                         AppConstants.INSTITUTION_NAME,
                         responseBody.body()?.responseContents?.get(0)!!.facility?.name
                     )
-
                     viewModel?.getDepartmentList(facilitylevelID, facilityUserID, depatmentCallback)
-
                 } else {
-
                     utils?.showToast(
                         R.color.negativeToast,
                         binding?.mainLayout!!,
@@ -1103,7 +941,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onBadRequest(errorBody: Response<InstitutionResponseModel?>) {
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -1112,7 +949,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onServerError(response: Response<*>?) {
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -1129,7 +965,6 @@ class LoginActivity : AppCompatActivity() {
             }
 
             override fun onForbidden() {
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -1139,7 +974,6 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onFailure(s: String?) {
                 if (s != null) {
-
                     utils?.showToast(
                         R.color.negativeToast,
                         binding?.mainLayout!!,
@@ -1153,26 +987,17 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-
     /*
     Department
      */
-
-
     val depatmentCallback = object : RetrofitCallback<DepartmentResponseModel> {
 
         override fun onSuccessfulResponse(responseBody: Response<DepartmentResponseModel?>) {
             Log.i("", "" + responseBody.body()?.responseContents)
-            var jsonresponse = Gson().toJson(responseBody.body()?.responseContents)
+            val jsonresponse = Gson().toJson(responseBody.body()?.responseContents)
             Log.i("", "" + jsonresponse)
-            Log.i("", "" + jsonresponse)
-            Log.i("", "" + jsonresponse)
-            Log.i("", "" + jsonresponse)
-
             if (responseBody.body()?.responseContents?.size!! > 1) {
-
                 when (type) {
-
                     AppConstants.LABINCHARGE -> {
                         val ft = supportFragmentManager.beginTransaction()
                         val dialog = LabInstituteDialogFragment()
@@ -1187,46 +1012,30 @@ class LoginActivity : AppCompatActivity() {
                         val ft = supportFragmentManager.beginTransaction()
                         val dialog = DepartmentInstituteDialogFragment()
                         dialog.show(ft, "Tag")
-
                     }
                 }
             } else if (responseBody.body()?.responseContents?.size!! == 1) {
-
                 facilitylevelID = responseBody.body()?.responseContents?.get(0)?.facility_uuid
-
                 departmentID = responseBody.body()?.responseContents?.get(0)?.department_uuid
-
-                var departmentName = responseBody.body()?.responseContents?.get(0)?.department?.name
-
+                val departmentName = responseBody.body()?.responseContents?.get(0)?.department?.name
                 if (type == AppConstants.LABINCHARGE) {
-
                     viewModel!!.getLocationMaster(
                         facilitylevelID!!, LocationMasterResponseCallback
                     )
-
                 } else {
-
                     appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
                     appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, departmentID!!)
-
                     appPreferences?.saveString(AppConstants.DEPARTMENT_NAME, departmentName!!)
-
                     //    startActivity(Intent(this@LoginActivity, MainLandScreenActivity::class.java))
                     //   finish()
-
                 }
-
-
             } else {
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
                     getString(R.string.Departmantmaperror)
                 )
             }
-
-
         }
 
         override fun onBadRequest(errorBody: Response<DepartmentResponseModel?>) {
@@ -1263,7 +1072,6 @@ class LoginActivity : AppCompatActivity() {
 
         override fun onFailure(s: String?) {
             if (s != null) {
-
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -1279,68 +1087,43 @@ class LoginActivity : AppCompatActivity() {
 
     val LocationMasterResponseCallback = object : RetrofitCallback<LocationMasterResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<LocationMasterResponseModel?>) {
-
-
             val data = responseBody.body()!!.responseContents
             if (data.isNotEmpty()) {
-
                 if (responseBody.body()?.responseContents?.size!! > 1) {
-
                     val ft = supportFragmentManager.beginTransaction()
                     val dialog = LabInstituteDialogFragment()
                     dialog.show(ft, "Tag")
-
                 } else {
-
                     val labUUID: Int = responseBody.body()!!.responseContents[0].uuid
-
                     val LabdepartmentId =
                         responseBody.body()!!.responseContents[0].department_uuid
-
                     appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
-
                     appPreferences?.saveInt(AppConstants.LAB_UUID, labUUID)
 
                     if (LabdepartmentId != null) {
-
                         appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, LabdepartmentId)
-
                     } else {
-
                         appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, 0)
                     }
-
-                    var tolocationMap =
+                    val tolocationMap =
                         responseBody.body()!!.responseContents[0].to_location_department_maps
-
                     if (tolocationMap.isNotEmpty()) {
-
-                        var otherdepaertment: ArrayList<Int> = ArrayList()
-
+                        val otherdepaertment: ArrayList<Int> = ArrayList()
                         for (i in tolocationMap.indices) {
-
                             otherdepaertment.add(tolocationMap[i].department_uuid)
-
                         }
-
                         val res = otherdepaertment.toString()
-
                         Log.i("department", "" + res)
-
                         appPreferences?.saveString(AppConstants.OTHER_DEPARTMENT_UUID, res)
                     }
 
-
                     //  startActivity(Intent(this@LoginActivity, MainLandScreenActivity::class.java))
-
                     //finish()
                 }
-
             }
         }
 
         override fun onBadRequest(errorBody: Response<LocationMasterResponseModel?>) {
-
             val gson = GsonBuilder().create()
             val responseModel: LocationMasterResponseModel
             try {
@@ -1361,11 +1144,9 @@ class LoginActivity : AppCompatActivity() {
                 )
                 e.printStackTrace()
             }
-
         }
 
         override fun onServerError(response: Response<*>?) {
-
             utils?.showToast(
                 R.color.negativeToast,
                 binding?.mainLayout!!,
@@ -1374,7 +1155,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onUnAuthorized() {
-
             utils?.showToast(
                 R.color.negativeToast,
                 binding?.mainLayout!!,
@@ -1391,28 +1171,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         override fun onFailure(failure: String?) {
-
             utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
-
         }
 
         override fun onEverytime() {
-
             viewModel!!.progress.value = 8
-
         }
     }
 
-
     private fun loadTermsAndCondtions() {
-
         val intent = Intent(this@LoginActivity, TermsAndConditionActivity::class.java)
         intent.putExtra("isTermsCondition", true)
         startActivity(intent)
     }
 
     private fun loadPrivacyPolicy() {
-
         val intent = Intent(this@LoginActivity, TermsAndConditionActivity::class.java)
         intent.putExtra("isTermsCondition", false)
         startActivity(intent)

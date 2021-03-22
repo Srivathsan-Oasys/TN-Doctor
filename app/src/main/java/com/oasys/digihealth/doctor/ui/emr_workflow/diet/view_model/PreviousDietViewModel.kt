@@ -9,6 +9,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.GetPreviousDietOrderResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.request.GetPreviousDietOrderReq
 import com.oasys.digihealth.doctor.utils.Utils
@@ -48,6 +49,6 @@ class PreviousDietViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getPreviousDietOrderReq
-        ).enqueue(RetrofitMainCallback(getPreviousDietOrderRespCallback))
+        )?.enqueue(RetrofitMainCallback(getPreviousDietOrderRespCallback))
     }
 }

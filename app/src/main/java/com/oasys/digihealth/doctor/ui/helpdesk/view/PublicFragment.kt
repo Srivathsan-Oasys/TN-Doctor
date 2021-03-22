@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.helpdesk.view
 
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,13 +18,14 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityPublicTicketBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.PublicTicketViewModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.PublicTicketViewModelFactory
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.util.*
-
 
 class PublicFragment : Fragment(), HelpDeskCallback {
     var binding: ActivityPublicTicketBinding? = null
@@ -76,8 +76,8 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             requireActivity().application
         )
             .create(PublicTicketViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         appPreferences = AppPreferences.getInstance(
@@ -85,14 +85,14 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             AppConstants.SHARE_PREFERENCE_NAME
         )
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
         department_id = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)!!
 
         callBack = this
 
-        binding.categorySpinner!!.onItemSelectedListener =
+        binding?.categorySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -124,7 +124,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 }
             }
 
-        binding.prioritySpinner!!.onItemSelectedListener =
+        binding?.prioritySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -151,7 +151,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 }
             }
 
-        binding.subcategorySpinner!!.onItemSelectedListener =
+        binding?.subcategorySpinner!!.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -178,7 +178,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 }
             }
 
-        binding.autoCompleteTextViewAssignTo.addTextChangedListener(object : TextWatcher {
+        binding?.autoCompleteTextViewAssignTo?.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -195,71 +195,71 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             }
         })
 
-        binding.autoCompleteTextViewAssignTo!!.setOnItemClickListener { parent, _, position, id ->
-            binding.autoCompleteTextViewAssignTo.setText(autocompleteVendorResponse?.get(position)?.first_name)
+        binding?.autoCompleteTextViewAssignTo!!.setOnItemClickListener { parent, _, position, id ->
+            binding?.autoCompleteTextViewAssignTo?.setText(autocompleteVendorResponse?.get(position)?.first_name)
             selectedAssignTo = autocompleteVendorResponse?.get(position)?.uuid!!
             selectedOfficerMail = autocompleteVendorResponse?.get(position)?.email ?: ""
             selectedOfficerName = autocompleteVendorResponse?.get(position)?.first_name!!
             selectedOfficerNo = autocompleteVendorResponse?.get(position)?.mobile1!!
-            binding.autoCompleteTextViewAssignTo.dismissDropDown()
+            binding?.autoCompleteTextViewAssignTo?.dismissDropDown()
         }
 
-        binding.clear.setOnClickListener { clearSearch() }
+        binding?.clear?.setOnClickListener { clearSearch() }
 
-        binding.save.setOnClickListener {
+        binding?.save?.setOnClickListener {
 
 
-            if (binding.edtMobileNumber!!.text.trim().toString().isEmpty() &&
-                binding.edtPin!!.text.trim().toString().isEmpty()
+            if (binding?.edtMobileNumber!!.text.trim().toString().isEmpty() &&
+                binding?.edtPin!!.text.trim().toString().isEmpty()
             ) {
-                binding.edtMobileNumber!!.error = "Enter Patient Number"
+                binding?.edtMobileNumber!!.error = "Enter Patient Number"
                 return@setOnClickListener
             }
 
-            if (binding.edtSubject!!.text.trim().toString().isEmpty()) {
-                binding.edtSubject!!.error = "Enter Subject"
+            if (binding?.edtSubject!!.text.trim().toString().isEmpty()) {
+                binding?.edtSubject!!.error = "Enter Subject"
                 return@setOnClickListener
             }
 
-            if (binding.edtDescription!!.text.trim().toString().isEmpty()) {
-                binding.edtDescription!!.error = "Enter Problem description"
+            if (binding?.edtDescription!!.text.trim().toString().isEmpty()) {
+                binding?.edtDescription!!.error = "Enter Problem description"
                 return@setOnClickListener
             }
 
             if (selectedAssignTo == 0) {
-                binding.autoCompleteTextViewAssignTo!!.error = "Enter Assign To"
+                binding?.autoCompleteTextViewAssignTo!!.error = "Enter Assign To"
                 return@setOnClickListener
             }
 
             if (selectedCategoryid == 0) {
-                (binding.categorySpinner.selectedView as TextView).error = "Select Category"
+                (binding?.categorySpinner?.selectedView as TextView).error = "Select Category"
                 return@setOnClickListener
             }
             if (selectedSubCategoryid == 0) {
-                (binding.subcategorySpinner.selectedView as TextView).error =
+                (binding?.subcategorySpinner?.selectedView as TextView).error =
                     "Select Sub Category"
                 return@setOnClickListener
             }
             if (selectedPriorityid == 0) {
-                (binding.prioritySpinner.selectedView as TextView).error = "Select Priority"
+                (binding?.prioritySpinner?.selectedView as TextView).error = "Select Priority"
                 return@setOnClickListener
             }
 
             var model = AddTicketRequestModel()
-            model.subject = binding.edtSubject.text.toString()
-            model.problem_description = binding.edtDescription.text.toString()
+            model.subject = binding?.edtSubject?.text.toString()
+            model.problem_description = binding?.edtDescription?.text.toString()
             model.user_type_uuid = 1
-            model.mobile = binding.edtMobileNumber.text.toString()
-            model.pin = binding.edtPin.text.toString()
+            model.mobile = binding?.edtMobileNumber?.text.toString()
+            model.pin = binding?.edtPin?.text.toString()
             model.assignto = selectedAssignTo
             model.category_uuid = selectedCategoryid
             model.subcategory_uuid = selectedSubCategoryid
             model.priority = selectedPriorityid
             model.ticketstatus_uuid = 1
-            model.application_user_uuid = userDetailsRoomRepository.getUserDetails().uuid!!
+            model.application_user_uuid = userDetailsRoomRepository?.getUserDetails()?.uuid!!
             model.facility_uuid = facility_id
             model.department_uuid = department_id
-            model.created_by = userDetailsRoomRepository.getUserDetails().uuid!!
+            model.created_by = userDetailsRoomRepository?.getUserDetails()?.uuid!!
             model.grofficer_mail = selectedOfficerMail
             model.grofficer_name = selectedOfficerName
             model.grofficer_no = selectedOfficerNo
@@ -272,7 +272,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
 
         }
 
-        binding.edtMobileNumber.addTextChangedListener(object : TextWatcher {
+        binding?.edtMobileNumber?.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -285,17 +285,17 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 if (s.length == 10) {
                     viewModel?.getVendorByMobile(
                         s.toString(),
-                        binding.edtPin.text.toString(),
+                        binding?.edtPin?.text.toString(),
                         vendorByMobileResponseRetrofitCallback
                     )
                 } else {
-                    binding.vendorDetails.text = "Vendor Name / Mobile Number"
+                    binding?.vendorDetails?.text = "Vendor Name / Mobile Number"
                 }
 
             }
         })
 
-        binding.edtPin.addTextChangedListener(object : TextWatcher {
+        binding?.edtPin?.addTextChangedListener(object : TextWatcher {
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
@@ -307,12 +307,12 @@ class PublicFragment : Fragment(), HelpDeskCallback {
 
                 if (s.length == 14) {
                     viewModel?.getVendorByMobile(
-                        binding.edtMobileNumber.text.toString(),
+                        binding?.edtMobileNumber?.text.toString(),
                         s.toString(),
                         vendorByMobileResponseRetrofitCallback
                     )
                 } else {
-                    binding.vendorDetails.text = "Vendor Name / Mobile Number"
+                    binding?.vendorDetails?.text = "Vendor Name / Mobile Number"
                 }
 
             }
@@ -326,20 +326,20 @@ class PublicFragment : Fragment(), HelpDeskCallback {
 
     private fun clearSearch() {
 
-        binding.categorySpinner.setSelection(0)
-        binding.subcategorySpinner.setSelection(0)
-        binding.prioritySpinner.setSelection(0)
+        binding?.categorySpinner?.setSelection(0)
+        binding?.subcategorySpinner?.setSelection(0)
+        binding?.prioritySpinner?.setSelection(0)
 
-        binding.edtDescription.setText("")
-        binding.edtSubject.setText("")
-        binding.edtMobileNumber.setText("")
-        binding.edtPin.setText("")
-        binding.autoCompleteTextViewAssignTo.setText("")
+        binding?.edtDescription?.setText("")
+        binding?.edtSubject?.setText("")
+        binding?.edtMobileNumber?.setText("")
+        binding?.edtPin?.setText("")
+        binding?.autoCompleteTextViewAssignTo?.setText("")
 
     }
 
     val categorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -359,13 +359,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                             FilterCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.categorySpinner!!.adapter = adapter
+                    binding?.categorySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.categorySpinner.prompt = categorylistfilteritem?.get(0)?.name
-                binding.categorySpinner!!.setSelection(0)
+                binding?.categorySpinner?.prompt = categorylistfilteritem?.get(0)?.name
+                binding?.categorySpinner!!.setSelection(0)
 
                 viewModel?.getSubCategoryList(
                     selectedCategoryid,
@@ -386,7 +386,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -396,7 +396,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -404,7 +404,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -412,13 +412,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -427,7 +427,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
         }
 
     val prioritySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -447,13 +447,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                             FilterPriorityResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.prioritySpinner!!.adapter = adapter
+                    binding?.prioritySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.prioritySpinner.prompt = prioritylistfilteritem?.get(0)?.name
-                binding.prioritySpinner!!.setSelection(0)
+                binding?.prioritySpinner?.prompt = prioritylistfilteritem?.get(0)?.name
+                binding?.prioritySpinner!!.setSelection(0)
 
             }
 
@@ -469,7 +469,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -479,7 +479,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -487,7 +487,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -495,13 +495,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -510,7 +510,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
         }
 
     val subCategorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -532,13 +532,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                             FilterSubCategoryResponseMap.values.toMutableList()
                         )
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    binding.subcategorySpinner!!.adapter = adapter
+                    binding?.subcategorySpinner!!.adapter = adapter
                 } catch (e: Exception) {
 
                 }
 
-                binding.subcategorySpinner.prompt = subCategorylistfilteritem?.get(0)?.name
-                binding.subcategorySpinner!!.setSelection(0)
+                binding?.subcategorySpinner?.prompt = subCategorylistfilteritem?.get(0)?.name
+                binding?.subcategorySpinner!!.setSelection(0)
 
                 viewModel?.getPriorityList(prioritySpinnerRetrofitCallback)
 
@@ -556,7 +556,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -566,7 +566,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -574,7 +574,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -582,13 +582,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -597,7 +597,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
         }
 
     val vendorResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<VendorListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<VendorListResponseModel>) {
                 Log.e("Vendor Response", "" + response.body()?.responseContents)
@@ -609,9 +609,9 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                     R.layout.row_chief_complaint_search_result,
                     response.body()?.responseContents!!
                 )
-                binding.autoCompleteTextViewAssignTo.threshold = 1
-                binding.autoCompleteTextViewAssignTo.setAdapter(adapter)
-                binding.autoCompleteTextViewAssignTo.showDropDown()
+                binding?.autoCompleteTextViewAssignTo?.threshold = 1
+                binding?.autoCompleteTextViewAssignTo?.setAdapter(adapter)
+                binding?.autoCompleteTextViewAssignTo?.showDropDown()
             }
 
             override fun onBadRequest(response: Response<VendorListResponseModel>) {
@@ -626,7 +626,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -636,7 +636,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -644,7 +644,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -652,13 +652,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -668,7 +668,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
 
 
     val vendorByMobileResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<VendorListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<VendorListResponseModel>) {
                 Log.e("Vendor Mobile Response", "" + response.body()?.responseContents)
@@ -678,18 +678,18 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 var gender = response.body()?.responseContents?.get(0)?.gender_details?.name
                 var mobileNumber = response.body()?.responseContents?.get(0)?.patient_detail?.mobile
 
-                binding.vendorDetails.text =
+                binding?.vendorDetails?.text =
                     firstname + " / " + age + " (Years) - " + gender + " / " + uhid + " / " + mobileNumber
 
                 gridLayoutManager =
                     GridLayoutManager(context!!, 1, GridLayoutManager.VERTICAL, false)
-                binding.publicRecyclerView!!.layoutManager = gridLayoutManager
+                binding?.publicRecyclerView!!.layoutManager = gridLayoutManager
                 publicListAdpater = PublicListAdapter(context!!, ArrayList(), callBack!!)
-                binding.publicRecyclerView!!.adapter = publicListAdpater
+                binding?.publicRecyclerView!!.adapter = publicListAdpater
 
                 publicListAdpater?.clearAll()
                 publicListAdpater!!.addAll(response.body()!!.responseContents?.get(0)?.patient_visits!!)
-                binding.listLayout.visibility = View.VISIBLE
+                binding?.listLayout?.visibility = View.VISIBLE
             }
 
             override fun onBadRequest(response: Response<VendorListResponseModel>) {
@@ -704,7 +704,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -714,7 +714,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -722,7 +722,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -730,13 +730,13 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -753,7 +753,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
     }
 
     val saveVendorResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<VendorByMobileResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<VendorByMobileResponseModel>) {
                 Toast.makeText(context!!, response.body()?.msg, Toast.LENGTH_LONG).show()
@@ -778,7 +778,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -788,7 +788,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -796,7 +796,7 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -804,19 +804,17 @@ class PublicFragment : Fragment(), HelpDeskCallback {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
                 viewModel!!.progress.value = 8
             }
         }
-
-
 }

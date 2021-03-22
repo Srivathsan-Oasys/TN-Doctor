@@ -31,7 +31,7 @@ import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.UserProfi
 import com.oasys.digihealth.doctor.ui.quick_reg.model.request.DoctorListAdapter
 import com.oasys.digihealth.doctor.ui.quick_reg.view_model.LabTestProcessViewModel
 import com.oasys.digihealth.doctor.ui.quick_reg.view_model.LabTestProcessViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_vitals.ui.nextstepvital.viewmodel.NextVitalsViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_vitals.ui.nextstepvital.viewmodel.NextVitalsViewModel" />-->
     </data>
 
 <LinearLayout

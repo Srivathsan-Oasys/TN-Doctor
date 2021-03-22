@@ -6,11 +6,10 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_wardwise_report.viewmodel.WardWiseSummaryViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_wardwise_report.viewmodel.WardWiseSummaryViewModel" />-->
     </data>
-
 
 
     <LinearLayout
@@ -25,62 +24,67 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:visibility="visible"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:visibility="visible">
+
             <LinearLayout
                 android:id="@+id/listLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
+                android:orientation="vertical"
                 android:padding="@dimen/_5sdp"
-                android:visibility="visible"
-                android:orientation="vertical">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/dateLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:text="Start Date: "
-                        android:fontFamily="@font/poppins_semibold"
                         android:id="@+id/startDateLable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="Start Date: "
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dr_medium_text">
 
                     </TextView>
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
                         android:id="@+id/startDate"
-                        android:text=""
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_semibold"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dr_medium_text">
 
                     </TextView>
+
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:layout_marginLeft="20dp"
-                        android:text="End Date: "
-                        android:fontFamily="@font/poppins_semibold"
                         android:id="@+id/endDateLable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="End Date: "
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dr_medium_text">
 
                     </TextView>
+
                     <TextView
+                        android:id="@+id/endDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:id="@+id/endDate"
-                        android:text=""
                         android:fontFamily="@font/poppins_semibold"
+                        android:text=""
+                        android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/dr_medium_text">
 
                     </TextView>
@@ -89,11 +93,10 @@
                 </LinearLayout>
 
 
-
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/wardWiseRecyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wardWiseRecyclerView"/>
+                    android:layout_height="wrap_content" />
 
 
             </LinearLayout>
@@ -111,10 +114,10 @@
                 android:id="@+id/pdfDownload"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/_20sdp"
-                app:cardBackgroundColor="@color/outPtientGreen"
-                android:visibility="visible"
                 android:layout_gravity="center"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:visibility="visible"
+                app:cardBackgroundColor="@color/outPtientGreen"
                 app:cardCornerRadius="8dp">
 
                 <TextView
@@ -124,11 +127,11 @@
                     android:drawablePadding="10dp"
                     android:fontFamily="@font/poppins"
                     android:gravity="center"
-                    android:text="Pdf"
-                    android:paddingTop="@dimen/_5sdp"
-                    android:paddingBottom="@dimen/_5sdp"
                     android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_5sdp"
                     android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_5sdp"
+                    android:text="Pdf"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     tools:ignore="HardcodedText" />

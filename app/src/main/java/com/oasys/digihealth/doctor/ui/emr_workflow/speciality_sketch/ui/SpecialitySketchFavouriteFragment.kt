@@ -25,7 +25,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.lab.ui.ClearFavParticularPosi
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.speciality_sketch.viewmodel.SpecialitySketchViewModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

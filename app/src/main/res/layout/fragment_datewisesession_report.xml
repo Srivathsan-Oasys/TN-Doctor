@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.datewisesession.view_model.DateWiseSessionReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.datewisesession.view_model.DateWiseSessionReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

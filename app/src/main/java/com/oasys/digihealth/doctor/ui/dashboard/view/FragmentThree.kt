@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.Diagnosis
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.ZeroStockDashBoardViewModel
 import com.oasys.digihealth.doctor.ui.dashboard.view_model.ZeroStockDashBoardViewModelFactory
@@ -58,19 +59,19 @@ class FragmentThree : Fragment() {
 
     val zeroStockCallBack = object : RetrofitCallback<ZeroStockResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<ZeroStockResponseModel>?) {
-            if (responseBody?.body().responseContents.isNotEmpty()!!) {
-                view?.rvPatientsComplients.visibility = View.VISIBLE
-                view?.tv_no_data_avaliable.visibility = View.GONE
-                Log.e("zerStock", responseBody?.body().responseContents.toString())
+            if (responseBody?.body()?.responseContents?.isNotEmpty()!!) {
+                view?.rvPatientsComplients?.visibility = View.VISIBLE
+                view?.tv_no_data_avaliable?.visibility = View.GONE
+                Log.e("zerStock", responseBody.body()?.responseContents.toString())
                 zeroStockAdapter =
-                    responseBody?.body().responseContents.let {
+                    responseBody.body()?.responseContents?.let {
                         ZeroStockAdapter(
                             requireContext(),
                             it
                         )
                     }
-                view?.rvPatientsComplients.layoutManager = LinearLayoutManager(requireActivity())
-                view?.rvPatientsComplients.adapter = zeroStockAdapter
+                view?.rvPatientsComplients?.layoutManager = LinearLayoutManager(requireActivity())
+                view?.rvPatientsComplients?.adapter = zeroStockAdapter
             } else {
                 noDataFound()
             }
@@ -86,7 +87,7 @@ class FragmentThree : Fragment() {
                     ZeroStockResponseModel::class.java
                 )
 
-                Log.e("zerStock", "BadRequest" + responseModel.message!!)
+                Log.e("zerStock", "BadRequest" + responseModel.message)
 
             } catch (e: Exception) {
                 Log.e("zerStock", "BadRequest")
@@ -125,7 +126,7 @@ class FragmentThree : Fragment() {
     }
 
     fun noDataFound() {
-        view?.rvPatientsComplients.visibility = View.GONE
-        view?.tv_no_data_avaliable.visibility = View.VISIBLE
+        view?.rvPatientsComplients?.visibility = View.GONE
+        view?.tv_no_data_avaliable?.visibility = View.VISIBLE
     }
 }

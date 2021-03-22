@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.sessionwise.view_model.SessionWiseReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.sessionwise.view_model.SessionWiseReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

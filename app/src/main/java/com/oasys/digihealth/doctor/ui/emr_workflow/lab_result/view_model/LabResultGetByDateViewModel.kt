@@ -9,7 +9,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab_result.model.LabResultGetByDataResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
@@ -66,7 +66,7 @@ class LabResultGetByDateViewModel(
         apiService?.getLabResultByDate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(LabResultRetrofitCallback))
     }
 
 

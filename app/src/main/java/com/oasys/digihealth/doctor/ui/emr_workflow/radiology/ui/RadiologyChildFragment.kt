@@ -49,7 +49,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.ui.saveTemplate.ManageRadiologySaveTemplateFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.view_model.RadiologyViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.view_model.RadiologyViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

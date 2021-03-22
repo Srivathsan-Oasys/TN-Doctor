@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.appMaster.healthoffice.viewModel.HealthofficeListViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.appMaster.healthoffice.viewModel.HealthofficeListViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -467,8 +467,7 @@
             android:layout_width="300dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:layout_marginTop="@dimen/_45sdp"
-            android:visibility="gone">
+            android:layout_marginTop="@dimen/_45sdp">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

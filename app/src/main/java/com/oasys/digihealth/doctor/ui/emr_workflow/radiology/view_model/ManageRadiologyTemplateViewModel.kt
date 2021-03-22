@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddAllDepatResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.lab.model.FavAddTestNameResponse
@@ -75,7 +75,7 @@ class ManageRadiologyTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(templateRadiodepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templateRadiodepartmentRetrofitCallBack))
         return
     }
 
@@ -110,7 +110,7 @@ class ManageRadiologyTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(tempRadiologyAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(tempRadiologyAddAllDepartmentCallBack))
         return
 
     }
@@ -144,7 +144,7 @@ class ManageRadiologyTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -165,7 +165,7 @@ class ManageRadiologyTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateAddDetails
-        ).enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
         return
     }
 
@@ -189,7 +189,7 @@ class ManageRadiologyTemplateViewModel(
             department_UUID!!,
             facilityID!!,
             AppConstants.FAV_TYPE_ID_RADIOLOGY
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -210,7 +210,7 @@ class ManageRadiologyTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateUpdateDetails
-        ).enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
         return
 
 

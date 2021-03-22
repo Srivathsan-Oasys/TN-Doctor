@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigResponseModel
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigUpdateResponseModel
 import com.oasys.digihealth.doctor.ui.configuration.model.HistoryConfigUpdateRequestModel
@@ -19,7 +19,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.hea
 import com.oasys.digihealth.doctor.ui.emr_workflow.critical_care_chart.model.headings.GetCriticalCareChartHeadingsResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.model.response.HistoryResponce
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.EmrWorkFlowResponseModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.SimpleResponseModel
+import com.oasys.digihealth.doctor.ui.login.model.SimpleResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
@@ -66,7 +66,7 @@ class HistoryConfigViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             body
-        ).enqueue(RetrofitMainCallback(configRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configRetrofitCallBack))
         return
     }
 
@@ -90,7 +90,7 @@ class HistoryConfigViewModel(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!, facility_id!!,
                 configRequestData
-            ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+            )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
 
         } else {
 
@@ -98,7 +98,7 @@ class HistoryConfigViewModel(
                 AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
                 userDataStoreBean?.uuid!!, facility_id!!,
                 configRequestData
-            ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+            )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
 
         }
         return
@@ -139,7 +139,7 @@ class HistoryConfigViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid
-        ).enqueue(RetrofitMainCallback(getHistoryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getHistoryRetrofitCallBack))
         return
     }
 
@@ -167,7 +167,7 @@ class HistoryConfigViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getCriticalCareChartHeadingsReq
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
     }
 
     fun getCriticalCareChartFilterHeadings(
@@ -191,7 +191,7 @@ class HistoryConfigViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             appPreferences!!.getInt(AppConstants.PATIENT_UUID)
-        ).enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getCriticalCareChartHeadingsRespCallback))
     }
 
     fun updateConfig(
@@ -219,7 +219,7 @@ class HistoryConfigViewModel(
             facilityId!!,
             appPreferences!!.getInt(AppConstants.PATIENT_UUID),
             reqestData
-        ).enqueue(RetrofitMainCallback(updateConfigCallback))
+        )?.enqueue(RetrofitMainCallback(updateConfigCallback))
 
     }
 

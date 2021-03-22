@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.sample_dispatch.ui
 
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -16,17 +15,17 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogSampleListBinding
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.SendIdList
 import com.oasys.digihealth.doctor.ui.sample_dispatch.model.DispatchReq
 import com.oasys.digihealth.doctor.ui.sample_dispatch.model.SampleDispatchResponseModel
 import com.oasys.digihealth.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModel
 import com.oasys.digihealth.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModelFactory
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 import java.util.*
-
 
 class DispatchDialogFragment : DialogFragment() {
 
@@ -47,10 +46,10 @@ class DispatchDialogFragment : DialogFragment() {
     private var tofacility: Int? = 0
 
     private var intData: ArrayList<Int> = ArrayList()
-
     private var dispatchdata: ArrayList<Int> = ArrayList()
 
     var appPreferences: AppPreferences? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         content = arguments?.getString(AppConstants.ALERTDIALOG)
@@ -68,11 +67,10 @@ class DispatchDialogFragment : DialogFragment() {
             DataBindingUtil.inflate(inflater, R.layout.dialog_sample__list_, container, false)
         viewModel = SampleDispatchViewModelFactory(
             requireActivity().application
-
         )
             .create(SampleDispatchViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
         customProgressDialog = CustomProgressDialog(requireContext())
 
@@ -81,22 +79,15 @@ class DispatchDialogFragment : DialogFragment() {
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
-
         val args = arguments
         if (args == null) {
 
         } else {
             // get value from bundle..
             intData = args.getIntegerArrayList(AppConstants.RESPONSECONTENT)!!
-
             //    dispatchdata = args.getIntegerArrayList(AppConstants.RESPONSEDISPATCH)!!
-
             tofacility = args.getInt(AppConstants.RESPONSENEXT)
-
-
         }
-
-
 
         binding!!.number.addTextChangedListener(object : TextWatcher {
 
@@ -107,144 +98,87 @@ class DispatchDialogFragment : DialogFragment() {
             }
 
             override fun afterTextChanged(s: Editable) {
-
                 val datasize = s.trim().length
-
                 val dt = s.trim()
-
-
                 if (datasize != 0) {
-
                     val firstlt = dt[0].toInt()
-
                     Log.i("first", "" + firstlt)
 
                     if (firstlt > 5) {
-
                         if (datasize == 10) {
-
                             if (s.trim().toString().toLong() < 6000000000) {
-
                                 binding!!.number.error = "InValid Mobile Number"
                             } else {
-
                                 binding!!.number.error = null
                             }
                         } else {
-
-
                             binding!!.number.error = "Mobile Number Must be 10 digit"
                         }
-
                     } else {
-
                         binding!!.number.error = "InValid Mobile Number"
-
                     }
-
                 }
-
             }
         })
 
-        binding.saveCardView.setOnClickListener {
+        binding?.saveCardView?.setOnClickListener {
 
-
-            if (!isValidMobileStart(binding!!.number!!.text.trim().toString())) {
-
-                binding.number!!.setError("Mobile Number Not Valid ")
-
+            if (!isValidMobileStart(binding!!.number.text.trim().toString())) {
+                binding?.number!!.error = "Mobile Number Not Valid "
                 Toast.makeText(requireContext(), "Enter Valid Attender Mobile", Toast.LENGTH_LONG)
                     .show()
                 return@setOnClickListener
             }
 
             if (!binding!!.name.text.toString().isNullOrEmpty()) {
-
-
                 if (!binding!!.number.text.toString().isNullOrEmpty()) {
-
-
                     if (binding!!.number.text.length == 10) {
-
-
                         Log.i("save", "" + intData)
-
                         val req: DispatchReq = DispatchReq()
-
                         req.uuids = intData
-
                         req.comments = binding!!.commentEdittext.text.toString()
-
                         req.dispatch_name = binding!!.name.text.toString()
-
                         req.mobile = binding!!.number.text.toString()
-
                         req.to_facility_id = tofacility!!
-
                         viewModel!!.dispatch(req, dispatchRapidRetrofitCallback)
-
                     } else {
-
                         binding!!.number.error = "Mobile no must be a 10 digit"
-
                     }
-
-
                 } else {
-
                     binding!!.number.error = "Please enter contact Number"
-
                 }
-
-
             } else {
-
                 binding!!.name.error = "Please enter Name"
-
             }
             //Call back
             //dialog?.dismiss()
         }
 
-
-
-
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             //Call back
             dialog?.dismiss()
         }
 
-        binding.cancelCardView.setOnClickListener {
+        binding?.cancelCardView?.setOnClickListener {
             //Call back
             dialog?.dismiss()
         }
-
-        return binding.root
+        return binding?.root
     }
 
-
-    val dispatchRapidRetrofitCallback = object {
+    val dispatchRapidRetrofitCallback = object : RetrofitCallback<SampleDispatchResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<SampleDispatchResponseModel>?) {
-
             Toast.makeText(context, "Save Successfully", Toast.LENGTH_LONG).show()
-
             Log.i("", "" + responseBody!!.body()!!.responseContents[0].sample_transport_batch_uuid)
-
             //call back then pdf  navigation send dispatchdata Array for print
-
             val bundle = Bundle()
-
             bundle.putInt(
                 "pdfid",
                 responseBody.body()!!.responseContents[0].sample_transport_batch_uuid
             )
-
             val labtemplatedialog = DispatchPDF()
-
             labtemplatedialog.arguments = bundle
-
-            (activity as MainLandScreenActivity).replaceFragment(labtemplatedialog)
+            (activity as HomeActivity).replaceFragment(labtemplatedialog)
 
             dialog!!.dismiss()
 
@@ -260,13 +194,13 @@ class DispatchDialogFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "something wrong"
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -276,7 +210,7 @@ class DispatchDialogFragment : DialogFragment() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -284,7 +218,7 @@ class DispatchDialogFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -292,13 +226,13 @@ class DispatchDialogFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -307,14 +241,10 @@ class DispatchDialogFragment : DialogFragment() {
 
     }
 
-
     private fun isValidMobileStart(mobileNo: String): Boolean {
         return if (mobileNo != null && mobileNo.isNotEmpty())
             mobileNo.substring(0, 1).toInt() > 5
         else
             false
     }
-
-
 }
-

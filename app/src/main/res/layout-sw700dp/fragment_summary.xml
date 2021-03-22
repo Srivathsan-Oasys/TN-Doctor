@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.sessionwise.view_model.SessionSummaryViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.sessionwise.view_model.SessionSummaryViewModel" />-->
     </data>
 
     <androidx.core.widget.NestedScrollView

@@ -5,9 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.covid.addpatientrequest.*
 import com.oasys.digihealth.doctor.ui.covid.addpatientresponse.AddPatientResponse
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
@@ -72,14 +74,14 @@ SpecimanTYPE
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facilityId!!, "specimen_type"
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -96,7 +98,7 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getMobileBelongsTo(
             AppConstants.ACCEPT_LANGUAGE_EN,
@@ -104,7 +106,7 @@ SpecimanTYPE
             userDataStoreBean?.uuid!!,
             facility_uuid,
             query
-        ).enqueue(RetrofitMainCallback(getMobileBelongsToGenderRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getMobileBelongsToGenderRetrofitCallBack))
         return
     }
 
@@ -120,7 +122,7 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getPatientCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
@@ -128,7 +130,7 @@ SpecimanTYPE
             userDataStoreBean?.uuid!!,
             facility_uuid,
             query
-        ).enqueue(RetrofitMainCallback(getPatientCategoryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getPatientCategoryRetrofitCallBack))
         return
     }
 
@@ -143,13 +145,13 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidGender(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidGenderResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidGenderResponseCallback))
         return
     }
 
@@ -164,14 +166,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidPeriod(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
         return
     }
 
@@ -188,7 +190,7 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getNationality(
             AppConstants.ACCEPT_LANGUAGE_EN,
@@ -196,7 +198,7 @@ SpecimanTYPE
             userDataStoreBean?.uuid!!,
             facilityId,
             query
-        ).enqueue(RetrofitMainCallback(covidNationalityResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidNationalityResponseCallback))
         return
     }
 
@@ -211,13 +213,13 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidNameTitle(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
         return
     }
 
@@ -228,7 +230,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("country_uuid", 1)
@@ -249,7 +251,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
 
         return
@@ -266,7 +268,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -287,7 +289,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(distictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
 
         return
@@ -304,7 +306,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -325,7 +327,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(distictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(distictRetrofitCallback))
 
 
         return
@@ -338,7 +340,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -359,7 +361,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -369,7 +371,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("Id", uuid)
@@ -390,7 +392,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -401,7 +403,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("talukId", uuid)
@@ -422,7 +424,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -433,7 +435,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("talukId", uuid)
@@ -454,7 +456,7 @@ SpecimanTYPE
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(talukRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(talukRetrofitCallback))
 
     }
 
@@ -467,14 +469,14 @@ SpecimanTYPE
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facility_id!!, "out_come_type"
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -490,14 +492,14 @@ SpecimanTYPE
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facilityId!!, "underline_medicine_condition_type"
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -513,14 +515,14 @@ SpecimanTYPE
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facilityId!!, "symptoms"
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -536,15 +538,15 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getAddPatientDetails(
-            AppConstants?.ACCEPT_LANGUAGE_EN,
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId!!,
             AddPatientReqestBody
-        ).enqueue(RetrofitMainCallback(addPatientDetailsResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addPatientDetailsResponseCallback))
         return
     }
 
@@ -555,7 +557,7 @@ SpecimanTYPE
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("searchKeyWord", "")
@@ -576,9 +578,9 @@ SpecimanTYPE
 
         apiService?.getCovidPatientSearch(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, AppConstants?.ACCEPT_LANGUAGE_EN, facility_id!!,
+            userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -588,7 +590,7 @@ SpecimanTYPE
         PatientNameRetrofitCallback: RetrofitCallback<CovidRegistrationSearchResponseModel>,
         strName: String?
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -616,9 +618,9 @@ SpecimanTYPE
 
         apiService?.getCovidPatientSearch(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, AppConstants?.ACCEPT_LANGUAGE_EN, facility_id!!,
+            userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN, facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -633,14 +635,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getQuarantineType(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidQuarantineResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidQuarantineResponseCallback))
         return
 
     }
@@ -654,14 +656,14 @@ SpecimanTYPE
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
         apiService?.getSpecimen_Type(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN,
             facility_id!!, "test_request_type"
-        ).enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(specimenListRetrofitCallBack))
         return
     }
 
@@ -677,15 +679,15 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getUpdatePatientDetails(
-            AppConstants?.ACCEPT_LANGUAGE_EN,
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId!!,
             AddPatientReqestBody
-        ).enqueue(RetrofitMainCallback(addPatientDetailsResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addPatientDetailsResponseCallback))
         return
     }
 
@@ -700,14 +702,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getRepeatedResult(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidRepeatedResultResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidRepeatedResultResponseCallback))
         return
     }
 
@@ -723,14 +725,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getIntervals(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
         return
     }
 
@@ -745,14 +747,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getspecimenDetails(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            this!!.facility_id!!, "patient_specimen_details", pataint_id
-        ).enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
+            this.facility_id!!, "patient_specimen_details", pataint_id
+        )?.enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
         return
     }
 
@@ -768,14 +770,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getsymptomsDetails(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            this!!.facility_id!!, "patient_symptoms", pataint_id
-        ).enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
+            this.facility_id!!, "patient_symptoms", pataint_id
+        )?.enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
         return
     }
 
@@ -790,14 +792,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getpatientDetails(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            this!!.facility_id!!, "covid_patient_details", pataint_id
-        ).enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
+            this.facility_id!!, "covid_patient_details", pataint_id
+        )?.enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
         return
     }
 
@@ -812,14 +814,14 @@ SpecimanTYPE
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getconditionDetails(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            this!!.facility_id!!, "patient_condition_details", pataint_id
-        ).enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
+            this.facility_id!!, "patient_condition_details", pataint_id
+        )?.enqueue(RetrofitMainCallback(covidIntervalsResponseCallback))
         return
     }
 

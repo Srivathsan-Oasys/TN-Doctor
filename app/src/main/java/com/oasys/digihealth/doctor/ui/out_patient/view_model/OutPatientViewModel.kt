@@ -5,10 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.FACILITY_UUID
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.out_patient.model.search_request_model.SearchPatientRequestModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.MyPatientsResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.OldPatientResponseModule
@@ -35,7 +37,7 @@ class OutPatientViewModel(
         progressBar.value = 8
         userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
 
     }
@@ -79,11 +81,11 @@ class OutPatientViewModel(
         progressBar.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatient(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(FACILITY_UUID)!!,
             searchPatientRequestModel
         )!!.enqueue(
@@ -127,11 +129,11 @@ class OutPatientViewModel(
         progressBar.value = 0
         val hmisApplication = HmisApplication.get(getApplication())
         val apiService = hmisApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchOutPatient(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(FACILITY_UUID)!!,
             searchPatientRequestModel
         )!!.enqueue(
@@ -150,7 +152,7 @@ class OutPatientViewModel(
         patientSearchRetrofitCallBack: RetrofitCallback<MyPatientsResponseModel>
     ) {
 
-        val userDataStoreBeans = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBeans = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("pageNo", currentPage)
@@ -159,7 +161,7 @@ class OutPatientViewModel(
             jsonBody.put("sortOrder", sortOrder)
             jsonBody.put("from_date", fromDate)
             jsonBody.put("to_date", toDate)
-            jsonBody.put("doctor_id", userDataStoreBeans.uuid.toString())
+            jsonBody.put("doctor_id", userDataStoreBeans?.uuid.toString())
             jsonBody.put("departmentId", departmentId)
             if (query.isNotEmpty()) {
                 jsonBody.put("pd_mobile", query)
@@ -179,11 +181,11 @@ class OutPatientViewModel(
         progressBars.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchMypatient(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(FACILITY_UUID)!!,
             body
         )!!.enqueue(
@@ -200,7 +202,7 @@ class OutPatientViewModel(
         patientSearchNextRetrofitCallBack: RetrofitCallback<MyPatientsResponseModel>
     ) {
 
-        val userDataStoreBeans = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBeans = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("pageNo", currentPage)
@@ -209,7 +211,7 @@ class OutPatientViewModel(
             jsonBody.put("sortOrder", "DESC")
             jsonBody.put("from_date", fromDate)
             jsonBody.put("to_date", toDate)
-            jsonBody.put("doctor_id", userDataStoreBeans.uuid.toString())
+            jsonBody.put("doctor_id", userDataStoreBeans?.uuid.toString())
             jsonBody.put("departmentId", departmentId)
             if (query.isNotEmpty()) {
                 jsonBody.put("pd_mobile", query)
@@ -228,11 +230,11 @@ class OutPatientViewModel(
         progressBars.value = 0
         val hmisApplication = HmisApplication.get(getApplication())
         val apiService = hmisApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         apiService?.searchMypatient(
             AppConstants.ACCEPT_LANGUAGE_EN,
-            AppConstants.BEARER_AUTH + userDataStoreBean.access_token,
-            userDataStoreBean.uuid!!,
+            AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
+            userDataStoreBean?.uuid!!,
             appPreferences?.getInt(FACILITY_UUID)!!,
             body
         )!!.enqueue(
@@ -262,15 +264,15 @@ class OutPatientViewModel(
             okhttp3.MediaType.parse("application/json; charset=utf-8"),
             jsonBody.toString()
         )
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         progressBar.value = 0
         val hmisApplication = HmisApplication.get(getApplication())
         val apiService = hmisApplication.getRetrofitService()
         apiService?.oldPatient(
-            AppConstants?.ACCEPT_LANGUAGE_EN,
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(oldPatientSearchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(oldPatientSearchRetrofitCallback))
     }
 
 

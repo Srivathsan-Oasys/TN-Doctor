@@ -5,9 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.AddTicketRequestModel
 import com.oasys.digihealth.doctor.ui.helpdesk.model.CategoryListResponseModel
 import com.oasys.digihealth.doctor.ui.helpdesk.model.VendorByMobileResponseModel
@@ -47,7 +49,7 @@ class PublicTicketViewModel(
 
     fun getCategoryList(ResponseDistrictRetrofitCallback: RetrofitCallback<CategoryListResponseModel>) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -73,15 +75,15 @@ class PublicTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
     fun getPriorityList(ResponseDistrictRetrofitCallback: RetrofitCallback<CategoryListResponseModel>) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -107,9 +109,9 @@ class PublicTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -118,7 +120,7 @@ class PublicTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<CategoryListResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -146,9 +148,9 @@ class PublicTicketViewModel(
         apiService?.getCategory(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -157,7 +159,7 @@ class PublicTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<VendorListResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -191,9 +193,9 @@ class PublicTicketViewModel(
         apiService?.getUserProfile(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -203,7 +205,7 @@ class PublicTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<VendorListResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -230,9 +232,9 @@ class PublicTicketViewModel(
         apiService?.getPatientVisit(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -241,7 +243,7 @@ class PublicTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<VendorByMobileResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -255,9 +257,9 @@ class PublicTicketViewModel(
         apiService?.getSaveVendor(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
-            requestModel!!
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
+            requestModel
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 

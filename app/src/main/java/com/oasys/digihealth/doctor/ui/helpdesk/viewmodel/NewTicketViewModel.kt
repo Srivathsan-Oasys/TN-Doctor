@@ -10,6 +10,8 @@ import com.oasys.digihealth.doctor.application.HmisApplication
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.MultipartBody
@@ -49,7 +51,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<TicketInstitutionResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -80,7 +82,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -89,7 +91,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<AssetResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -110,7 +112,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -119,7 +121,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<DepartmentResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -149,7 +151,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -159,7 +161,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<TicketInstitutionResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -235,7 +237,7 @@ class NewTicketViewModel(
             multipartDescription, multipartSerial, multipartVendor, multipartFacility,
             multipartDepartment, multipartUserType, multipartTicketStatus, multipartAssetUUID,
             multipartCategory, multipartPriority, multipartPriority
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback)) // requestModel!!
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback)) // requestModel!!
 
     }
 
@@ -246,7 +248,7 @@ class NewTicketViewModel(
     ) {
 
         Log.e("getTicketList", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -267,7 +269,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -276,7 +278,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<CategoryListResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -296,7 +298,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -305,7 +307,7 @@ class NewTicketViewModel(
         ResponseDistrictRetrofitCallback: RetrofitCallback<CategoryListResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -325,7 +327,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseDistrictRetrofitCallback))
 
     }
 
@@ -337,7 +339,7 @@ class NewTicketViewModel(
     ) {
 
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
 
@@ -374,7 +376,7 @@ class NewTicketViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(assetResponseRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(assetResponseRetrofitCallback))
 
 
     }

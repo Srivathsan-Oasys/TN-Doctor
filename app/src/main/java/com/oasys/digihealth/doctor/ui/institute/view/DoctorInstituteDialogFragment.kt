@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.institute.view
 
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -20,19 +19,19 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogDoctorInstituteListBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.InstitutionresponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.SurgeryInstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseContent
 import com.oasys.digihealth.doctor.ui.institute.model.DepartmentResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseContent
 import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModelFactory
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
-
 
 class DoctorInstituteDialogFragment : DialogFragment() {
 
@@ -80,8 +79,8 @@ class DoctorInstituteDialogFragment : DialogFragment() {
         )
             .create(InstituteViewModel::class.java)
 
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
         ClearData()
         appPreferences =
@@ -90,22 +89,22 @@ class DoctorInstituteDialogFragment : DialogFragment() {
         facilitylevelID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
         department_uuid = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
 
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
 
         viewModel!!.getfacilityCallback(facilitycallbackRetrofitCallback)
 
-        binding.clear.setOnClickListener {
+        binding?.clear?.setOnClickListener {
             ClearData()
         }
-        binding.save.setOnClickListener {
+        binding?.save?.setOnClickListener {
             if (department_uuid != 0 && facilitylevelID != 0) {
                 /*  utils?.showToast(
-                          R.color.positiveToast,
-                          binding?.mainLayout!!,
-                          getString(R.string.data_save)
-                      )*/
+                      R.color.positiveToast,
+                      binding?.mainLayout!!,
+                      getString(R.string.data_save)
+                  )*/
 
 
                 appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
@@ -115,33 +114,33 @@ class DoctorInstituteDialogFragment : DialogFragment() {
 
                 appPreferences?.saveString(AppConstants.DEPARTMENT_NAME, departmentname!!)
 
-                startActivity(Intent(context, MainLandScreenActivity::class.java))
+                startActivity(Intent(context, HomeActivity::class.java))
 
                 requireActivity().finish()
             } else {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.empty_item)
                 )
             }
         }
 
-        binding.spinnerInstitution!!.setOnTouchListener { v, event ->
-            when (event.action) {
+        binding?.spinnerInstitution!!.setOnTouchListener { v, event ->
+            when (event?.action) {
                 MotionEvent.ACTION_DOWN ->
 
                     viewModel!!.getfacilityCallback(facilitycallbackRetrofitCallback)
 
             }
 
-            v.onTouchEvent(event) ?: true
+            v?.onTouchEvent(event) ?: true
         }
 
 
 
 
-        return binding.root
+        return binding?.root
     }
 
     private fun ClearData() {
@@ -155,13 +154,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
         institutionDropDownAdapter = SelectInstituteDropDownAdapter(requireContext(), ArrayList())
         arraylist_institution.add(InstitutionresponseContent())
         institutionDropDownAdapter?.setInstitutionListDetails(arraylist_institution)
-        binding.spinnerInstitution.adapter = institutionDropDownAdapter
+        binding?.spinnerInstitution?.adapter = institutionDropDownAdapter
 
         arraylist_department.clear()
         departmentDropDownAdapter = DepartmentDropDownAdapter(requireContext(), ArrayList())
         arraylist_department.add(DepartmentResponseContent())
         departmentDropDownAdapter?.setDepatmentListDetails(arraylist_department)
-        binding.spinnerDeparment.adapter = departmentDropDownAdapter
+        binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
 
 
         facilitylevelID = 0
@@ -180,7 +179,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
     }
 
     val officeRetrofitCallBack =
-        object {
+        object : RetrofitCallback<OfficeResponseModel> {
             override fun onSuccessfulResponse(response: Response<OfficeResponseModel>) {
                 Log.i("", "" + response.body())
                 if (response.body()?.responseContents!!.isNotEmpty()) {
@@ -201,13 +200,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -217,7 +216,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -225,7 +224,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -233,13 +232,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -321,15 +320,15 @@ class DoctorInstituteDialogFragment : DialogFragment() {
 
 
     val facilitycallbackRetrofitCallback =
-        object {
+        object : RetrofitCallback<SurgeryInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(responseBody: Response<SurgeryInstitutionResponseModel>?) {
 
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
 
-                setInstution(responseBody!!.body().responseContents as ArrayList<InstitutionresponseContent?>?)
+                setInstution(responseBody!!.body()?.responseContents as ArrayList<InstitutionresponseContent?>?)
 
 
             }
@@ -338,7 +337,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                 AnalyticsManager.getAnalyticsManager().trackLoginFailed(context!!, "Bad Request")
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -348,7 +347,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.something_went_wrong))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -358,7 +357,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.unauthorized))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -368,7 +367,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.something_went_wrong))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -379,7 +378,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                         AnalyticsManager.getAnalyticsManager().trackLoginFailed(context!!, s)
                         utils?.showToast(
                             R.color.negativeToast,
-                            binding.mainLayout!!,
+                            binding?.mainLayout!!,
                             s
                         )
                     } catch (e: Exception) {
@@ -396,15 +395,15 @@ class DoctorInstituteDialogFragment : DialogFragment() {
     private fun setInstution(arrayList: ArrayList<InstitutionresponseContent?>?) {
 
         institutionDropDownAdapter?.setInstitutionListDetails(arrayList)
-        binding.spinnerInstitution.adapter = institutionDropDownAdapter
+        binding?.spinnerInstitution?.adapter = institutionDropDownAdapter
 
         if (facilitylevelID != 0) {
 
             for (i in arrayList!!.indices) {
 
-                if (arrayList[i].facility_uuid == facilitylevelID) {
+                if (arrayList[i]?.facility_uuid == facilitylevelID) {
 
-                    binding.spinnerInstitution.setSelection(i)
+                    binding?.spinnerInstitution?.setSelection(i)
 
                     break
 
@@ -414,7 +413,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
         }
 
 
-        binding.spinnerInstitution.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerInstitution?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -424,14 +423,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                 if (position != institutionDropDownAdapter?.count!!) {
                     val institutionListGetDetails = institutionDropDownAdapter?.getlistDetails()
 
-                    facilitylevelID = institutionListGetDetails?.get(position).facility_uuid
-                    institution_NAME = institutionListGetDetails?.get(position).facility.name
+                    facilitylevelID = institutionListGetDetails?.get(position)?.facility_uuid
+                    institution_NAME = institutionListGetDetails?.get(position)?.facility?.name
 
 
                     if (facilitylevelID != 0) {
                         viewModel?.getDepartmentList(facilitylevelID, departmentRetrofitCallBack)
                     }
-
                     return
                 }
             }
@@ -439,14 +437,11 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
-
         }
-
-
     }
 
     val departmentRetrofitCallBack =
-        object {
+        object : RetrofitCallback<DepartmentResponseModel> {
             override fun onSuccessfulResponse(response: Response<DepartmentResponseModel>) {
                 Log.i("", "" + response.body())
 
@@ -464,13 +459,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -480,7 +475,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -488,7 +483,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -496,13 +491,13 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -511,28 +506,20 @@ class DoctorInstituteDialogFragment : DialogFragment() {
         }
 
     private fun setDepartment(arrayList: ArrayList<DepartmentResponseContent?>?) {
-
         departmentDropDownAdapter?.setDepatmentListDetails(arrayList)
-        binding.spinnerDeparment.adapter = departmentDropDownAdapter
-
+        binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
 
         if (department_uuid != 0) {
-
             for (i in arrayList!!.indices) {
-
                 if (arrayList[i]?.department_uuid == department_uuid) {
-
-                    binding.spinnerDeparment.setSelection(i)
-
+                    binding?.spinnerDeparment?.setSelection(i)
                     break
-
                 }
-
             }
         }
 
 
-        binding.spinnerDeparment.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerDeparment?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -543,10 +530,7 @@ class DoctorInstituteDialogFragment : DialogFragment() {
                 department_uuid =
                     departmentListGetDetails?.get(position)?.department_uuid
 
-
                 departmentname = departmentListGetDetails?.get(position)?.department?.name
-
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -561,8 +545,4 @@ class DoctorInstituteDialogFragment : DialogFragment() {
             }
         }
     }
-
-
 }
-
-

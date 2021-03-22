@@ -3,7 +3,6 @@ package com.oasys.digihealth.doctor.ui.sample_dispatch.ui
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.AsyncTask
 import android.os.Build
@@ -23,7 +22,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.PdfviewBinding
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.PDFRequestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.SampleErrorResponse
@@ -33,7 +33,6 @@ import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.*
-
 
 class DispatchPDF : Fragment() {
     private var PDFID: Int = 0
@@ -55,7 +54,6 @@ class DispatchPDF : Fragment() {
 
     companion object {
         const val PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE = 101
-
     }
 
     //private var customProgressDialog: CustomProgressDialog? = null
@@ -74,8 +72,8 @@ class DispatchPDF : Fragment() {
         viewModel = PDFViewModelFactory(
             requireActivity().application
         ).create(PDFViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         appPreferences =
@@ -86,36 +84,25 @@ class DispatchPDF : Fragment() {
 
         val args = arguments
         if (args == null) {
-
             //  Toast.makeText(activity, "arguments is null ", Toast.LENGTH_LONG).show()
         } else {
-
             val bundle = this.arguments
             if (bundle != null) {
                 PDFID = bundle.getInt("pdfid")
-
             }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 runTimePermission()
-
             } else {
-
                 if (PDFID != 0) {
-
-                    viewModel.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
-
-
+                    viewModel?.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
                 }
             }
         }
 
         binding!!.closeImageView.setOnClickListener {
-
             val labtemplatedialog = SampleDispatchActivity()
-
-            (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+            (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
         }
-
         return binding!!.root
     }
 
@@ -131,11 +118,9 @@ class DispatchPDF : Fragment() {
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ), PERMISSION_REQUEST_WRITE_EXTERNAL_STORAGE
             )
-
-
             return
         } else {
-            viewModel.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
+            viewModel?.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
             return
         }
     }
@@ -151,52 +136,36 @@ class DispatchPDF : Fragment() {
 
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // now, you have permission go ahead
-
-                viewModel.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
-
-
+                viewModel?.dispatchPDFdownload(PDFID, GetPDFRetrofitCallback)
             } else {
-
                 getCustomDialog()
             }
         }
-
     }
 
     private fun getCustomDialog() {
-        // build alert dialog
         val dialogBuilder = AlertDialog.Builder(context)
-        // set message of alert dialog
         dialogBuilder.setMessage("App need this permission")
-            // if the dialog is cancelable
             .setCancelable(false)
-            // positive button text and action
-            .setPositiveButton("Proceed", DialogInterface.OnClickListener { dialog, id ->
+            .setPositiveButton("Proceed") { dialog, id ->
                 runTimePermission()
-            })
-            // negative button text and action
-            .setNegativeButton("Cancel", DialogInterface.OnClickListener { dialog, id ->
+            }
+            .setNegativeButton("Cancel") { dialog, id ->
                 dialog.cancel()
-            })
-        // create dialog box
+            }
         val alert = dialogBuilder.create()
-        // set title for alert dialog box
         alert.setTitle("Permission!!")
-        // show alert dialog
         alert.show()
     }
 
-    val GetPDFRetrofitCallback = object {
+    val GetPDFRetrofitCallback = object : RetrofitCallback<ResponseBody> {
         override fun onSuccessfulResponse(responseBody: Response<ResponseBody>?) {
             //you can now get your file in the InputStream
             downloadZipFileTask = DownloadZipFileTask()
             downloadZipFileTask!!.execute(responseBody?.body())
-
-
         }
 
         override fun onBadRequest(response: Response<ResponseBody>?) {
-
             Log.e("badreq", response.toString())
             val gson = GsonBuilder().create()
             val responseModel: QuickRegistrationSaveResponseModel
@@ -206,22 +175,17 @@ class DispatchPDF : Fragment() {
                     response!!.errorBody()!!.string(),
                     SampleErrorResponse::class.java
                 )
-
-
             } catch (e: IOException) { // handle failure to read error
             }
         }
 
         override fun onServerError(response: Response<*>) {
-
         }
 
         override fun onUnAuthorized() {
-
         }
 
         override fun onForbidden() {
-
         }
 
         override fun onFailure(failure: String) {
@@ -231,20 +195,18 @@ class DispatchPDF : Fragment() {
         override fun onEverytime() {
             viewModel!!.progress.value = 8
         }
-
     }
 
-    inner class DownloadZipFileTask :
-        AsyncTask<ResponseBody?, Pair<Int?, Long?>?, String?>() {
+    inner class DownloadZipFileTask : AsyncTask<ResponseBody?, Pair<Int?, Long?>?, String?>() {
 
         fun doProgress(progressDetails: Pair<Int?, Long?>?) {
             publishProgress(progressDetails)
         }
 
         override fun onPostExecute(result: String?) {
-            binding.progressbar!!.setVisibility(View.GONE)
+            binding?.progressbar!!.visibility = View.GONE
 
-            binding.pdfView!!.fromFile(destinationFile)
+            binding?.pdfView!!.fromFile(destinationFile)
                 .password(null)
                 .defaultPage(0)
                 .enableSwipe(true)
@@ -261,8 +223,6 @@ class DispatchPDF : Fragment() {
                 context,
                 "Storage path: $destinationFile", Toast.LENGTH_LONG
             ).show()
-
-
         }
 
         override fun doInBackground(vararg params: ResponseBody?): String? {
@@ -270,7 +230,6 @@ class DispatchPDF : Fragment() {
             return null
         }
     }
-
 
     private fun saveToDisk(body: ResponseBody, filename: String) {
         try {
@@ -294,5 +253,4 @@ class DispatchPDF : Fragment() {
             e.printStackTrace()
         }
     }
-
 }

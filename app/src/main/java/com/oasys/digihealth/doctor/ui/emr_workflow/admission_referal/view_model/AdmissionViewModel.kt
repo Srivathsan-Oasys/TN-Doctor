@@ -5,10 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.request.AdmissionPatientUpdateRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.request.AdmissionSaveRequestModel
@@ -83,7 +84,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(FavdepartmentRetrofitCallBack))
         return
     }
 
@@ -117,7 +118,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
     }
 
@@ -154,7 +155,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -185,7 +186,7 @@ class AdmissionViewModel(
         apiService?.getInstitutions(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(SurgeryInstitutionCallback))
+        )?.enqueue(RetrofitMainCallback(SurgeryInstitutionCallback))
     }
 
     fun getReason(
@@ -206,7 +207,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
         return
     }
 
@@ -228,7 +229,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
         return
     }
 
@@ -251,7 +252,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -277,7 +278,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestModels
-        ).enqueue(RetrofitMainCallback(AdmissionSaveRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(AdmissionSaveRetrofitCallback))
 
     }
 
@@ -387,7 +388,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -410,7 +411,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
-        ).enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
     }
 
@@ -446,7 +447,7 @@ class AdmissionViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -497,7 +498,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(DepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(DepartmentCallBack))
         return
     }
 
@@ -519,7 +520,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_id!!
-        ).enqueue(RetrofitMainCallback(currentDateTimeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(currentDateTimeRetrofitCallback))
         return
 
     }
@@ -543,7 +544,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             patient_id!!, facility_id!!, 2
-        ).enqueue(RetrofitMainCallback(PatientAdmissionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(PatientAdmissionRetrofitCallback))
 
     }
 
@@ -580,7 +581,7 @@ class AdmissionViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
 
 
     }
@@ -605,7 +606,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestModels
-        ).enqueue(RetrofitMainCallback(AdmissionUpdateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(AdmissionUpdateRetrofitCallback))
 
     }
 
@@ -630,7 +631,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestModels
-        ).enqueue(RetrofitMainCallback(AdmissionUpdateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(AdmissionUpdateRetrofitCallback))
 
     }
 
@@ -670,7 +671,7 @@ class AdmissionViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetPDFRetrofitCallback))
 
     }
 
@@ -713,7 +714,7 @@ class AdmissionViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
 
 
     }
@@ -768,7 +769,7 @@ class AdmissionViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(DepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(DepartmentCallBack))
         return
     }
 

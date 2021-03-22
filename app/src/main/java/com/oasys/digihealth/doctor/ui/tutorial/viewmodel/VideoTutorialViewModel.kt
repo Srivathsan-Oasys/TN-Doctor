@@ -6,9 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserManualDeleteResponseModel
 import com.oasys.digihealth.doctor.ui.tutorial.model.UserManualResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
@@ -51,7 +53,7 @@ class VideoTutorialViewModel(
     ) {
 
         Log.e("getUserManualList", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -69,9 +71,9 @@ class VideoTutorialViewModel(
         apiService?.getTutorialList(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -80,7 +82,7 @@ class VideoTutorialViewModel(
     ) {
 
         Log.e("getUserManualList", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -99,7 +101,7 @@ class VideoTutorialViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -110,7 +112,7 @@ class VideoTutorialViewModel(
     ) {
 
         Log.e("deleteFile", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -128,9 +130,9 @@ class VideoTutorialViewModel(
         apiService?.deleteTutorial(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -140,7 +142,7 @@ class VideoTutorialViewModel(
     ) {
 
         Log.e("deleteFile", "inside")
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -158,9 +160,9 @@ class VideoTutorialViewModel(
         apiService?.updateDownloadCount(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean?.user_name,
+            userDataStoreBean?.uuid!!, facility_id!!, userDataStoreBean.user_name,
             body
-        ).enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
@@ -171,7 +173,7 @@ class VideoTutorialViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
         try {
             jsonBody.put("filePath", filepath)
@@ -189,7 +191,7 @@ class VideoTutorialViewModel(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(downloadfile))
+        )?.enqueue(RetrofitMainCallback(downloadfile))
 
     }
 

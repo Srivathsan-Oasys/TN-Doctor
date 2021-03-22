@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.dateswise.view_model.DateWiseReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.quick_reg_reports.dateswise.view_model.DateWiseReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -33,8 +33,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="5dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="vertical">
 
 
                     <LinearLayout
@@ -46,510 +46,510 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:weightSum="2"
                             android:gravity="center_vertical"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="0.5"
                                 android:orientation="vertical">
 
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginLeft="5dp"
-                                        android:fontFamily="@font/poppins_bold"
-                                        android:padding="5dp"
-                                        android:text="Date Wise"
-                                        android:textColor="@color/hmis_background"
-                                        android:textSize="@dimen/dr_title_text" />
-
-                                </LinearLayout>
-
-                                <LinearLayout
+                                <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:layout_weight="1.5"
-                                    android:gravity="right">
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/poppins_bold"
+                                    android:padding="5dp"
+                                    android:text="Date Wise"
+                                    android:textColor="@color/hmis_background"
+                                    android:textSize="@dimen/dr_title_text" />
 
-                                    <androidx.cardview.widget.CardView
-                                        android:id="@+id/favouriteDrawerCardView"
-                                        android:layout_width="35dp"
-                                        android:layout_height="35dp"
-                                        android:layout_marginRight="20dp"
-                                        app:cardBackgroundColor="@color/colorPrimary"
-                                        app:cardCornerRadius="22dp">
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center"
-                                            app:srcCompat="@drawable/ic_favourite_back_arrow"
-                                            tools:ignore="ContentDescription" />
-                                    </androidx.cardview.widget.CardView>
-
-                                </LinearLayout>
                             </LinearLayout>
-                            <View
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:background="@color/view"
-                                />
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.5"
+                                android:gravity="right"
+                                android:orientation="horizontal">
 
+                                <androidx.cardview.widget.CardView
+                                    android:id="@+id/favouriteDrawerCardView"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
+                                    android:layout_marginRight="20dp"
+                                    app:cardBackgroundColor="@color/colorPrimary"
+                                    app:cardCornerRadius="22dp">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        app:srcCompat="@drawable/ic_favourite_back_arrow"
+                                        tools:ignore="ContentDescription" />
+                                </androidx.cardview.widget.CardView>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:background="@color/view" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginRight="20dp"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/reports_patients"
+                                app:cardCornerRadius="5dp">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="@dimen/_10sdp"
-                                    android:layout_marginRight="20dp"
-                                    android:gravity="left"
-                                    android:orientation="horizontal">
+                                    android:layout_height="100dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
 
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight="1"
-                                        android:layout_marginBottom="5dp"
-                                        android:visibility="visible"
-                                        app:cardBackgroundColor="@color/reports_patients"
-                                        app:cardCornerRadius="5dp">
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
-                                        <LinearLayout
+                                        <TextView
                                             android:layout_width="match_parent"
-                                            android:layout_height="100dp"
-                                            android:gravity="center"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Total Patients"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/totalPatientsCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Total Patients"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                            <TextView
-                                                android:id="@+id/totalPatientsCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:id="@+id/totalPatientsAdultCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Adult - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/totalPatientsChildCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="Child - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                        </LinearLayout>
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
-                                </androidx.cardview.widget.CardView>
-
-
-
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight="1"
-                                        android:layout_marginBottom="5dp"
-                                        android:visibility="visible"
-                                        app:cardBackgroundColor="@color/cp"
-                                        app:cardCornerRadius="5dp">
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/totalPatientsAdultCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="100dp"
-                                            android:gravity="center"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Adult - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
 
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/totalPatientsChildCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="New Patients"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                            <TextView
-                                                android:id="@+id/newPatientsCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:id="@+id/newPatientsAdultCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Adult - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/newPatientsChildCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="Child - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                        </LinearLayout>
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="Child - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
 
                                     </LinearLayout>
 
+                                </LinearLayout>
 
-                                </androidx.cardview.widget.CardView>
 
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight="1"
-                                        android:layout_marginBottom="5dp"
-                                        android:visibility="visible"
-                                        app:cardBackgroundColor="@color/colorPrimary"
-                                        app:cardCornerRadius="5dp">
+                            </androidx.cardview.widget.CardView>
 
-                                        <LinearLayout
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/cp"
+                                app:cardCornerRadius="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
                                             android:layout_width="match_parent"
-                                            android:layout_height="100dp"
-                                            android:gravity="center"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="New Patients"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/newPatientsCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:maxLines="2"
-                                                android:text="Old Patients"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                            <TextView
-                                                android:id="@+id/oldPatientsTotal"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:id="@+id/oldPatientsAdultCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Adult - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/oldPatientsChildCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="Child - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                        </LinearLayout>
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
-                                </androidx.cardview.widget.CardView>
-
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight="1"
-                                        android:layout_marginBottom="5dp"
-                                        android:visibility="visible"
-                                        app:cardBackgroundColor="@color/configurationOrange"
-                                        app:cardCornerRadius="5dp">
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/newPatientsAdultCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="100dp"
-                                            android:gravity="center"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Adult - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
 
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/newPatientsChildCount"
                                             android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Adult"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                            <TextView
-                                                android:id="@+id/adultCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:id="@+id/adultMaleCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.7"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="M - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/adultFemaleCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="0.7"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="center"
-                                                android:text="F - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/adultTransgenderCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="0.6"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="TG - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                        </LinearLayout>
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="Child - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
 
                                     </LinearLayout>
 
+                                </LinearLayout>
 
-                                </androidx.cardview.widget.CardView>
 
-                                    <androidx.cardview.widget.CardView
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="10dp"
-                                        android:layout_weight="1"
-                                        android:layout_marginBottom="5dp"
-                                        android:visibility="visible"
-                                        app:cardBackgroundColor="@color/search_button"
-                                        app:cardCornerRadius="5dp">
+                            </androidx.cardview.widget.CardView>
 
-                                        <LinearLayout
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/colorPrimary"
+                                app:cardCornerRadius="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
                                             android:layout_width="match_parent"
-                                            android:layout_height="100dp"
-                                            android:gravity="center"
-                                            android:orientation="vertical"
-                                            android:padding="5dp">
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:maxLines="2"
+                                            android:text="Old Patients"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
-
-                                        <LinearLayout
+                                        <TextView
+                                            android:id="@+id/oldPatientsTotal"
                                             android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="Child"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                            <TextView
-                                                android:id="@+id/childCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_medium_text" />
-
-                                        </LinearLayout>
-
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="50dp"
-                                            android:orientation="horizontal"
-                                            android:weightSum="2"
-                                            android:padding="@dimen/_5sdp">
-
-                                            <TextView
-                                                android:id="@+id/childMaleCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="0.9"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="left|center_vertical"
-                                                android:text="M - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                            <TextView
-                                                android:id="@+id/childFemaleCount"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_weight="1.1"
-                                                android:fontFamily="@font/poppins"
-                                                android:gravity="right|center_vertical"
-                                                android:text="F - 0"
-                                                android:textColor="@color/white"
-                                                android:textSize="@dimen/dr_small_text" />
-
-                                        </LinearLayout>
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
 
                                     </LinearLayout>
 
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
 
-                                </androidx.cardview.widget.CardView>
+                                        <TextView
+                                            android:id="@+id/oldPatientsAdultCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Adult - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                        <TextView
+                                            android:id="@+id/oldPatientsChildCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="Child - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
 
 
-                            </LinearLayout>
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/configurationOrange"
+                                app:cardCornerRadius="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Adult"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
+
+                                        <TextView
+                                            android:id="@+id/adultCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
+                                            android:id="@+id/adultMaleCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.7"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="M - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                        <TextView
+                                            android:id="@+id/adultFemaleCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.7"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="center"
+                                            android:text="F - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                        <TextView
+                                            android:id="@+id/adultTransgenderCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.6"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="TG - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_weight="1"
+                                android:visibility="visible"
+                                app:cardBackgroundColor="@color/search_button"
+                                app:cardCornerRadius="5dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:gravity="center"
+                                    android:orientation="vertical"
+                                    android:padding="5dp">
+
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="Child"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
+
+                                        <TextView
+                                            android:id="@+id/childCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_medium_text" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="50dp"
+                                        android:orientation="horizontal"
+                                        android:padding="@dimen/_5sdp"
+                                        android:weightSum="2">
+
+                                        <TextView
+                                            android:id="@+id/childMaleCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_weight="0.9"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="left|center_vertical"
+                                            android:text="M - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                        <TextView
+                                            android:id="@+id/childFemaleCount"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1.1"
+                                            android:fontFamily="@font/poppins"
+                                            android:gravity="right|center_vertical"
+                                            android:text="F - 0"
+                                            android:textColor="@color/white"
+                                            android:textSize="@dimen/dr_small_text" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="250dp"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:layout_marginBottom="@dimen/_10sdp"
-                            android:visibility="gone"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:visibility="gone">
 
                             <com.github.mikephil.charting.charts.LineChart
                                 android:id="@+id/lineChartView"
@@ -653,12 +653,12 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
-                                    android:textSize="@dimen/dr_medium_text"
-                                    android:focusable="false"
                                     android:background="@drawable/edit_text_bottom_border"
                                     android:drawableRight="@drawable/ic_calendar"
+                                    android:focusable="false"
                                     android:hint="From date"
-                                    android:padding="5dp" />
+                                    android:padding="5dp"
+                                    android:textSize="@dimen/dr_medium_text" />
                             </com.google.android.material.textfield.TextInputLayout>
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -671,12 +671,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"
                                     android:layout_marginTop="@dimen/_5sdp"
-                                    android:textSize="@dimen/dr_medium_text"
-                                    android:focusable="false"
                                     android:background="@drawable/edit_text_bottom_border"
                                     android:drawableRight="@drawable/ic_calendar"
+                                    android:focusable="false"
                                     android:hint="To date"
-                                    android:padding="5dp" />
+                                    android:padding="5dp"
+                                    android:textSize="@dimen/dr_medium_text" />
                             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -684,11 +684,11 @@
                                 android:id="@+id/etDistrictspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select District"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select District"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
 
@@ -696,44 +696,44 @@
                                 android:id="@+id/etHudspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Hud"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select Hud"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etBlockspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Block"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select Block"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etOfficespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select office"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select office"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etInstitutionTypespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Institution Type"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select Institution Type"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="@dimen/dr_medium_text" />
 
 
@@ -741,42 +741,42 @@
                                 android:id="@+id/etInstitutionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Institution"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select Institution"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
                             <com.oasys.digihealth.doctor.MultiSelectionSpinner
                                 android:id="@+id/etSessionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:inputType="text"
-                                android:autofillHints="Select Session"
                                 android:layout_marginTop="20dp"
+                                android:autofillHints="Select Session"
+                                android:background="@drawable/edit_text_bottom_border"
+                                android:inputType="text"
                                 android:textColor="@color/black"
-                                 android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
                             <com.google.android.material.textfield.TextInputLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
-                                 android:background="@drawable/edit_text_bottom_border">
+                                android:background="@drawable/edit_text_bottom_border">
 
                                 <androidx.appcompat.widget.AppCompatSpinner
                                     android:id="@+id/adultOrChildSpinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@null"
                                     android:fontFamily="@font/poppins"
                                     android:hint="Adult / Child"
                                     android:inputType="textNoSuggestions"
                                     android:maxLines="1"
                                     android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
                                     android:paddingRight="5dp"
-                                    android:background="@null"
+                                    android:paddingBottom="5dp"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                     android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>
@@ -785,20 +785,20 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="15dp"
-                                 android:background="@drawable/edit_text_bottom_border">
+                                android:background="@drawable/edit_text_bottom_border">
 
                                 <androidx.appcompat.widget.AppCompatSpinner
                                     android:id="@+id/genderSpinner"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@null"
                                     android:fontFamily="@font/poppins"
                                     android:hint="Gender"
                                     android:inputType="textNoSuggestions"
                                     android:maxLines="1"
                                     android:paddingTop="5dp"
-                                    android:paddingBottom="5dp"
                                     android:paddingRight="5dp"
-                                    android:background="@null"
+                                    android:paddingBottom="5dp"
                                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                                     android:textSize="18sp" />
                             </com.google.android.material.textfield.TextInputLayout>

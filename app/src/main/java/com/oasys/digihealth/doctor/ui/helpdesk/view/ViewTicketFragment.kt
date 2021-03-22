@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.helpdesk.view
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +14,8 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogFragmentViewTicketBinding
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.helpdesk.model.*
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.EditTicketViewModel
 import com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.EditTicketViewModelFactory
@@ -85,8 +86,8 @@ class ViewTicketFragment : DialogFragment() {
             requireActivity().application
         )
             .create(EditTicketViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         val args = arguments
@@ -107,11 +108,11 @@ class ViewTicketFragment : DialogFragment() {
             AppConstants.SHARE_PREFERENCE_NAME
         )
         userDetailsRoomRepository = UserDetailsRoomRepository(requireActivity().application)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)!!
         loginType = appPreferences?.getString(AppConstants.LOGINTYPE)!!
-        userUUID = userDataStoreBean.uuid!!
+        userUUID = userDataStoreBean?.uuid!!
 
 
 
@@ -119,7 +120,7 @@ class ViewTicketFragment : DialogFragment() {
             TicketActivityAdapter(
                 requireActivity(), ArrayList()
             )
-        binding.prescriptionListRecyclerView.adapter = ticketActivityAdapter
+        binding?.prescriptionListRecyclerView?.adapter = ticketActivityAdapter
 
 
         return binding!!.root
@@ -133,7 +134,7 @@ class ViewTicketFragment : DialogFragment() {
 
             for (i in categorylistfilteritem!!.indices)
                 if (categorylistfilteritem?.get(i)?.uuid == detailList?.category_uuid) {
-                    binding.edCategory.setText(categorylistfilteritem?.get(i)?.name)
+                    binding?.edCategory?.setText(categorylistfilteritem?.get(i)?.name)
                 }
 
         }
@@ -151,7 +152,7 @@ class ViewTicketFragment : DialogFragment() {
 
                 if (subCategorylistfilteritem?.get(i)?.uuid == detailList?.subcategory_uuid) {
 
-                    binding.edSubCategory.setText(subCategorylistfilteritem?.get(i)?.name)
+                    binding?.edSubCategory?.setText(subCategorylistfilteritem?.get(i)?.name)
 
                 }
         }
@@ -170,7 +171,7 @@ class ViewTicketFragment : DialogFragment() {
 
                 if (prioritylistfilteritem?.get(i)?.uuid == detailList?.priority_uuid) {
 
-                    binding.edPriority.setText(prioritylistfilteritem?.get(i)?.name)
+                    binding?.edPriority?.setText(prioritylistfilteritem?.get(i)?.name)
 
                 }
         }
@@ -178,7 +179,7 @@ class ViewTicketFragment : DialogFragment() {
     }
 
     val updateTicketRetrofitCallback =
-        object {
+        object : RetrofitCallback<TicketInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<TicketInstitutionResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -198,7 +199,7 @@ class ViewTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -208,7 +209,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -216,7 +217,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -224,13 +225,13 @@ class ViewTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -239,7 +240,7 @@ class ViewTicketFragment : DialogFragment() {
         }
 
     val categorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -272,7 +273,7 @@ class ViewTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -282,7 +283,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -290,7 +291,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -298,13 +299,13 @@ class ViewTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -326,7 +327,8 @@ class ViewTicketFragment : DialogFragment() {
     }
 
 
-    val ticketByIdResponseRetrofitCallback = object {
+    val ticketByIdResponseRetrofitCallback = object :
+        RetrofitCallback<TicketIdResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<TicketIdResponseModel>?) {
 
             var responsedata = Gson().toJson(responseBody?.body()?.responseContents)
@@ -365,13 +367,13 @@ class ViewTicketFragment : DialogFragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -381,7 +383,7 @@ class ViewTicketFragment : DialogFragment() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -389,7 +391,7 @@ class ViewTicketFragment : DialogFragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -397,13 +399,13 @@ class ViewTicketFragment : DialogFragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -412,7 +414,7 @@ class ViewTicketFragment : DialogFragment() {
     }
 
     val prioritySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -443,7 +445,7 @@ class ViewTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -453,7 +455,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -461,7 +463,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -469,13 +471,13 @@ class ViewTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -484,7 +486,7 @@ class ViewTicketFragment : DialogFragment() {
         }
 
     val statuspinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -513,7 +515,7 @@ class ViewTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -523,7 +525,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -531,7 +533,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -539,13 +541,13 @@ class ViewTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -555,7 +557,7 @@ class ViewTicketFragment : DialogFragment() {
 
 
     val subCategorySpinnerRetrofitCallback =
-        object {
+        object : RetrofitCallback<CategoryListResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<CategoryListResponseModel>) {
                 Log.i("", "" + response.body()?.responseContents)
@@ -588,7 +590,7 @@ class ViewTicketFragment : DialogFragment() {
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -598,7 +600,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -606,7 +608,7 @@ class ViewTicketFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -614,13 +616,13 @@ class ViewTicketFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {

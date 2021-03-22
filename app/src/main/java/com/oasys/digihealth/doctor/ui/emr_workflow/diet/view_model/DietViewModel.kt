@@ -9,6 +9,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.ResponseDietGetTemplateDetails
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.SearchDietResponse
@@ -59,7 +60,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.getDietFavourites(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, userDataStoreBean?.uuid!!,
             facility_UUID!!, departmentID!!
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -94,7 +95,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.deletedietRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -129,7 +130,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(dietSearchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(dietSearchRetrofitCallback))
         return
     }
 
@@ -151,7 +152,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
             department_UUID!!,
             facility_UUID!!,
             AppConstants.FAV_TYPE_ID_DIET
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -183,7 +184,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -205,7 +206,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.getDietMasterCategoryList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!
-        ).enqueue(RetrofitMainCallback(favCategoryCallBack))
+        )?.enqueue(RetrofitMainCallback(favCategoryCallBack))
         return
 
     }
@@ -229,7 +230,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
         apiService?.getDietMasterFrequency(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!
-        ).enqueue(RetrofitMainCallback(favFrequencyallBack))
+        )?.enqueue(RetrofitMainCallback(favFrequencyallBack))
         return
 
     }
@@ -252,7 +253,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             EmrRequestData
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -279,7 +280,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
             templateId!!,
             AppConstants.FAV_TYPE_ID_DIET,
             department_UUID!!
-        ).enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getTemplateRetrofitCallback))
         return
     }
 
@@ -310,7 +311,7 @@ class DietViewModel(application: Application) : AndroidViewModel(application) {
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getOpNotesEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getOpNotesEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(

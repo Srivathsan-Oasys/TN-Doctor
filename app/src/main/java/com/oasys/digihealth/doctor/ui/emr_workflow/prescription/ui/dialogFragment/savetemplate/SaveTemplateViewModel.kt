@@ -5,12 +5,15 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.*
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
+import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PresDrugFrequencyResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PresInstructionResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PrescriptionDurationResponseModel
+import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.model.PrescriptionRoutResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.request.SaveTemplateRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.request.SearchPrescriptionResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.savetemplate.response.SaveTemplateResponseModel
@@ -76,7 +79,7 @@ class SaveTemplateViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -111,7 +114,7 @@ class SaveTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -146,7 +149,7 @@ class SaveTemplateViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -184,7 +187,7 @@ class SaveTemplateViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(instructionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(instructionRetrofitCallback))
         return
 
     }
@@ -228,7 +231,7 @@ class SaveTemplateViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(searchRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(searchRetrofitCallback))
 
 
     }
@@ -253,7 +256,7 @@ class SaveTemplateViewModel(
             userDataStoreBean?.uuid!!,
             facilityID!!,
             saveTemplateRequestModel
-        ).enqueue(RetrofitMainCallback(saveTemplateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(saveTemplateRetrofitCallback))
 
 
     }

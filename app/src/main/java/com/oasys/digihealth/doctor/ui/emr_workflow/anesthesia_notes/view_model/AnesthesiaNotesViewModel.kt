@@ -5,10 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.anesthesia_notes.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.anesthesia_notes.model.add_consultations.AnaesthesiaNotesAddConsultationsReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.anesthesia_notes.model.add_consultations.AnaesthesiaNotesAddConsultationsResp
@@ -69,7 +70,7 @@ class AnesthesiaNotesViewModel(
             facility_uuid,
             profileType,
             departmentId
-        ).enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getAllProfileTypesRespRetrofitCallback))
     }
 
     fun getAnesthesiaNotes(
@@ -93,7 +94,7 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profileUuid
-        ).enqueue(RetrofitMainCallback(getAnesthesiaNotesRestRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getAnesthesiaNotesRestRetrofitCallback))
     }
 
     fun getEncounter(
@@ -123,7 +124,7 @@ class AnesthesiaNotesViewModel(
             doctorId!!,
             departmentId,
             encounterType
-        ).enqueue(RetrofitMainCallback(getAnesthesiaNotesEncounterByDocAndPatientIdRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAnesthesiaNotesEncounterByDocAndPatientIdRespCallback))
     }
 
     fun createEncounter(
@@ -204,7 +205,7 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             saveAnesthesiaNotesDetailsReq
-        ).enqueue(RetrofitMainCallback(saveAnesthesiaNotesDetailsRespCallback))
+        )?.enqueue(RetrofitMainCallback(saveAnesthesiaNotesDetailsRespCallback))
     }
 
     fun getDefault(
@@ -228,7 +229,7 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             profile_type_uuid
-        ).enqueue(RetrofitMainCallback(getAnesthesiaNotesDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAnesthesiaNotesDefaultRespCallback))
     }
 
     fun setDefault(
@@ -252,7 +253,7 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             setAnesthesiaNotesDefaultReq
-        ).enqueue(RetrofitMainCallback(setAnesthesiaNotesDefaultRespCallback))
+        )?.enqueue(RetrofitMainCallback(setAnesthesiaNotesDefaultRespCallback))
     }
 
     fun getPreviousRecords(
@@ -278,7 +279,7 @@ class AnesthesiaNotesViewModel(
             facility_uuid,
             patientId,
             profileType
-        ).enqueue(RetrofitMainCallback(getAnesthesiaNotesPreviousRecordsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAnesthesiaNotesPreviousRecordsRespCallback))
     }
 
     fun getObservedValues(
@@ -302,7 +303,7 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             patientId
-        ).enqueue(RetrofitMainCallback(getAnesthesiaNotesObservedValuesRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAnesthesiaNotesObservedValuesRespCallback))
     }
 
     fun getEmrWorkflow(
@@ -323,7 +324,7 @@ class AnesthesiaNotesViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             contextId
-        ).enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowResponseModelCallback))
     }
 
     fun addConsultations(
@@ -347,6 +348,6 @@ class AnesthesiaNotesViewModel(
             userDataStoreBean?.uuid!!,
             facility_uuid,
             anaesthesiaNotesAddConsultationsReq
-        ).enqueue(RetrofitMainCallback(anaesthesiaNotesAddConsultationsRespCallback))
+        )?.enqueue(RetrofitMainCallback(anaesthesiaNotesAddConsultationsRespCallback))
     }
 }

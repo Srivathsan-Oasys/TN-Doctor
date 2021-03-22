@@ -5,11 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.documents.model.*
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.MultipartBody
@@ -59,7 +59,7 @@ class DocumentViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(documentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(documentTypeResponseCallback))
         return
     }
 
@@ -82,7 +82,7 @@ class DocumentViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId, patiend_UUID!!
-        ).enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
+        )?.enqueue(RetrofitMainCallback(addDocumentTypeResponseCallback))
         return
     }
 
@@ -104,7 +104,7 @@ class DocumentViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, attachmentId!!
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -136,7 +136,7 @@ class DocumentViewModel(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!, body
-        ).enqueue(RetrofitMainCallback(downloadfile))
+        )?.enqueue(RetrofitMainCallback(downloadfile))
 
     }
 
@@ -195,6 +195,6 @@ class DocumentViewModel(
             multipartattachmentTypeUuid,
             multipartcomments,
             multipartattachedname
-        ).enqueue(RetrofitMainCallback(adduploadCallback))
+        )?.enqueue(RetrofitMainCallback(adduploadCallback))
     }
 }

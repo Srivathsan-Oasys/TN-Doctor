@@ -27,7 +27,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesRes
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.favouriteEdit.ManagePreFavEdit
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.PrescriptionViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.view_model.PrescriptionViewModelFactory
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

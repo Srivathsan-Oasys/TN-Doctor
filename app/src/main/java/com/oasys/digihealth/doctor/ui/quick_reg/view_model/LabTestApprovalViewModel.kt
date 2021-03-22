@@ -3,20 +3,22 @@ package com.oasys.digihealth.doctor.ui.quick_reg.view_model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.ApprovalRequestModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalResultResponse
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.LabApprovalSpinnerResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.response.OrderApprovedResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.request.LabTestApprovalRequestModel
-import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.*
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabAssignedToResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabTestApprovalResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.LabTestSpinnerResponseModel
+import com.oasys.digihealth.doctor.ui.quick_reg.model.labtest.response.SimpleResponseModel
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -31,7 +33,6 @@ class LabTestApprovalViewModel(
 ) {
 
 
-
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
     var enterConfirmPasswordEditText = MutableLiveData<String>()
@@ -41,10 +42,9 @@ class LabTestApprovalViewModel(
 
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
 
-    var facility_id:Int?=0
+    var facility_id: Int? = 0
 
     var appPreferences: AppPreferences? = null
-
 
 
     init {
@@ -58,8 +58,9 @@ class LabTestApprovalViewModel(
     }
 
 
-
-    fun getLabTestApprovalList(requestLabApprovalListRequest: LabTestApprovalRequestModel, GetLabTestApprovalListRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>
+    fun getLabTestApprovalList(
+        requestLabApprovalListRequest: LabTestApprovalRequestModel,
+        GetLabTestApprovalListRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -71,15 +72,19 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabTestApproval(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabTestApproval(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,true,
+            userDataStoreBean?.uuid!!, facility_id!!, true,
             requestLabApprovalListRequest
         )?.enqueue(RetrofitMainCallback(GetLabTestApprovalListRetrofitCallback))
 
     }
 
-    fun getLabTestApprovalListSecond(labTestApprovalRequestModel: LabTestApprovalRequestModel, labTestApprovalResponseSecondRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>) {
+    fun getLabTestApprovalListSecond(
+        labTestApprovalRequestModel: LabTestApprovalRequestModel,
+        labTestApprovalResponseSecondRetrofitCallback: RetrofitCallback<LabTestApprovalResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -91,15 +96,19 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabTestApproval(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabTestApproval(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!,true,
+            userDataStoreBean?.uuid!!, facility_id!!, true,
             labTestApprovalRequestModel
         )?.enqueue(RetrofitMainCallback(labTestApprovalResponseSecondRetrofitCallback))
 
 
     }
-    fun orderDetailsGet(req: com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.Req, GetLabTestSampleListRetrofitCallback: RetrofitCallback<LabApprovalResultResponse>
+
+    fun orderDetailsGet(
+        req: com.oasys.digihealth.doctor.ui.quick_reg.model.labapprovalresult.Req,
+        GetLabTestSampleListRetrofitCallback: RetrofitCallback<LabApprovalResultResponse>
     ) {
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -111,13 +120,15 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.orderDetailsGetLabApproval(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.orderDetailsGetLabApproval(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             req
         )?.enqueue(RetrofitMainCallback(GetLabTestSampleListRetrofitCallback))
 
     }
+
     fun getapprovalSpinner(
         labApprovalSpinnerRetrofitCallback: RetrofitCallback<LabApprovalSpinnerResponseModel>
     ) {
@@ -132,7 +143,7 @@ class LabTestApprovalViewModel(
             jsonBody.put("table_name", "auth_status")
             jsonBody.put("sortField", "display_order")
             jsonBody.put("sortOrder", "ASC")
-            jsonBody.put("status",1)
+            jsonBody.put("status", 1)
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -150,7 +161,7 @@ class LabTestApprovalViewModel(
         apiService?.getApprovalResultSpinner(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            facility_id!!,AppConstants.ACCEPT_LANGUAGE_EN,
+            facility_id!!, AppConstants.ACCEPT_LANGUAGE_EN,
             body
         )?.enqueue(RetrofitMainCallback(labApprovalSpinnerRetrofitCallback))
         return
@@ -158,8 +169,10 @@ class LabTestApprovalViewModel(
     }
 
 
-
-    fun getTextMethod1(facilityId: Int, ResponseTestMethodRetrofitCallback: RetrofitCallback<LabTestSpinnerResponseModel>) {
+    fun getTextMethod1(
+        facilityId: Int,
+        ResponseTestMethodRetrofitCallback: RetrofitCallback<LabTestSpinnerResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -192,15 +205,19 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabTestSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabTestSpinner(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!, true,
+            userDataStoreBean?.uuid!!, facilityId, true,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
-    fun getTextAssignedTo(facilityId: Int, ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabAssignedToResponseModel>) {
+    fun getTextAssignedTo(
+        facilityId: Int,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<LabAssignedToResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
@@ -220,7 +237,6 @@ class LabTestApprovalViewModel(
             jsonBody.put("search", "")
 
 
-
         } catch (e: JSONException) {
             e.printStackTrace()
         }
@@ -234,7 +250,8 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.getLabAssignedToSpinner(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.getLabAssignedToSpinner(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId, true,
             body
@@ -242,7 +259,10 @@ class LabTestApprovalViewModel(
 
     }
 
-    fun orderApproved(request: ApprovalRequestModel,ResponseTestAssignedToRetrofitCallback: RetrofitCallback<OrderApprovedResponseModel>) {
+    fun orderApproved(
+        request: ApprovalRequestModel,
+        ResponseTestAssignedToRetrofitCallback: RetrofitCallback<OrderApprovedResponseModel>
+    ) {
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
@@ -254,14 +274,18 @@ class LabTestApprovalViewModel(
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
 
-        apiService?.orderApproved(AppConstants.ACCEPT_LANGUAGE_EN,
+        apiService?.orderApproved(
+            AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             request
         )?.enqueue(RetrofitMainCallback(ResponseTestAssignedToRetrofitCallback))
     }
 
-    fun retest(id: ArrayList<Int>, orderretestRetrofitCallback: RetrofitCallback<SimpleResponseModel>) {
+    fun retest(
+        id: ArrayList<Int>,
+        orderretestRetrofitCallback: RetrofitCallback<SimpleResponseModel>
+    ) {
 
 
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
@@ -275,14 +299,12 @@ class LabTestApprovalViewModel(
         }
 
 
-        for(i in id.indices){
+        for (i in id.indices) {
 
             jsonArray.put(id[i])
         }
 
         try {
-
-
 
 
             jsonBody.put("Id", jsonArray)
@@ -305,7 +327,6 @@ class LabTestApprovalViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, this.facility_id!!, body
         )?.enqueue(RetrofitMainCallback(orderretestRetrofitCallback))
-
 
 
     }

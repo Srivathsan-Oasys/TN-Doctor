@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.allergy.model.response.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.allergy.model.response.edit.EditAllergyBindResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.allergy.model.response.period.PeriodsResponseModel
@@ -58,7 +58,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid
-        ).enqueue(RetrofitMainCallback(getallergyTypeRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getallergyTypeRetrofitCallBack))
         return
     }
 
@@ -89,7 +89,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             body
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 
@@ -110,7 +110,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid
-        ).enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
         return
     }
 
@@ -143,7 +143,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, body
-        ).enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
         return
     }
 
@@ -176,7 +176,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, body
-        ).enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getallergyNameRetrofitCallBack))
         return
     }
 
@@ -198,7 +198,7 @@ class AllergyViewModel(
         apiService?.getAllergyAll(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_uuid, patient_uuid
-        ).enqueue(RetrofitMainCallback(getAllergyAllRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getAllergyAllRetrofitCallBack))
         return
     }
 
@@ -223,7 +223,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, allergyRequest
-        ).enqueue(RetrofitMainCallback(postAllergyRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(postAllergyRetrofitCallBack))
         return
     }
 
@@ -249,7 +249,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, uuid, allergyRequest
-        ).enqueue(RetrofitMainCallback(updateAllergyRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(updateAllergyRetrofitCallBack))
         return
     }
 
@@ -275,7 +275,7 @@ class AllergyViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, uuid.toString()
-        ).enqueue(RetrofitMainCallback(editAllergyRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(editAllergyRetrofitCallBack))
         return
     }
 

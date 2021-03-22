@@ -5,12 +5,13 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppConstants.FAV_TYPE_ID_CHIEF_COMPLAINTS
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.model.PrevChiefComplainResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.model.duration.DurationResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.model.request.ChiefComplaintRequestModel
@@ -69,7 +70,7 @@ class ChiefComplaintViewModel(
             facilty_UUID!!,
             departmentID!!,
             FAV_TYPE_ID_CHIEF_COMPLAINTS
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -86,7 +87,7 @@ class ChiefComplaintViewModel(
         apiService?.getDuration(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!
-        ).enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getDurationRetrofitCallBack))
         return
     }
 
@@ -109,7 +110,7 @@ class ChiefComplaintViewModel(
             userDataStoreBean?.uuid!!,
             "filterbythree",
             query
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -131,7 +132,7 @@ class ChiefComplaintViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             ChiefComplaintArray
-        ).enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(configFinalRetrofitCallBack))
         return
 
     }
@@ -162,7 +163,7 @@ class ChiefComplaintViewModel(
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -186,7 +187,7 @@ class ChiefComplaintViewModel(
             userDataStoreBean?.uuid!!,
             "filterbythree",
             query
-        ).enqueue(RetrofitMainCallback(complaintSearchFavRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchFavRetrofitCallBack))
         return
 
     }
@@ -211,7 +212,7 @@ class ChiefComplaintViewModel(
             userDataStoreBean?.uuid!!,
             facilityid!!,
             encounterTypeUuid!!, patientId.toString(), "5"
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
     fun getEncounter(

@@ -64,7 +64,7 @@
                     android:focusableInTouchMode="true"
                     android:orientation="horizontal">
 
-                    <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                         style="@style/TabTitleCommonTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/tvCategory"
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"
@@ -278,7 +278,7 @@
                         android:layout_marginRight="10dp"
                         android:layout_weight=".3">
 
-                        <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/tv_frequency"
                             style="@style/TabTitleCommonTextView"
                             android:layout_width="wrap_content"

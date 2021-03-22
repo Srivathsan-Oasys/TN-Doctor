@@ -21,12 +21,13 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentBloodRequestChildBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.blood_request.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.blood_request.view_model.BloodRequestViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_response.CreateEncounterResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.fetch_encounters_response.FectchEncounterResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 
 class BloodRequestChildFragment : Fragment() {
@@ -891,7 +892,7 @@ class BloodRequestChildFragment : Fragment() {
     }
 
     private fun trackBloodRequestPreviousBloodRequest(type: String?) {
-//        AnalyticsManager.getAnalyticsManager().trackBloodRequestPreviousBloodRequest(type)
+        AnalyticsManager.getAnalyticsManager().trackBloodRequestPreviousBloodRequest(type)
     }
 
 }

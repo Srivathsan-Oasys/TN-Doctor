@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.immunization.model.ImmunizationInstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.edit.EditSurgeryResponseModel
@@ -72,7 +72,7 @@ class HistorySurgeryViewModel(
         apiService?.getInstitutions(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(SurgeryInstitutionCallback))
+        )?.enqueue(RetrofitMainCallback(SurgeryInstitutionCallback))
     }
 
     fun getSurgeryCallback(
@@ -91,7 +91,7 @@ class HistorySurgeryViewModel(
         apiService?.getSurgery(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, patientId!!
-        ).enqueue(RetrofitMainCallback(surgeryCallback))
+        )?.enqueue(RetrofitMainCallback(surgeryCallback))
     }
 
     fun getSurgeryNameCallback(
@@ -120,7 +120,7 @@ class HistorySurgeryViewModel(
         apiService?.getName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityid!!, body
-        ).enqueue(RetrofitMainCallback(SurgeryNameCallback))
+        )?.enqueue(RetrofitMainCallback(SurgeryNameCallback))
     }
 
 
@@ -144,7 +144,7 @@ class HistorySurgeryViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, createSurgery
-        ).enqueue(RetrofitMainCallback(createSurgeryHistoryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(createSurgeryHistoryRetrofitCallBack))
         return
     }
 
@@ -170,7 +170,7 @@ class HistorySurgeryViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, uuid, surgeryRequest
-        ).enqueue(RetrofitMainCallback(updateSurgeryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(updateSurgeryRetrofitCallBack))
         return
     }
 
@@ -195,7 +195,7 @@ class HistorySurgeryViewModel(
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, uuid.toString()
-        ).enqueue(RetrofitMainCallback(editSurgeryRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(editSurgeryRetrofitCallBack))
         return
     }
 
@@ -230,7 +230,7 @@ class HistorySurgeryViewModel(
             userDataStoreBean?.uuid!!,
             facility_id!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 

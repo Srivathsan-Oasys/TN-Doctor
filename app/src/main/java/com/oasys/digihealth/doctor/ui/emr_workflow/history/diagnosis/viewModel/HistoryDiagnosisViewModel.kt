@@ -5,12 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.diagnosis.model.DiagnosisSearchResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.diagnosis.model.HistoryDiagnosisCreateResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.diagnosis.model.HistoryDiagnosisResponseModel
@@ -64,7 +64,7 @@ class HistoryDiagnosisViewModel(application: Application) : AndroidViewModel(app
                     BEARER_AUTH + userDataStoreBean?.access_token,
                     userDataStoreBean?.uuid!!, facilityId, "getLatestDiagnosis", 10,
                     patient_id, department_uuid!!
-                ).enqueue(
+                )?.enqueue(
                     RetrofitMainCallback(getallListRetrofitCallback)
                 )
             }
@@ -92,7 +92,7 @@ class HistoryDiagnosisViewModel(application: Application) : AndroidViewModel(app
             userDataStoreBean?.uuid!!,
             facility_uuid!!,
             "filterbythree", query
-        ).enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
+        )?.enqueue(RetrofitMainCallback(dignosisSearchRetrofitCallBack1))
     }
 
 
@@ -116,7 +116,7 @@ class HistoryDiagnosisViewModel(application: Application) : AndroidViewModel(app
             BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facility_uuid, diagnosisRequest
-        ).enqueue(RetrofitMainCallback(postAllergyRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(postAllergyRetrofitCallBack))
         return
     }
 
@@ -147,7 +147,7 @@ class HistoryDiagnosisViewModel(application: Application) : AndroidViewModel(app
             patient_uuid!!,
             department_uuid!!,
             diagnosisupdateRequest
-        ).enqueue(RetrofitMainCallback(updateDiagnosisRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(updateDiagnosisRetrofitCallBack))
         return
     }
 

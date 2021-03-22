@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_critical_care_chart.view_model.NurseDeskCriticalCareChartViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_critical_care_chart.view_model.NurseDeskCriticalCareChartViewModel" />-->
     </data>
 
     <RelativeLayout

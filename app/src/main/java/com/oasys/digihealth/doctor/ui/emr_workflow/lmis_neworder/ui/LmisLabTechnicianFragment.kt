@@ -50,7 +50,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.model.templete.LabDetail
 import com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.CommentDialogFragment
 import com.oasys.digihealth.doctor.ui.emr_workflow.radiology.model.GetToLocationTestResponse
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.lab.ui.PrevLmisLabTechnicianFragment
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.quick_reg.model.GetReferenceResponseModel
 import com.oasys.digihealth.doctor.ui.quick_reg.model.LocationMasterResponseModelX
 import com.oasys.digihealth.doctor.ui.quick_reg.model.ResponseTestMethod
@@ -999,11 +999,11 @@ class LmisLabTechnicianFragment : Fragment(), LmisLabTechnicianFavouriteFragment
         object : RetrofitCallback<LabTestSpinnerResponseModel> {
             @SuppressLint("SetTextI18n")
             override fun onSuccessfulResponse(response: Response<LabTestSpinnerResponseModel>) {
-                Log.i("search", "" + response.body().responseContents)
-                if (response.body().responseContents.isNotEmpty()!!) {
+                Log.i("search", "" + response.body()?.responseContents)
+                if (response.body()?.responseContents?.isNotEmpty()!!) {
                     mAdapter?.setAdapter(
                         dropdownReferenceView,
-                        response.body().responseContents!! as ArrayList<LabTestSpinnerresponseContent>,
+                        response.body()?.responseContents!! as ArrayList<LabTestSpinnerresponseContent>,
                         searchposition
                     )
                 } else {
@@ -1291,7 +1291,7 @@ class LmisLabTechnicianFragment : Fragment(), LmisLabTechnicianFavouriteFragment
             if (savestatus!!) {
                 val labtemplatedialog = LabTestActivity()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
             }
         }
 
@@ -1370,7 +1370,7 @@ class LmisLabTechnicianFragment : Fragment(), LmisLabTechnicianFavouriteFragment
             if (savestatus!!) {
                 val labtemplatedialog = LabTestActivity()
 
-                (activity as MainLandScreenActivity).replaceFragmentNoBack(labtemplatedialog)
+                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
             }
         }
 

@@ -21,6 +21,7 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentTabTrasfereBinding
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.AdmissionWardResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.AmissionWardResponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.model.TransmissionReasonResponseContent
@@ -39,7 +40,6 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class TransferTabFragment : Fragment() {
 
@@ -125,7 +125,7 @@ class TransferTabFragment : Fragment() {
 
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
         val dateInString = sdf.format(Date())
-        responseContents = binding?.departmentRemarks.text.toString()
+        responseContents = binding?.departmentRemarks?.text.toString()
 
         binding?.radioGroup?.setOnCheckedChangeListener { group, checkedId ->
 
@@ -159,7 +159,7 @@ class TransferTabFragment : Fragment() {
             }
 
             override fun afterTextChanged(s: Editable) {
-                if (s.length in 3..4) {
+                if (s.length > 2 && s.length < 5) {
 
                     viewModel?.getAutoCompleteDepartment(
                         s.toString(),
@@ -247,7 +247,7 @@ class TransferTabFragment : Fragment() {
                      .isEmpty() || !binding?.wardRemarks!!.text.trim().toString().isEmpty()
              ) {*/
             val refferalNextRequestModel: TrasfferedRequestModel = TrasfferedRequestModel()
-            val departmentRemarks = binding?.departmentRemarks.text.toString()
+            val departmentRemarks = binding?.departmentRemarks?.text.toString()
             val institutionRemarks = binding?.institutionRemarks?.text.toString()
             val wardRemarks = binding?.wardRemarks?.text.toString()
 
@@ -302,7 +302,7 @@ class TransferTabFragment : Fragment() {
 
 
     private fun itemClickListener() {
-        binding?.department.onItemSelectedListener =
+        binding?.department?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
@@ -328,7 +328,7 @@ class TransferTabFragment : Fragment() {
                     }
                 }
             }
-        binding?.departmentReason.onItemSelectedListener =
+        binding?.departmentReason?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
@@ -358,7 +358,7 @@ class TransferTabFragment : Fragment() {
 
 
 
-        binding?.institution.onItemSelectedListener =
+        binding?.institution?.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
@@ -501,7 +501,7 @@ class TransferTabFragment : Fragment() {
                 binding?.departmentReason!!.isEnabled = true
                 binding?.departmentRemarks?.isEnabled = true*/
 
-                binding?.institution.isEnabled = false
+                binding?.institution?.isEnabled = false
                 binding?.institutionDepartment?.isEnabled = false
                 binding?.institutionReason?.isEnabled = false
                 binding?.institutionRemarks?.isEnabled = false
@@ -516,14 +516,14 @@ class TransferTabFragment : Fragment() {
 
                 binding?.department!!.isEnabled = false
                 binding?.departmentReason!!.isEnabled = false
-                binding?.departmentRemarks.isEnabled = false
+                binding?.departmentRemarks?.isEnabled = false
 
                 binding?.wardSpinner?.isEnabled = false
                 binding?.wardReason?.isEnabled = false
                 binding?.wardRemarks?.isEnabled = false
 
 
-                binding?.institution.isEnabled = true
+                binding?.institution?.isEnabled = true
                 //binding?.department?.isEnabled = true
                 binding?.institutionReason?.isEnabled = true
                 binding?.institutionRemarks?.isEnabled = true
@@ -539,8 +539,8 @@ class TransferTabFragment : Fragment() {
                 binding?.departmentReason!!.isEnabled = false
                 binding?.departmentRemarks?.isEnabled = false*/
 
-                binding?.institution.isEnabled = false
-                binding?.department.isEnabled = false
+                binding?.institution?.isEnabled = false
+                binding?.department?.isEnabled = false
                 binding?.institutionReason?.isEnabled = false
                 binding?.institutionRemarks?.isEnabled = false
             }
@@ -550,7 +550,7 @@ class TransferTabFragment : Fragment() {
                 binding?.departmentReason!!.isEnabled = true
                 binding?.departmentRemarks?.isEnabled = true*/
 
-                binding?.institution.isEnabled = true
+                binding?.institution?.isEnabled = true
                 //binding?.department?.isEnabled = true
                 binding?.institutionReason?.isEnabled = true
                 binding?.institutionRemarks?.isEnabled = true
@@ -566,7 +566,7 @@ class TransferTabFragment : Fragment() {
 
     val surgeryInstitutionRetrofitCallback =
         object : RetrofitCallback<SurgeryInstitutionResponseModel> {
-            override fun onSuccessfulResponse(response: Response<SurgeryInstitutionResponseModel?>) {
+            override fun onSuccessfulResponse(response: Response<SurgeryInstitutionResponseModel>) {
 
                 listAllinstituteItems = response.body()?.responseContents!!
                 AddinstituteResponseMap =
@@ -583,11 +583,11 @@ class TransferTabFragment : Fragment() {
                 //binding?.autoCompleteTextViewInstitution!!.adapter = adapter
             }
 
-            override fun onBadRequest(response: Response<SurgeryInstitutionResponseModel?>) {
+            override fun onBadRequest(response: Response<SurgeryInstitutionResponseModel>) {
 
             }
 
-            override fun onServerError(response: Response<*>?) {
+            override fun onServerError(response: Response<*>) {
 
                 utils?.showToast(
                     R.color.negativeToast,
@@ -612,8 +612,8 @@ class TransferTabFragment : Fragment() {
                 )
             }
 
-            override fun onFailure(s: String?) {
-                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, s ?: "")
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -623,13 +623,13 @@ class TransferTabFragment : Fragment() {
     val AddAllDepartmentCallBack =
         object : RetrofitCallback<DepartmentResponseModel> {
             @SuppressLint("NewApi")
-            override fun onSuccessfulResponse(responseBody: Response<DepartmentResponseModel?>) {
+            override fun onSuccessfulResponse(responseBody: Response<DepartmentResponseModel>?) {
 
                 val departmentresponseContent =
                     DepartmentresponseContent(uuid = 0, name = "Select Department")
                 listAllAddDepartmentItems.add(departmentresponseContent)
 
-                listAllAddDepartmentItems.addAll(responseBody.body()!!.responseContents!!)
+                listAllAddDepartmentItems.addAll(responseBody!!.body()!!.responseContents!!)
                 favAddResponseMap =
                     listAllAddDepartmentItems.map { it.uuid!! to it.name!! }.toMap().toMutableMap()
                 val adapter =
@@ -644,7 +644,7 @@ class TransferTabFragment : Fragment() {
                 //binding?.department!!.adapter = adapter
             }
 
-            override fun onBadRequest(errorBody: Response<DepartmentResponseModel?>) {
+            override fun onBadRequest(errorBody: Response<DepartmentResponseModel>?) {
 
             }
 
@@ -672,8 +672,8 @@ class TransferTabFragment : Fragment() {
                 )
             }
 
-            override fun onFailure(s: String?) {
-                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, s ?: "")
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -682,7 +682,7 @@ class TransferTabFragment : Fragment() {
         }
 
     val ReasonRetrofitCallback = object : RetrofitCallback<TransmissionReasonResponseModel> {
-        override fun onSuccessfulResponse(response: Response<TransmissionReasonResponseModel?>) {
+        override fun onSuccessfulResponse(response: Response<TransmissionReasonResponseModel>) {
 
             val transmissionReasonResponseContent =
                 TransmissionReasonResponseContent(uuid = 0, name = "Select Reason")
@@ -704,11 +704,11 @@ class TransferTabFragment : Fragment() {
             binding?.wardReason!!.adapter = adapter
         }
 
-        override fun onBadRequest(response: Response<TransmissionReasonResponseModel?>) {
+        override fun onBadRequest(response: Response<TransmissionReasonResponseModel>) {
 
         }
 
-        override fun onServerError(response: Response<*>?) {
+        override fun onServerError(response: Response<*>) {
 
             utils?.showToast(
                 R.color.negativeToast,
@@ -733,8 +733,8 @@ class TransferTabFragment : Fragment() {
             )
         }
 
-        override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure ?: "")
+        override fun onFailure(failure: String) {
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -744,13 +744,13 @@ class TransferTabFragment : Fragment() {
     val WardCallBack =
         object : RetrofitCallback<AdmissionWardResponseModel> {
             @SuppressLint("NewApi")
-            override fun onSuccessfulResponse(responseBody: Response<AdmissionWardResponseModel?>) {
+            override fun onSuccessfulResponse(responseBody: Response<AdmissionWardResponseModel>?) {
 
                 val amissionWardResponseContent =
                     AmissionWardResponseContent(ward_uuid = 0, ward_name = "Select ward")
                 wardItems.add(amissionWardResponseContent)
 
-                wardItems.addAll(responseBody.body()?.responseContents!!)
+                wardItems.addAll(responseBody?.body()?.responseContents!!)
                 wardResponseMap =
                     wardItems.map { it?.ward_uuid!! to it.ward_name }.toMap().toMutableMap()
                 val adapter =
@@ -764,7 +764,7 @@ class TransferTabFragment : Fragment() {
                 binding?.wardSpinner!!.adapter = adapter
             }
 
-            override fun onBadRequest(errorBody: Response<AdmissionWardResponseModel?>) {
+            override fun onBadRequest(errorBody: Response<AdmissionWardResponseModel>?) {
 
             }
 
@@ -792,8 +792,8 @@ class TransferTabFragment : Fragment() {
                 )
             }
 
-            override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure ?: "")
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -804,20 +804,25 @@ class TransferTabFragment : Fragment() {
 
     var NextOrderRegistrationRetrofitCallback = object :
         RetrofitCallback<TransferredResponseModel> {
-        override fun onSuccessfulResponse(responseBody: Response<TransferredResponseModel?>) {
+        override fun onSuccessfulResponse(responseBody: Response<TransferredResponseModel>?) {
+
 
             utils?.showToast(
                 R.color.positiveToast,
                 mainLayout!!,
-                responseBody.body()?.message.toString()
+                responseBody?.body()?.message.toString()
+
             )
-        }
 
-        override fun onBadRequest(response: Response<TransferredResponseModel?>) {
 
         }
 
-        override fun onServerError(response: Response<*>?) {
+        override fun onBadRequest(response: Response<TransferredResponseModel>) {
+
+
+        }
+
+        override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
                 mainLayout!!,
@@ -843,11 +848,11 @@ class TransferTabFragment : Fragment() {
 
         }
 
-        override fun onFailure(s: String?) {
+        override fun onFailure(failure: String) {
             utils?.showToast(
                 R.color.negativeToast,
                 mainLayout!!,
-                s ?: ""
+                failure
             )
         }
 
@@ -861,7 +866,7 @@ class TransferTabFragment : Fragment() {
     val getDeptSearchRetrofitCallBack =
         object : RetrofitCallback<DeptsRespModel> {
 
-            override fun onSuccessfulResponse(response: Response<DeptsRespModel?>) {
+            override fun onSuccessfulResponse(response: Response<DeptsRespModel>) {
                 if (response.body()?.responseContents?.isNotEmpty()!!) {
 
                     Log.e("SearchDeptData", response.body()?.responseContents.toString())
@@ -870,7 +875,7 @@ class TransferTabFragment : Fragment() {
                 }
             }
 
-            override fun onBadRequest(response: Response<DeptsRespModel?>) {
+            override fun onBadRequest(response: Response<DeptsRespModel>) {
                 val gson = GsonBuilder().create()
                 val responseModel: DeptsRespModel
                 try {
@@ -894,7 +899,7 @@ class TransferTabFragment : Fragment() {
                 }
             }
 
-            override fun onServerError(response: Response<*>?) {
+            override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -921,8 +926,8 @@ class TransferTabFragment : Fragment() {
                 //      customProgressDialog!!.dismiss()
             }
 
-            override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure ?: "")
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
                 //     customProgressDialog!!.dismiss()
             }
 
@@ -950,7 +955,7 @@ class TransferTabFragment : Fragment() {
     val getInstitutionSearchRetrofitCallBack =
         object : RetrofitCallback<LabNameSearchResponseModel> {
 
-            override fun onSuccessfulResponse(response: Response<LabNameSearchResponseModel?>) {
+            override fun onSuccessfulResponse(response: Response<LabNameSearchResponseModel>) {
                 if (response.body()?.responseContents?.isNotEmpty()!!) {
 
                     Log.e("SearchInstitutionData", response.body()?.responseContents.toString())
@@ -959,7 +964,7 @@ class TransferTabFragment : Fragment() {
                 }
             }
 
-            override fun onBadRequest(response: Response<LabNameSearchResponseModel?>) {
+            override fun onBadRequest(response: Response<LabNameSearchResponseModel>) {
                 val gson = GsonBuilder().create()
                 val responseModel: LabNameSearchResponseModel
                 try {
@@ -983,7 +988,7 @@ class TransferTabFragment : Fragment() {
                 }
             }
 
-            override fun onServerError(response: Response<*>?) {
+            override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
                     binding?.mainLayout!!,
@@ -1010,8 +1015,8 @@ class TransferTabFragment : Fragment() {
                 //      customProgressDialog!!.dismiss()
             }
 
-            override fun onFailure(failure: String?) {
-                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure ?: "")
+            override fun onFailure(failure: String) {
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
                 //     customProgressDialog!!.dismiss()
             }
 

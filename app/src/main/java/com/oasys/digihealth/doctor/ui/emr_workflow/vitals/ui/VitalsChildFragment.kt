@@ -39,7 +39,7 @@ import com.oasys.digihealth.doctor.ui.emr_workflow.vitals.model.responseuommodul
 import com.oasys.digihealth.doctor.ui.emr_workflow.vitals.view_model.VitalsViewModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.vitals.view_model.VitalsViewModelFactory
 import com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_vitals.ui.nextstepvital.model.MainVItalsListResponseModel
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -473,11 +473,11 @@ class VitalsChildFragment : Fragment() {
 
             if (responseBody?.body().responseContents.getVitals.isNotEmpty()!!) {
 
-                if (responseBody.body()!!.responseContents.getVitals.size != 0) {
+                if (responseBody?.body()!!.responseContents.getVitals.size != 0) {
 
                     //Log.e("VitalList",responseBody!!.body()?.responseContents.toString())
 
-                    vitalsAdapter!!.addFavouritesInRow(responseBody.body().responseContents.getVitals as ArrayList<TemplateDetail>)
+                    vitalsAdapter!!.addFavouritesInRow(responseBody?.body().responseContents.getVitals as ArrayList<TemplateDetail>)
 
 
                 }

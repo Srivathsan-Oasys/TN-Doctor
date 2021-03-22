@@ -6,9 +6,9 @@
 
     <data>
 
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDrugsViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDrugsViewModel" />-->
     </data>
 
     <androidx.core.widget.NestedScrollView

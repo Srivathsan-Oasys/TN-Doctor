@@ -27,16 +27,17 @@ import com.oasys.digihealth.doctor.component.extention.slideDown
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentOutPatientListingBinding
-import com.oasys.digihealth.doctor.ui.scanner.ScannerActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.EmrWorkFlowActivity
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.OldPatientResponseModule
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.ResponseContent
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.SearchResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.OutPatientNewViewModel
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.OutPatientNewViewModelFactorty
+import com.oasys.digihealth.doctor.ui.scanner.ScannerActivity
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import kotlinx.android.synthetic.main.dialog_add_casualty_patient.*
 import retrofit2.Response
 import java.text.SimpleDateFormat
@@ -92,12 +93,13 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         initDatePicker()
         initVisitOutPatientAdapter()
         callIntialSearch()
-        binding.qrCodeImageview.setOnClickListener {
+
+        binding?.qrCodeImageview?.setOnClickListener {
             val intent = Intent(requireActivity(), ScannerActivity::class.java)
             startActivityForResult(intent, 122)
         }
 
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
+        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
@@ -106,25 +108,25 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
 
             override fun afterTextChanged(s: Editable) {
                 if (s.length < 10) {
-                    binding.etSearch.error = "Please enter minimum of 10 nos"
+                    binding?.etSearch?.error = "Please enter minimum of 10 nos"
 
                 }
             }
         })
 
-        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+        binding?.etSearch?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (binding.etSearch.text.toString().trim().length!! >= 10) {
+                if (binding?.etSearch?.text.toString().trim().length >= 10) {
                     showCustomProgressDialog()
                     currentPage = 0
-                    queryvalue = binding.etSearch.text.toString()
+                    queryvalue = binding?.etSearch?.text.toString()
                     outPatientAdapter.clearAll()
                     departmentSearch = false
                     viewModel?.searchPatient(
                         "",
                         "",
                         queryvalue!!,
-                        binding.etDischargeSummaryDate.text.toString(),
+                        binding?.etDischargeSummaryDate?.text.toString(),
                         currentPage,
                         pageSize,
                         "modified_date",
@@ -136,7 +138,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             true
         }
 
-        binding.searchButton.setOnClickListener {
+        binding?.searchButton?.setOnClickListener {
             try {
                 val view: View = requireActivity().currentFocus!!
                 if (view != null) {
@@ -148,9 +150,9 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
 
             }
 
-            val pinnumber = binding.etExsistingPin.text.toString()
-            val searchview = binding.etSearch.text.toString()
-            if (pinnumber!!.isNotEmpty()!!) {
+            val pinnumber = binding?.etExsistingPin?.text.toString()
+            val searchview = binding?.etSearch?.text.toString()
+            if (pinnumber.isNotEmpty()) {
                 outPatientAdapter.clearAll()
                 viewModel?.getOldPatient(
                     pinnumber,
@@ -158,7 +160,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                     oldSEarchResponseCallback
                 )
                 return@setOnClickListener
-            } else if (searchview.isNotEmpty()!! && searchview.length >= 10) {
+            } else if (searchview.isNotEmpty() && searchview.length >= 10) {
                 showCustomProgressDialog()
                 currentPage = 0
                 queryvalue = searchview
@@ -168,7 +170,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                     "",
                     "",
                     searchview,
-                    binding.etDischargeSummaryDate.text.toString(),
+                    binding?.etDischargeSummaryDate?.text.toString(),
                     currentPage,
                     pageSize,
                     "modified_date",
@@ -179,27 +181,27 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             } else {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     "Please fill any one field"
                 )
             }
         }
-        binding.clearcardview.setOnClickListener {
-            binding.etSearch.setText("")
-            binding.etExsistingPin.setText("")
-            binding.etUfcPin.setText("")
-            binding.etDischargeSummaryDate.setText(getCurrentDate("dd-MMM-yyyy"))
+
+        binding?.clearcardview?.setOnClickListener {
+            binding?.etSearch?.setText("")
+            binding?.etExsistingPin?.setText("")
+            binding?.etUfcPin?.setText("")
+            binding?.etDischargeSummaryDate?.setText(getCurrentDate("dd-MMM-yyyy"))
             callIntialSearch()
             hideDropDown()
         }
         return binding!!.root
     }
 
-
     fun initDropDown() {
-        binding.llDropDownView.hide()
-        binding.rlHeader.setOnClickListener {
-            if (binding.llDropDownView.isvisible()!!) {
+        binding?.llDropDownView?.hide()
+        binding?.rlHeader?.setOnClickListener {
+            if (binding?.llDropDownView?.isvisible()!!) {
                 hideDropDown()
             } else {
                 showDropDown()
@@ -207,22 +209,19 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         }
     }
 
-
     fun showDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.llDropDownView.show()
-        binding.ivArrow.rotation = 270F
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.llDropDownView?.show()
+        binding?.ivArrow?.rotation = 270F
     }
 
     fun hideDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.ivArrow.rotation = 90F
-        binding.llDropDownView.hide()
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.ivArrow?.rotation = 90F
+        binding?.llDropDownView?.hide()
     }
 
-
     fun initPerference() {
-
         if (activity !is FragmentBackClick) {
 //            throw ClassCastException("Hosting activity must implement BackHandlerInterface")
         } else {
@@ -233,24 +232,23 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         )
             .create(OutPatientNewViewModel::class.java)
         customProgressDialog = CustomProgressDialog(requireContext())
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         facility_UUID = appPreferences?.getInt(AppConstants.FACILITY_UUID)
     }
 
-    fun initDatePicker() {
+    private fun initDatePicker() {
         val sdf = SimpleDateFormat("dd-mm-yyy HH:mm:ss", Locale.getDefault())
         selectedDate = getCurrentDate("dd-MMM-yyyy")
-        binding.etDischargeSummaryDate.setText(getCurrentDate("dd-MMM-yyyy"))
-        binding.etDischargeSummaryDate.setOnClickListener {
+        binding?.etDischargeSummaryDate?.setText(getCurrentDate("dd-MMM-yyyy"))
+        binding?.etDischargeSummaryDate?.setOnClickListener {
             openDatePicker()
         }
 
     }
-
 
     private fun initVisitOutPatientAdapter() {
         outPatientAdapter = OutPatientAdapter(requireContext())
@@ -263,8 +261,8 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             gridLayoutManager =
                 GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         }
-        binding.recyclerView.layoutManager = gridLayoutManager
-        binding.recyclerView.adapter = outPatientAdapter
+        binding?.recyclerView?.layoutManager = gridLayoutManager
+        binding?.recyclerView?.adapter = outPatientAdapter
 
         outPatientAdapter.setOnItemClickListener(object :
             OutPatientAdapter.OnItemClickListener {
@@ -281,11 +279,12 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
 
                 val emr = EmrWorkFlowActivity.newInstance(AppConstants.OUT_PATIENT)
 
-                (activity as MainLandScreenActivity).replaceFragment(emr)
+                (activity as HomeActivity).replaceFragment(emr)
 
             }
         })
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+        binding?.recyclerView?.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (!recyclerView.canScrollVertically(1)) {
@@ -324,7 +323,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                 startMonthOfYear = monthOfYear
                 startDayOfMonth = dayOfMonth
                 // set day of month , month and year value in the edit text
-                binding.etDischargeSummaryDate!!.setText(
+                binding?.etDischargeSummaryDate!!.setText(
                     utils?.emrDisplayDate(
                         dayOfMonth.toString() +
                                 "-" + (monthOfYear + 1) + "-" + year, "dd-MM-yyyy"
@@ -376,7 +375,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         }
     }
 
-    val patientSearchRetrofitCallBack = object {
+    val patientSearchRetrofitCallBack = object : RetrofitCallback<SearchResponseModel> {
         override fun onSuccessfulResponse(response: Response<SearchResponseModel>) {
             dismissCustomProgressDialog()
             val responsepatient = Gson().toJson(response.body()?.responseContents)
@@ -392,14 +391,14 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
 
                 val emr = EmrWorkFlowActivity.newInstance(AppConstants.OUT_PATIENT)
 
-                (activity as MainLandScreenActivity).replaceFragment(emr)
+                (activity as HomeActivity).replaceFragment(emr)
                 return
             }
 
             if (response.body()?.responseContents?.isNotEmpty()!!) {
 
 //                viewModel?.errorTextVisibility?.value = 8
-                binding.llDropDownView.visibility = View.GONE
+                binding?.llDropDownView?.visibility = View.GONE
                 TOTAL_PAGES = Math.ceil(response.body()!!.totalRecords!!.toDouble() / 10).toInt()
                 if (response.body()!!.responseContents!!.isNotEmpty()) {
                     isLoadingPaginationAdapterCallback = false
@@ -423,7 +422,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                     isLastPage = true
                 }
             } else {
-                binding.llDropDownView.visibility = View.VISIBLE
+                binding?.llDropDownView?.visibility = View.VISIBLE
                 isLoadingPaginationAdapterCallback = false
                 Toast.makeText(
                     requireContext(),
@@ -446,13 +445,13 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -464,7 +463,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -474,7 +473,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -483,7 +482,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             dismissCustomProgressDialog()
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -491,7 +490,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         override fun onFailure(failure: String) {
             dismissCustomProgressDialog()
             isLoadingPaginationAdapterCallback = false
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -500,7 +499,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         }
     }
 
-    val patientSearchNextRetrofitCallBack = object {
+    val patientSearchNextRetrofitCallBack = object : RetrofitCallback<SearchResponseModel> {
         override fun onSuccessfulResponse(response: Response<SearchResponseModel>) {
             if (response.body()?.responseContents!!.isNotEmpty()) {
                 dismissCustomProgressDialog()
@@ -551,7 +550,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -562,7 +561,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -572,7 +571,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -580,7 +579,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         override fun onFailure(failure: String) {
             dismissCustomProgressDialog()
             isLoadingPaginationAdapterCallback = false
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -589,7 +588,8 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         }
     }
 
-    val oldSEarchResponseCallback = object {
+    val oldSEarchResponseCallback = object : RetrofitCallback<OldPatientResponseModule> {
+
         override fun onSuccessfulResponse(responseBody: Response<OldPatientResponseModule>?) {
 
             val uhid = responseBody?.body()?.responseContent?.uhid
@@ -647,13 +647,13 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.statusCode!!.toString()
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -664,7 +664,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         override fun onServerError(response: Response<*>?) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -672,7 +672,7 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -680,13 +680,13 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String?) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure!!)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure!!)
         }
 
         override fun onEverytime() {
@@ -701,15 +701,11 @@ class OutPatientFragmentNew : Fragment(), OldPatientSaveDialogFragment.OnOldPati
     }
 
     fun showCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.show()
-        }
+        customProgressDialog?.show()
     }
 
     fun dismissCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.dismiss()
-        }
+        customProgressDialog?.dismiss()
     }
 
 }

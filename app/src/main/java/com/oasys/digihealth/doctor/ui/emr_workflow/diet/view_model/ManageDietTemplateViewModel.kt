@@ -9,6 +9,7 @@ import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.template_department.GetAllDepartmentReq
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.template_department.GetAllDepartmentResp
 import com.oasys.digihealth.doctor.ui.emr_workflow.investigation.model.InvestigationSearchResponseModel
@@ -69,7 +70,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -91,7 +92,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
         apiService?.getDietMasterCategoryList(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!
-        ).enqueue(RetrofitMainCallback(favCategoryCallBack))
+        )?.enqueue(RetrofitMainCallback(favCategoryCallBack))
         return
 
     }
@@ -115,7 +116,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
         apiService?.getDietMasterFrequency(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!
-        ).enqueue(RetrofitMainCallback(favFrequencyallBack))
+        )?.enqueue(RetrofitMainCallback(favFrequencyallBack))
         return
 
     }
@@ -153,7 +154,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddTestNameCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddTestNameCallBack))
         return
     }
 
@@ -175,7 +176,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateAddDetails
-        ).enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrlabTemplateAddRetrofitCallback))
         return
 
 
@@ -203,7 +204,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityUuid!!,
             requestTemplateUpdateDetails
-        ).enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(UpdateemrlabTemplateAddRetrofitCallback))
         return
 
 
@@ -234,7 +235,7 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             department_UUID!!,
             facility_ID!!,
             AppConstants.FAV_TYPE_ID_DIET
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -259,6 +260,6 @@ class ManageDietTemplateViewModel(application: Application) : AndroidViewModel(a
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getAllDepartmentReq
-        ).enqueue(RetrofitMainCallback(getAllDepartmentRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAllDepartmentRespCallback))
     }
 }

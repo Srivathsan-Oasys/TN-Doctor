@@ -5,21 +5,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
-
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.order_status.model.OrderStatusRequestModel
 import com.oasys.digihealth.doctor.ui.order_status.model.OrderStatusResponseModel
 import com.oasys.digihealth.doctor.ui.order_status.model.OrderStatusSpinnerResponseModel
 import com.oasys.digihealth.doctor.ui.order_status.model.TestNameResponseModel
-
 import com.oasys.digihealth.doctor.utils.Utils
 import okhttp3.RequestBody
 import org.json.JSONException
 import org.json.JSONObject
-
 
 class OrderStatusViewModel(
     application: Application?
@@ -27,20 +25,15 @@ class OrderStatusViewModel(
     application!!
 ) {
 
-
     var enterOTPEditText = MutableLiveData<String>()
     var enterNewPasswordEditText = MutableLiveData<String>()
     var enterConfirmPasswordEditText = MutableLiveData<String>()
     var progress = MutableLiveData<Int>()
     var errorText = MutableLiveData<String>()
 
-
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
-
     var facility_id: Int? = 0
-
     var appPreferences: AppPreferences? = null
-
 
     init {
 
@@ -71,7 +64,7 @@ class OrderStatusViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -111,9 +104,9 @@ class OrderStatusViewModel(
         apiService?.getOrderStatus(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             body
-        ).enqueue(RetrofitMainCallback(orderStatusRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(orderStatusRetrofitCallBack))
         return
     }
 
@@ -131,7 +124,7 @@ class OrderStatusViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -160,9 +153,9 @@ class OrderStatusViewModel(
         apiService?.getOrderStatus(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             body
-        ).enqueue(RetrofitMainCallback(orderStatusRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(orderStatusRetrofitCallBack))
         return
     }
 
@@ -172,7 +165,7 @@ class OrderStatusViewModel(
         ResponseTestMethodRetrofitCallback: RetrofitCallback<OrderStatusResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         if (!Utils.isNetworkConnected(getApplication())) {
@@ -187,9 +180,9 @@ class OrderStatusViewModel(
         apiService?.getSearchOrderStatus(
             "en",
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             orderStatusRequestModel
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -198,7 +191,7 @@ class OrderStatusViewModel(
         ResponseTestMethodRetrofitCallback: RetrofitCallback<TestNameResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
@@ -224,9 +217,9 @@ class OrderStatusViewModel(
 
         apiService?.getOrderStatusTestName(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             body
-        ).enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
     }
 
@@ -235,7 +228,7 @@ class OrderStatusViewModel(
         OrderStatusRetrofitCallback: RetrofitCallback<OrderStatusSpinnerResponseModel>
     ) {
 
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
@@ -261,9 +254,9 @@ class OrderStatusViewModel(
 
         apiService?.getSearchOrderStatus(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_uuid!!,
+            userDataStoreBean?.uuid!!, facility_uuid,
             body
-        ).enqueue(RetrofitMainCallback(OrderStatusRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(OrderStatusRetrofitCallback))
 
     }
 

@@ -5,9 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
+import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.CovidGenderResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.model.CovidPeriodResponseModel
 import com.oasys.digihealth.doctor.ui.dashboard.model.CovidSalutationTitleResponseModel
@@ -37,14 +39,11 @@ class OldPatientSaveViewModel(
         progress.value = 8
         userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
-        userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
+        userDetailsRoomRepository = UserDetailsRoomRepository(application)
 
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
-
-
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
-
     }
 
     fun getCovidGenderList(
@@ -58,13 +57,13 @@ class OldPatientSaveViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidGender(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidGenderResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidGenderResponseCallback))
         return
     }
 
@@ -79,14 +78,14 @@ class OldPatientSaveViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidPeriod(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidPeriodResponseCallback))
         return
     }
 
@@ -101,13 +100,13 @@ class OldPatientSaveViewModel(
         progress.value = 0
         val aiiceApplication = HmisApplication.get(getApplication())
         val apiService = aiiceApplication.getRetrofitService()
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         apiService?.getCovidNameTitle(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityId
-        ).enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
+        )?.enqueue(RetrofitMainCallback(covidSalutationResponseCallback))
         return
     }
 
@@ -119,7 +118,7 @@ class OldPatientSaveViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
         val jsonBody = JSONObject()
 
         try {
@@ -140,7 +139,7 @@ class OldPatientSaveViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
+        )?.enqueue(RetrofitMainCallback(favAddAllDepartmentCallBack))
         return
 
     }
@@ -151,7 +150,7 @@ class OldPatientSaveViewModel(
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
             return
         }
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val jsonBody = JSONObject()
         try {
@@ -173,7 +172,7 @@ class OldPatientSaveViewModel(
             AppConstants.ACCEPT_LANGUAGE_EN,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(stateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(stateRetrofitCallback))
 
         return
     }
@@ -183,7 +182,7 @@ class OldPatientSaveViewModel(
         requestAddPatient: RequestAddPatient,
         responsePatienAdd: RetrofitCallback<ResponseAddPatient>
     ) {
-        val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
+        val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         if (!Utils.isNetworkConnected(getApplication())) {
             errorText.value = getApplication<Application>().getString(R.string.no_internet)
@@ -198,8 +197,7 @@ class OldPatientSaveViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestAddPatient
-        ).enqueue(RetrofitMainCallback(responsePatienAdd))
-
+        )?.enqueue(RetrofitMainCallback(responsePatienAdd))
     }
 
 //    fun getOldPatient(oldpinnumber : String?,facilityid: Int?,  oldPatientSearchRetrofitCallback: RetrofitCallback<OLdPatientResponseModel>) {

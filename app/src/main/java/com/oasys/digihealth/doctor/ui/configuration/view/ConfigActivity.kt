@@ -23,6 +23,7 @@ import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityConfigBinding
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigResponseContent
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigResponseModel
 import com.oasys.digihealth.doctor.ui.configuration.model.ConfigUpdateRequestModel
@@ -32,7 +33,7 @@ import com.oasys.digihealth.doctor.ui.configuration.view_model.ConfigViewModelFa
 import com.oasys.digihealth.doctor.ui.dashboard.view.DashBoardActivity
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.EmrWorkFlowResponseModel
 import com.oasys.digihealth.doctor.ui.home.HomeActivity
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
 

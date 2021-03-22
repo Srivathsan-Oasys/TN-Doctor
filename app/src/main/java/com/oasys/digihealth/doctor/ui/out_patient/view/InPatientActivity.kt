@@ -27,8 +27,9 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityInPatientBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.EmrWorkFlowActivity
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.InPatientResponseData
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.InPatientResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.SearchResponseModel
@@ -74,13 +75,13 @@ class InPatientActivity : Fragment() {
             requireActivity().application
         )
             .create(InPatientViewModel::class.java)
-        binding.lifecycleOwner = this
+        binding?.lifecycleOwner = this
         // binding?.viewModel = viewModel
         utils = Utils(requireContext())
 
         viewModel!!.errorText.observe(viewLifecycleOwner,
             Observer { toastMessage ->
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, toastMessage)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
             })
         patientType = activity?.intent?.getStringExtra(AppConstants.PATIENT_TYPE)
 
@@ -88,11 +89,11 @@ class InPatientActivity : Fragment() {
         appPreferences =
             AppPreferences.getInstance(requireContext(), AppConstants.SHARE_PREFERENCE_NAME)
         val searchText =
-            binding.searchView.findViewById(R.id.search_src_text) as TextView
+            binding?.searchView?.findViewById<TextView>(R.id.search_src_text)
 
         val tf = ResourcesCompat.getFont(requireContext(), R.font.poppins)
-        searchText.typeface = tf
-        searchText.text = ""
+        searchText?.typeface = tf
+        searchText?.text = ""
         initVisitOutPatientAdapter()
 
         trackDashBoardIPAnalyticsVisit()
@@ -105,12 +106,12 @@ class InPatientActivity : Fragment() {
             "DESC",
             admittedPatientRetrofitCallback
         )
-        binding.searchView.setOnQueryTextListener(object :
+        binding?.searchView?.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             @SuppressLint("RestrictedApi")
             override fun onQueryTextSubmit(query: String): Boolean {
                 callSearch(query)
-                binding.searchView.clearFocus()
+                binding?.searchView?.clearFocus()
                 return true
             }
 
@@ -132,8 +133,8 @@ class InPatientActivity : Fragment() {
             }
 
         })
-        binding.qrCodeImageview.setOnClickListener {
-            binding.scannerView.visibility = View.VISIBLE
+        binding?.qrCodeImageview?.setOnClickListener {
+            binding?.scannerView?.visibility = View.VISIBLE
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 runTimePermission()
@@ -161,8 +162,8 @@ class InPatientActivity : Fragment() {
                 GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         }
 
-        binding.recyclerView.layoutManager = gridLayoutManager
-        binding.recyclerView.adapter = outPatientAdapter
+        binding?.recyclerView?.layoutManager = gridLayoutManager
+        binding?.recyclerView?.adapter = outPatientAdapter
 
         outPatientAdapter.setOnItemClickListener(object :
             InpatientAdapter.OnItemClickListener {
@@ -188,7 +189,7 @@ class InPatientActivity : Fragment() {
 
                     val emr = EmrWorkFlowActivity.newInstance(AppConstants.IN_PATIENT)
 
-                    (activity as MainLandScreenActivity).replaceFragment(emr)
+                    (activity as HomeActivity).replaceFragment(emr)
 
                     /*  val fragmentTransaction = childFragmentManager.beginTransaction()
                       fragmentTransaction.replace(R.id.landfragment, emr)
@@ -210,20 +211,20 @@ class InPatientActivity : Fragment() {
             }
         })
 
-        binding.recyclerView.addOnScrollListener(object :
+        binding?.recyclerView?.addOnScrollListener(object :
             PaginationScrollListener(gridLayoutManager) {
 
             override fun loadMoreItems() {
                 println("bindingdsafgsethry = ${binding}")
                 currentPage += 1
                 if (currentPage <= TOTAL_PAGES) {
-    /*
-                        viewModel?.getPatientListNextPage(
-                            queryvalue!!,currentPage,
-                            patientSearchNextRetrofitCallBack
+                    /*
+                                        viewModel?.getPatientListNextPage(
+                                            queryvalue!!,currentPage,
+                                            patientSearchNextRetrofitCallBack
 
-                        )
-    */
+                                        )
+                    */
                 }
             }
 
@@ -288,12 +289,12 @@ class InPatientActivity : Fragment() {
         }
 
         mCodeScanner!!.decodeCallback = DecodeCallback { result ->
-            this.activity!!.runOnUiThread(Runnable {
-                binding.searchView!!.setQuery(result.text, true)
+            this.requireActivity().runOnUiThread {
+                binding?.searchView!!.setQuery(result.text, true)
                 Toast.makeText(requireContext(), result.text, Toast.LENGTH_SHORT)
                     .show()
-                binding.scannerView.visibility = View.GONE
-            })
+                binding?.scannerView?.visibility = View.GONE
+            }
             if (mCodeScanner != null) {
                 mCodeScanner!!.releaseResources()
             }
@@ -337,7 +338,7 @@ class InPatientActivity : Fragment() {
         super.onPause()
     }
 
-    val patientSearchNextRetrofitCallBack = object {
+    val patientSearchNextRetrofitCallBack = object : RetrofitCallback<InPatientResponseModel> {
         override fun onSuccessfulResponse(response: Response<InPatientResponseModel>) {
             if (response.body()?.responseContents!!.isNotEmpty()) {
 
@@ -384,7 +385,7 @@ class InPatientActivity : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -393,7 +394,7 @@ class InPatientActivity : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -402,13 +403,13 @@ class InPatientActivity : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -416,7 +417,7 @@ class InPatientActivity : Fragment() {
         }
     }
 
-    val admittedPatientRetrofitCallback = object {
+    val admittedPatientRetrofitCallback = object: RetrofitCallback<InPatientResponseModel> {
         override fun onSuccessfulResponse(response: Response<InPatientResponseModel>) {
 
             if (response.body()?.responseContents?.isNotEmpty() == true) {
@@ -458,13 +459,13 @@ class InPatientActivity : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -474,7 +475,7 @@ class InPatientActivity : Fragment() {
         override fun onServerError(response: Response<*>) {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -482,7 +483,7 @@ class InPatientActivity : Fragment() {
         override fun onUnAuthorized() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -490,13 +491,13 @@ class InPatientActivity : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -509,7 +510,7 @@ class InPatientActivity : Fragment() {
     }
 
     private fun setLoading(toLoad: Boolean) {
-        binding.progressBar.visibility = if (toLoad) View.VISIBLE else View.GONE
+        binding?.progressBar?.visibility = if (toLoad) View.VISIBLE else View.GONE
     }
 
 }

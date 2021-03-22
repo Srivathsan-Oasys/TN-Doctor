@@ -994,7 +994,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.oasys.digihealth.doctor.utils.MandatoryTextView
+                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
                                 android:id="@+id/schematv"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"

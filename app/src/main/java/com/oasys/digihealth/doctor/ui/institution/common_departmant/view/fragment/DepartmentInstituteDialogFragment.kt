@@ -1,6 +1,5 @@
 package com.oasys.digihealth.doctor.ui.institution.common_departmant.view.fragment
 
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
@@ -19,7 +18,8 @@ import com.google.gson.GsonBuilder
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
-import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteBinding
+import com.oasys.digihealth.doctor.databinding.DialogSelectInstituteRadiologyBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseContent
 import com.oasys.digihealth.doctor.ui.institution.common_departmant.model.DepartmentResponseModel
@@ -29,9 +29,7 @@ import com.oasys.digihealth.doctor.ui.institution.viewModel.InstituteViewModel
 import com.oasys.digihealth.doctor.ui.login.model.institution_response.InstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.login.model.institution_response.InstitutionresponseContent
 import com.oasys.digihealth.doctor.utils.Utils
-
 import retrofit2.Response
-
 
 class DepartmentInstituteDialogFragment : DialogFragment() {
 
@@ -42,7 +40,7 @@ class DepartmentInstituteDialogFragment : DialogFragment() {
     private var content: String? = null
     private var departmentname: String? = ""
     private var viewModel: InstituteViewModel? = null
-    var binding: DialogSelectInstituteBinding? = null
+    var binding: DialogSelectInstituteRadiologyBinding? = null
     private var utils: Utils? = null
 
     private var institutionDropDownAdapter: SelectInstituteDropDownAdapter? = null
@@ -69,7 +67,7 @@ class DepartmentInstituteDialogFragment : DialogFragment() {
         binding =
             DataBindingUtil.inflate(
                 inflater,
-                R.layout.dialog_select_institute,
+                R.layout.dialog_select_institute_radiology,
                 container,
                 false
             )

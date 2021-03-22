@@ -20,18 +20,19 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.DialogNurseInstituteBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.InstitutionresponseContent
 import com.oasys.digihealth.doctor.ui.emr_workflow.history.surgery.model.response.SurgeryInstitutionResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.favourite.FavouritesResponseModel
-import com.oasys.digihealth.doctor.ui.institute.model.*
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
+import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseContent
+import com.oasys.digihealth.doctor.ui.institute.model.OfficeResponseModel
 import com.oasys.digihealth.doctor.ui.institute.model.wardList.Ward
 import com.oasys.digihealth.doctor.ui.institute.model.wardList.WardListResponseModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModel
 import com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModelFactory
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
 import com.oasys.digihealth.doctor.utils.Utils
 import retrofit2.Response
-
 
 class NurseInstituteDialogFragment : DialogFragment() {
 
@@ -73,8 +74,8 @@ class NurseInstituteDialogFragment : DialogFragment() {
             officeRetrofitCallBack
         )
             .create(InstituteViewModel::class.java)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this
+        binding?.viewModel = viewModel
+        binding?.lifecycleOwner = this
         utils = Utils(requireContext())
 
         ClearData()
@@ -86,76 +87,61 @@ class NurseInstituteDialogFragment : DialogFragment() {
 
         ward_uuid = appPreferences?.getInt(AppConstants.WARDUUID)
 
-        binding.closeImageView.setOnClickListener {
+        binding?.closeImageView?.setOnClickListener {
             dialog?.dismiss()
         }
 
         viewModel!!.getfacilityCallback(facilitycallbackRetrofitCallback)
-        binding.clear.setOnClickListener {
+        binding?.clear?.setOnClickListener {
             ClearData()
         }
-        binding.save.setOnClickListener {
+        binding?.save?.setOnClickListener {
 
             if (facilitylevelID != 0 && ward_uuid != 0) {
-
                 appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, department_uuid ?: 0)
-
                 appPreferences?.saveInt(AppConstants.WARDUUID, ward_uuid ?: 0)
-
                 appPreferences?.saveString(AppConstants.WARDNAME, ward_name ?: "")
-
-
                 appPreferences?.saveInt(AppConstants.FACILITY_UUID, facilitylevelID!!)
-
-
                 appPreferences?.saveString(AppConstants.INSTITUTION_NAME, institution_NAME!!)
-
-
-                startActivity(Intent(context, MainLandScreenActivity::class.java))
+                startActivity(Intent(context, HomeActivity::class.java))
                 requireActivity().finish()
             } else {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.empty_item)
                 )
             }
         }
 
-        binding.spinnerInstitution!!.setOnTouchListener { v, event ->
-            when (event.action) {
+        binding?.spinnerInstitution!!.setOnTouchListener { v, event ->
+            when (event?.action) {
                 MotionEvent.ACTION_DOWN ->
-
                     viewModel!!.getfacilityCallback(facilitycallbackRetrofitCallback)
-
             }
-
-            v.onTouchEvent(event) ?: true
+            v?.onTouchEvent(event) ?: true
         }
-
-
-
-        return binding.root
+        return binding?.root
     }
 
     private fun ClearData() {
         arraylist_office.clear()
-        officeDropDownAdapter = OfficeDropDownAdapter(context!!, ArrayList())
+        officeDropDownAdapter = OfficeDropDownAdapter(requireContext(), ArrayList())
         arraylist_office.add(OfficeResponseContent())
         officeDropDownAdapter?.setOfficeListDetails(arraylist_office)
 
 
         arraylist_institution.clear()
-        institutionDropDownAdapter = SelectInstituteDropDownAdapter(context!!, ArrayList())
+        institutionDropDownAdapter = SelectInstituteDropDownAdapter(requireContext(), ArrayList())
         arraylist_institution.add(InstitutionresponseContent())
         institutionDropDownAdapter?.setInstitutionListDetails(arraylist_institution)
-        binding.spinnerInstitution.adapter = institutionDropDownAdapter
+        binding?.spinnerInstitution?.adapter = institutionDropDownAdapter
 
         arraylist_department.clear()
-        departmentDropDownAdapter = WardDropDownAdapter(context!!, ArrayList())
+        departmentDropDownAdapter = WardDropDownAdapter(requireContext(), ArrayList())
         arraylist_department.add(Ward())
         departmentDropDownAdapter?.setDepatmentListDetails(arraylist_department)
-        binding.spinnerDeparment.adapter = departmentDropDownAdapter
+        binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
 
 
         //      appPreferences?.saveInt(AppConstants.DEPARTMENT_UUID, 0)
@@ -170,7 +156,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
     }
 
     val officeRetrofitCallBack =
-        object {
+        object : RetrofitCallback<OfficeResponseModel> {
             override fun onSuccessfulResponse(response: Response<OfficeResponseModel>) {
                 Log.i("", "" + response.body())
                 if (response.body()?.responseContents!!.isNotEmpty()) {
@@ -191,13 +177,13 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -207,7 +193,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -215,7 +201,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -223,13 +209,13 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -239,16 +225,16 @@ class NurseInstituteDialogFragment : DialogFragment() {
 
 
     val facilitycallbackRetrofitCallback =
-        object {
+        object : RetrofitCallback<SurgeryInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(responseBody: Response<SurgeryInstitutionResponseModel>?) {
 
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
-                Log.i("", "" + responseBody?.body().responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
+                Log.i("", "" + responseBody?.body()?.responseContents)
 
 
-                setInstutution(responseBody!!.body().responseContents as ArrayList<InstitutionresponseContent?>?)
+                setInstutution(responseBody!!.body()?.responseContents as ArrayList<InstitutionresponseContent?>?)
 
 
             }
@@ -257,7 +243,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
                 AnalyticsManager.getAnalyticsManager().trackLoginFailed(context!!, "Bad Request")
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -267,7 +253,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.something_went_wrong))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -277,7 +263,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.unauthorized))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -287,7 +273,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     .trackLoginFailed(context!!, getString(R.string.something_went_wrong))
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -297,7 +283,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     AnalyticsManager.getAnalyticsManager().trackLoginFailed(context!!, s)
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         s
                     )
                 }
@@ -312,15 +298,15 @@ class NurseInstituteDialogFragment : DialogFragment() {
 
         institutionDropDownAdapter?.setInstitutionListDetails(arrayList)
 
-        binding.spinnerInstitution.adapter = institutionDropDownAdapter
+        binding?.spinnerInstitution?.adapter = institutionDropDownAdapter
 
         if (facilitylevelID != 0) {
 
             for (i in arrayList!!.indices) {
 
-                if (arrayList[i].facility_uuid == facilitylevelID) {
+                if (arrayList[i]?.facility_uuid == facilitylevelID) {
 
-                    binding.spinnerInstitution.setSelection(i)
+                    binding?.spinnerInstitution?.setSelection(i)
 
                     break
 
@@ -330,7 +316,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
         }
 
 
-        binding.spinnerInstitution.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerInstitution?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -340,8 +326,8 @@ class NurseInstituteDialogFragment : DialogFragment() {
                 if (position != institutionDropDownAdapter?.count!!) {
                     val institutionListGetDetails = institutionDropDownAdapter?.getlistDetails()
 
-                    facilitylevelID = institutionListGetDetails?.get(position).facility_uuid
-                    institution_NAME = institutionListGetDetails?.get(position).facility.name
+                    facilitylevelID = institutionListGetDetails?.get(position)?.facility_uuid
+                    institution_NAME = institutionListGetDetails?.get(position)?.facility?.name
 
                     if (facilitylevelID != 0) {
                         viewModel?.getWardList(facilitylevelID, departmentRetrofitCallBack)
@@ -360,7 +346,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
     }
 
     val departmentRetrofitCallBack =
-        object {
+        object : RetrofitCallback<WardListResponseModel> {
             override fun onSuccessfulResponse(response: Response<WardListResponseModel>) {
                 Log.i("", "" + response.body())
 
@@ -378,13 +364,13 @@ class NurseInstituteDialogFragment : DialogFragment() {
                     )
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         responseModel.message!!
                     )
                 } catch (e: Exception) {
                     utils?.showToast(
                         R.color.negativeToast,
-                        binding.mainLayout!!,
+                        binding?.mainLayout!!,
                         getString(R.string.something_went_wrong)
                     )
                     e.printStackTrace()
@@ -394,7 +380,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onServerError(response: Response<*>) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -402,7 +388,7 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onUnAuthorized() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.unauthorized)
                 )
             }
@@ -410,13 +396,13 @@ class NurseInstituteDialogFragment : DialogFragment() {
             override fun onForbidden() {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
@@ -425,27 +411,19 @@ class NurseInstituteDialogFragment : DialogFragment() {
         }
 
     private fun setward(responseContents: List<Ward>?) {
-
         departmentDropDownAdapter?.setDepatmentListDetails(responseContents as ArrayList<Ward?>?)
-        binding.spinnerDeparment.adapter = departmentDropDownAdapter
-
+        binding?.spinnerDeparment?.adapter = departmentDropDownAdapter
         if (ward_uuid != 0) {
-
             for (i in responseContents!!.indices) {
-
                 if (responseContents[i].ward_uuid == ward_uuid) {
-
-                    binding.spinnerDeparment.setSelection(i)
-
+                    binding?.spinnerDeparment?.setSelection(i)
                     break
-
                 }
-
             }
         }
 
 
-        binding.spinnerDeparment.onItemSelectedListener = object : OnItemSelectedListener {
+        binding?.spinnerDeparment?.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>,
                 view: View?,
@@ -454,29 +432,19 @@ class NurseInstituteDialogFragment : DialogFragment() {
             ) {
                 val departmentListGetDetails = departmentDropDownAdapter?.getlistDetails()
                 department_uuid = departmentListGetDetails?.get(position)?.department_uuid ?: 0
-
                 ward_uuid = departmentListGetDetails?.get(position)?.ward_uuid ?: 0
-
-
                 ward_name = departmentListGetDetails?.get(position)?.ward_name ?: ""
-
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
-
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return object : Dialog(activity!!, theme) {
+        return object : Dialog(requireActivity(), theme) {
             override fun onBackPressed() {
             }
         }
     }
-
-
 }
-
-

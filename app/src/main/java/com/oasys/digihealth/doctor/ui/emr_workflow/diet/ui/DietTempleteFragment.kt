@@ -21,6 +21,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentDietTempleteBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.DietTemplateDeatils
 import com.oasys.digihealth.doctor.ui.emr_workflow.diet.model.ResponseDietGetTemplateDetails
@@ -170,7 +171,7 @@ class DietTempleteFragment : Fragment() {
 
 
     val getTempleteRetrofitCallBack =
-        object {
+        object : RetrofitCallback<TempleResponseModel> {
             override fun onSuccessfulResponse(response: Response<TempleResponseModel>) {
                 val responseContents = Gson().toJson(response.body()?.responseContents)
                 Log.i("", "" + responseContents)
@@ -264,7 +265,7 @@ class DietTempleteFragment : Fragment() {
           viewModel!!.getTemplete(getTempleteRetrofitCallBack)
       }*/
 
-    var deleteRetrofitResponseCallback = object {
+    var deleteRetrofitResponseCallback = object : RetrofitCallback<DeleteResponseModel> {
         override fun onSuccessfulResponse(responseBody: Response<DeleteResponseModel>?) {
             viewModel!!.getTemplete(getTempleteRetrofitCallBack)
             customdialog!!.dismiss()
@@ -303,7 +304,7 @@ class DietTempleteFragment : Fragment() {
      Get Template
     */
     var getTemplateRetrofitResponseCallback =
-        object {
+        object : RetrofitCallback<ResponseDietGetTemplateDetails> {
             override fun onSuccessfulResponse(responseBody: Response<ResponseDietGetTemplateDetails>?) {
 
                 val ft = childFragmentManager.beginTransaction()

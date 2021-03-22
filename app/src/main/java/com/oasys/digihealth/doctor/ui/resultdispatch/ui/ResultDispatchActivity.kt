@@ -20,6 +20,7 @@ import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.ActivityResultDispatchBinding
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.resultdispatch.model.ResponseContentsResultDispatch
 import com.oasys.digihealth.doctor.ui.resultdispatch.model.ResponseResultDispatch
 import com.oasys.digihealth.doctor.ui.resultdispatch.request.RequestDispatchSearch
@@ -84,15 +85,15 @@ class ResultDispatchActivity : Fragment() {
             requireActivity().application
         )
             .create(ResultDispatchViewModel::class.java)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
+        binding?.lifecycleOwner = this
+        binding?.viewModel = viewModel
         utils = Utils(requireContext())
-        binding.searchDrawerCardView.setOnClickListener {
-            binding.drawerLayout!!.openDrawer(GravityCompat.END)
+        binding?.searchDrawerCardView?.setOnClickListener {
+            binding?.drawerLayout!!.openDrawer(GravityCompat.END)
 
         }
-        binding.drawerLayout.drawerElevation = 0f
-        binding.drawerLayout.setScrimColor(
+        binding?.drawerLayout?.drawerElevation = 0f
+        binding?.drawerLayout?.setScrimColor(
             ContextCompat.getColor(
                 requireContext(),
                 android.R.color.transparent
@@ -101,9 +102,9 @@ class ResultDispatchActivity : Fragment() {
 
         linearLayoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.sampleDispatchrecycleview!!.layoutManager = linearLayoutManager
+        binding?.sampleDispatchrecycleview!!.layoutManager = linearLayoutManager
         mAdapter = ResultDispatchAdapter(requireContext(), ArrayList())
-        binding.sampleDispatchrecycleview!!.adapter = mAdapter
+        binding?.sampleDispatchrecycleview!!.adapter = mAdapter
         appPreferences = AppPreferences.getInstance(
             requireActivity().application,
             AppConstants.SHARE_PREFERENCE_NAME
@@ -132,7 +133,7 @@ class ResultDispatchActivity : Fragment() {
 
         val formatter = SimpleDateFormat("dd-MM-yyyy")
 
-        binding.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
+        binding?.calendarEditText!!.setText("""${formatter.format(Date())}-${formatter.format(Date())}""")
 
         //startDate = utils!!.getAgedayDifferent(1)+ "T23:59:59.000Z"
 
@@ -140,32 +141,32 @@ class ResultDispatchActivity : Fragment() {
     }
 
     private fun listeners() {
-        binding.advanceSearchText.setOnClickListener {
+        binding?.advanceSearchText?.setOnClickListener {
 
-            if (binding.advanceSearchLayout.visibility == View.VISIBLE) {
-                binding.advanceSearchLayout.visibility = View.GONE
+            if (binding?.advanceSearchLayout?.visibility == View.VISIBLE) {
+                binding?.advanceSearchLayout?.visibility = View.GONE
 
 
             } else {
-                binding.advanceSearchLayout.visibility = View.VISIBLE
+                binding?.advanceSearchLayout?.visibility = View.VISIBLE
 
 
             }
         }
 
-        binding.searchButton!!.setOnClickListener {
+        binding?.searchButton!!.setOnClickListener {
 
-            if (!binding.calendarEditText!!.text.trim().toString().isEmpty()) {
+            if (!binding?.calendarEditText!!.text.trim().toString().isEmpty()) {
 
                 startDate = fromDateRev + "T00:01:00.000Z"
                 endDate = toDateRev + "T23:59:59.000Z"
             }
 
-            qucik_search = binding.qucikSearch!!.text.trim().toString()
-            pinnumber = binding.patientDetailsPin!!.text.trim().toString()
-            searchUsingOrderNo = binding.searchUsingOrderNo!!.text.trim().toString()
+            qucik_search = binding?.qucikSearch!!.text.trim().toString()
+            pinnumber = binding?.patientDetailsPin!!.text.trim().toString()
+            searchUsingOrderNo = binding?.searchUsingOrderNo!!.text.trim().toString()
 
-            binding.drawerLayout!!.closeDrawer(GravityCompat.END)
+            binding?.drawerLayout!!.closeDrawer(GravityCompat.END)
 
             mAdapter!!.clearAll()
 
@@ -198,7 +199,7 @@ class ResultDispatchActivity : Fragment() {
             }
         })
 
-        binding.calendarEditText!!.setOnClickListener {
+        binding?.calendarEditText!!.setOnClickListener {
 
             Toast.makeText(context, "Select Start Date", Toast.LENGTH_LONG).show()
             val c: Calendar = Calendar.getInstance()
@@ -246,7 +247,7 @@ class ResultDispatchActivity : Fragment() {
                                 dayOfMonth1
                             )
 
-                            binding.calendarEditText!!.setText(fromDate + "-" + toDate)
+                            binding?.calendarEditText!!.setText(fromDate + "-" + toDate)
 
                         },
                         mYear!!,
@@ -270,7 +271,7 @@ class ResultDispatchActivity : Fragment() {
 
         }
 
-        binding.sampleDispatchrecycleview.addOnScrollListener(object :
+        binding?.sampleDispatchrecycleview?.addOnScrollListener(object :
             RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -288,7 +289,7 @@ class ResultDispatchActivity : Fragment() {
             }
         })
 
-        binding.clear.setOnClickListener {
+        binding?.clear?.setOnClickListener {
             clearAllFields()
 
             initViews()
@@ -296,10 +297,10 @@ class ResultDispatchActivity : Fragment() {
     }
 
     private fun clearAllFields() {
-        binding.qucikSearch.setText("")
-        binding.patientDetailsPin.setText("")
-        binding.searchUsingOrderNo.setText("")
-        binding.calendarEditText.setText("")
+        binding?.qucikSearch?.setText("")
+        binding?.patientDetailsPin?.setText("")
+        binding?.searchUsingOrderNo?.setText("")
+        binding?.calendarEditText?.setText("")
     }
 
     private fun resultDispatchSeacondAPI(
@@ -347,10 +348,10 @@ class ResultDispatchActivity : Fragment() {
         viewModel?.getresultdispatch(requestResultdiapatch, resultdispatchResponseRetrofitCallback)
     }
 
-    val resultdispatchResponseRetrofitCallback = object {
+    val resultdispatchResponseRetrofitCallback = object : RetrofitCallback<ResponseResultDispatch> {
         override fun onSuccessfulResponse(responseBody: Response<ResponseResultDispatch>?) {
             if (responseBody!!.body()?.responseContents?.isNotEmpty()!!) {
-                binding.resultDispatchCount.text =
+                binding?.resultDispatchCount?.text =
                     "Result Dispatch Count " + responseBody.body()?.totalRecords
                 TOTAL_PAGES =
                     Math.ceil(responseBody.body()!!.totalRecords!!.toDouble() / 10).toInt()
@@ -358,30 +359,30 @@ class ResultDispatchActivity : Fragment() {
                     isLoadingPaginationAdapterCallback = false
                     mAdapter!!.addAll(responseBody.body()!!.responseContents)
                     if (currentPage < TOTAL_PAGES) {
-                        binding.progressbar!!.visibility = View.VISIBLE
+                        binding?.progressbar!!.visibility = View.VISIBLE
                         mAdapter!!.addLoadingFooter()
                         isLoading = true
                         isLastPage = false
                     } else {
-                        binding.progressbar!!.visibility = View.GONE
+                        binding?.progressbar!!.visibility = View.GONE
                         mAdapter!!.removeLoadingFooter()
                         isLoading = false
                         isLastPage = true
                     }
 
                 } else {
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
                     mAdapter!!.removeLoadingFooter()
                     isLoading = false
                     isLastPage = true
                 }
                 if (responseBody.body()!!.totalRecords!! < 11) {
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
                 }
 
             } else {
 
-                binding.resultDispatchCount.text = "Result Dispatch Count 0 "
+                binding?.resultDispatchCount?.text = "Result Dispatch Count 0 "
                 Toast.makeText(context, "No records found", Toast.LENGTH_LONG).show()
             }
         }
@@ -397,13 +398,13 @@ class ResultDispatchActivity : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.msg!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -414,7 +415,7 @@ class ResultDispatchActivity : Fragment() {
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -423,7 +424,7 @@ class ResultDispatchActivity : Fragment() {
             isLoadingPaginationAdapterCallback = false
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -431,31 +432,27 @@ class ResultDispatchActivity : Fragment() {
         override fun onForbidden() {
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
             isLoadingPaginationAdapterCallback = false
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
             isLoadingPaginationAdapterCallback = false
-            binding.progressbar!!.visibility = View.GONE
-
+            binding?.progressbar!!.visibility = View.GONE
         }
-
-
     }
 
-
     val secondresultdispatchResponseRetrofitCallback =
-        object {
+        object : RetrofitCallback<ResponseResultDispatch> {
             override fun onSuccessfulResponse(response: Response<ResponseResultDispatch>) {
                 if (response.body()?.responseContents!!.isNotEmpty()) {
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
                     mAdapter!!.removeLoadingFooter()
                     isLoading = false
                     isLoadingPaginationAdapterCallback = false
@@ -465,14 +462,14 @@ class ResultDispatchActivity : Fragment() {
 
                     if (currentPage < TOTAL_PAGES) {
 
-                        binding.progressbar!!.visibility = View.VISIBLE
+                        binding?.progressbar!!.visibility = View.VISIBLE
                         mAdapter?.addLoadingFooter()
                         isLoading = true
                         isLastPage = false
                         println("testing for four  = $currentPage--$TOTAL_PAGES")
                     } else {
                         isLastPage = true
-                        binding.progressbar!!.visibility = View.GONE
+                        binding?.progressbar!!.visibility = View.GONE
 //                    visitHistoryAdapter.removeLoadingFooter()
                         isLoading = false
                         isLastPage = true
@@ -480,7 +477,7 @@ class ResultDispatchActivity : Fragment() {
                     }
 
                 } else {
-                    binding.progressbar!!.visibility = View.GONE
+                    binding?.progressbar!!.visibility = View.GONE
                     println("testing for six  = $currentPage--$TOTAL_PAGES")
                     mAdapter?.removeLoadingFooter()
                     isLoading = false
@@ -500,7 +497,7 @@ class ResultDispatchActivity : Fragment() {
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -509,7 +506,7 @@ class ResultDispatchActivity : Fragment() {
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
@@ -518,22 +515,17 @@ class ResultDispatchActivity : Fragment() {
                 viewModel!!.progress.value = View.GONE
                 utils!!.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
             }
 
             override fun onFailure(failure: String) {
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
             }
 
             override fun onEverytime() {
-                binding.progressbar!!.visibility = View.GONE
+                binding?.progressbar!!.visibility = View.GONE
             }
         }
-
-
 }
-
-
-

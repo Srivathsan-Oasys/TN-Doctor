@@ -25,16 +25,17 @@ import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.databinding.FragmentTabDischargePatientBinding
 import com.oasys.digihealth.doctor.fire_base_analytics.AnalyticsManager
-import com.oasys.digihealth.doctor.ui.scanner.ScannerActivity
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.view.EmrWorkFlowActivity
-import com.oasys.digihealth.doctor.ui.landingscreen.MainLandScreenActivity
+import com.oasys.digihealth.doctor.ui.home.HomeActivity
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.InPatientResponseData
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.InPatientResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.search_response_model.SearchResponseModel
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.DischargePatientViewModel
 import com.oasys.digihealth.doctor.ui.out_patient.view_model.DischargePatientViewModelFactory
+import com.oasys.digihealth.doctor.ui.scanner.ScannerActivity
 import com.oasys.digihealth.doctor.utils.Utils
-import com.oasys.digihealth.doctor.utils.CustomProgressDialog
+import com.oasys.digihealth.doctor.utils.custom_views.CustomProgressDialog
 import retrofit2.Response
 
 
@@ -89,7 +90,7 @@ class DischargePatientTabFragment : Fragment() {
 
 
 
-        binding.etSearch.addTextChangedListener(object : TextWatcher {
+        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
             }
 
@@ -98,20 +99,20 @@ class DischargePatientTabFragment : Fragment() {
 
             override fun afterTextChanged(s: Editable) {
                 if (s.length < 10) {
-                    binding.etSearch.error = "Please enter minimum of 10 nos"
+                    binding?.etSearch?.error = "Please enter minimum of 10 nos"
 
                 }
             }
         })
 
-        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
+        binding?.etSearch?.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                if (binding.etSearch.text.toString().trim().length!! >= 3) {
-                    queryvalue = binding.etSearch.text.toString()
+                if (binding?.etSearch?.text.toString().trim().length >= 3) {
+                    queryvalue = binding?.etSearch?.text.toString()
                     outPatientAdapter.clearAll()
                     showCustomProgressDialog()
                     viewModel?.searchDischargePatients(
-                        binding.etSearch.text.toString(),
+                        binding?.etSearch?.text.toString(),
                         currentPage,
                         pageSize,
                         "modified_date",
@@ -123,12 +124,12 @@ class DischargePatientTabFragment : Fragment() {
             true
         }
 
-        binding.searchButton.setOnClickListener {
-            val searchview = binding.etSearch.text.toString()
-            if (searchview.isNotEmpty()!! && searchview.length >= 3) {
+        binding?.searchButton?.setOnClickListener {
+            val searchview = binding?.etSearch?.text.toString()
+            if (searchview.isNotEmpty() && searchview.length >= 3) {
                 showCustomProgressDialog()
                 viewModel?.searchDischargePatients(
-                    binding.etSearch.text.toString(),
+                    binding?.etSearch?.text.toString(),
                     currentPage,
                     pageSize,
                     "modified_date",
@@ -138,7 +139,7 @@ class DischargePatientTabFragment : Fragment() {
             }
         }
 
-        binding.clearcardview.setOnClickListener {
+        binding?.clearcardview?.setOnClickListener {
             showCustomProgressDialog()
             viewModel?.searchDischargePatients(
                 "",
@@ -149,14 +150,13 @@ class DischargePatientTabFragment : Fragment() {
                 admittedPatientRetrofitCallback
             )
         }
-        binding.qrCodeImageview.setOnClickListener {
+        binding?.qrCodeImageview?.setOnClickListener {
             val intent = Intent(requireActivity(), ScannerActivity::class.java)
             startActivityForResult(intent, 122)
         }
         return binding!!.root
     }
     //defining Interface
-
 
     fun initPerefences() {
         customProgressDialog = CustomProgressDialog(requireContext())
@@ -176,19 +176,19 @@ class DischargePatientTabFragment : Fragment() {
         viewModel = DischargePatientViewModelFactory(
             requireActivity().application
         ).create(DischargePatientViewModel::class.java)
-        binding.viewModel = viewModel
+        binding?.viewModel = viewModel
         binding!!.lifecycleOwner = this
 
         viewModel!!.errorText.observe(viewLifecycleOwner,
             Observer { toastMessage ->
-                utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, toastMessage)
+                utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, toastMessage)
             })
     }
 
     fun initDropDown() {
-        binding.llDropDownView.hide()
-        binding.rlHeader.setOnClickListener {
-            if (binding.llDropDownView.isvisible()!!) {
+        binding?.llDropDownView?.hide()
+        binding?.rlHeader?.setOnClickListener {
+            if (binding?.llDropDownView?.isvisible()!!) {
                 hideDropDown()
             } else {
                 showDropDown()
@@ -197,15 +197,15 @@ class DischargePatientTabFragment : Fragment() {
     }
 
     fun showDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.llDropDownView.show()
-        binding.ivArrow.rotation = 270F
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.llDropDownView?.show()
+        binding?.ivArrow?.rotation = 270F
     }
 
     fun hideDropDown() {
-        slideDown(requireContext(), binding.llDropDownView!!)
-        binding.ivArrow.rotation = 90F
-        binding.llDropDownView.hide()
+        slideDown(requireContext(), binding?.llDropDownView!!)
+        binding?.ivArrow?.rotation = 90F
+        binding?.llDropDownView?.hide()
     }
 
 
@@ -221,8 +221,8 @@ class DischargePatientTabFragment : Fragment() {
                 GridLayoutManager(context, 1, GridLayoutManager.VERTICAL, false)
         }
 
-        binding.recyclerView.layoutManager = gridLayoutManager
-        binding.recyclerView.adapter = outPatientAdapter
+        binding?.recyclerView?.layoutManager = gridLayoutManager
+        binding?.recyclerView?.adapter = outPatientAdapter
 
         outPatientAdapter.setOnItemClickListener(object :
             InpatientAdapter.OnItemClickListener {
@@ -244,7 +244,7 @@ class DischargePatientTabFragment : Fragment() {
 
                     val emr = EmrWorkFlowActivity.newInstance(AppConstants.IN_PATIENT)
 
-                    (activity as MainLandScreenActivity).replaceFragment(emr)
+                    (activity as HomeActivity).replaceFragment(emr)
 
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -253,7 +253,7 @@ class DischargePatientTabFragment : Fragment() {
             }
         })
 
-        binding.recyclerView.addOnScrollListener(object :
+        binding?.recyclerView?.addOnScrollListener(object :
             PaginationScrollListener(gridLayoutManager) {
 
             override fun loadMoreItems() {
@@ -301,13 +301,13 @@ class DischargePatientTabFragment : Fragment() {
                 )
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     responseModel.message!!
                 )
             } catch (e: Exception) {
                 utils?.showToast(
                     R.color.negativeToast,
-                    binding.mainLayout!!,
+                    binding?.mainLayout!!,
                     getString(R.string.something_went_wrong)
                 )
                 e.printStackTrace()
@@ -318,7 +318,7 @@ class DischargePatientTabFragment : Fragment() {
             dismissCustomProgressDialog()
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -327,7 +327,7 @@ class DischargePatientTabFragment : Fragment() {
             dismissCustomProgressDialog()
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.unauthorized)
             )
         }
@@ -336,14 +336,14 @@ class DischargePatientTabFragment : Fragment() {
             dismissCustomProgressDialog()
             utils?.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
             dismissCustomProgressDialog()
-            utils?.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils?.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -393,7 +393,7 @@ class DischargePatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -402,7 +402,7 @@ class DischargePatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
@@ -411,13 +411,13 @@ class DischargePatientTabFragment : Fragment() {
             viewModel!!.progressBar.value = View.GONE
             utils!!.showToast(
                 R.color.negativeToast,
-                binding.mainLayout!!,
+                binding?.mainLayout!!,
                 getString(R.string.something_went_wrong)
             )
         }
 
         override fun onFailure(failure: String) {
-            utils!!.showToast(R.color.negativeToast, binding.mainLayout!!, failure)
+            utils!!.showToast(R.color.negativeToast, binding?.mainLayout!!, failure)
         }
 
         override fun onEverytime() {
@@ -431,15 +431,11 @@ class DischargePatientTabFragment : Fragment() {
     }
 
     fun showCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.show()
-        }
+        customProgressDialog?.show()
     }
 
     fun dismissCustomProgressDialog() {
-        if (customProgressDialog != null) {
-            customProgressDialog.dismiss()
-        }
+        customProgressDialog?.dismiss()
     }
 
 

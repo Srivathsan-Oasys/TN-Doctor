@@ -6,11 +6,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.delete.model.DeleteResponseModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
@@ -59,7 +59,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_UUID!!, departmentID!!,
             AppConstants.FAV_TYPE_ID_PRESCRIPTION, StoreMasterID
-        ).enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(emrWorkFlowRetrofitCallBack))
         return
     }
 
@@ -81,7 +81,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             department_UUID!!,
             AppConstants.FAV_TYPE_ID_PRESCRIPTION,
             StoreMasterID
-        ).enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(templeteRetrofitCallBack))
         return
     }
 
@@ -120,7 +120,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(labTypeRetrofitCallback))
         return
 
     }
@@ -159,7 +159,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(instructionRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(instructionRetrofitCallback))
         return
 
     }
@@ -195,7 +195,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getFrequencyRetrofitCallback))
         return
 
     }
@@ -232,7 +232,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facilityID!!,
             body
-        ).enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(complaintSearchRetrofitCallBack))
         return
     }
 
@@ -270,7 +270,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
             facilityID!!, body
-        ).enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
+        )?.enqueue(RetrofitMainCallback(getPrescriptionDurationRetrofitCallBack))
         return
 
     }
@@ -296,7 +296,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             emrPrescriptionRequestModel
-        ).enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
         return
 
 
@@ -323,7 +323,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facilityId!!,
             emrPrescriptionRequestModel
-        ).enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(emrprescriptionpostRetrofitCallback))
         return
 
 
@@ -359,7 +359,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
         apiService?.deleteRows(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -393,7 +393,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
         apiService?.deleteTemplate(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!, body
-        ).enqueue(RetrofitMainCallback(deleteRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(deleteRetrofitCallback))
         return
     }
 
@@ -432,8 +432,8 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             AppConstants.LANGUAGE,
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!,
-            facilityId!!, userDataStoreBean?.user_name, body
-        ).enqueue(RetrofitMainCallback(injectionRetrofitCallback))
+            facilityId!!, userDataStoreBean.user_name, body
+        )?.enqueue(RetrofitMainCallback(injectionRetrofitCallback))
         return
 
     }
@@ -558,7 +558,7 @@ class PrescriptionViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_UUID!!,
             body
-        ).enqueue(RetrofitMainCallback(pdfGenerateRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(pdfGenerateRetrofitCallback))
         return
     }
 

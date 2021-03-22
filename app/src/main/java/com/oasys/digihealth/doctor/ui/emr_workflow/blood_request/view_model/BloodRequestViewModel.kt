@@ -5,11 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppConstants.BEARER_AUTH
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.emr_workflow.blood_request.model.*
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.CreateEncounterRequestModel
 import com.oasys.digihealth.doctor.ui.emr_workflow.model.create_encounter_request.Encounter
@@ -52,7 +53,7 @@ class BloodRequestViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getAllBloodGroupReq
-        ).enqueue(RetrofitMainCallback(getAllBloodGroupRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAllBloodGroupRespCallback))
     }
 
     fun getAllPurpose(
@@ -76,7 +77,7 @@ class BloodRequestViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getAllPurposeReq
-        ).enqueue(RetrofitMainCallback(getAllPurposeRespCallback))
+        )?.enqueue(RetrofitMainCallback(getAllPurposeRespCallback))
     }
 
     fun getBloodComponent(
@@ -100,7 +101,7 @@ class BloodRequestViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getBloodComponentsReq
-        ).enqueue(RetrofitMainCallback(getBloodComponentsRespCallback))
+        )?.enqueue(RetrofitMainCallback(getBloodComponentsRespCallback))
     }
 
     fun getPreviousBloodRequest(
@@ -124,7 +125,7 @@ class BloodRequestViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             getPreviousBloodReq
-        ).enqueue(RetrofitMainCallback(getPreviousBloodRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(getPreviousBloodRespRetrofitCallback))
     }
 
     fun bloodRequestSave(
@@ -148,7 +149,7 @@ class BloodRequestViewModel(application: Application) : AndroidViewModel(applica
             userDataStoreBean?.uuid!!,
             facility_uuid,
             bloodRequestSaveReq
-        ).enqueue(RetrofitMainCallback(bloodRequestSaveRespRetrofitCallback))
+        )?.enqueue(RetrofitMainCallback(bloodRequestSaveRespRetrofitCallback))
     }
 
     fun getEncounter(

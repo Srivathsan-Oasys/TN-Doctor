@@ -5,9 +5,9 @@
     tools:ignore="MissingDefaultResource">
 
     <data>
-        <variable
-            name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_state_level_report.viewmodel.AdmissionStateLevelReportViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_state_level_report.viewmodel.AdmissionStateLevelReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

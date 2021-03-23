@@ -8,10 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.oasys.digihealth.doctor.R
 import com.oasys.digihealth.doctor.application.HmisApplication
-import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.config.AppConstants
 import com.oasys.digihealth.doctor.config.AppPreferences
 import com.oasys.digihealth.doctor.db.UserDetailsRoomRepository
+import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitCallback
 import com.oasys.digihealth.doctor.retrofitCallbacks.RetrofitMainCallback
 import com.oasys.digihealth.doctor.ui.dashboard.model.*
 import com.oasys.digihealth.doctor.ui.dashboard.model.registration.*
@@ -39,7 +39,6 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class QuickRegistrationNewViewModel(
     application: Application?
 ) : AndroidViewModel(
@@ -53,25 +52,15 @@ class QuickRegistrationNewViewModel(
     var errorText = MutableLiveData<String>()
 
     var userDetailsRoomRepository: UserDetailsRoomRepository? = null
-
     var facility_id: Int? = 0
-
     var department_UUID: Int? = 0
-
-
     var appPreferences: AppPreferences? = null
 
-
     init {
-
         userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
-
         appPreferences = AppPreferences.getInstance(application, AppConstants.SHARE_PREFERENCE_NAME)
-
         progress.value = 8
-
         facility_id = appPreferences?.getInt(AppConstants.FACILITY_UUID)
-
         department_UUID = appPreferences?.getInt(AppConstants.DEPARTMENT_UUID)
     }
 
@@ -232,7 +221,7 @@ class QuickRegistrationNewViewModel(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
             userDataStoreBean?.uuid!!, facility_id!!,
             requestRegistration
-        )?.enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
+        ).enqueue(RetrofitMainCallback(updateQuickRegistrationRetrofitCallback))
 
     }
 
@@ -545,7 +534,7 @@ class QuickRegistrationNewViewModel(
         val apiService = aiiceApplication.getRetrofitService()
         apiService?.getPrivilliageModule(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token, "en",
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(getPrivilageRetrofitCallback))
 
@@ -589,7 +578,7 @@ class QuickRegistrationNewViewModel(
 
         apiService?.getTestMethod(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
@@ -633,7 +622,7 @@ class QuickRegistrationNewViewModel(
 
         apiService?.getTestMethod(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facilityId!!,
+            userDataStoreBean?.uuid!!, facilityId,
             body
         )?.enqueue(RetrofitMainCallback(ResponseTestMethodRetrofitCallback))
 
@@ -1255,7 +1244,7 @@ class QuickRegistrationNewViewModel(
 
         apiService?.getCovidPatientSearch(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, AppConstants?.ACCEPT_LANGUAGE_EN, facility_id!!,
+            userDataStoreBean?.uuid!!, AppConstants.ACCEPT_LANGUAGE_EN, facility_id!!,
             body
         )?.enqueue(RetrofitMainCallback(PatientNameRetrofitCallback))
 
@@ -1374,7 +1363,7 @@ class QuickRegistrationNewViewModel(
 
         apiService?.getSessionTimer(
             AppConstants.BEARER_AUTH + userDataStoreBean?.access_token,
-            userDataStoreBean?.uuid!!, facility_id!!, AppConstants?.ACCEPT_LANGUAGE_EN,
+            userDataStoreBean?.uuid!!, facility_id!!, AppConstants.ACCEPT_LANGUAGE_EN,
             body
         )?.enqueue(RetrofitMainCallback(sessionResponseCallback))
     }

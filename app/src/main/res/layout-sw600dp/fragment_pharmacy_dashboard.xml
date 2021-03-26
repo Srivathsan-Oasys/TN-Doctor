@@ -7,7 +7,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDashboardViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.pharmacy_management.dashboard.viewmodel.PharmacyDashboardViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

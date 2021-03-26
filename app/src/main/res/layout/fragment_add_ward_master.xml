@@ -24,7 +24,7 @@
             android:layout_height="2dp"
             android:background="@color/view" />
 
-        <com.oasys.digihealth.doctor.utils.custom_views.CustomViewpager
+        <com.hmis_tn.doctor.utils.custom_views.CustomViewpager
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

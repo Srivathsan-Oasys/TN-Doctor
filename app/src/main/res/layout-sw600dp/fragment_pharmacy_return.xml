@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.pharmacy_management.returns.viewmodel.PharmacyReturnViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.pharmacy_management.returns.viewmodel.PharmacyReturnViewModel" />-->
     </data>
 
     <LinearLayout

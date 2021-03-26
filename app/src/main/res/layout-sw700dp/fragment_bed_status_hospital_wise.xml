@@ -7,7 +7,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.bed_manage_reports.viewmodel.BedStatusHospitalWiseViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.nursedesk.bed_manage_reports.viewmodel.BedStatusHospitalWiseViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -1327,7 +1327,7 @@
                 android:layout_margin="@dimen/_10sdp"
                 android:orientation="vertical">
 
-                <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                <com.hmis_tn.doctor.MultiSelectionSpinner
                     android:id="@+id/etDistrictspinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_29sdp"
@@ -1338,7 +1338,7 @@
                     android:background="@drawable/edittext_border_gray"
                     android:textSize="14sp" />
 
-                <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                <com.hmis_tn.doctor.MultiSelectionSpinner
                     android:id="@+id/etInstitutionSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_29sdp"

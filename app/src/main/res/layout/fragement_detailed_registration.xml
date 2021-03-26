@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.detailedRegistration.viewModel.DetailedRegistrationViewModel" />
+            type="com.hmis_tn.doctor.ui.detailedRegistration.viewModel.DetailedRegistrationViewModel" />
     </data>
 
 

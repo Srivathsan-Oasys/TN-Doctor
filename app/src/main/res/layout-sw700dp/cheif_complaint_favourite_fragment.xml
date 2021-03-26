@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.chief_complaint.view_model.ChiefComplaintViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.chief_complaint.view_model.ChiefComplaintViewModel" />
     </data>
 
     <LinearLayout

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.institute.view_model.InstituteViewModel" />
+            type="com.hmis_tn.doctor.ui.institute.view_model.InstituteViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -62,7 +62,7 @@
             -->
 
 
-            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                 android:id="@+id/revalidationDateLabelTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                 android:id="@+id/listName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

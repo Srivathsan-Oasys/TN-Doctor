@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.diet.view_model.DietViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.diet.view_model.DietViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

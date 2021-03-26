@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.login.view_model.LoginViewModel" />
+            type="com.hmis_tn.doctor.ui.login.view_model.LoginViewModel" />
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/rlLogin"

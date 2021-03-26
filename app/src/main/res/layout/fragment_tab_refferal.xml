@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.view_model.AdmissionViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.admission_referal.view_model.AdmissionViewModel" />
     </data>
 
 
@@ -84,7 +84,7 @@
                         android:textSize="18sp" />
 
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:id="@+id/deptText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                         android:textSize="16sp"
                         android:visibility="gone" />
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:id="@+id/deptTxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
                         android:textSize="16sp"
                         android:visibility="gone" />
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
@@ -176,7 +176,7 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textSize="@dimen/dr_medium_text" />
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"

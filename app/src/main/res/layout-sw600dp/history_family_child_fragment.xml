@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.familyhistory.viewmodel.HistoryFamilyViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.history.familyhistory.viewmodel.HistoryFamilyViewModel" />
     </data>
 
     <FrameLayout

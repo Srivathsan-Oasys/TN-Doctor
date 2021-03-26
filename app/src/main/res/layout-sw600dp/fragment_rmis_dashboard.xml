@@ -7,7 +7,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.rmis.rmisdashboard.viewmodel.RMISDashboardViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.rmis.rmisdashboard.viewmodel.RMISDashboardViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

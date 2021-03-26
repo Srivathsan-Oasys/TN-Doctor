@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.ip_management.emergeny_casualty_patient_list.view_model.EmergencyCasualtyPatientViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.ip_management.emergeny_casualty_patient_list.view_model.EmergencyCasualtyPatientViewModel" />-->
     </data>
 
     <LinearLayout
@@ -231,7 +231,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -247,7 +247,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textSize="16sp" />
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -378,7 +378,7 @@
                                 android:layout_height="wrap_content"
                                 android:inputType="text" />
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -566,7 +566,7 @@
                         android:orientation="vertical"
                         android:visibility="gone">
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"
@@ -594,7 +594,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textSize="16sp" />
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="8dp"

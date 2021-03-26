@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.documents.view_model.DocumentViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.documents.view_model.DocumentViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -170,7 +170,7 @@
                                     android:orientation="vertical"
                                     tools:ignore="MissingConstraints">
 
-                                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="13sp"
@@ -197,7 +197,7 @@
                                     android:weightSum="1"
                                     tools:ignore="MissingConstraints">
 
-                                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="13sp"
@@ -223,7 +223,7 @@
                                     android:weightSum="1"
                                     tools:ignore="MissingConstraints">
 
-                                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="13sp"

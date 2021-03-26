@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.radiology.view_model.RadiologyViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.radiology.view_model.RadiologyViewModel" />
     </data>
 
     <LinearLayout

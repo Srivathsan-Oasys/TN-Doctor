@@ -1,0 +1,32 @@
+package com.hmis_tn.doctor.ui.quickregistration.model
+
+data class OpCorrectionRequest(
+    var aadhaar_number: String? = null,
+    var address_line1: String? = null,
+    var address_line2: String? = null,
+    var age: String? = null,
+    var correction_reason: String? = null,
+    var country_uuid: Int? = null,
+    var district_uuid: Int? = null,
+    var dob: String? = null,
+    var father_name: String? = null,
+    var fingerPrintData: FingerPrintData? = FingerPrintData(),
+    var first_name: String? = null,
+    var gender_uuid: Int? = null,
+    var is_adult: Int? = null,
+    var is_dob_auto_calculate: Int? = null,
+    var last_name: String? = null,
+    var mobile: String? = null,
+    var period_uuid: Int? = null,
+    var isDrMobileApi: Boolean? = true,
+    var photo_path: String? = null,
+    var pincode: String? = null,
+    var registred_facility_uuid: String? = null,
+    var saveExists: Boolean? = null,
+    var state_uuid: Int? = null,
+    var taluk_uuid: String? = null,
+    var title_uuid: Int? = null,
+    var uhid: String? = null,
+    var uuid: Int? = null,
+    var village_uuid: String? = null
+)

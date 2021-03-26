@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_patient_list"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentListMainFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.booking.fragment.AppointmentListMainFragment"
         android:label="AppointmentListMainFragment"
         tools:layout="@layout/fragment_appointment_list_main">
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_main_search"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentMainSearchFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.booking.fragment.AppointmentMainSearchFragment"
         android:label="AppointmentSearchFragment"
         tools:layout="@layout/fragment_appointment_search">
 
@@ -49,7 +49,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_search"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.AppointmentSearchFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.fragment.AppointmentSearchFragment"
         android:label="AppointmentSearchFragment"
         tools:layout="@layout/fragment_appointment_search">
 
@@ -74,7 +74,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_doctors"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.AppointmentDoctorsFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.booking.fragment.AppointmentDoctorsFragment"
         android:label="AppointmentDoctorsFragment"
         tools:layout="@layout/fragment_appointment_doctors">
 
@@ -90,7 +90,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_booking"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.booking.fragment.AppointmentSlotBookFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.booking.fragment.AppointmentSlotBookFragment"
         android:label="AppointmentSearchFragment"
         tools:layout="@layout/fragment_appointment_search">
 
@@ -108,7 +108,7 @@
 
     <!--<dialog
         android:id="@+id/nav_patient_list_Search_dialog"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.fragment.PatientListDialogFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.fragment.PatientListDialogFragment"
         android:label="PatientListDialogFragment"
         tools:layout="@layout/fragment_patient_list_dialog" />-->
 
@@ -116,7 +116,7 @@
     <!-- Appointment session list to appointment book  -->
     <fragment
         android:id="@+id/nav_appointment_session_list"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionListFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.session.AppointmentSessionListFragment"
         android:label="AppointmentSessionListFragment"
         tools:layout="@layout/fragment_appointment_session_list">
 
@@ -140,7 +140,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_session_create"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionCreateFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.session.AppointmentSessionCreateFragment"
         android:label="AppointmentSessionCreateFragment"
         tools:layout="@layout/fragment_appointment_session_create">
 
@@ -155,7 +155,7 @@
 
     <fragment
         android:id="@+id/nav_appointment_session_view"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionViewFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.session.AppointmentSessionViewFragment"
         android:label="AppointmentSessionViewFragment"
         tools:layout="@layout/fragment_appointment_session_view">
 
@@ -171,7 +171,7 @@
 
     <dialog
         android:id="@+id/nav_appointment_session_dialog"
-        android:name="com.oasys.digihealth.doctor.ui.telemedicine.session.AppointmentSessionCreateDialogFragment"
+        android:name="com.hmis_tn.doctor.ui.telemedicine.session.AppointmentSessionCreateDialogFragment"
         android:label="AppointmentSessionCreateDialogFragment"
         tools:layout="@layout/fragment_appointment_session_create_dialog" />
 

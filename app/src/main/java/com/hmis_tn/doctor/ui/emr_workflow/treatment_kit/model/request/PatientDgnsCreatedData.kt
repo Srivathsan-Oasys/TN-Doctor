@@ -1,0 +1,30 @@
+package com.hmis_tn.doctor.ui.emr_workflow.treatment_kit.model.request
+
+data class PatientDgnsCreatedData(
+    val body_site_uuid: Int? = 0,
+    val category_uuid: Int? = 0,
+    val condition_status_uuid: Int? = 0,
+    val condition_type_uuid: Int? = 0,
+    val consultation_uuid: Int? = 0,
+    val created_by: String? = "",
+    val created_date: String? = "",
+    val department_uuid: String? = "",
+    val diagnosis_uuid: Int? = 0,
+    val encounter_type_uuid: Int? = 0,
+    val encounter_uuid: Int? = 0,
+    val facility_uuid: String? = "",
+    val grade_uuid: Int? = 0,
+    val is_active: Int? = 0,
+    val is_chronic: Int? = 0,
+    val is_patient_condition: Int? = 0,
+    val is_snomed: Int? = 0,
+    val modified_by: String? = "",
+    val modified_date: String? = "",
+    val patient_treatment_uuid: Int? = 0,
+    val patient_uuid: String? = "",
+    val prescription_uuid: Int? = 0,
+    val revision: Int? = 0,
+    val status: Int? = 0,
+    val type_uuid: Int? = 0,
+    val uuid: Int? = 0
+)

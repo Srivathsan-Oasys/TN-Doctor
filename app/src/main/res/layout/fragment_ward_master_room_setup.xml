@@ -143,7 +143,7 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/dr_medium_text" />
 
-                        <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                        <com.hmis_tn.doctor.MultiSelectionSpinner
                             android:id="@+id/etBedNumberspinner"
                             style="@style/Widget.AppCompat.Spinner.Underlined"
                             android:layout_width="match_parent"

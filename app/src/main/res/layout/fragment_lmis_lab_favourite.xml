@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.lmis_neworder.view_model.LmisNewOrderViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.lmis_neworder.view_model.LmisNewOrderViewModel" />
     </data>
 
     <LinearLayout

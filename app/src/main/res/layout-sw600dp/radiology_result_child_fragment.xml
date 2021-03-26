@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.radiology_result.view_model.RadiologyResultViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.radiology_result.view_model.RadiologyResultViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModel" />
+            type="com.hmis_tn.doctor.ui.sample_dispatch.view_model.SampleDispatchViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

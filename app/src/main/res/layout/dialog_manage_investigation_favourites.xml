@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.investigation.view_model.ManageInvestFavourteViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.investigation.view_model.ManageInvestFavourteViewModel" />
     </data>
 
     <LinearLayout
@@ -104,7 +104,7 @@
 
                         </LinearLayout>
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"
@@ -131,7 +131,7 @@
 
                         </LinearLayout>
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -162,7 +162,7 @@
 
                         </LinearLayout>
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="3dp"

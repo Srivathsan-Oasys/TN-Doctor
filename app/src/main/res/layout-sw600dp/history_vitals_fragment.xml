@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.vitals.model.viewmodel.HistoryVitalsViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.history.vitals.model.viewmodel.HistoryVitalsViewModel" />
     </data>
 
     <LinearLayout

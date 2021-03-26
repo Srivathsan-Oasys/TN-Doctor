@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.op_notes.view_model.OpNotesViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.op_notes.view_model.OpNotesViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

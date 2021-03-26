@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.lab_result.view_model.LabResultViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.lab_result.view_model.LabResultViewModel" />
     </data>
 
     <FrameLayout

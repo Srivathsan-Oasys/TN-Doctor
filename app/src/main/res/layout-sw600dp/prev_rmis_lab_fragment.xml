@@ -6,7 +6,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.rmis.rmisTech.viewmodel.RMISNewOrderViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.rmis.rmisTech.viewmodel.RMISNewOrderViewModel" />-->
     </data>
     <LinearLayout
         android:layout_width="match_parent"

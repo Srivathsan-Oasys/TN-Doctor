@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.lab.view_model.ManageLabFavourteViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.lab.view_model.ManageLabFavourteViewModel" />
     </data>
 
     <LinearLayout
@@ -80,7 +80,7 @@
                         android:textColor="@color/navColor">
 
                     </TextView>
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Department"
@@ -89,7 +89,7 @@
                         android:paddingLeft="3dp"
                         android:fontFamily="@font/poppins_semibold"
                         android:textColor="@color/navColor"/>
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Display Order"
@@ -161,7 +161,7 @@
                     android:layout_marginLeft="13dp"
                     android:layout_marginRight="10dp"
                     android:orientation="horizontal">
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="Test Name"

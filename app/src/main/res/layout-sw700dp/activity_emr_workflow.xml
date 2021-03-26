@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.view_model.EmrViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.view_model.EmrViewModel" />
     </data>
 
     <LinearLayout
@@ -258,7 +258,7 @@
                         app:tabTextColor="@color/primaryGrey" />
                 </com.google.android.material.appbar.AppBarLayout>
 
-                <com.oasys.digihealth.doctor.utils.custom_views.CustomViewpager
+                <com.hmis_tn.doctor.utils.custom_views.CustomViewpager
                     android:id="@+id/viewPager"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />

@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.quickregistration.viewmodel.QuickRegistrationNewViewModel" />
+            type="com.hmis_tn.doctor.ui.quickregistration.viewmodel.QuickRegistrationNewViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.nurse_desk.bedmangement.model.view_model.BedManagementViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.nurse_desk.bedmangement.model.view_model.BedManagementViewModel" />-->
     </data>
 
     <LinearLayout
@@ -57,7 +57,7 @@
                         app:srcCompat="@drawable/ic_close_white" />
                 </LinearLayout>
 
-                <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -85,7 +85,7 @@
 
                 </RelativeLayout>
 
-                <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -143,7 +143,7 @@
 
                 </RelativeLayout>
 
-                <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

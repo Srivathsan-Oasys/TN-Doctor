@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:906299923991:android:9fd9841c79af6467474652",
         "android_client_info": {
-          "package_name": "com.oasys.digihealth.doctor"
+          "package_name": "com.hmis_tn.doctor"
         }
       },
       "oauth_client": [

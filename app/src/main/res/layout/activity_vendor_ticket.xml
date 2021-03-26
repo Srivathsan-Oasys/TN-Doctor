@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.helpdesk.viewmodel.VendorTicketViewModel" />
+            type="com.hmis_tn.doctor.ui.helpdesk.viewmodel.VendorTicketViewModel" />
     </data>
 
     <LinearLayout

@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.ot_schedule.viewmodel.AddSurgeryViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.ot_schedule.viewmodel.AddSurgeryViewModel" />
     </data>
 
     <LinearLayout

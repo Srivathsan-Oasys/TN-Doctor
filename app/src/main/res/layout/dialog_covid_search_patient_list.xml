@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.dashboard.view_model.CovidRegistrationViewModel" />
+            type="com.hmis_tn.doctor.ui.dashboard.view_model.CovidRegistrationViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

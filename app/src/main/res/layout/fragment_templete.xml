@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.lab.view_model.LabViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.lab.view_model.LabViewModel" />
     </data>
 
     <LinearLayout

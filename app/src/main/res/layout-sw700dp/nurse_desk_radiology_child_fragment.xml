@@ -6,7 +6,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_radiology.view_model.NurseDeskRadiologyViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.nursedesk.nurse_desk_radiology.view_model.NurseDeskRadiologyViewModel" />-->
     </data>
     <LinearLayout
         android:layout_width="match_parent"

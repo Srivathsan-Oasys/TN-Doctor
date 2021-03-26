@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.tutorial.viewmodel.VideoTutorialViewModel" />
+            type="com.hmis_tn.doctor.ui.tutorial.viewmodel.VideoTutorialViewModel" />
     </data>
 
             <LinearLayout

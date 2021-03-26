@@ -7,7 +7,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_prescription.viewmodel.NurseDeskPrescriptionViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.nursedesk.nurse_desk_prescription.viewmodel.NurseDeskPrescriptionViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

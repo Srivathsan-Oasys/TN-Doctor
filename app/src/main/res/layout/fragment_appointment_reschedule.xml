@@ -69,7 +69,7 @@
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_navigate_next" />
 
-                <com.oasys.digihealth.doctor.component.custom.DayOfWeekLayout
+                <com.hmis_tn.doctor.component.custom.DayOfWeekLayout
                     android:id="@+id/dayCalendarLayout"
                     android:layout_width="match_parent"
                     android:layout_height="75dp"

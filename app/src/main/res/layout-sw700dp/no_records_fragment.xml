@@ -7,7 +7,7 @@ tools:ignore="MissingDefaultResource">
 
     <variable
         name="viewModel"
-        type="com.oasys.digihealth.doctor.ui.emr_workflow.view_model.EmrViewModel" />
+        type="com.hmis_tn.doctor.ui.emr_workflow.view_model.EmrViewModel" />
 </data>
 
 <FrameLayout

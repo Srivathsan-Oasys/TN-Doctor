@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatKitFavAddDialogViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.treatment_kit.view_model.TreatKitFavAddDialogViewModel" />
     </data>
 
     <LinearLayout
@@ -81,7 +81,7 @@
                             android:focusableInTouchMode="true"
                             android:orientation="vertical">
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="3dp"
@@ -103,7 +103,7 @@
                                 android:textSize="12sp"
                                 tools:ignore="HardcodedText" />
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="3dp"
@@ -121,7 +121,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="3dp"

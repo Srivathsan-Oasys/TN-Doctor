@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.DoctorWiseSummaryViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.DoctorWiseSummaryViewModel" />-->
     </data>
 
     <LinearLayout

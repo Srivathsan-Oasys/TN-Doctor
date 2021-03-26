@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.out_patient.view_model.OutPatientViewModel" />
+            type="com.hmis_tn.doctor.ui.out_patient.view_model.OutPatientViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

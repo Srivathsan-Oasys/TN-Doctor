@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.application.viewmodel.ApplicationInstituteViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.application.viewmodel.ApplicationInstituteViewModel" />-->
     </data>
 
     <LinearLayout

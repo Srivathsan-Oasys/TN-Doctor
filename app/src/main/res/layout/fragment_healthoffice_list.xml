@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.appMaster.healthoffice.viewModel.HealthofficeListViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.appMaster.healthoffice.viewModel.HealthofficeListViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout

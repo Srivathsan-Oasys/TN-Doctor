@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.view_model.EmrViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.view_model.EmrViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -283,7 +283,7 @@
                         android:layout_height="1dp"
                         android:background="@color/view" />
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.CustomViewpager
+                    <com.hmis_tn.doctor.utils.custom_views.CustomViewpager
                         android:id="@+id/viewPager"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

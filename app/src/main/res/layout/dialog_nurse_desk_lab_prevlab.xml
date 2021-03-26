@@ -8,7 +8,7 @@
 
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.nursedesk.nurse_desk_lab.view_model.NurseDeskLabViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.nursedesk.nurse_desk_lab.view_model.NurseDeskLabViewModel" />-->
     </data>
 
     <LinearLayout

@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.home.HomeViewModel" />
+            type="com.hmis_tn.doctor.ui.home.HomeViewModel" />
     </data>
 
 

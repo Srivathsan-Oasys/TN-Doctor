@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.treatment_kit.view_model.TreatmentKitViewModel" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"

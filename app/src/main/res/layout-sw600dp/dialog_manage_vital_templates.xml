@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.vitals.view_model.ManageVitalTemplateViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.vitals.view_model.ManageVitalTemplateViewModel" />
     </data>
 
     <LinearLayout
@@ -69,7 +69,7 @@
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:id="@+id/labelName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                         android:textSize="@dimen/dr_medium_text"
                         tools:ignore="UnusedAttribute" />
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:id="@+id/labelVitals"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                         tools:ignore="UnusedAttribute" />
 
 
-                    <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                    <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                         android:id="@+id/labelOrder"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

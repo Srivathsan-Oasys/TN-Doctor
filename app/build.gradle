@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.oasys.digihealth.doctor"
+        applicationId "com.hmis_tn.doctor"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -306,5 +306,9 @@ dependencies {
     implementation "org.koin:koin-androidx-viewmodel:$koin_version"
     implementation "org.koin:koin-androidx-scope:$koin_version"
     // endregion
+
+    //region video call
+    implementation "com.opentok.android:opentok-android-sdk:$opentok"
+    //endregion
 
 }

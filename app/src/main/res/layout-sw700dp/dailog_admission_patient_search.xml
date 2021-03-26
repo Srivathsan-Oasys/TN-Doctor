@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.quick_reg.view_model.QuickRegistrationViewModel" />
+            type="com.hmis_tn.doctor.ui.quick_reg.view_model.QuickRegistrationViewModel" />
     </data>
 
     <androidx.cardview.widget.CardView

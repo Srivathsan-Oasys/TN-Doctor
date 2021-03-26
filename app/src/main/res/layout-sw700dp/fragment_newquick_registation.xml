@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.quickregistration.viewmodel.QuickRegistrationNewViewModel" />
+            type="com.hmis_tn.doctor.ui.quickregistration.viewmodel.QuickRegistrationNewViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -994,7 +994,7 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:id="@+id/schematv"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"

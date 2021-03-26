@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.history.diagnosis.viewModel.HistoryDiagnosisViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.history.diagnosis.viewModel.HistoryDiagnosisViewModel" />
     </data>
 
     <FrameLayout
@@ -78,7 +78,7 @@
                         android:orientation="vertical"
                         android:padding="10dp">
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:id="@+id/dateHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
                             android:focusable="false"
                             android:textAlignment="center" />
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"
@@ -118,7 +118,7 @@
                             android:textColor="@color/navColor" />
 
 
-                        <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                        <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="5dp"

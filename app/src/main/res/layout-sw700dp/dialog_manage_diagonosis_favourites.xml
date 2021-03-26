@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.diagnosis.view_model.DiagonosisDialogViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.diagnosis.view_model.DiagonosisDialogViewModel" />
     </data>
 
     <LinearLayout
@@ -81,7 +81,7 @@
                             android:orientation="horizontal"
                             android:weightSum="4">
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -90,7 +90,7 @@
                                 android:textColor="@color/navColor"
                                 android:textSize="@dimen/dr_medium_text"/>
 
-                            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+                            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

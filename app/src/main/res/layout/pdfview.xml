@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.quick_reg.view_model.PDFViewModel" />
+            type="com.hmis_tn.doctor.ui.quick_reg.view_model.PDFViewModel" />
     </data>
 
     <LinearLayout

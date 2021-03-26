@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.prescription.ui.dialogFragment.templeteEdit.ManagePreTempAddEditviewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.prescription.ui.dialogFragment.templeteEdit.ManagePreTempAddEditviewModel" />
     </data>
 
     <LinearLayout

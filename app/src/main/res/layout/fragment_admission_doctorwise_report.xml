@@ -7,7 +7,7 @@
     <data>
 <!--        <variable-->
 <!--            name="viewModel"-->
-<!--            type="com.oasys.digihealth.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.AdmissionDoctorWiseReportViewModel" />-->
+<!--            type="com.hmis_tn.doctor.ui.report.admission_report.admission_doctorwise_report.viewmodel.AdmissionDoctorWiseReportViewModel" />-->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -514,7 +514,7 @@
                             </com.google.android.material.textfield.TextInputLayout>
 
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etDistrictspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -526,7 +526,7 @@
                                 android:textSize="14sp" />
 
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etHudspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -537,7 +537,7 @@
                                  android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etBlockspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -548,7 +548,7 @@
                                  android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etOfficespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -559,7 +559,7 @@
                                  android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etInstitutionTypespinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -571,7 +571,7 @@
                                 android:textSize="12sp" />
 
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etInstitutionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"
@@ -582,7 +582,7 @@
                                  android:background="@drawable/edit_text_bottom_border"
                                 android:textSize="14sp" />
 
-                            <com.oasys.digihealth.doctor.MultiSelectionSpinner
+                            <com.hmis_tn.doctor.MultiSelectionSpinner
                                 android:id="@+id/etSessionspinner"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/_29sdp"

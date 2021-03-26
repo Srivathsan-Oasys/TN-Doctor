@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    tools:context="com.oasys.digihealth.doctor.ui.telemedicine.AppointmentActivity">
+    tools:context="com.hmis_tn.doctor.ui.telemedicine.AppointmentActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/tbAppointment"

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.mrd.view_model.MRDViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.mrd.view_model.MRDViewModel" />
     </data>
     <FrameLayout
         android:layout_width="match_parent"

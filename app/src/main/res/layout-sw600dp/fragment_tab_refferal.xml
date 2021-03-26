@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oasys.digihealth.doctor.ui.emr_workflow.admission_referal.view_model.AdmissionViewModel" />
+            type="com.hmis_tn.doctor.ui.emr_workflow.admission_referal.view_model.AdmissionViewModel" />
     </data>
 
     <LinearLayout
@@ -35,7 +35,7 @@
             android:padding="10dp"
             android:weightSum="3">
 
-            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -44,7 +44,7 @@
                 android:textColor="@color/navColor"
                 android:textSize="18sp"/>
 
-            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -53,7 +53,7 @@
                 android:textColor="@color/navColor"
                 android:textSize="18sp"/>
 
-            <com.oasys.digihealth.doctor.utils.custom_views.MandatoryTextView
+            <com.hmis_tn.doctor.utils.custom_views.MandatoryTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

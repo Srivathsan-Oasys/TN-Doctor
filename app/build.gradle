@@ -284,7 +284,7 @@ dependencies {
 
     debugImplementation 'com.readystatesoftware.chuck:library:1.1.0'
     releaseImplementation 'com.readystatesoftware.chuck:library-no-op:1.1.0'
-    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2' // to be changed
+//    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2' // to be changed
     implementation 'org.apache.commons:commons-io:1.3.2'
     implementation 'com.google.code.gson:gson:2.8.6'
 

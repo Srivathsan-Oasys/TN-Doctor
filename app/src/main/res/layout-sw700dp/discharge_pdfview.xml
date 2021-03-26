@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingDefaultResource">
 
@@ -10,10 +9,11 @@
             name="viewModel"
             type="com.hmis_tn.doctor.ui.emr_workflow.discharge_summary.view_model.DischargeSummaryViewModel" />
     </data>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,16 +22,16 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/headertext"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_weight=".9"
-                android:padding="10dp"
-                android:text="Discharge Summary"
-                android:textSize="16dp"
-                android:id="@+id/headertext"
                 android:fontFamily="@font/poppins_bold"
                 android:gravity="center_vertical"
+                android:padding="10dp"
+                android:text="Discharge Summary"
                 android:textColor="@color/white"
+                android:textSize="16dp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -49,17 +49,18 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:max="100"
+            android:layout_marginTop="-7dp"
             android:backgroundTint="@color/red"
+            android:indeterminate="true"
 
             android:indeterminateTint="#1a09d6"
-            android:layout_marginTop="-7dp"/>
-        <com.github.barteksc.pdfviewer.PDFView
-            android:id="@+id/pdfView"
-            android:layout_below="@+id/progressbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:max="100" />
+
+<!--        <com.github.barteksc.pdfviewer.PDFView-->
+<!--            android:id="@+id/pdfView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_below="@+id/progressbar" />-->
 
 
     </LinearLayout>

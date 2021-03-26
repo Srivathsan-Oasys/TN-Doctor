@@ -32,6 +32,7 @@ import com.hmis_tn.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.hmis_tn.doctor.ui.quick_reg.model.SampleErrorResponse
 import com.hmis_tn.doctor.ui.quick_reg.view_model.PDFViewModel
 import com.hmis_tn.doctor.ui.quick_reg.view_model.PDFViewModelFactory
+import com.hmis_tn.doctor.utils.FileHelper
 import okhttp3.ResponseBody
 import retrofit2.Response
 import java.io.*
@@ -262,23 +263,25 @@ class LabPDF : Fragment(){
         override fun onPostExecute(result: String?) {
             binding?.progressbar!!.setVisibility(View.GONE);
 
-            binding?.pdfView!!.fromFile(destinationFile)
-                .password(null)
-                .defaultPage(0)
-                .enableSwipe(true)
-                .swipeHorizontal(false)
-                .enableDoubletap(true)
-                .onPageError { page, _ ->
-                    Toast.makeText(
-                        context,
-                        "Error at page: $page", Toast.LENGTH_LONG
-                    ).show()
-                }
-                .load()
-            Toast.makeText(
-                context,
-                "Storage path: $destinationFile", Toast.LENGTH_LONG
-            ).show()
+//            binding?.pdfView!!.fromFile(destinationFile)
+//                .password(null)
+//                .defaultPage(0)
+//                .enableSwipe(true)
+//                .swipeHorizontal(false)
+//                .enableDoubletap(true)
+//                .onPageError { page, _ ->
+//                    Toast.makeText(
+//                        context,
+//                        "Error at page: $page", Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//                .load()
+//            Toast.makeText(
+//                context,
+//                "Storage path: $destinationFile", Toast.LENGTH_LONG
+//            ).show()
+
+            destinationFile?.let { FileHelper(context).showNotification(it) }
 
 
         }

@@ -61,16 +61,16 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/sessionlist"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp" />
+                    android:layout_margin="5dp"
+                    android:visibility="gone" />
 
                 <RelativeLayout
                     android:id="@+id/searchLayout"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <EditText
@@ -124,8 +124,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/lastpin"
@@ -1167,14 +1167,14 @@
                             app:cardElevation="4dp">
 
 
-                <!--            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/edittext_border"
-                                android:orientation="vertical"
-                                android:padding="10dp"
-                                android:visibility="visible">
--->
+                            <!--            <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:background="@drawable/edittext_border"
+                                            android:orientation="vertical"
+                                            android:padding="10dp"
+                                            android:visibility="visible">
+            -->
                             <EditText
                                 android:id="@+id/ReasonEdt"
                                 android:layout_width="match_parent"
@@ -1316,10 +1316,10 @@
                             </androidx.cardview.widget.CardView>
 
 
-                            <com.github.barteksc.pdfviewer.PDFView
-                                android:id="@+id/pdfView"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent" />
+<!--                            <com.github.barteksc.pdfviewer.PDFView-->
+<!--                                android:id="@+id/pdfView"-->
+<!--                                android:layout_width="match_parent"-->
+<!--                                android:layout_height="match_parent" />-->
                         </LinearLayout>
 
 

@@ -33,6 +33,7 @@ import com.hmis_tn.doctor.ui.home.HomeActivity
 import com.hmis_tn.doctor.ui.quick_reg.model.QuickRegistrationSaveResponseModel
 import com.hmis_tn.doctor.ui.quick_reg.model.SampleErrorResponse
 import com.hmis_tn.doctor.ui.quickregistration.ui.QuickRegistrationNew
+import com.hmis_tn.doctor.utils.FileHelper
 import com.hmis_tn.doctor.utils.Utils
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -270,24 +271,25 @@ class DialogMrdPDFViewerActivity : Fragment() {
         override fun onPostExecute(result: String?) {
             binding?.progressbar!!.visibility = View.GONE
 
-            binding?.pdfView!!.fromFile(destinationFile)
-                .password(null)
-                .defaultPage(0)
-                .enableSwipe(true)
-                .swipeHorizontal(false)
-                .enableDoubletap(true)
-                .onPageError { page, _ ->
-                    Toast.makeText(
-                        context,
-                        "Error at page: $page", Toast.LENGTH_LONG
-                    ).show()
-                }
-                .load()
-            Toast.makeText(
-                context,
-                "Storage path: $destinationFile", Toast.LENGTH_LONG
-            ).show()
+//            binding?.pdfView!!.fromFile(destinationFile)
+//                .password(null)
+//                .defaultPage(0)
+//                .enableSwipe(true)
+//                .swipeHorizontal(false)
+//                .enableDoubletap(true)
+//                .onPageError { page, _ ->
+//                    Toast.makeText(
+//                        context,
+//                        "Error at page: $page", Toast.LENGTH_LONG
+//                    ).show()
+//                }
+//                .load()
+//            Toast.makeText(
+//                context,
+//                "Storage path: $destinationFile", Toast.LENGTH_LONG
+//            ).show()
 
+            destinationFile?.let { FileHelper(context).showNotification(it) }
 
         }
 

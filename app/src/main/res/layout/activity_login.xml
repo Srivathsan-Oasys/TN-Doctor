@@ -2,11 +2,14 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:ignore="MissingDefaultResource">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.hmis_tn.doctor.ui.login.view_model.LoginViewModel" />
     </data>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/rlLogin"
         android:layout_width="match_parent"
@@ -195,8 +198,8 @@
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/poppins"
                                         android:gravity="center"
-                                        android:padding="8dp"
                                         android:onClick="@{() -> viewModel.visisbleSendOTp()}"
+                                        android:padding="8dp"
                                         android:text="@string/forgot"
                                         android:textColor="@color/colorPrimaryDark"
                                         android:textSize="14sp" />
@@ -219,6 +222,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_centerVertical="true"
                                             android:layout_toStartOf="@+id/viewCenter"
+                                            android:layout_toLeftOf="@+id/viewCenter"
                                             android:fontFamily="@font/poppins"
                                             android:gravity="center"
                                             android:paddingStart="8dp"
@@ -227,8 +231,7 @@
                                             android:paddingBottom="4dp"
                                             android:text="@string/terms_of_use"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="14sp"
-                                            android:layout_toLeftOf="@+id/viewCenter" />
+                                            android:textSize="14sp" />
 
                                         <TextView
                                             android:id="@+id/tvPrivacyPolicy"
@@ -236,6 +239,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_centerVertical="true"
                                             android:layout_toEndOf="@+id/viewCenter"
+                                            android:layout_toRightOf="@+id/viewCenter"
                                             android:fontFamily="@font/poppins"
                                             android:gravity="center"
                                             android:paddingStart="8dp"
@@ -244,8 +248,7 @@
                                             android:paddingBottom="4dp"
                                             android:text="@string/privacy_policy"
                                             android:textColor="@color/colorPrimaryDark"
-                                            android:textSize="14sp"
-                                            android:layout_toRightOf="@+id/viewCenter" />
+                                            android:textSize="14sp" />
 
                                     </RelativeLayout>
 
@@ -259,8 +262,8 @@
                                     android:layout_margin="10dp"
                                     android:animateLayoutChanges="true"
                                     android:gravity="center"
-                                    android:visibility="@{viewModel.sendOptLayout}"
-                                    android:orientation="vertical">
+                                    android:orientation="vertical"
+                                    android:visibility="@{viewModel.sendOptLayout}">
 
                                     <TextView
                                         android:layout_width="match_parent"
@@ -278,8 +281,8 @@
                                         android:id="@+id/layoutSendotp"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:visibility="@{viewModel.forgetUsernemeLayout}"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:visibility="@{viewModel.forgetUsernemeLayout}">
 
                                         <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                                             android:layout_width="match_parent"
@@ -296,11 +299,11 @@
                                                 android:hint="@string/forgetotphint"
                                                 android:imeOptions="actionNext"
                                                 android:paddingStart="5dp"
+                                                android:paddingLeft="5dp"
+                                                android:text="@={viewModel.forgotpasswordusername}"
                                                 android:textColor="@color/navColor"
                                                 android:textSize="16sp"
-                                                android:text="@={viewModel.forgotpasswordusername}"
-                                                tools:ignore="HardcodedText"
-                                                android:paddingLeft="5dp" />
+                                                tools:ignore="HardcodedText" />
                                         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -331,9 +334,9 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
+                                            android:onClick="@{() -> viewModel.visisbleLogin()}"
                                             android:padding="8dp"
                                             android:text="@string/loginheader"
-                                            android:onClick="@{() -> viewModel.visisbleLogin()}"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:textSize="14sp" />
 
@@ -355,6 +358,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toStartOf="@+id/viewCenter1"
+                                                android:layout_toLeftOf="@+id/viewCenter1"
                                                 android:fontFamily="@font/poppins"
                                                 android:gravity="center"
                                                 android:paddingStart="8dp"
@@ -363,8 +367,7 @@
                                                 android:paddingBottom="4dp"
                                                 android:text="@string/terms_of_use"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="14sp"
-                                                android:layout_toLeftOf="@+id/viewCenter1" />
+                                                android:textSize="14sp" />
 
                                             <TextView
                                                 android:id="@+id/tvPrivacyPolicy1"
@@ -372,6 +375,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toEndOf="@+id/viewCenter1"
+                                                android:layout_toRightOf="@+id/viewCenter1"
                                                 android:fontFamily="@font/poppins"
                                                 android:gravity="center"
                                                 android:paddingStart="8dp"
@@ -380,8 +384,7 @@
                                                 android:paddingBottom="4dp"
                                                 android:text="@string/privacy_policy"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="14sp"
-                                                android:layout_toRightOf="@+id/viewCenter1" />
+                                                android:textSize="14sp" />
 
                                         </RelativeLayout>
 
@@ -394,8 +397,8 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="10dp"
                                         android:layout_marginRight="10dp"
-                                        android:visibility="@{viewModel.changePasswordLayout}"
-                                        android:orientation="vertical">
+                                        android:orientation="vertical"
+                                        android:visibility="@{viewModel.changePasswordLayout}">
 
                                         <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
                                             android:layout_width="match_parent"
@@ -414,11 +417,11 @@
                                                 android:hint="@string/enterOTP"
                                                 android:imeOptions="actionNext"
                                                 android:paddingStart="10dp"
+                                                android:paddingLeft="10dp"
                                                 android:text="@={viewModel.otp}"
                                                 android:textColor="@color/navColor"
                                                 android:textSize="16sp"
-                                                tools:ignore="HardcodedText"
-                                                android:paddingLeft="10dp" />
+                                                tools:ignore="HardcodedText" />
                                         </com.google.android.material.textfield.TextInputLayout>
 
                                         <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -439,12 +442,12 @@
                                                 android:imeOptions="actionNext"
                                                 android:inputType="textPassword"
                                                 android:maxLength="25"
-                                                android:text="@={viewModel.changePassword}"
                                                 android:paddingStart="10dp"
+                                                android:paddingLeft="@dimen/_10sdp"
+                                                android:text="@={viewModel.changePassword}"
                                                 android:textColor="@color/navColor"
                                                 android:textSize="16sp"
-                                                tools:ignore="HardcodedText"
-                                                android:paddingLeft="@dimen/_10sdp" />
+                                                tools:ignore="HardcodedText" />
                                         </com.google.android.material.textfield.TextInputLayout>
 
                                         <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -464,12 +467,12 @@
                                                 android:imeOptions="actionNext"
                                                 android:inputType="textPassword"
                                                 android:maxLength="25"
-                                                android:text="@={viewModel.confirmPassword}"
                                                 android:paddingStart="10dp"
+                                                android:paddingLeft="@dimen/_10sdp"
+                                                android:text="@={viewModel.confirmPassword}"
                                                 android:textColor="@color/navColor"
                                                 android:textSize="16sp"
-                                                tools:ignore="HardcodedText"
-                                                android:paddingLeft="@dimen/_10sdp" />
+                                                tools:ignore="HardcodedText" />
                                         </com.google.android.material.textfield.TextInputLayout>
 
                                         <androidx.cardview.widget.CardView
@@ -497,9 +500,9 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:gravity="center"
+                                            android:onClick="@{() -> viewModel.visisbleLogin()}"
                                             android:padding="8dp"
                                             android:text="@string/loginheader"
-                                            android:onClick="@{() -> viewModel.visisbleLogin()}"
                                             android:textColor="@color/colorPrimaryDark"
                                             android:textSize="14sp" />
 
@@ -521,6 +524,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toStartOf="@+id/viewCenter2"
+                                                android:layout_toLeftOf="@+id/viewCenter2"
                                                 android:fontFamily="@font/poppins"
                                                 android:gravity="center"
                                                 android:paddingStart="8dp"
@@ -529,8 +533,7 @@
                                                 android:paddingBottom="4dp"
                                                 android:text="@string/terms_of_use"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="14sp"
-                                                android:layout_toLeftOf="@+id/viewCenter2" />
+                                                android:textSize="14sp" />
 
                                             <TextView
                                                 android:id="@+id/tvPrivacyPolicy2"
@@ -538,6 +541,7 @@
                                                 android:layout_height="wrap_content"
                                                 android:layout_centerVertical="true"
                                                 android:layout_toEndOf="@+id/viewCenter2"
+                                                android:layout_toRightOf="@+id/viewCenter2"
                                                 android:fontFamily="@font/poppins"
                                                 android:gravity="center"
                                                 android:paddingStart="8dp"
@@ -546,8 +550,7 @@
                                                 android:paddingBottom="4dp"
                                                 android:text="@string/privacy_policy"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="14sp"
-                                                android:layout_toRightOf="@+id/viewCenter2" />
+                                                android:textSize="14sp" />
 
                                         </RelativeLayout>
 
@@ -609,9 +612,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:gravity="end|center_vertical"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="@dimen/_5sdp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -625,8 +628,8 @@
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="@dimen/_25sdp"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:src="@drawable/bottom_oasys_logo"
-                        android:layout_marginLeft="@dimen/_5sdp" />
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:src="@drawable/bottom_oasys_logo" />
                 </LinearLayout>
             </LinearLayout>
 

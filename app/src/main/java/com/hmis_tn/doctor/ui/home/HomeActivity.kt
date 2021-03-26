@@ -1107,7 +1107,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
         /*reg_report?.setOnClickListener {
 
-            //      if ((dateWiseSession_report?.visibility == View.GONE && dateWise_report?.visibility == View.GONE) && (sessionWise_report?.visibility == View.GONE && dayWisePatient_report?.visibility == View.GONE)) {
+            //      if ((dateWiseSession_report?.visibility == View.GONE && dateWise_report?.visibility == View.GONE) &&
+            (sessionWise_report?.visibility == View.GONE && dayWisePatient_report?.visibility == View.GONE))
+            {
 
             if (regreportlayout?.visibility == View.GONE) {
 
@@ -2668,7 +2670,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 val dialog = SelectInstituteDialogFragment()
 
                 dialog.show(ft, "Tag")
-            } else if ((logintype == AppConstants.PHYSICIANASSISTANT || logintype == AppConstants.PHYSICIANTRAINEE) || (logintype == AppConstants.HELPDESK || logintype == AppConstants.GENDRALCODE)) {
+            } else if ((logintype == AppConstants.PHYSICIANASSISTANT || logintype == AppConstants.PHYSICIANTRAINEE) ||
+                (logintype == AppConstants.HELPDESK || logintype == AppConstants.GENDRALCODE)
+            ) {
                 val ft = supportFragmentManager.beginTransaction()
                 val dialog = DoctorInstituteDialogFragment()
                 dialog.show(ft, "Tag")

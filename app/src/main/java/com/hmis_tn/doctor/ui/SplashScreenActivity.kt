@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.hmis_tn.doctor.BuildConfig
+import androidx.multidex.BuildConfig
 import com.hmis_tn.doctor.R
 import com.hmis_tn.doctor.databinding.ActivitySplashScreenBinding
 import com.hmis_tn.doctor.ui.login.view.LoginActivity
@@ -41,9 +41,9 @@ class SplashScreenActivity : AppCompatActivity() {
         binding?.tvVersion?.text = "Version" + " " + BuildConfig.VERSION_NAME
 
         if (BuildConfig.FLAVOR == "puneuat" || BuildConfig.FLAVOR == "puneprod") {
-            binding?.tvBottomView?.text = getString(R.string.copyright_msg_pune)
+            binding?.tvCopyright?.text = getString(R.string.copyright_msg_pune)
         } else {
-            binding?.tvBottomView?.text = getString(R.string.copyright_msg)
+            binding?.tvCopyright?.text = getString(R.string.copyright_msg)
         }
 
         /* val factory =

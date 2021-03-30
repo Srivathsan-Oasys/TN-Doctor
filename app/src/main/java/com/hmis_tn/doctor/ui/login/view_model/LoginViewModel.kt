@@ -51,8 +51,8 @@ class LoginViewModel(
 
 
     init {
-        username.value = "parthidoc"//todo
-        password.value = "123456"
+        username.value = ""
+        password.value = ""
         forgotpasswordusername.value = ""
         otp.value = ""
         changePassword.value = ""

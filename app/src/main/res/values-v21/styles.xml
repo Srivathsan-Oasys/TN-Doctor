@@ -24,7 +24,7 @@
     </style>
 
     <style name="Hmis.Splash" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowBackground">@drawable/background_pattern</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -34,7 +34,7 @@
 
 
     <style name="Hmis.SplashTablet" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash_screen_tab</item>
+        <item name="android:windowBackground">@drawable/background_pattern</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>

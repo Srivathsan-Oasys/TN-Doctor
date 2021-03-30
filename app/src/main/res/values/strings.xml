@@ -915,8 +915,9 @@ Ministry of Health &amp; Family Welfare does not guarantee that linked websites 
     <string name="ventilator_supported">Ventilator Supported</string>
     <string name="oxygen_supported">Oxygen Supported</string>
 
-    <string name="copyright_msg" translatable="false">Copyrights © 2020 TN HMIS.All Rights Reserved</string>
-    <string name="copyright_msg_pune" translatable="false">Copyrights © 2020 Pune HMIS.All Rights Reserved</string>
+    <string name="copyright_msg" translatable="false">Copyrights © 2021 National Health Mission - Tamil Nadu.</string>
+    <string name="copyright_msg_pune" translatable="false">Copyrights © 2020 Pune HMIS.</string>
+    <string name="rights_reserved">All Rights Reserved</string>
     <string name="copyright_name" translatable="false">Powered by</string>
     <string name="version" translatable="false">Version</string>
     <string name="number_of_ventilor">Number of Ventilator Beds</string>

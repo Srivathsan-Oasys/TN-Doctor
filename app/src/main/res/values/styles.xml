@@ -232,7 +232,7 @@
     </style>
 
     <style name="Hmis.Splash" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/login_bg</item>
+        <item name="android:windowBackground">@drawable/background_pattern</item>
         <item name="android:windowDisablePreview">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="windowActionBar">false</item>
@@ -241,7 +241,7 @@
 
 
     <style name="Hmis.SplashTablet" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/login_background</item>
+        <item name="android:windowBackground">@drawable/background_pattern</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

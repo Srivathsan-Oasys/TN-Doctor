@@ -336,14 +336,11 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             val dialog = LanguagesDialogFragemnt()
             dialog.show(ft, "Tag")
         }
+
         if (this.emrcheck!!) {
-
             emr.visibility = View.VISIBLE
-
         } else {
-
             emr.visibility = View.GONE
-
         }
 
         if (this.tutorialcheck!!) {
@@ -352,186 +349,116 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             tutorial.visibility = View.GONE
         }
 
-        if (this.helpDeskcheck!!) {
-            helpDesk.visibility = View.VISIBLE
-        } else {
-            helpDesk.visibility = View.GONE
-        }
+//        if (this.helpDeskcheck!!) {
+//            helpDesk.visibility = View.VISIBLE
+//        } else {
+//            helpDesk.visibility = View.GONE
+//        }
 
-        if (this.LmisCheck!!) {
-
-            lab.visibility = View.VISIBLE
-
-        } else {
-
-            lab.visibility = View.GONE
-
-        }
+//        if (this.LmisCheck!!) {
+//            lab.visibility = View.VISIBLE
+//        } else {
+//            lab.visibility = View.GONE
+//        }
 
         if (this.registercheck!!) {
-
             registration.visibility = View.VISIBLE
-
         } else {
-
             registration.visibility = View.GONE
-
         }
 
-        if (this.bedReportCheck!!) {
+//        if (this.bedReportCheck!!) {
+//            Bedmangementreport.visibility = View.VISIBLE
+//        } else {
+//            Bedmangementreport.visibility = View.GONE
+//        }
 
-            Bedmangementreport.visibility = View.VISIBLE
-        } else {
+//        if (this.labreportCheck!!) {
+//            lab_report.visibility = View.VISIBLE
+//        } else {
+//            lab_report.visibility = View.GONE
+//        }
 
-            Bedmangementreport.visibility = View.GONE
+//        if (this.nurseDeskCheck!!) {
+//            nurse_desk.visibility = View.VISIBLE
+//        } else {
+//            nurse_desk.visibility = View.GONE
+//        }
 
-        }
-
-
-
-        if (this.labreportCheck!!) {
-
-            lab_report.visibility = View.VISIBLE
-
-
-        } else {
-
-            lab_report.visibility = View.GONE
-
-        }
-
-        if (this.nurseDeskCheck!!) {
-
-            nurse_desk.visibility = View.VISIBLE
-        } else {
-
-            nurse_desk.visibility = View.GONE
-        }
-
-        if (this.helpDeskCheck!!) {
-            helpDesk.visibility = View.VISIBLE
-        } else {
-
-            helpDesk.visibility = View.GONE
-        }
+//        if (this.helpDeskCheck!!) {
+//            helpDesk.visibility = View.VISIBLE
+//        } else {
+//            helpDesk.visibility = View.GONE
+//        }
 
         if (this.tutorialCheck!!) {
             tutorial.visibility = View.VISIBLE
         } else {
-
             tutorial.visibility = View.GONE
         }
 
+//        if (this.rmisCheck!!) {
+//            radilogy.visibility = View.VISIBLE
+//        } else {
+//            radilogy.visibility = View.GONE
+//        }
 
-        if (this.rmisCheck!!) {
+//        if (this.ipCheck!!) {
+//            ipmangement.visibility = View.VISIBLE
+//        } else {
+//            ipmangement.visibility = View.GONE
+//        }
 
-            radilogy.visibility = View.VISIBLE
+//        if (this.regReportCheck!!) {
+//            reg_report.visibility = View.VISIBLE
+//        } else {
+//            reg_report.visibility = View.GONE
+//        }
 
-        } else {
+//        if (this.pharmacyCheck!!) {
+//            pharmasyLayout?.visibility = View.VISIBLE
+//        } else {
+//            pharmasyLayout?.visibility = View.GONE
+//        }
 
-            radilogy.visibility = View.GONE
-        }
+//        if (this.ipAdmissionReportCheck!!) {
+//            ipAdmission_report?.visibility = View.VISIBLE
+//        } else {
+//            ipAdmission_report?.visibility = View.GONE
+//        }
 
-
-        if (this.ipCheck!!) {
-
-            ipmangement.visibility = View.VISIBLE
-
-        } else {
-
-            ipmangement.visibility = View.GONE
-        }
-
-
-        if (this.regReportCheck!!) {
-
-            reg_report.visibility = View.VISIBLE
-
-        } else {
-
-            reg_report.visibility = View.GONE
-        }
-
-
-        if (this.pharmacyCheck!!) {
-
-            pharmasyLayout?.visibility = View.VISIBLE
-        } else {
-
-            pharmasyLayout?.visibility = View.GONE
-        }
-
-
-        if (this.ipAdmissionReportCheck!!) {
-
-            ipAdmission_report?.visibility = View.VISIBLE
-        } else {
-
-            ipAdmission_report?.visibility = View.GONE
-        }
-
-        if (this.appMasterCheck!!) {
-
-            appMaster?.visibility = View.VISIBLE
-
-        } else {
-
-            appMaster?.visibility = View.GONE
-
-        }
+//        if (this.appMasterCheck!!) {
+//            appMaster?.visibility = View.VISIBLE
+//        } else {
+//            appMaster?.visibility = View.GONE
+//        }
 
         emr?.setOnClickListener {
-
-
             registerList?.visibility = View.GONE
-
             lmisList?.visibility = View.GONE
-
             rmislayout?.visibility = View.GONE
-
             regreportlayout?.visibility = View.GONE
-
             ipadmissionreportlayout?.visibility = View.GONE
-
             labreportLayout?.visibility = View.GONE
-
             tutorialLayout?.visibility = View.GONE
-
             helpdesklayout?.visibility = View.GONE
-
             pharmacylayout?.visibility = View.GONE
-
             bedreportlayout?.visibility = View.GONE
-
             ipmanagementlayout?.visibility = View.GONE
-
             settingLayout?.visibility = View.GONE
 
-
             add_image?.setImageResource(R.drawable.ic_add)
-
             lab_image?.setImageResource(R.drawable.ic_add)
-
             rad_image?.setImageResource(R.drawable.ic_add)
-
             reg_report_image?.setImageResource(R.drawable.ic_add)
-
             admission_report_image?.setImageResource(R.drawable.ic_add)
-
             lab_report_image?.setImageResource(R.drawable.ic_add)
-
             tutorial_image?.setImageResource(R.drawable.ic_add)
-
             helpDesk_image?.setImageResource(R.drawable.ic_add)
-
             pharmacy_image?.setImageResource(R.drawable.ic_add)
-
             bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
             ipmangement_image?.setImageResource(R.drawable.ic_add)
-
             settings_image?.setImageResource(R.drawable.ic_add)
-
 
             val op = DashBoardActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -605,597 +532,349 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 //        }
 
         appMaster?.setOnClickListener {
-
             if (appMasterList?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.VISIBLE
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 appMaster_image?.setImageResource(R.drawable.ic_minus_white)
-
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 val appdashboard =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDATEWISESESSION)
-
                 val healthOfficecheck =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDATEWISE)
-
                 val departmentCheak =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDAYWISEPATIENTLIST)
-
                 val instutionCheck =
                     appPreferences?.getBoolean(AppConstants.CHECKREGSESSIONWISE)
-
                 if (appdashboard!!) {
-
                     appDashBoard?.visibility = View.VISIBLE
-
                 } else {
-
                     appDashBoard?.visibility = View.GONE
                 }
 
                 if (healthOfficecheck!!) {
-
                     healthoffice?.visibility = View.VISIBLE
-
                 } else {
-
                     healthoffice?.visibility = View.GONE
                 }
 
                 if (departmentCheak!!) {
-
                     department?.visibility = View.VISIBLE
                 } else {
                     department?.visibility = View.GONE
                 }
 
                 if (instutionCheck!!) {
-
                     application_institution?.visibility = View.VISIBLE
-
                 } else {
-
                     application_institution?.visibility = View.GONE
-
                 }
 
             } else {
-
-
                 appMasterList?.visibility = View.GONE
-
                 appMaster_image?.setImageResource(R.drawable.ic_add)
-
-
             }
-
         }
 
         registration?.setOnClickListener {
-
             if (registerList?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.GONE
-
                 registerList?.visibility = View.VISIBLE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
-
                 add_image?.setImageResource(R.drawable.ic_minus_white)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 val covidCheck = appPreferences?.getBoolean(AppConstants.COVIDREGISTER)
-
                 if (covidCheck!!) {
-
                     covid_reg?.visibility = View.VISIBLE
-
                 } else {
-
                     covid_reg?.visibility = View.GONE
                 }
 
                 val quickcheck = appPreferences?.getBoolean(AppConstants.QUICKREGISTER)
-
                 if (quickcheck!!) {
-
                     quick_Reg?.visibility = View.VISIBLE
-
                 } else {
-
                     quick_Reg?.visibility = View.GONE
-
                 }
 
-
                 detailedRegistration?.visibility = View.VISIBLE
-
-
             } else {
                 registerList?.visibility = View.GONE
                 add_image?.setImageResource(R.drawable.ic_add)
-
-
             }
         }
 
-
         /*lab?.setOnClickListener {
-
             if (lmisList?.visibility == View.VISIBLE) {
-
                 lmisList?.visibility = View.GONE
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
             } else {
                 registerList?.visibility = View.GONE
-
                 appMasterList?.visibility = View.GONE
-
                 lmisList?.visibility = View.VISIBLE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
-
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_minus_white)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
-
                 val labtest = appPreferences?.getBoolean(AppConstants.LABTEST)
-
                 if (labtest!!) {
-
                     lab_test?.visibility = View.VISIBLE
                 } else {
-
                     lab_test?.visibility = View.GONE
                 }
 
                 val labApprovel = appPreferences?.getBoolean(AppConstants.LABAPPROVEL)
-
                 if (labApprovel!!) {
-
                     lab_approvl?.visibility = View.VISIBLE
-
                 } else {
-
                     lab_approvl?.visibility = View.GONE
-
                 }
 
                 val labProcess = appPreferences?.getBoolean(AppConstants.LABPROCESS)
-
                 if (labProcess!!) {
-
                     lab_process?.visibility = View.VISIBLE
-
                 } else {
-
                     lab_process?.visibility = View.GONE
-
                 }
 
                 val labNew = appPreferences?.getBoolean(AppConstants.LABNEWORDER)
-
                 if (labNew!!) {
-
                     new_order.visibility = View.VISIBLE
-
                 } else {
-
                     new_order.visibility = View.GONE
                 }
 
                 val labSampleDispatch = appPreferences?.getBoolean(AppConstants.LABSAMPLEDISPATCH)
-
                 if (labSampleDispatch!!) {
-
                     sample_dispatch.visibility = View.VISIBLE
-
                 } else {
-
                     sample_dispatch.visibility = View.GONE
                 }
 
-
                 val labResultDispatch = appPreferences?.getBoolean(AppConstants.LABRESULTDISPATCH)
-
                 if (labResultDispatch!!) {
-
                     result_dispatch.visibility = View.VISIBLE
-
                 } else {
-
                     result_dispatch.visibility = View.GONE
                 }
 
                 val labOderStatus = appPreferences?.getBoolean(AppConstants.LABORDERSTATUS)
-
                 if (labOderStatus!!) {
-
                     order_status.visibility = View.VISIBLE
-
                 } else {
-
                     order_status.visibility = View.GONE
                 }
-
-
             }
         }*/
 
-
         /*radilogy?.setOnClickListener {
-
             if (rmislayout?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.GONE
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.VISIBLE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
-
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_minus_white)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
 
                 val radapprovlCheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_TESTAPPROVAL)
-
                 val radNewOrderCheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_TECH)
-
                 val radTestCheck = appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_TEST)
-
                 val radProcessCheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_TESTPROCESS)
-
                 val radResultCheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_DISPATCH)
-
                 val radorderCheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_ORDER)
-
                 val radDashboard =
                     true//appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_RMIS_DASHBORD)
 
                 if (radapprovlCheck!!) {
-
                     rad_approvl?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_approvl?.visibility = View.GONE
                 }
 
-
                 if (radNewOrderCheck!!) {
-
                     rad_new_order?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_new_order?.visibility = View.GONE
                 }
 
                 if (radDashboard) {
-
                     rad_dashboard?.visibility = View.VISIBLE
                 } else {
                     rad_dashboard?.visibility = View.GONE
                 }
 
                 if (radTestCheck!!) {
-
                     rad_test?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_test?.visibility = View.GONE
                 }
 
                 if (radProcessCheck!!) {
-
                     rad_process?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_process?.visibility = View.GONE
                 }
 
                 if (radResultCheck!!) {
                     rad_result_dispatch?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_result_dispatch?.visibility = View.GONE
-
                 }
+
                 if (radorderCheck!!) {
-
                     rad_order_status?.visibility = View.VISIBLE
-
                 } else {
-
                     rad_order_status?.visibility = View.GONE
                 }
-
-
             } else {
-
                 rmislayout?.visibility = View.GONE
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
-
             }
-
-
         }*/
 
-
         /*reg_report?.setOnClickListener {
-
             //      if ((dateWiseSession_report?.visibility == View.GONE && dateWise_report?.visibility == View.GONE) &&
             (sessionWise_report?.visibility == View.GONE && dayWisePatient_report?.visibility == View.GONE))
             {
 
             if (regreportlayout?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.VISIBLE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_minus_white)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
 
                 val dateWiseSession =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDATEWISESESSION)
-
                 val dateWise =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDATEWISE)
-
                 val dateWisPatient =
                     appPreferences?.getBoolean(AppConstants.CHECKREGDAYWISEPATIENTLIST)
-
                 val sessionWise =
                     appPreferences?.getBoolean(AppConstants.CHECKREGSESSIONWISE)
-
                 if (dateWiseSession!!) {
-
                     dateWiseSession_report?.visibility = View.VISIBLE
-
                 } else {
-
                     dateWiseSession_report?.visibility = View.GONE
                 }
 
-
                 if (dateWise!!) {
-
                     dateWise_report?.visibility = View.VISIBLE
-
                 } else {
-
                     dateWise_report?.visibility = View.GONE
                 }
 
                 if (sessionWise!!) {
-
                     sessionWise_report?.visibility = View.VISIBLE
                 } else {
                     sessionWise_report?.visibility = View.GONE
@@ -1203,432 +882,248 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
                 if (dateWisPatient!!) {
                     dayWisePatient_report?.visibility = View.VISIBLE
-
                 } else {
-
                     dayWisePatient_report?.visibility = View.GONE
-
                 }
-
 *//*
                 if (admissionDateWise!!) {
-
                     admission_day_patient_Wise_report?.visibility = View.VISIBLE
                 } else {
                     admission_day_patient_Wise_report?.visibility = View.GONE
                 }
 *//*
 
-
                 *//*    if(radTestCheck!!){
-
                     rad_test?.visibility = View.VISIBLE
-
                 }
                 else{
-
                     rad_test?.visibility = View.GONE
                 }*//*
-
-
             } else {
-
-
                 regreportlayout?.visibility = View.GONE
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
-
             }
-
         }*/
 
-
         /*ipAdmission_report?.setOnClickListener {
-
-
             if (ipadmissionreportlayout?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.VISIBLE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_minus_white)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
 
                 val DWPL =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIONDWP)
-
                 val WW =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIONWW)
-
                 val DW =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIODW)
-
                 val SL =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIONSL)
-
                 val DL =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIONDL)
-
                 val DC =
                     appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONADMISSIONDC)
 
                 if (DWPL!!) {
-
                     admission_day_patient_Wise_report?.visibility = View.VISIBLE
-
                 } else {
-
                     admission_day_patient_Wise_report?.visibility = View.GONE
                 }
 
-
                 if (WW!!) {
-
                     admission_ward_Wise_report?.visibility = View.VISIBLE
-
                 } else {
-
                     admission_ward_Wise_report?.visibility = View.GONE
                 }
 
                 if (DW!!) {
-
                     admission_doctor_Wise_report?.visibility = View.VISIBLE
-
                 } else {
-
                     admission_doctor_Wise_report?.visibility = View.GONE
-
                 }
 
                 if (SL!!) {
-
                     admission_state_level_report?.visibility = View.VISIBLE
-
                 } else {
-
                     admission_state_level_report?.visibility = View.GONE
-
                 }
 
-
                 if (DL!!) {
-
                     admission_district_level_report?.visibility = View.VISIBLE
-
                 } else {
-
                     admission_district_level_report?.visibility = View.GONE
-
                 }
 
                 if (DC!!) {
-
                     discharge_report_count_layout?.visibility = View.VISIBLE
-
                 } else {
-
                     discharge_report_count_layout?.visibility = View.GONE
-
                 }
-
-
             } else {
-
                 *//*   admission_day_patient_Wise_report?.visibility = View.GONE
-
                    admission_ward_Wise_report?.visibility = View.GONE
-
                    admission_doctor_Wise_report?.visibility = View.GONE
-
                    admission_state_level_report?.visibility = View.GONE
-
                    admission_district_level_report?.visibility = View.GONE
-
                    discharge_report_count_layout?.visibility = View.GONE*//*
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
-
             }
-
         }*/
 
-
         /*lab_report?.setOnClickListener {
-
             if (labreportLayout?.visibility == View.VISIBLE) {
-
                 labreportLayout?.visibility = View.GONE
-
                 *//*     labWise_report.visibility=View.GONE
-
                      labTestWise_report.visibility=View.GONE
-
                      sessionWise_report.visibility=View.GONE
-
                      dateWiseSession_report.visibility=View.GONE
-
-
                      dateWise_report.visibility=View.GONE
-
-
                      districtwise_report.visibility=View.GONE
-
                      districtwisetest_report.visibility=View.GONE*//*
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
             } else {
-
-
                 appMasterList?.visibility = View.GONE
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.VISIBLE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_minus_white)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
 
                 var consolidateReport =
                     appPreferences?.getBoolean(AppConstants.REPORTCONSOLIDATEDREPORT)
-
                 consolidateReport = true
-
                 if (consolidateReport) {
-
                     consolidated_report?.visibility = View.VISIBLE
                 } else {
-
                     consolidated_report?.visibility = View.GONE
                 }
 
                 var labWiseReport = appPreferences?.getBoolean(AppConstants.REPORTLABWISEREPORT)
-
                 labWiseReport = true
 
                 if (labWiseReport) {
-
                     labWise_report?.visibility = View.VISIBLE
                 } else {
-
                     labWise_report?.visibility = View.GONE
                 }
 
                 var labTestWiseReport =
                     appPreferences?.getBoolean(AppConstants.REPORTLABTESTWISEREPORT)
-
                 labTestWiseReport = true
-
                 if (labTestWiseReport) {
-
                     labTestWise_report?.visibility = View.VISIBLE
                 } else {
-
                     labTestWise_report?.visibility = View.GONE
                 }
 
                 var districtWiseReport =
                     appPreferences?.getBoolean(AppConstants.REPORTDISTRICTWISEPATIENTCODE)
-
                 districtWiseReport = true
-
                 if (districtWiseReport) {
-
                     districtwise_report?.visibility = View.VISIBLE
                 } else {
-
                     districtwise_report?.visibility = View.GONE
                 }
 
                 var districtWiseTestReport =
                     appPreferences?.getBoolean(AppConstants.REPORTDISTRICTWISETESTCODE)
-
                 districtWiseTestReport = true
-
                 if (districtWiseTestReport) {
-
                     districtwisetest_report?.visibility = View.VISIBLE
                 } else {
-
                     districtwisetest_report?.visibility = View.GONE
                 }
-
-
                 lab_report_image?.setImageResource(R.drawable.ic_minus_white)
-
             }
         }*/
 
-
         tutorial?.setOnClickListener {
-
             if (tutorialLayout?.visibility == View.VISIBLE) {
-
                 tutorialLayout?.visibility = View.GONE
-
                 //userManual.visibility=View.GONE
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
             } else {
-
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.VISIBLE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_minus_white)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
-
                 var video_tutoarial = appPreferences?.getBoolean(AppConstants.TUTORIALVIDEOTUTORIAL)
-
                 video_tutoarial = true
-
                 if (video_tutoarial) {
-
                     videoTutorial?.visibility = View.VISIBLE
                 } else {
-
                     videoTutorial?.visibility = View.GONE
                 }
 
                 var user_manual = appPreferences?.getBoolean(AppConstants.TUTORIALUSERMANUAL)
-
                 user_manual = true
-
                 if (user_manual) {
                     userManual?.visibility = View.VISIBLE
                 } else {
@@ -1639,148 +1134,83 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }
 
         /*helpDesk?.setOnClickListener {
-
             if (helpdesklayout?.visibility == View.VISIBLE) {
-
                 helpdesklayout?.visibility = View.GONE
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
             } else {
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.VISIBLE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_minus_white)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
-
                 var ticket = appPreferences?.getBoolean(AppConstants.HELPDESKTICKETS)
-
                 ticket = true
-
                 if (ticket) {
-
                     tickets?.visibility = View.VISIBLE
                 } else {
-
                     tickets?.visibility = View.GONE
                 }
 
                 helpDesk_image?.setImageResource(R.drawable.ic_minus_white)
-
             }
         }*/
 
-
         /*pharmacy?.setOnClickListener {
-
             if (pharmacylayout?.visibility == View.GONE) {
-
                 appMasterList?.visibility = View.GONE
-
                 pharmacy_dashboard?.visibility = View.VISIBLE
-
                 pharmacy_dispance?.visibility = View.VISIBLE
-
                 pharmacy_return?.visibility = View.VISIBLE
-
                 pharmacy_injrectionWorklist?.visibility = View.VISIBLE
-
                 pharmacy_return_text?.visibility = View.VISIBLE
-
                 //            pharmacy_image?.setImageResource(R.drawable.ic_minus_white
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.VISIBLE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_minus_white)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
-
             } else {
                 pharmacylayout?.visibility = View.GONE
                 *//*   pharmacy_dispance?.visibility=View.GONE
@@ -1788,233 +1218,133 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                    pharmacy_return?.visibility=View.GONE*//*
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
             }
-
-
         }*/
 
         /*Bedmangementreport?.setOnClickListener {
-
             if (bedreportlayout?.visibility == View.GONE) {
 *//*
                 Bedstatushw?.visibility = View.VISIBLE
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_minus_white)*//*
 
-
                 appMasterList?.visibility = View.GONE
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.VISIBLE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_minus_white)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
 
-
                 val Bedrep = appPreferences?.getBoolean(AppConstants.CHECK_BEDSTHW)
-
                 if (Bedrep!!) {
-
                     Bedstatushw?.visibility = View.VISIBLE
-
                 } else {
-
                     Bedstatushw?.visibility = View.GONE
                 }
-
-
             } else {
-
                 bedreportlayout?.visibility = View.GONE
-
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
-
             }
         }*/
 
         /*ipmangement?.setOnClickListener {
-
             if (ipmanagementlayout?.visibility == View.VISIBLE
             *//*||
             ipmangement_admission?.visibility == View.VISIBLE ||
             ipmangement_emergency_casualty_patient_list?.visibility == View.VISIBLE || ipwardmasterlayout?.visibility == View.VISIBLE*//*
             ) {
-
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 *//*  ipmangement_admission?.visibility = View.GONE
-
                   ipwardmasterlayout?.visibility = View.GONE
-
                   ipmangement_emergency_casualty_patient_list?.visibility = View.GONE
   *//*
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
-
             } else {
-
-
                 appMasterList?.visibility = View.GONE
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.VISIBLE
-
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_minus_white)
-
                 settings_image?.setImageResource(R.drawable.ic_add)
-
 
                 val ipdashboard =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_IP_DASHBOARD)
-
                 if (ipdashboard!!) {
-
                     ipmangement_dashboard?.visibility = View.VISIBLE
-
                 } else {
-
                     ipmangement_dashboard?.visibility = View.GONE
                 }
 
-
                 val ipadmissioncheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_IP_ADMISSION)
-
                 if (ipadmissioncheck!!) {
-
                     ipmangement_admission?.visibility = View.VISIBLE
-
                 } else {
-
                     ipmangement_admission?.visibility = View.GONE
-
                 }
 
                 val wardcheck =
                     appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_IP_WARD_MASTER)
-
                 if (wardcheck!!) {
-
                     ipwardmasterlayout?.visibility = View.VISIBLE
-
                 } else {
-
                     ipwardmasterlayout?.visibility = View.GONE
-
                 }
-
 
                 val ecplcheck = appPreferences?.getBoolean(AppConstants.ACTIVITY_CHECK_IP_ECPL)
-
                 if (ecplcheck!!) {
-
                     ipmangement_emergency_casualty_patient_list?.visibility = View.VISIBLE
-
                 } else {
-
                     ipmangement_emergency_casualty_patient_list?.visibility = View.GONE
-
                 }
-
-
             }
         }*/
 
         /*Bedstatushw.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = BedStatusHospitalWiseFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
-
 
         /*ipmangement_dashboard?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
@@ -2034,68 +1364,36 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
 
         settings.setOnClickListener {
-
             if (settingLayout.visibility == View.VISIBLE) {
-
                 settingLayout?.visibility = View.GONE
-
                 settings_image.setImageResource(R.drawable.ic_add)
-
             } else {
-
-
                 registerList?.visibility = View.GONE
-
                 lmisList?.visibility = View.GONE
-
                 rmislayout?.visibility = View.GONE
-
                 regreportlayout?.visibility = View.GONE
-
                 ipadmissionreportlayout?.visibility = View.GONE
-
                 labreportLayout?.visibility = View.GONE
-
                 tutorialLayout?.visibility = View.GONE
-
                 helpdesklayout?.visibility = View.GONE
-
                 pharmacylayout?.visibility = View.GONE
-
                 bedreportlayout?.visibility = View.GONE
-
                 ipmanagementlayout?.visibility = View.GONE
-
                 settingLayout?.visibility = View.VISIBLE
-
                 add_image?.setImageResource(R.drawable.ic_add)
-
                 lab_image?.setImageResource(R.drawable.ic_add)
-
                 rad_image?.setImageResource(R.drawable.ic_add)
-
                 reg_report_image?.setImageResource(R.drawable.ic_add)
-
                 admission_report_image?.setImageResource(R.drawable.ic_add)
-
                 lab_report_image?.setImageResource(R.drawable.ic_add)
-
                 tutorial_image?.setImageResource(R.drawable.ic_add)
-
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-
                 pharmacy_image?.setImageResource(R.drawable.ic_add)
-
                 bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-
                 ipmangement_image?.setImageResource(R.drawable.ic_add)
-
                 settings_image.setImageResource(R.drawable.ic_minus_white)
-
                 changePassword.visibility = View.VISIBLE
                 languages.visibility = View.VISIBLE
-
-
             }
         }
 
@@ -2117,9 +1415,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.commit()
         }*/
 
-
         /*ipmangement_admission?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = AdmissionListFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -2136,23 +1432,19 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }*/
 
         /*rad_test?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = RmisTestActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
 
         /*rad_dashboard?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = RMISDashboardFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
 
         /*pharmacy_injrectionWorklist?.setOnClickListener {
@@ -2163,7 +1455,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.commit()
         }*/
 
-
         /*pharmacy_dispance?.setOnClickListener {
 
             drawerLayout!!.closeDrawer(GravityCompat.START)
@@ -2172,7 +1463,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         }*/
-
 
         /*pharmacy_dashboard?.setOnClickListener {
 
@@ -2198,13 +1488,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             dialog.show(ft, "Tag")
         }
 
-
         covid_reg?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
-
             val op = QuickRegistrationActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             //       fragmentTransaction.addToBackStack(null)
@@ -2254,14 +1540,10 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }*/
 
         detailedRegistration?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
-
             val op = DetailedRegistration()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
-
             fragmentTransaction.commit()
         }
 
@@ -2271,25 +1553,17 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
 
         /*lab_approvl?.setOnClickListener {
-
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
-
-
             val op = LabTestApprovalActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
 
         /*consolidated_report?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = LabConsolidatedReportsActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -2298,7 +1572,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }*/
 
         videoTutorial?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = VideoTutorialActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -2306,11 +1579,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.commit()
         }
 
-
         tickets?.setOnClickListener {
             val loginType = appPreferences?.getString(AppConstants.LOGINTYPE)!!
             Log.e("loginType", loginType)
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             var op: Fragment? = null
             if (loginType.equals("HDA")) {
@@ -2322,7 +1593,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         }
-
 
         userManual?.setOnClickListener {
 
@@ -2592,6 +1862,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                     putExtra(AppointmentActivity.ISAPPOINTMENTSESSION, true)
                 })
         }
+
         llAppointmentBook?.setOnClickListener {
             startActivity(
                 Intent(
@@ -2601,11 +1872,8 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                     putExtra(AppointmentActivity.ISAPPOINTMENTSESSION, false)
                 })
         }
-
         appPreferences = AppPreferences.getInstance(this, AppConstants.SHARE_PREFERENCE_NAME)
-
         name = appPreferences?.getString(AppConstants.INSTITUTION_NAME)
-
         /*   userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
            val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
            */
@@ -2641,7 +1909,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 dialog.show(ft, "Tag")
             } else {
                 val ft = supportFragmentManager.beginTransaction()
-
                 val dialog = DoctorInstituteDialogFragment()
                 // val dialog = InstituteDialogFragment()
                 dialog.show(ft, "Tag")
@@ -2661,14 +1928,10 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }
 
         landofficeName?.setOnClickListener {
-
             val logintype = appPreferences?.getString(AppConstants.LOGINTYPE)
-
             if (logintype == AppConstants.LABINCHARGE) {
                 val ft = supportFragmentManager.beginTransaction()
-
                 val dialog = SelectInstituteDialogFragment()
-
                 dialog.show(ft, "Tag")
             } else if ((logintype == AppConstants.PHYSICIANASSISTANT || logintype == AppConstants.PHYSICIANTRAINEE) ||
                 (logintype == AppConstants.HELPDESK || logintype == AppConstants.GENDRALCODE)
@@ -2690,12 +1953,10 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 dialog.show(ft, "Tag")
             } else {
                 val ft = supportFragmentManager.beginTransaction()
-
                 val dialog = DoctorInstituteDialogFragment()
                 // val dialog = InstituteDialogFragment()
                 dialog.show(ft, "Tag")
             }
-
 /*
             if(type!=AppConstants.LABINCHARGE) {
                 val ft = supportFragmentManager.beginTransaction()
@@ -2709,47 +1970,32 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             }*/
         }
 
-
         val land = appPreferences?.getString(AppConstants.LANDSCREEN)
-
         val landurl = appPreferences?.getString(AppConstants.LANDURL)
-
         if (land!! == AppConstants.LABAPPROVELCODE) {
-
             val op = LabTestApprovalActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         } else if (land == AppConstants.COVIDREGISTERCODE) {
-
             val op = QuickRegistrationActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         } else if (land == AppConstants.QUICKREGISTERCODE) {
-
             val op = QuickRegistrationNew()
-
             val bundle: Bundle = Bundle()
-
             bundle.putInt("PIN", 0)
-
             op.arguments = bundle
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         } else if (land == AppConstants.LABPROCESSCODE) {
-
             val op = LabTestProcessActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         } else if (land == AppConstants.LABTESTCODE) {
-
             val op = LabTestActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
@@ -2778,18 +2024,13 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 //            fragmentTransaction.commit()
 
         } else if (land == AppConstants.EMRDASHBOARDCODE) {
-
             val op = DashBoardActivity()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             //          fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
-
         } else if (land == AppConstants.HELPDESKTICKETS) {
-
             val op = UserTicketsListFragment()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             //          fragmentTransaction.addToBackStack(null)
@@ -2834,33 +2075,24 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 //            fragmentTransaction.commit()
 //
 //        } else {
-
-
         if (landurl!! == AppConstants.OPROUTEURL) {
-
             val op = OutPatientFragment()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.addToBackStack("home")
             fragmentTransaction.commit()
         } else if (landurl == AppConstants.IPROUTEURL) {
-
             val op = InpatientFragment()
-
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         } else {
 /*
-
                 val op=DashBoardActivity()
-
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.landfragment, op)
                 fragmentTransaction.commit()
 */
-
         }
 //        }
         changePassword?.setOnClickListener {
@@ -2871,51 +2103,32 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
         logout?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
-
             customdialog = Dialog(this)
             customdialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
             customdialog!!.setCancelable(false)
             customdialog!!.setContentView(R.layout.logout_dialog)
             val closeImageView = customdialog!!.findViewById(R.id.closeImageView) as ImageView
             closeImageView.setOnClickListener {
-
                 customdialog?.dismiss()
             }
-
             val yesBtn = customdialog!!.findViewById(R.id.yes) as CardView
-
             val noBtn = customdialog!!.findViewById(R.id.no) as CardView
-
             yesBtn.setOnClickListener {
-
                 viewModel?.LogOutseassion(
                     appPreferences?.getInt(AppConstants.FACILITY_UUID)!!,
                     LoginSeasionRetrofitCallBack
                 )
-
-
                 appPreferences?.saveInt(AppConstants.LAB_UUID, 0)
-
                 appPreferences?.saveString(AppConstants.OTHER_DEPARTMENT_UUID, "")
-
                 startActivity(Intent(this, LoginActivity::class.java))
-
                 finishAffinity()
-
-
-
                 customdialog!!.dismiss()
-
             }
             noBtn.setOnClickListener {
                 customdialog!!.dismiss()
-
-
             }
             customdialog!!.show()
         }
-
-
     }
 
     fun replaceFragment(fragment: Fragment) {

@@ -469,66 +469,37 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }
 
 //        nurse_desk?.setOnClickListener {
-//
-//
 //            registerList?.visibility = View.GONE
-//
 //            lmisList?.visibility = View.GONE
-//
 //            rmislayout?.visibility = View.GONE
-//
 //            regreportlayout?.visibility = View.GONE
-//
 //            ipadmissionreportlayout?.visibility = View.GONE
-//
 //            labreportLayout?.visibility = View.GONE
-//
 //            tutorialLayout?.visibility = View.GONE
-//
 //            helpdesklayout?.visibility = View.GONE
-//
 //            pharmacylayout?.visibility = View.GONE
-//
 //            bedreportlayout?.visibility = View.GONE
-//
 //            ipmanagementlayout?.visibility = View.GONE
-//
 //            settingLayout?.visibility = View.GONE
 //
-//
 //            add_image?.setImageResource(R.drawable.ic_add)
-//
 //            lab_image?.setImageResource(R.drawable.ic_add)
-//
 //            rad_image?.setImageResource(R.drawable.ic_add)
-//
 //            reg_report_image?.setImageResource(R.drawable.ic_add)
-//
 //            admission_report_image?.setImageResource(R.drawable.ic_add)
-//
 //            lab_report_image?.setImageResource(R.drawable.ic_add)
-//
 //            tutorial_image?.setImageResource(R.drawable.ic_add)
-//
 //            helpDesk_image?.setImageResource(R.drawable.ic_add)
-//
 //            pharmacy_image?.setImageResource(R.drawable.ic_add)
-//
 //            bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-//
 //            ipmangement_image?.setImageResource(R.drawable.ic_add)
-//
 //            settings_image?.setImageResource(R.drawable.ic_add)
 //
-//
 //            val nursedesk = NurseEmrWorkFlowActivity()
-//
 //            val fragmentTransaction = supportFragmentManager.beginTransaction()
 //            fragmentTransaction.replace(R.id.landfragment, nursedesk)
 //            fragmentTransaction.commit()
-//
 //            drawerLayout!!.closeDrawer(GravityCompat.START)
-//
 //        }
 
         appMaster?.setOnClickListener {

@@ -96,7 +96,7 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!--My Profile-->
+                    <!--  My Profile -->
 
                     <LinearLayout
                         android:id="@+id/myProfile"
@@ -133,8 +133,7 @@
                     </LinearLayout>
 
 
-                    <!-- App Master-->
-
+                    <!--  App Master-->
 
                     <LinearLayout
                         android:id="@+id/appMaster"
@@ -180,7 +179,6 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:id="@+id/appMasterList"
                         android:layout_width="match_parent"
@@ -219,7 +217,6 @@
                                 android:textStyle="bold" />
 
                         </LinearLayout>
-
 
                         <LinearLayout
                             android:id="@+id/healthoffice"
@@ -323,10 +320,10 @@
 
                     </LinearLayout>
 
-                    <!-- Assert Master-->
+                    <!--  Assert Master-->
 
 
-                    <!--Registration-->
+                    <!--  Registration-->
 
                     <LinearLayout
                         android:id="@+id/registration"
@@ -371,7 +368,6 @@
 
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/registerList"
@@ -520,9 +516,10 @@
                     </LinearLayout>
 
 
-                    <!--LMIS-->
+                    <!--  LMIS-->
 
-                    <LinearLayout
+<!--
+                    <LinearLayout""""""""""""""""""""""
                         android:id="@+id/lab"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -804,9 +801,11 @@
 
 
                     </LinearLayout>
+-->
 
-                    <!--RMIS-->
+                    <!--  RMIS-->
 
+<!--
                     <LinearLayout
                         android:id="@+id/radilogy"
                         android:layout_width="match_parent"
@@ -1093,10 +1092,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
-                    <!--Reg Report-->
+                    <!-- Reg Report-->
 
-
+<!--
                     <LinearLayout
                         android:id="@+id/reg_report"
                         android:layout_width="match_parent"
@@ -1138,7 +1138,6 @@
                             tools:ignore="ContentDescription" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/regreportlayout"
@@ -1314,10 +1313,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
                     <!--  admissionreports-->
 
-
+<!--
                     <LinearLayout
                         android:id="@+id/ipAdmission_report"
                         android:layout_width="match_parent"
@@ -1567,10 +1567,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
+                    <!-- Lab Report-->
 
-                    <!--Lab Report-->
-
+<!--
                     <LinearLayout
                         android:id="@+id/lab_report"
                         android:layout_width="match_parent"
@@ -1612,7 +1613,6 @@
                             tools:ignore="ContentDescription" />
 
                     </LinearLayout>
-
 
                     <LinearLayout
                         android:id="@+id/labreportLayout"
@@ -1788,10 +1788,11 @@
 
 
                     </LinearLayout>
+-->
 
+                    <!--  Nurse Desk-->
 
-                    <!--Nurse Desk-->
-
+<!--
                     <LinearLayout
                         android:id="@+id/nurse_desk"
                         android:layout_width="match_parent"
@@ -1833,8 +1834,9 @@
                             tools:ignore="ContentDescription" />
 
                     </LinearLayout>
+-->
 
-                    <!--EMR-->
+                    <!--  EMR-->
 
                     <LinearLayout
                         android:id="@+id/emr"
@@ -2010,7 +2012,7 @@
 
                     </LinearLayout>
 
-                    <!--Tutorial-->
+                    <!--  Tutorial-->
 
                     <LinearLayout
                         android:id="@+id/tutorial"
@@ -2131,7 +2133,8 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                    <!--Help Desk-->
+
+                    <!--  Help Desk-->
 
                     <LinearLayout
                         android:id="@+id/helpDesk"
@@ -2216,8 +2219,10 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                    <!--Pharmacy Management-->
 
+                    <!--  Pharmacy Management-->
+
+<!--
                     <LinearLayout
                         android:id="@+id/pharmacy"
                         android:layout_width="match_parent"
@@ -2406,9 +2411,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
-                    <!-- Bed Maagment report-->
+                    <!--  Bed Maagment report-->
 
+<!--
                     <LinearLayout
                         android:id="@+id/Bedmangementreport"
                         android:layout_width="match_parent"
@@ -2453,7 +2460,6 @@
 
                     </LinearLayout>
 
-
                     <LinearLayout
                         android:id="@+id/bedreportlayout"
                         android:layout_width="match_parent"
@@ -2497,9 +2503,11 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
-                    <!--IP Management-->
+                    <!--  IP Management-->
 
+<!--
                     <LinearLayout
                         android:id="@+id/ipmangement"
                         android:layout_width="match_parent"
@@ -2757,8 +2765,10 @@
                         </LinearLayout>
 
                     </LinearLayout>
+-->
 
                     <!--  Telemedicine -->
+
                     <LinearLayout
                         android:id="@+id/llTelemedicine"
                         android:layout_width="match_parent"
@@ -2869,8 +2879,7 @@
 
                     </LinearLayout>
 
-
-                    <!--Settings-->
+                    <!--  Settings-->
 
                     <LinearLayout
                         android:id="@+id/settings"
@@ -2988,7 +2997,8 @@
                         </LinearLayout>
 
                     </LinearLayout>
-                    <!--Logout-->
+
+                    <!--  Logout-->
 
                     <LinearLayout
                         android:id="@+id/logout"

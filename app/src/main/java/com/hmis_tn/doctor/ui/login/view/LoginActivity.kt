@@ -432,6 +432,17 @@ class LoginActivity : AppCompatActivity() {
 
                     // Modules List
                     for (i in module_details!!.indices) {
+                        //Registration
+                        if (module_details!![i]?.code == AppConstants.ROLE_Registration) {
+                            val details = module_details!![i]!!.role_activities
+                            val checkcovid =
+                                details!!.any { it!!.activity.code == AppConstants.COVIDREGISTERCODE }
+                            appPreferences?.saveBoolean(AppConstants.COVIDREGISTER, checkcovid)
+                            val checkQuick =
+                                details.any { it!!.activity.code == AppConstants.QUICKREGISTERCODE }
+                            appPreferences?.saveBoolean(AppConstants.QUICKREGISTER, checkQuick)
+                        }
+
                         //Lmis
                         if (module_details!![i]?.code == AppConstants.ROLE_LMIS) {
                             val details = module_details!![i]!!.role_activities
@@ -518,8 +529,8 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
 
-                    // Check valid Login If only lMIS or RMIS is there
-                    if ((checkLIMS || CheckRMIS) || (checkEMR || checkREGISTER)) {
+                    // Check valid Login If only registration or doctor is there
+                    if ((checkEMR || checkREGISTER)) {
                         if (module_details?.size!! > 0) {
                             val userDataStoreBean = userDetailsRoomRepository.getUserDetails()
                             Log.i("", "" + userDataStoreBean?.user_type?.revision)
@@ -547,7 +558,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        toast("Invalid User Please contect Admin to check your Controller")
+                        toast("Invalid User Please contact Admin to check your Controller")
                     }
                     //   Toast.makeText(this@LoginActivity, "Login Success", Toast.LENGTH_SHORT).show()
                 } else {

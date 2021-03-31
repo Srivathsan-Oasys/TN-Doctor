@@ -2579,7 +2579,6 @@ class AddSurgeryDialogFragment(
     }
 
     private fun updateSurgery() {
-        //TODO sri rectify doubts
         val body = ModifyOtScheduleReq(
             Id = otScheduleToCalendarresponseContent?.os_uuid,
             anaesthetic_nurse_uuid = otScheduleToCalendarresponseContent?.os_assistant_nurse_uuid,   //doubt

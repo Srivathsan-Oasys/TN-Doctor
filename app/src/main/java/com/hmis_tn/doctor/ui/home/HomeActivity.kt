@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -34,7 +33,7 @@ import com.hmis_tn.doctor.ui.institute.view.*
 import com.hmis_tn.doctor.ui.institution.rmis.view.fragment.RadiologyInstituteDialogFragment
 import com.hmis_tn.doctor.ui.login.model.SimpleResponseModel
 import com.hmis_tn.doctor.ui.login.view.LoginActivity
-import com.hmis_tn.doctor.ui.order_status.ui.OrderStatusActivity
+import com.hmis_tn.doctor.ui.opcorrection.ui.OpCorrectionFragement
 import com.hmis_tn.doctor.ui.out_patient.view.InpatientFragment
 import com.hmis_tn.doctor.ui.out_patient.view.OutPatientFragment
 import com.hmis_tn.doctor.ui.quick_reg.view.LabTestActivity
@@ -42,8 +41,6 @@ import com.hmis_tn.doctor.ui.quick_reg.view.LabTestApprovalActivity
 import com.hmis_tn.doctor.ui.quick_reg.view.LabTestProcessActivity
 import com.hmis_tn.doctor.ui.quick_reg.view.QuickRegistrationActivity
 import com.hmis_tn.doctor.ui.quickregistration.ui.QuickRegistrationNew
-import com.hmis_tn.doctor.ui.resultdispatch.ui.ResultDispatchActivity
-import com.hmis_tn.doctor.ui.sample_dispatch.ui.SampleDispatchActivity
 import com.hmis_tn.doctor.ui.telemedicine.AppointmentActivity
 import com.hmis_tn.doctor.ui.tutorial.view.UserManualActivity
 import com.hmis_tn.doctor.ui.tutorial.view.VideoTutorialActivity
@@ -74,28 +71,18 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
     private var customdialog: Dialog? = null
     var registercheck: Boolean? = null
     var nurseDeskCheck: Boolean? = null
-
     var helpDeskCheck: Boolean? = null
     var LmisCheck: Boolean? = null
-
     var labreportCheck: Boolean? = null
-
     var tutorialCheck: Boolean? = null
-
     var rmisCheck: Boolean? = null
-
     var ipCheck: Boolean? = null
-
     var appMasterCheck: Boolean? = null
-
     var pharmacyCheck: Boolean? = null
-
     var bedReportCheck: Boolean? = null
 
-    var pharmasyLayout: LinearLayout? = null
-
+    //    var pharmasyLayout: LinearLayout? = null
     var regReportCheck: Boolean? = null
-
     var ipAdmissionReportCheck: Boolean? = null
 
     private var utils: Utils? = null
@@ -125,12 +112,10 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         ).create(HomeViewModel::class.java)
 
         binding?.viewModel = viewModel
-
         binding?.lifecycleOwner = this
 
         appPreferences = AppPreferences.getInstance(this, AppConstants.SHARE_PREFERENCE_NAME)
         setSupportActionBar(homeLayoutInclude?.toolbar)
-
 
         val toggle = object :
             ActionBarDrawerToggle(
@@ -145,40 +130,28 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             View.OnClickListener { drawerLayout?.openDrawer(GravityCompat.START) }
         homeLayoutInclude?.toolbar?.setNavigationIcon(R.drawable.ic_hamburger_icon)
 
-        pharmasyLayout = findViewById(R.id.pharmacy)
-
+//        pharmasyLayout = findViewById(R.id.pharmacy)
         appMasterCheck = appPreferences?.getBoolean(AppConstants.APPLICATIONMANGERCHECK)
-
         emrcheck = appPreferences?.getBoolean(AppConstants.EMRCHECK)
         tutorialcheck = true // appPreferences?.getBoolean(AppConstants.TUTORIALCHECK)
         helpDeskcheck = true//appPreferences?.getBoolean(AppConstants.HELPDESKCHECK)
         LmisCheck = appPreferences?.getBoolean(AppConstants.LMISCHECK)
         registercheck = appPreferences?.getBoolean(AppConstants.REGISTRATIONCHECK)
         labreportCheck = appPreferences?.getBoolean(AppConstants.LABREPORTS)
-
         nurseDeskCheck = appPreferences?.getBoolean(AppConstants.CHECK_NURSE)
-
         helpDeskCheck = appPreferences?.getBoolean(AppConstants.CHECK_HELPDESK)
-
         tutorialCheck = appPreferences?.getBoolean(AppConstants.CHECK_TUTORIAL)
-
         rmisCheck = appPreferences?.getBoolean(AppConstants.CHECK_RMIS)
-
         ipCheck = appPreferences?.getBoolean(AppConstants.CHECK_IPMANAGEMENT)
-
         pharmacyCheck = appPreferences?.getBoolean(AppConstants.CHECK_PHARMASY)
-
         bedReportCheck = appPreferences?.getBoolean(AppConstants.CHECK_BEEDREPORT)
-
         regReportCheck = appPreferences?.getBoolean(AppConstants.CHECKREGISTRATIONREPOERT)
-
         ipAdmissionReportCheck = appPreferences?.getBoolean(AppConstants.CHECKIPADMISSIONREPORT)
 
         userDetailsRoomRepository = UserDetailsRoomRepository(application)
         val userDataStoreBean = userDetailsRoomRepository?.getUserDetails()
 
         val departmentname = appPreferences?.getString(AppConstants.DEPARTMENT_NAME)
-
         userNameTextView?.text =
             "" + userDataStoreBean?.title?.name + userDataStoreBean?.first_name + "\n" + "($departmentname)"
         utils = Utils(this)
@@ -191,7 +164,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 utils?.getLocaleStringResource(Locale("ta"), R.string.quickreg, this)!!
             val Str_covidreg: String =
                 utils?.getLocaleStringResource(Locale("ta"), R.string.covidreg, this)!!
-
 
             val Str_lmis: String =
                 utils?.getLocaleStringResource(Locale("ta"), R.string.lmis, this)!!
@@ -261,10 +233,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             val Str_tickets: String =
                 utils?.getLocaleStringResource(Locale("ta"), R.string.tickets, this)!!
 
-
 /*
-
-
             binding?.navigationItem?.registrationText!!.text = Str_register
             binding?.navigationItem?.lmistext!!.text = Str_lmis
             binding?.navigationItem?.labreporttext!!.text = Str_labreport
@@ -330,7 +299,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             binding?.navigationItem?.logouttext!!.text = Str_logout*/
         }
 
-
         languages?.setOnClickListener {
             val ft = supportFragmentManager.beginTransaction()
             val dialog = LanguagesDialogFragemnt()
@@ -349,11 +317,11 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             tutorial.visibility = View.GONE
         }
 
-//        if (this.helpDeskcheck!!) {
-//            helpDesk.visibility = View.VISIBLE
-//        } else {
-//            helpDesk.visibility = View.GONE
-//        }
+        if (this.helpDeskcheck!!) {
+            helpDesk.visibility = View.VISIBLE
+        } else {
+            helpDesk.visibility = View.GONE
+        }
 
 //        if (this.LmisCheck!!) {
 //            lab.visibility = View.VISIBLE
@@ -385,11 +353,11 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 //            nurse_desk.visibility = View.GONE
 //        }
 
-//        if (this.helpDeskCheck!!) {
-//            helpDesk.visibility = View.VISIBLE
-//        } else {
-//            helpDesk.visibility = View.GONE
-//        }
+        if (this.helpDeskCheck!!) {
+            helpDesk.visibility = View.VISIBLE
+        } else {
+            helpDesk.visibility = View.GONE
+        }
 
         if (this.tutorialCheck!!) {
             tutorial.visibility = View.VISIBLE
@@ -427,13 +395,49 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 //            ipAdmission_report?.visibility = View.GONE
 //        }
 
-//        if (this.appMasterCheck!!) {
-//            appMaster?.visibility = View.VISIBLE
-//        } else {
-//            appMaster?.visibility = View.GONE
-//        }
+        if (this.appMasterCheck!!) {
+            appMaster?.visibility = View.VISIBLE
+        } else {
+            appMaster?.visibility = View.GONE
+        }
 
         emr?.setOnClickListener {
+            registerList?.visibility = View.GONE
+//            lmisList?.visibility = View.GONE
+//            rmislayout?.visibility = View.GONE
+//            regreportlayout?.visibility = View.GONE
+//            ipadmissionreportlayout?.visibility = View.GONE
+//            labreportLayout?.visibility = View.GONE
+            tutorialLayout?.visibility = View.GONE
+            helpdesklayout?.visibility = View.GONE
+//            pharmacylayout?.visibility = View.GONE
+//            bedreportlayout?.visibility = View.GONE
+//            ipmanagementlayout?.visibility = View.GONE
+            settingLayout?.visibility = View.GONE
+
+            add_image?.setImageResource(R.drawable.ic_add)
+//            lab_image?.setImageResource(R.drawable.ic_add)
+//            rad_image?.setImageResource(R.drawable.ic_add)
+//            reg_report_image?.setImageResource(R.drawable.ic_add)
+//            admission_report_image?.setImageResource(R.drawable.ic_add)
+//            lab_report_image?.setImageResource(R.drawable.ic_add)
+            tutorial_image?.setImageResource(R.drawable.ic_add)
+            helpDesk_image?.setImageResource(R.drawable.ic_add)
+//            pharmacy_image?.setImageResource(R.drawable.ic_add)
+//            bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//            ipmangement_image?.setImageResource(R.drawable.ic_add)
+            settings_image?.setImageResource(R.drawable.ic_add)
+
+            val op = DashBoardActivity()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.landfragment, op)
+            fragmentTransaction.commit()
+
+            drawerLayout!!.closeDrawer(GravityCompat.START)
+        }
+
+/*
+        nurse_desk?.setOnClickListener {
             registerList?.visibility = View.GONE
             lmisList?.visibility = View.GONE
             rmislayout?.visibility = View.GONE
@@ -460,76 +464,42 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             ipmangement_image?.setImageResource(R.drawable.ic_add)
             settings_image?.setImageResource(R.drawable.ic_add)
 
-            val op = DashBoardActivity()
+            val nursedesk = NurseEmrWorkFlowActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.landfragment, op)
+            fragmentTransaction.replace(R.id.landfragment, nursedesk)
             fragmentTransaction.commit()
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
         }
-
-//        nurse_desk?.setOnClickListener {
-//            registerList?.visibility = View.GONE
-//            lmisList?.visibility = View.GONE
-//            rmislayout?.visibility = View.GONE
-//            regreportlayout?.visibility = View.GONE
-//            ipadmissionreportlayout?.visibility = View.GONE
-//            labreportLayout?.visibility = View.GONE
-//            tutorialLayout?.visibility = View.GONE
-//            helpdesklayout?.visibility = View.GONE
-//            pharmacylayout?.visibility = View.GONE
-//            bedreportlayout?.visibility = View.GONE
-//            ipmanagementlayout?.visibility = View.GONE
-//            settingLayout?.visibility = View.GONE
-//
-//            add_image?.setImageResource(R.drawable.ic_add)
-//            lab_image?.setImageResource(R.drawable.ic_add)
-//            rad_image?.setImageResource(R.drawable.ic_add)
-//            reg_report_image?.setImageResource(R.drawable.ic_add)
-//            admission_report_image?.setImageResource(R.drawable.ic_add)
-//            lab_report_image?.setImageResource(R.drawable.ic_add)
-//            tutorial_image?.setImageResource(R.drawable.ic_add)
-//            helpDesk_image?.setImageResource(R.drawable.ic_add)
-//            pharmacy_image?.setImageResource(R.drawable.ic_add)
-//            bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-//            ipmangement_image?.setImageResource(R.drawable.ic_add)
-//            settings_image?.setImageResource(R.drawable.ic_add)
-//
-//            val nursedesk = NurseEmrWorkFlowActivity()
-//            val fragmentTransaction = supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.landfragment, nursedesk)
-//            fragmentTransaction.commit()
-//            drawerLayout!!.closeDrawer(GravityCompat.START)
-//        }
+*/
 
         appMaster?.setOnClickListener {
             if (appMasterList?.visibility == View.GONE) {
                 appMasterList?.visibility = View.VISIBLE
                 registerList?.visibility = View.GONE
-                lmisList?.visibility = View.GONE
-                rmislayout?.visibility = View.GONE
-                regreportlayout?.visibility = View.GONE
-                ipadmissionreportlayout?.visibility = View.GONE
-                labreportLayout?.visibility = View.GONE
+//                lmisList?.visibility = View.GONE
+//                rmislayout?.visibility = View.GONE
+//                regreportlayout?.visibility = View.GONE
+//                ipadmissionreportlayout?.visibility = View.GONE
+//                labreportLayout?.visibility = View.GONE
                 tutorialLayout?.visibility = View.GONE
                 helpdesklayout?.visibility = View.GONE
-                pharmacylayout?.visibility = View.GONE
-                bedreportlayout?.visibility = View.GONE
-                ipmanagementlayout?.visibility = View.GONE
+//                pharmacylayout?.visibility = View.GONE
+//                bedreportlayout?.visibility = View.GONE
+//                ipmanagementlayout?.visibility = View.GONE
                 settingLayout?.visibility = View.GONE
 
                 appMaster_image?.setImageResource(R.drawable.ic_minus_white)
                 add_image?.setImageResource(R.drawable.ic_add)
-                lab_image?.setImageResource(R.drawable.ic_add)
-                rad_image?.setImageResource(R.drawable.ic_add)
-                reg_report_image?.setImageResource(R.drawable.ic_add)
-                admission_report_image?.setImageResource(R.drawable.ic_add)
-                lab_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_image?.setImageResource(R.drawable.ic_add)
+//                rad_image?.setImageResource(R.drawable.ic_add)
+//                reg_report_image?.setImageResource(R.drawable.ic_add)
+//                admission_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_report_image?.setImageResource(R.drawable.ic_add)
                 tutorial_image?.setImageResource(R.drawable.ic_add)
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-                pharmacy_image?.setImageResource(R.drawable.ic_add)
-                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-                ipmangement_image?.setImageResource(R.drawable.ic_add)
+//                pharmacy_image?.setImageResource(R.drawable.ic_add)
+//                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//                ipmangement_image?.setImageResource(R.drawable.ic_add)
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 val appdashboard =
@@ -574,29 +544,29 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             if (registerList?.visibility == View.GONE) {
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.VISIBLE
-                lmisList?.visibility = View.GONE
-                rmislayout?.visibility = View.GONE
-                regreportlayout?.visibility = View.GONE
-                ipadmissionreportlayout?.visibility = View.GONE
-                labreportLayout?.visibility = View.GONE
+//                lmisList?.visibility = View.GONE
+//                rmislayout?.visibility = View.GONE
+//                regreportlayout?.visibility = View.GONE
+//                ipadmissionreportlayout?.visibility = View.GONE
+//                labreportLayout?.visibility = View.GONE
                 tutorialLayout?.visibility = View.GONE
                 helpdesklayout?.visibility = View.GONE
-                pharmacylayout?.visibility = View.GONE
-                bedreportlayout?.visibility = View.GONE
-                ipmanagementlayout?.visibility = View.GONE
+//                pharmacylayout?.visibility = View.GONE
+//                bedreportlayout?.visibility = View.GONE
+//                ipmanagementlayout?.visibility = View.GONE
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_minus_white)
-                lab_image?.setImageResource(R.drawable.ic_add)
-                rad_image?.setImageResource(R.drawable.ic_add)
-                reg_report_image?.setImageResource(R.drawable.ic_add)
-                admission_report_image?.setImageResource(R.drawable.ic_add)
-                lab_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_image?.setImageResource(R.drawable.ic_add)
+//                rad_image?.setImageResource(R.drawable.ic_add)
+//                reg_report_image?.setImageResource(R.drawable.ic_add)
+//                admission_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_report_image?.setImageResource(R.drawable.ic_add)
                 tutorial_image?.setImageResource(R.drawable.ic_add)
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-                pharmacy_image?.setImageResource(R.drawable.ic_add)
-                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-                ipmangement_image?.setImageResource(R.drawable.ic_add)
+//                pharmacy_image?.setImageResource(R.drawable.ic_add)
+//                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//                ipmangement_image?.setImageResource(R.drawable.ic_add)
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 val covidCheck = appPreferences?.getBoolean(AppConstants.COVIDREGISTER)
@@ -1060,29 +1030,29 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             } else {
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-                lmisList?.visibility = View.GONE
-                rmislayout?.visibility = View.GONE
-                regreportlayout?.visibility = View.GONE
-                ipadmissionreportlayout?.visibility = View.GONE
-                labreportLayout?.visibility = View.GONE
+//                lmisList?.visibility = View.GONE
+//                rmislayout?.visibility = View.GONE
+//                regreportlayout?.visibility = View.GONE
+//                ipadmissionreportlayout?.visibility = View.GONE
+//                labreportLayout?.visibility = View.GONE
                 tutorialLayout?.visibility = View.VISIBLE
                 helpdesklayout?.visibility = View.GONE
-                pharmacylayout?.visibility = View.GONE
-                bedreportlayout?.visibility = View.GONE
-                ipmanagementlayout?.visibility = View.GONE
+//                pharmacylayout?.visibility = View.GONE
+//                bedreportlayout?.visibility = View.GONE
+//                ipmanagementlayout?.visibility = View.GONE
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-                lab_image?.setImageResource(R.drawable.ic_add)
-                rad_image?.setImageResource(R.drawable.ic_add)
-                reg_report_image?.setImageResource(R.drawable.ic_add)
-                admission_report_image?.setImageResource(R.drawable.ic_add)
-                lab_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_image?.setImageResource(R.drawable.ic_add)
+//                rad_image?.setImageResource(R.drawable.ic_add)
+//                reg_report_image?.setImageResource(R.drawable.ic_add)
+//                admission_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_report_image?.setImageResource(R.drawable.ic_add)
                 tutorial_image?.setImageResource(R.drawable.ic_minus_white)
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-                pharmacy_image?.setImageResource(R.drawable.ic_add)
-                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-                ipmangement_image?.setImageResource(R.drawable.ic_add)
+//                pharmacy_image?.setImageResource(R.drawable.ic_add)
+//                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//                ipmangement_image?.setImageResource(R.drawable.ic_add)
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 var video_tutoarial = appPreferences?.getBoolean(AppConstants.TUTORIALVIDEOTUTORIAL)
@@ -1104,36 +1074,36 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             }
         }
 
-        /*helpDesk?.setOnClickListener {
+        helpDesk?.setOnClickListener {
             if (helpdesklayout?.visibility == View.VISIBLE) {
                 helpdesklayout?.visibility = View.GONE
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
             } else {
                 appMasterList?.visibility = View.GONE
                 registerList?.visibility = View.GONE
-                lmisList?.visibility = View.GONE
-                rmislayout?.visibility = View.GONE
-                regreportlayout?.visibility = View.GONE
-                ipadmissionreportlayout?.visibility = View.GONE
-                labreportLayout?.visibility = View.GONE
+//                lmisList?.visibility = View.GONE
+//                rmislayout?.visibility = View.GONE
+//                regreportlayout?.visibility = View.GONE
+//                ipadmissionreportlayout?.visibility = View.GONE
+//                labreportLayout?.visibility = View.GONE
                 tutorialLayout?.visibility = View.GONE
                 helpdesklayout?.visibility = View.VISIBLE
-                pharmacylayout?.visibility = View.GONE
-                bedreportlayout?.visibility = View.GONE
-                ipmanagementlayout?.visibility = View.GONE
+//                pharmacylayout?.visibility = View.GONE
+//                bedreportlayout?.visibility = View.GONE
+//                ipmanagementlayout?.visibility = View.GONE
                 settingLayout?.visibility = View.GONE
 
                 add_image?.setImageResource(R.drawable.ic_add)
-                lab_image?.setImageResource(R.drawable.ic_add)
-                rad_image?.setImageResource(R.drawable.ic_add)
-                reg_report_image?.setImageResource(R.drawable.ic_add)
-                admission_report_image?.setImageResource(R.drawable.ic_add)
-                lab_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_image?.setImageResource(R.drawable.ic_add)
+//                rad_image?.setImageResource(R.drawable.ic_add)
+//                reg_report_image?.setImageResource(R.drawable.ic_add)
+//                admission_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_report_image?.setImageResource(R.drawable.ic_add)
                 tutorial_image?.setImageResource(R.drawable.ic_add)
                 helpDesk_image?.setImageResource(R.drawable.ic_minus_white)
-                pharmacy_image?.setImageResource(R.drawable.ic_add)
-                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-                ipmangement_image?.setImageResource(R.drawable.ic_add)
+//                pharmacy_image?.setImageResource(R.drawable.ic_add)
+//                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//                ipmangement_image?.setImageResource(R.drawable.ic_add)
                 settings_image?.setImageResource(R.drawable.ic_add)
 
                 var ticket = appPreferences?.getBoolean(AppConstants.HELPDESKTICKETS)
@@ -1146,7 +1116,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
                 helpDesk_image?.setImageResource(R.drawable.ic_minus_white)
             }
-        }*/
+        }
 
         /*pharmacy?.setOnClickListener {
             if (pharmacylayout?.visibility == View.GONE) {
@@ -1340,28 +1310,28 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 settings_image.setImageResource(R.drawable.ic_add)
             } else {
                 registerList?.visibility = View.GONE
-                lmisList?.visibility = View.GONE
-                rmislayout?.visibility = View.GONE
-                regreportlayout?.visibility = View.GONE
-                ipadmissionreportlayout?.visibility = View.GONE
-                labreportLayout?.visibility = View.GONE
+//                lmisList?.visibility = View.GONE
+//                rmislayout?.visibility = View.GONE
+//                regreportlayout?.visibility = View.GONE
+//                ipadmissionreportlayout?.visibility = View.GONE
+//                labreportLayout?.visibility = View.GONE
                 tutorialLayout?.visibility = View.GONE
                 helpdesklayout?.visibility = View.GONE
-                pharmacylayout?.visibility = View.GONE
-                bedreportlayout?.visibility = View.GONE
-                ipmanagementlayout?.visibility = View.GONE
+//                pharmacylayout?.visibility = View.GONE
+//                bedreportlayout?.visibility = View.GONE
+//                ipmanagementlayout?.visibility = View.GONE
                 settingLayout?.visibility = View.VISIBLE
                 add_image?.setImageResource(R.drawable.ic_add)
-                lab_image?.setImageResource(R.drawable.ic_add)
-                rad_image?.setImageResource(R.drawable.ic_add)
-                reg_report_image?.setImageResource(R.drawable.ic_add)
-                admission_report_image?.setImageResource(R.drawable.ic_add)
-                lab_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_image?.setImageResource(R.drawable.ic_add)
+//                rad_image?.setImageResource(R.drawable.ic_add)
+//                reg_report_image?.setImageResource(R.drawable.ic_add)
+//                admission_report_image?.setImageResource(R.drawable.ic_add)
+//                lab_report_image?.setImageResource(R.drawable.ic_add)
                 tutorial_image?.setImageResource(R.drawable.ic_add)
                 helpDesk_image?.setImageResource(R.drawable.ic_add)
-                pharmacy_image?.setImageResource(R.drawable.ic_add)
-                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
-                ipmangement_image?.setImageResource(R.drawable.ic_add)
+//                pharmacy_image?.setImageResource(R.drawable.ic_add)
+//                bedmangementreport_image?.setImageResource(R.drawable.ic_add)
+//                ipmangement_image?.setImageResource(R.drawable.ic_add)
                 settings_image.setImageResource(R.drawable.ic_minus_white)
                 changePassword.visibility = View.VISIBLE
                 languages.visibility = View.VISIBLE
@@ -1468,41 +1438,32 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.commit()
         }
 
-        //todo add the optimized module
-//        quick_Reg?.setOnClickListener {
-//
-//            drawerLayout!!.closeDrawer(GravityCompat.START)
-//
-//            val op = QuickRegistrationNew()
-//
-//            val fragmentTransaction = supportFragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id.landfragment, op)
-//            //   fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
-//        }
+        quick_Reg?.setOnClickListener {
+            drawerLayout!!.closeDrawer(GravityCompat.START)
+            val op = QuickRegistrationNew()
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.landfragment, op)
+            //   fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
 
-
-        /*OPCorrection?.setOnClickListener {
-
+        OPCorrection?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = OpCorrectionFragement()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-        }*/
+        }
 
         /*bluePrintlayout?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = BluePrintFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
-
         }*/
 
         /*ipCorrectionlayout?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = IpCorrectionFragment()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -1566,7 +1527,6 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         }
 
         userManual?.setOnClickListener {
-
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = UserManualActivity()
             val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -1742,6 +1702,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
 
         }*/
 
+/*
         sample_dispatch?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = SampleDispatchActivity()
@@ -1749,7 +1710,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         }
+*/
 
+/*
         result_dispatch?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = ResultDispatchActivity()
@@ -1757,7 +1720,9 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         }
+*/
 
+/*
         order_status?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
             val op = OrderStatusActivity()
@@ -1765,6 +1730,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
             fragmentTransaction.replace(R.id.landfragment, op)
             fragmentTransaction.commit()
         }
+*/
 
         /*rad_order_status?.setOnClickListener {
             drawerLayout!!.closeDrawer(GravityCompat.START)
@@ -1843,6 +1809,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                     putExtra(AppointmentActivity.ISAPPOINTMENTSESSION, false)
                 })
         }
+
         appPreferences = AppPreferences.getInstance(this, AppConstants.SHARE_PREFERENCE_NAME)
         name = appPreferences?.getString(AppConstants.INSTITUTION_NAME)
         /*   userDetailsRoomRepository = UserDetailsRoomRepository(application!!)
@@ -1851,11 +1818,8 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
         landofficeName!!.text =
             "" + userDataStoreBean?.title?.name + userDataStoreBean?.first_name + " / " + name
 
-
         iv_change_institue?.setOnClickListener {
-
             val logintype = appPreferences?.getString(AppConstants.LOGINTYPE)
-
             if (logintype == AppConstants.LABINCHARGE) {
                 val ft = supportFragmentManager.beginTransaction()
                 val dialog = SelectInstituteDialogFragment()
@@ -1872,7 +1836,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 dialog.show(ft, "Tag")
             } else if (logintype == AppConstants.RADINCHARGE) {
                 val ft = supportFragmentManager.beginTransaction()
-                val dialog = RadiologyInstituteDialogFragment() //todo sri check
+                val dialog = RadiologyInstituteDialogFragment()
                 dialog.show(ft, "Tag")
             } else if (logintype == AppConstants.NURSELOGIN) {
                 val ft = supportFragmentManager.beginTransaction()
@@ -1915,7 +1879,7 @@ class HomeActivity : AppCompatActivity(), ManageInstituteDialogFragment.DialogLi
                 val dialog = PharmacistInstituteDialogFragment()
                 dialog.show(ft, "Tag")
             } else if (logintype == AppConstants.RADINCHARGE) {
-                val ft = supportFragmentManager.beginTransaction()  //todo sri check
+                val ft = supportFragmentManager.beginTransaction()
                 val dialog = RadiologyInstituteDialogFragment()
                 dialog.show(ft, "Tag")
             } else if (logintype == AppConstants.NURSELOGIN) {

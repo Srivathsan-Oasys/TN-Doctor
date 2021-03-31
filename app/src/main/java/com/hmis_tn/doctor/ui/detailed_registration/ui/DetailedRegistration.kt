@@ -1,7 +1,5 @@
 package com.hmis_tn.doctor.ui.detailed_registration.ui
 
-//import androidx.appcompat.widget.Toolbar
-
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
@@ -76,11 +74,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     private var pageSize = 10
 
     private var ReferralsAdapter: PatientAllReferralsAdapter? = null
-
     private var VisitsAdapter: PatientAllVisitsAdapter? = null
 
     var salutaioData: ArrayList<SalutationresponseContent> = ArrayList()
-
     var GenderlistData: ArrayList<GenderresponseContent?> = ArrayList()
 
     private var mAdapter: SessionAdapter? = null
@@ -4647,46 +4643,27 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     val heading = customdialog!!.findViewById(R.id.heading) as TextView
                     heading.text = "Session Expiry Alert"
-
                     val yesBtn = customdialog!!.findViewById(R.id.yes) as CardView
                     val noBtn = customdialog!!.findViewById(R.id.no) as CardView
-
                     yesBtn.setOnClickListener {
-
-
                         Log.i("timmer", "Before " + opMorStartTime)
-
                         val cal = Calendar.getInstance()
-
                         cal.time = opMorStartTime
-
                         cal.add(Calendar.MINUTE, opExTime!!)
-
                         opMorStartTime = cal.time
-
                         TimesetStatus = false
-
                         Log.i("timmer", "After " + opMorStartTime)
-
                         customdialog!!.dismiss()
-
-
                     }
                     noBtn.setOnClickListener {
                         customdialog!!.dismiss()
-
                         TimesetStatus = true
                     }
-
-
-
-
                     customdialog!!.show()
 
                 }
 
             } else if (optime == opMorEndTime) {
-
 
                 Handler(Looper.getMainLooper()).post {
 
@@ -4707,40 +4684,22 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
                     val heading = customdialog!!.findViewById(R.id.heading) as TextView
                     heading.text = "Session Expiry Alert"
-
                     val yesBtn = customdialog!!.findViewById(R.id.yes) as CardView
                     val noBtn = customdialog!!.findViewById(R.id.no) as CardView
-
                     yesBtn.setOnClickListener {
-
-
                         Log.i("timmer", "Before " + opMorEndTime)
-
                         val cal = Calendar.getInstance()
-
                         cal.time = opMorEndTime
-
                         cal.add(Calendar.MINUTE, opExTime!!)
-
                         opMorEndTime = cal.time
-
                         TimesetStatus = false
-
                         Log.i("timmer", "After " + opMorEndTime)
-
                         customdialog!!.dismiss()
-
-
                     }
                     noBtn.setOnClickListener {
                         customdialog!!.dismiss()
-
                         TimesetStatus = true
                     }
-
-
-
-
                     customdialog!!.show()
 
                 }
@@ -4851,13 +4810,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
 
         selectBelongUuid = searchData.patient_detail.taluk_uuid ?: 0
-
         selectVillageUuid = searchData.patient_detail.village_uuid ?: 0
-
         selectNationalityUuid = searchData.patient_detail.country_uuid ?: 0
-
         selectStateUuid = searchData.patient_detail.state_uuid ?: 0
-
         selectDistictUuid = searchData.patient_detail.district_uuid ?: 0
 
         viewModel?.getCovidNationalityList(
@@ -4865,14 +4820,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             covidNationalityResponseCallback
         )
 
-
         viewModel?.getCovidNationalityList(
             "nationality_type",
             covidNationalityResponseCallback
         )
 
         if (searchData.patient_detail.lab_to_facility_uuid != null) {
-
             selectLabNameID = searchData.patient_detail.lab_to_facility_uuid
 
             /*   if (selectLabNameID != 0) {
@@ -4884,20 +4837,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
 
         if (searchData.uhid != null) {
-
             uhid = searchData.uhid.toString()
         }
 
         if (searchData.registered_date != "") {
-
             registerDate = searchData.registered_date!!
         }
 
-
         if (searchData.patient_detail.address_line2 != null) {
-
             binding?.quickAddress!!.setText(searchData.patient_detail.address_line2.toString())
-
         }
 
         if (searchData.title_uuid != null) {
@@ -4941,7 +4889,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 binding?.community!!.setSelection(0)
             }
         }
-
     }
 
 
@@ -5014,18 +4961,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         }
 
     fun setNationality(responseContents: List<NationalityresponseContent?>?) {
-
-
-        var dummy: NationalityresponseContent = NationalityresponseContent()
-
+        val dummy: NationalityresponseContent = NationalityresponseContent()
         dummy.uuid = 0
-
         dummy.name = "Select Country"
 
-        var countryList: ArrayList<NationalityresponseContent?>? = ArrayList()
-
+        val countryList: ArrayList<NationalityresponseContent?>? = ArrayList()
         countryList?.add(dummy)
-
         countryList?.addAll(responseContents!!)
 
         CovidNationalityList =
@@ -5312,17 +5253,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
     private fun setTaluk(responseContent: ArrayList<Taluk>) {
 
-        var dummy: Taluk = Taluk()
-
+        val dummy: Taluk = Taluk()
         dummy.uuid = 0
-
         dummy.name = "Select Taluk"
 
-        var responseContents: ArrayList<Taluk> = ArrayList()
-
-
+        val responseContents: ArrayList<Taluk> = ArrayList()
         responseContents.add(dummy)
-
         responseContents.addAll(responseContent)
 
         CovidBlockList = responseContents.map { it.uuid to it.name }.toMap().toMutableMap()
@@ -5390,18 +5326,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
     private fun setVillage(responseContent: ArrayList<Villiage>) {
-
-
-        var dummy: Villiage = Villiage()
-
+        val dummy: Villiage = Villiage()
         dummy.uuid = 0
-
         dummy.name = "Select Village"
 
-        var responseContents: ArrayList<Villiage> = ArrayList()
-
+        val responseContents: ArrayList<Villiage> = ArrayList()
         responseContents.add(dummy)
-
         responseContents.addAll(responseContent)
 
         CovidVillageList =
@@ -5410,7 +5340,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         hashVillageSpinnerList.clear()
 
         for (i in responseContents.indices) {
-
             hashVillageSpinnerList[responseContents[i].uuid] = i
         }
 
@@ -5423,7 +5352,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         adapter.setDropDownViewResource(R.layout.spinner_item)
         binding?.qucikVillage!!.adapter = adapter
 
-
         if (selectVillageUuid != null) {
             val checkvillageuuid =
                 hashVillageSpinnerList.any { it.key == selectVillageUuid }
@@ -5433,7 +5361,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 binding?.qucikVillage!!.setSelection(0)
             }
         }
-
     }
 
 
@@ -5442,18 +5369,15 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onSuccessfulResponse(responseBody: Response<FacilityLocationResponseModel>?) {
 
                 if (responseBody!!.body()!!.responseContents != null) {
-
                     facility_Name = responseBody.body()!!.responseContents.facility.name
 
                     if (responseBody.body()!!.responseContents.country_master != null) {
-
                         selectNationalityUuid =
                             responseBody.body()!!.responseContents.country_master.uuid
                     }
 
                     if (responseBody.body()!!.responseContents.state_master != null) {
                         selectStateUuid = responseBody.body()!!.responseContents.state_master.uuid
-
                     }
 
                     if (responseBody.body()!!.responseContents.district_master != null) {
@@ -5465,14 +5389,11 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         covidNationalityResponseCallback
                     )
                 } else {
-
                     viewModel?.getCovidNationalityList(
                         "nationality_type",
                         covidNationalityResponseCallback
                     )
-
                     setTaluk(ArrayList())
-
                     setVillage(ArrayList())
                 }
             }
@@ -5498,7 +5419,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                     )
                     e.printStackTrace()
                 }
-
             }
 
             override fun onServerError(response: Response<*>?) {
@@ -5534,248 +5454,37 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             }
         }
 
-    var saveQuickRegistrationRetrofitCallback = object :
-        RetrofitCallback<QuickRegistrationSaveResponseModel> {
-        override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationSaveResponseModel>?) {
+    var saveQuickRegistrationRetrofitCallback =
+        object : RetrofitCallback<QuickRegistrationSaveResponseModel> {
+            override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationSaveResponseModel>?) {
 
-            utils?.showToast(
-                R.color.positiveToast,
-                binding?.mainLayout!!,
-                "Register Success"
-            )
+                utils?.showToast(
+                    R.color.positiveToast,
+                    binding?.mainLayout!!,
+                    "Register Success"
+                )
 
-            Log.i("", "" + responseBody?.body()?.responseContent)
+                Log.i("", "" + responseBody?.body()?.responseContent)
 
-            appPreferences?.saveString(
-                AppConstants.LASTPIN,
-                responseBody?.body()?.responseContent?.uhid
-            )
-
-
-            val pdfRequestModel = PrintQuickRequest()
-            pdfRequestModel.componentName = "basic"
-            pdfRequestModel.uuid = responseBody?.body()?.responseContent?.uuid!!
-            pdfRequestModel.uhid = responseBody.body()?.responseContent?.uhid!!
-            pdfRequestModel.facilityName = facility_Name
-            pdfRequestModel.firstName = responseBody.body()?.responseContent?.first_name!!
-            pdfRequestModel.period = CovidPeriodList[selectPeriodUuid]!!
-            pdfRequestModel.age = responseBody.body()?.responseContent?.age!!
-            pdfRequestModel.registered_date =
-                responseBody.body()?.responseContent?.registered_date!!
-            pdfRequestModel.sari = sariStatus
-            pdfRequestModel.ili = iliStatus
-            pdfRequestModel.noSymptom = nosymptomsStatus
-            pdfRequestModel.is_dob_auto_calculate = is_dob_auto_calculate
-            pdfRequestModel.session = session_name!!
-            pdfRequestModel.gender = CovidGenderList[selectGenderUuid]!!
-            pdfRequestModel.mobile = binding!!.quickMobile.text.toString()
-
-
-            if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
-                pdfRequestModel.fatherName =
-                    binding?.etFathername?.text?.trim().toString()
-
-            }
-            if (!binding?.quickAather?.text.toString().isNullOrEmpty()) {
-
-                pdfRequestModel.aadhaarNumber = binding?.quickAather?.text.toString()
-            }
-
-            if (addressenable!!) {
-
-                pdfRequestModel.addressDetails.doorNum = binding!!.doorNo.text.toString()
-                pdfRequestModel.addressDetails.streetName = binding!!.quickAddress.text.toString()
-
-                if (selectNationalityUuid != 0) {
-                    pdfRequestModel.addressDetails.country =
-                        CovidNationalityList[selectNationalityUuid]!!
-                }
-                if (selectDistictUuid != 0) {
-
-
-                    pdfRequestModel.addressDetails.district = CovidDistictList[selectDistictUuid]!!
-
-
-                }
-
-                if (selectStateUuid != 0) {
-
-
-                    try {
-                        pdfRequestModel.addressDetails.state = CovidStateList[selectStateUuid]!!
-                    } catch (e: Exception) {
-                    }
-
-
-                }
-
-                if (selectVillageUuid != 0) {
-
-
-                    pdfRequestModel.addressDetails.village = CovidVillageList[selectVillageUuid]!!
-
-
-                }
-
-
-                if (selectBelongUuid != 0) {
-
-                    pdfRequestModel.addressDetails.taluk = CovidBlockList[selectBelongUuid]!!
-
-
-                }
-
-                if (!binding?.quickPincode?.text.toString().isNullOrEmpty()) {
-
-
-                    pdfRequestModel.addressDetails.pincode = binding?.quickPincode?.text.toString()
-
-
-                }
-
-
-            }
-            pdfRequestModel.visitNum =
-                responseBody.body()?.responseContent?.patient_visits!!.seqNum!!
-
-
-            pdfRequestModel.dob = responseBody.body()?.responseContent?.dob!!
-
-            if (selectSalutationUuid != 0) {
-
-                pdfRequestModel.salutation = SalutaionList[selectSalutationUuid]!!
-
-            }
-            if (selectProffestionalUuid != 0) {
-
-                pdfRequestModel.professional = ProfestioanlList[selectProffestionalUuid]!!
-            }
-
-            if (selectCoummityUuid != 0) {
-
-                pdfRequestModel.community = CommunityList[selectCoummityUuid]!!
-            }
-
-            pdfRequestModel.middleName = binding!!.etmiddlename.text.toString()
-
-            pdfRequestModel.lastName = binding!!.etLastname.text.toString()
-
-
-            if (selectSuffixUuid != 0) {
-
-                pdfRequestModel.suffixCode = SuffixList[selectSuffixUuid]!!
-            }
-
-
-            if (selectSuffixUuid != 0) {
-
-                pdfRequestModel.suffixCode = SuffixList[selectSuffixUuid]!!
-            }
-
-            pdfRequestModel.department = binding!!.department.text.toString()
-
-            val bundle = Bundle()
-            bundle.putParcelable(AppConstants.RESPONSECONTENT, pdfRequestModel)
-            bundle.putInt(AppConstants.RESPONSENEXT, 190)
-            bundle.putString("From", "Quick")
-            bundle.putInt("next", onNext!!)
-
-            val labtemplatedialog = QuickDialogPDFViewerActivity()
-
-            labtemplatedialog.arguments = bundle
-
-            if (onNext == 0) {
-                (activity as HomeActivity).replaceFragment(labtemplatedialog)
-            } else if (onNext == 1) {
-                (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
-            }
-        }
-
-        override fun onBadRequest(response: Response<QuickRegistrationSaveResponseModel>) {
-            Log.e("badreq", response.toString())
-            val gson = GsonBuilder().create()
-            val responseModel: QuickRegistrationSaveResponseModel
-            var mError = ErrorAPIClass()
-            try {
-                mError = gson.fromJson(response.errorBody()!!.string(), ErrorAPIClass::class.java)
-
-                Toast.makeText(context!!, mError.message, Toast.LENGTH_LONG).show()
-
-                if (mError.message == "Patient already exists") {
-
-                    saveAgain()
-
-                }
-
-            } catch (e: IOException) {
-
-                // handle failure to read error
-
-            }
-        }
-
-        override fun onServerError(response: Response<*>) {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding?.mainLayout!!,
-                "serverError"
-            )
-
-        }
-
-        override fun onUnAuthorized() {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding?.mainLayout!!,
-                getString(R.string.unauthorized)
-            )
-        }
-
-        override fun onForbidden() {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding?.mainLayout!!,
-                "Forbidden"
-            )
-
-        }
-
-        override fun onFailure(failure: String) {
-            utils?.showToast(
-                R.color.negativeToast,
-                binding?.mainLayout!!,
-                failure
-            )
-        }
-
-        override fun onEverytime() {
-            viewModel!!.progress.value = 8
-        }
-
-    }
-
-    val updateQuickRegistrationRetrofitCallback =
-        object : RetrofitCallback<QuickRegistrationUpdateResponseModel> {
-            override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationUpdateResponseModel>?) {
-                Log.e("UpdateMSG", responseBody!!.body()?.message.toString())
-                Toast.makeText(requireContext(), "Successfully Updated", Toast.LENGTH_LONG).show()
                 appPreferences?.saveString(
                     AppConstants.LASTPIN,
-                    responseBody.body()?.responseContent?.uhid
+                    responseBody?.body()?.responseContent?.uhid
                 )
+
                 val pdfRequestModel = PrintQuickRequest()
                 pdfRequestModel.componentName = "basic"
-                pdfRequestModel.uuid = responseBody.body()?.responseContent?.uuid!!
+                pdfRequestModel.uuid = responseBody?.body()?.responseContent?.uuid!!
                 pdfRequestModel.uhid = responseBody.body()?.responseContent?.uhid!!
                 pdfRequestModel.facilityName = facility_Name
                 pdfRequestModel.firstName = responseBody.body()?.responseContent?.first_name!!
                 pdfRequestModel.period = CovidPeriodList[selectPeriodUuid]!!
                 pdfRequestModel.age = responseBody.body()?.responseContent?.age!!
-                //pdfRequestModel.registered_date = responseBody?.body()?.responseContent?.registered_date!!
-                pdfRequestModel.registered_date = registerDate
+                pdfRequestModel.registered_date =
+                    responseBody.body()?.responseContent?.registered_date!!
                 pdfRequestModel.sari = sariStatus
                 pdfRequestModel.ili = iliStatus
                 pdfRequestModel.noSymptom = nosymptomsStatus
+                pdfRequestModel.is_dob_auto_calculate = is_dob_auto_calculate
                 pdfRequestModel.session = session_name!!
                 pdfRequestModel.gender = CovidGenderList[selectGenderUuid]!!
                 pdfRequestModel.mobile = binding!!.quickMobile.text.toString()
@@ -5783,17 +5492,13 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
                     pdfRequestModel.fatherName =
                         binding?.etFathername?.text?.trim().toString()
-
                 }
 
                 if (!binding?.quickAather?.text.toString().isNullOrEmpty()) {
-
                     pdfRequestModel.aadhaarNumber = binding?.quickAather?.text.toString()
-
                 }
 
                 if (addressenable!!) {
-
                     pdfRequestModel.addressDetails.doorNum = binding!!.doorNo.text.toString()
                     pdfRequestModel.addressDetails.streetName =
                         binding!!.quickAddress.text.toString()
@@ -5802,58 +5507,39 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                         pdfRequestModel.addressDetails.country =
                             CovidNationalityList[selectNationalityUuid]!!
                     }
+
                     if (selectDistictUuid != 0) {
-
-
                         pdfRequestModel.addressDetails.district =
                             CovidDistictList[selectDistictUuid]!!
-
-
                     }
 
                     if (selectStateUuid != 0) {
-
                         try {
-
-
                             pdfRequestModel.addressDetails.state = CovidStateList[selectStateUuid]!!
-
-                        } catch (r: Exception) {
-
-
+                        } catch (e: Exception) {
                         }
                     }
 
                     if (selectVillageUuid != 0) {
-
-
                         pdfRequestModel.addressDetails.village =
                             CovidVillageList[selectVillageUuid]!!
-
-
                     }
 
-
                     if (selectBelongUuid != 0) {
-
                         pdfRequestModel.addressDetails.taluk = CovidBlockList[selectBelongUuid]!!
-
-
                     }
 
                     if (!binding?.quickPincode?.text.toString().isNullOrEmpty()) {
-
-
                         pdfRequestModel.addressDetails.pincode =
                             binding?.quickPincode?.text.toString()
-
-
                     }
 
 
                 }
                 pdfRequestModel.visitNum =
-                    responseBody.body()?.responseContent?.patient_visits!!.visit_number!!
+                    responseBody.body()?.responseContent?.patient_visits!!.seqNum!!
+
+
                 pdfRequestModel.dob = responseBody.body()?.responseContent?.dob!!
 
                 if (selectSalutationUuid != 0) {
@@ -5893,16 +5579,190 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
                 bundle.putParcelable(AppConstants.RESPONSECONTENT, pdfRequestModel)
                 bundle.putInt(AppConstants.RESPONSENEXT, 190)
                 bundle.putString("From", "Quick")
-
                 bundle.putInt("next", onNext!!)
 
                 val labtemplatedialog = QuickDialogPDFViewerActivity()
 
                 labtemplatedialog.arguments = bundle
 
+                if (onNext == 0) {
+                    (activity as HomeActivity).replaceFragment(labtemplatedialog)
+                } else if (onNext == 1) {
+                    (activity as HomeActivity).replaceFragmentNoBack(labtemplatedialog)
+                }
+            }
+
+            override fun onBadRequest(response: Response<QuickRegistrationSaveResponseModel>) {
+                Log.e("badreq", response.toString())
+                val gson = GsonBuilder().create()
+                val responseModel: QuickRegistrationSaveResponseModel
+                var mError = ErrorAPIClass()
+                try {
+                    mError =
+                        gson.fromJson(response.errorBody()!!.string(), ErrorAPIClass::class.java)
+
+                    Toast.makeText(context!!, mError.message, Toast.LENGTH_LONG).show()
+
+                    if (mError.message == "Patient already exists") {
+
+                        saveAgain()
+
+                    }
+
+                } catch (e: IOException) {
+
+                    // handle failure to read error
+
+                }
+            }
+
+            override fun onServerError(response: Response<*>) {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    "serverError"
+                )
+
+            }
+
+            override fun onUnAuthorized() {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    getString(R.string.unauthorized)
+                )
+            }
+
+            override fun onForbidden() {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    "Forbidden"
+                )
+
+            }
+
+            override fun onFailure(failure: String) {
+                utils?.showToast(
+                    R.color.negativeToast,
+                    binding?.mainLayout!!,
+                    failure
+                )
+            }
+
+            override fun onEverytime() {
+                viewModel!!.progress.value = 8
+            }
+
+        }
+
+    val updateQuickRegistrationRetrofitCallback =
+        object : RetrofitCallback<QuickRegistrationUpdateResponseModel> {
+            override fun onSuccessfulResponse(responseBody: Response<QuickRegistrationUpdateResponseModel>?) {
+                Log.e("UpdateMSG", responseBody!!.body()?.message.toString())
+                Toast.makeText(requireContext(), "Successfully Updated", Toast.LENGTH_LONG).show()
+                appPreferences?.saveString(
+                    AppConstants.LASTPIN,
+                    responseBody.body()?.responseContent?.uhid
+                )
+                val pdfRequestModel = PrintQuickRequest()
+                pdfRequestModel.componentName = "basic"
+                pdfRequestModel.uuid = responseBody.body()?.responseContent?.uuid!!
+                pdfRequestModel.uhid = responseBody.body()?.responseContent?.uhid!!
+                pdfRequestModel.facilityName = facility_Name
+                pdfRequestModel.firstName = responseBody.body()?.responseContent?.first_name!!
+                pdfRequestModel.period = CovidPeriodList[selectPeriodUuid]!!
+                pdfRequestModel.age = responseBody.body()?.responseContent?.age!!
+                //pdfRequestModel.registered_date = responseBody?.body()?.responseContent?.registered_date!!
+                pdfRequestModel.registered_date = registerDate
+                pdfRequestModel.sari = sariStatus
+                pdfRequestModel.ili = iliStatus
+                pdfRequestModel.noSymptom = nosymptomsStatus
+                pdfRequestModel.session = session_name!!
+                pdfRequestModel.gender = CovidGenderList[selectGenderUuid]!!
+                pdfRequestModel.mobile = binding!!.quickMobile.text.toString()
+
+                if (!binding?.etFathername?.text?.trim().isNullOrEmpty()) {
+                    pdfRequestModel.fatherName =
+                        binding?.etFathername?.text?.trim().toString()
+                }
+
+                if (!binding?.quickAather?.text.toString().isNullOrEmpty()) {
+                    pdfRequestModel.aadhaarNumber = binding?.quickAather?.text.toString()
+                }
+
+                if (addressenable!!) {
+                    pdfRequestModel.addressDetails.doorNum = binding!!.doorNo.text.toString()
+                    pdfRequestModel.addressDetails.streetName =
+                        binding!!.quickAddress.text.toString()
+
+                    if (selectNationalityUuid != 0) {
+                        pdfRequestModel.addressDetails.country =
+                            CovidNationalityList[selectNationalityUuid]!!
+                    }
+                    if (selectDistictUuid != 0) {
+                        pdfRequestModel.addressDetails.district =
+                            CovidDistictList[selectDistictUuid]!!
+                    }
+
+                    if (selectStateUuid != 0) {
+                        try {
+                            pdfRequestModel.addressDetails.state = CovidStateList[selectStateUuid]!!
+                        } catch (r: Exception) {
+
+                        }
+                    }
+
+                    if (selectVillageUuid != 0) {
+                        pdfRequestModel.addressDetails.village =
+                            CovidVillageList[selectVillageUuid]!!
+                    }
+
+                    if (selectBelongUuid != 0) {
+                        pdfRequestModel.addressDetails.taluk = CovidBlockList[selectBelongUuid]!!
+                    }
+
+                    if (!binding?.quickPincode?.text.toString().isNullOrEmpty()) {
+                        pdfRequestModel.addressDetails.pincode =
+                            binding?.quickPincode?.text.toString()
+                    }
+                }
+                pdfRequestModel.visitNum =
+                    responseBody.body()?.responseContent?.patient_visits!!.visit_number!!
+                pdfRequestModel.dob = responseBody.body()?.responseContent?.dob!!
+
+                if (selectSalutationUuid != 0) {
+                    pdfRequestModel.salutation = SalutaionList[selectSalutationUuid]!!
+                }
+                if (selectProffestionalUuid != 0) {
+                    pdfRequestModel.professional = ProfestioanlList[selectProffestionalUuid]!!
+                }
+
+                if (selectCoummityUuid != 0) {
+                    pdfRequestModel.community = CommunityList[selectCoummityUuid]!!
+                }
+                pdfRequestModel.middleName = binding!!.etmiddlename.text.toString()
+                pdfRequestModel.lastName = binding!!.etLastname.text.toString()
+
+                if (selectSuffixUuid != 0) {
+                    pdfRequestModel.suffixCode = SuffixList[selectSuffixUuid]!!
+                }
+
+                if (selectSuffixUuid != 0) {
+                    pdfRequestModel.suffixCode = SuffixList[selectSuffixUuid]!!
+                }
+
+                pdfRequestModel.department = binding!!.department.text.toString()
+
+                val bundle = Bundle()
+                bundle.putParcelable(AppConstants.RESPONSECONTENT, pdfRequestModel)
+                bundle.putInt(AppConstants.RESPONSENEXT, 190)
+                bundle.putString("From", "Quick")
+                bundle.putInt("next", onNext!!)
+
+                val labtemplatedialog = QuickDialogPDFViewerActivity()
+                labtemplatedialog.arguments = bundle
                 (activity as HomeActivity).replaceFragment(labtemplatedialog)
-
-
             }
 
             override fun onBadRequest(errorBody: Response<QuickRegistrationUpdateResponseModel>?) {
@@ -5960,38 +5820,28 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
             override fun onEverytime() {
                 viewModel!!.progress.value = 8
             }
-
         }
 
-
     private fun saveAgain() {
-
         alreadyExists = true
-
         customdialog = Dialog(requireContext())
         customdialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         customdialog!!.setCancelable(false)
         customdialog!!.setContentView(R.layout.duplicate_add_dialog)
         val closeImageView = customdialog!!.findViewById(R.id.closeImageView) as ImageView
         closeImageView.setOnClickListener {
-
             customdialog?.dismiss()
         }
-
         val yesBtn = customdialog!!.findViewById(R.id.yes) as CardView
         val noBtn = customdialog!!.findViewById(R.id.no) as CardView
         yesBtn.setOnClickListener {
-
             quickRegistrationSaveResponseModel.saveExists = alreadyExists
 
             viewModel?.quickRegistrationSaveList(
                 quickRegistrationSaveResponseModel,
                 saveQuickRegistrationRetrofitCallback
             )
-
             customdialog!!.dismiss()
-
-
         }
         noBtn.setOnClickListener {
             customdialog!!.dismiss()
@@ -6001,17 +5851,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         customdialog!!.show()
     }
 
-
     val getInstitutionSearchRetrofitCallBack =
         object : RetrofitCallback<ImmunizationInstitutionResponseModel> {
 
             override fun onSuccessfulResponse(response: Response<ImmunizationInstitutionResponseModel>) {
-
                 if (response.body()?.responseContents?.isNotEmpty()!!) {
-
                     setInstitutionSeason(response.body()?.responseContents!!)
-
-
                 }
             }
 
@@ -6159,11 +6004,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
         override fun onEverytime() {
             viewModel!!.progress.value = 8
         }
-
     }
 
     private fun setDepartmentRefuralAdapter(responseContents: List<FavAddAllDepatResponseContent>?) {
-
         val responseContentAdapter2 = DepartmentSearchAdapter(
             this.requireContext(),
             R.layout.row_chief_complaint_search_result,
@@ -6175,14 +6018,9 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
         binding!!.departmentReferal.setOnItemClickListener { parent, _, pos, id ->
             val selectedPoi = parent.adapter.getItem(pos) as FavAddAllDepatResponseContent?
-
             binding!!.departmentReferal.setText(selectedPoi!!.name)
-
             selectdepartmentRefuralUUId = selectedPoi.uuid
-
-
         }
-
     }
 
     val getAllReferralCallBack = object : RetrofitCallback<GetPatientAllReferralsResponse> {
@@ -6253,14 +6091,12 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
     }
 
     fun setReferralsAdapter(responseContent: List<GetPatientAllReferral?>?) {
-
         val layoutmanager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
         binding?.refuralHistoryRecyclerView!!.layoutManager = layoutmanager
         ReferralsAdapter = PatientAllReferralsAdapter(requireContext(), ArrayList())
         binding?.refuralHistoryRecyclerView!!.adapter = ReferralsAdapter
         ReferralsAdapter?.clearAll()
         ReferralsAdapter?.addAll(responseContent)
-
     }
 
 
@@ -6334,7 +6170,6 @@ class DetailedRegistration : Fragment(), SearchPatientDialogFragment.OnOrderProc
 
 
     fun setVisitsAdapter(responseContent: List<GetPatientAllVisit?>?) {
-
         val layoutmanager: RecyclerView.LayoutManager = LinearLayoutManager(requireContext())
         binding?.visitHistoryRecyclerView!!.layoutManager = layoutmanager
         VisitsAdapter = PatientAllVisitsAdapter(requireContext(), ArrayList())
